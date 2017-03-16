@@ -2,11 +2,13 @@ import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
+window.superagent = require('superagent');
 
-import axios from 'axios'
+
 import 'bootstrap/dist/css/bootstrap.css'
-axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+import axios from 'axios'
+// axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 window.axios = axios;
 import qs from 'qs'
 window.qs = qs;

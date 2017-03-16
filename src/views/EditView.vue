@@ -37,8 +37,8 @@ export default {
     data() {
         return {
             // 初始化渲染数据接口
-            baseURL: '/mock/editView',
-            // baseURL: 'http://113.6.252.23:6688/ndrcs/editNdrcs',
+            // baseURL: '/mock/editView',
+            baseURL: 'http://113.6.252.23:6688/ndrcs/editNdrcs',
 
             message: '', // 弹出框文字提示
 
@@ -109,10 +109,10 @@ export default {
          */
         submit() {
             // http
-            axios.put(this.form.data.url.submit, {
+            axios.put(this.form.data.url.submit, qs.stringify({
                     accessToken: this.$store.state.accessToken,
                     ...this.formValues.body
-                })
+                }))
                 .then((response) => {
                     this.modal.show = true;
                     this.message = response.data.message;

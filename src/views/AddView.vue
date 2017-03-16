@@ -108,11 +108,10 @@ export default {
          * 提交
          */
         submit() {
-            // http
-            axios.post(this.form.data.url.submit, {
+            axios.post(this.form.data.url.submit, qs.stringify({
                     accessToken: this.$store.state.accessToken,
                     ...this.formValues.body
-                })
+                }))
                 .then((response) => {
                     this.modal.show = true;
                     this.message = response.data.message;

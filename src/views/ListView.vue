@@ -262,9 +262,9 @@ export default {
          * 删除
          */
         del(id, index) {
-            axios.delete(this.filterForm.data.table.url.del, {
+            axios.delete(this.filterForm.data.table.url.del, qs.stringify({
                 id: id
-            }).then(response => {
+            })).then(response => {
                 this.modal.show = true;
                 this.modal.content = response.data.message;
                 setTimeout(() => {

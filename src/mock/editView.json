@@ -3,6 +3,12 @@
     "status": 1,
     "data": {
         "form": [{
+            "title": "评分组件",
+            "name":"rateStarValue",
+            "type":"rateStar",
+            "value":3,
+            "column": [6, 4, 3, 3]
+        },{
             "title": "输入框",
             "value": "工具",
             "name": "inputValue",

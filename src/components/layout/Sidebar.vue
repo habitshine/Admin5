@@ -22,7 +22,7 @@ export default {
     name: 'Menu',
 
     mounted() {
-        axios.get('/mock/menu', {
+        axios.get(this.baseUrl, {
                 params: {
                     accessToken: this.$store.state.accessToken
                 }
@@ -39,6 +39,7 @@ export default {
 
     data() {
         return {
+            baseUrl: 'http://113.6.252.23:6688/ndrcs/menus',
             menu: []
         }
     },

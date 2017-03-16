@@ -1,0 +1,44 @@
+[{
+    "id": 1,
+    "icon": "plus",
+    "text": "系统设置",
+    "children": [{
+        "id": 11,
+        "text": "商品列表",
+        "route": {
+            "path": "/home/category/goods/list",
+            "query": {
+                "page": 1,
+                "limit": 15
+            }
+        }
+    }]
+}, {
+    "id": 2,
+    "text": "菜单2",
+    "children": [{
+        "id": 11,
+        "text": "新增",
+        "route": {
+            "path": "/home/category/goods/add"
+        }
+    },{
+        "id": 12,
+        "text": "回家",
+        "route": {
+            "path": "/home"
+        }
+    }, {
+        "id": 13,
+        "text": "编辑id=1",
+        "route": {
+            "path": "/home/category/goods/edit?id=1"
+        }
+    }]
+}, {
+    "id": 33,
+    "text": "登陆",
+    "route": {
+        "path": "/login"
+    }
+}]

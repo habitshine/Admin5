@@ -1,0 +1,98 @@
+*{margin: 0;padding:0;}
+html{overflow-y: scroll;}
+body{font-family:'微软雅黑','microsoft yahei','新宋体','宋体',Tahoma,Verdana,Arial,Helvetica,sans-serif;}
+li{list-style-type: none;}
+::selection{background:#69c; color:#fff;} 
+::-moz-selection{background:#69c; color:#fff;} 
+::-webkit-selection{background:#69c; color:#fff;} 
+::-ms-selection{background:#69c; color:#fff;} 
+
+::-webkit-scrollbar{background:#ccc;width: 4px;}
+::-webkit-scrollbar-thumb{background:#485054; }
+::-moz-scrollbar{background:#ccc;width: 4px;}
+::-moz-scrollbar-thumb{background:#485054; }
+::-ms-scrollbar{background:#ccc;width: 4px;}
+::-ms-scrollbar-thumb{background:#485054; }
+
+[v-cloak] {
+  display: none;
+}
+
+/* 变量 */
+.pointer{cursor: pointer;}
+
+.label{display: inline-block;margin:5px 15px 5px 0;}
+.center{margin: auto;display: block;}
+// .modal-open .modal{overflow-y: hidden;}
+
+// 搜索
+.search{margin: 15px 0;display: -webkit-box;
+	.select2-container{
+		.select2-selection--single{height: 34px;border:1px solid #ccc;border-right:none;border-radius:4px 0 0 4px;
+			.select2-selection__arrow{height: 34px;}
+			.select2-selection__rendered {line-height: 34px;}
+		}
+		
+
+	}
+	.form-group{-webkit-box-flex:1;
+		select{border: none;outline: none;}
+	}
+	.input-group{width: 240px;
+		input{border: 1px solid #ccc;border-radius: 0;}
+	}
+}
+// 按钮组
+.btngroup{margin: 15px 0;}
+
+// 面包屑
+.breadcrumb-fix{margin: 30px 0;padding:15px;border: 1px solid #ddd;display: block;background: #f5f5f5;}
+
+// 过滤条件
+.row-filter{
+	.filter-title{color: #000;font-weight: 900;display: block;}
+	.checkbox, .radio, .select{padding: 5px 0 0 0;
+		label{margin-right: 10px;}
+	}
+	.select2-container, .linkage{min-width: 200px;}
+}
+#page-wrapper{position: relative;/* overflow: hidden; */}
+
+.popup-transition {
+}
+.popup-enter {
+  animation: popup-in .5s;
+}
+.popup-leave {
+  animation: popup-out .5s;
+}
+@keyframes popup-in {
+  0% {
+  	opacity: 0;
+    transform: translateY(-30px) scale(1.1);
+  }
+  100% {
+  	opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes popup-out {
+  0% {
+  	opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+  	opacity: 0;
+    transform: translateY(-30px) scale(1.1);
+  }
+}
+
+
+.nav li .active{background: #ddd;}
+
+.page-header a:last-child{display: none;}
+
+// datetimepicker 显示动画
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  animation: popup-in .5s;
+}

@@ -9,7 +9,8 @@
                 <i class="fa fa-remove"></i>
             </a>
         </div>
-        <v-modal :show="popup.show" @close="popup.show = false">
+
+        <v-modal v-model="popup.show">
             <v-tab v-model="activeIndex">
                 <!-- panel -->
                 <v-tab-panel v-for="(page, i) in opts.children" :key="i" :label="page.label" :disabled="!newValues[i] && 0 == group[i].children.length">

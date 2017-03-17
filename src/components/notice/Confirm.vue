@@ -1,21 +1,56 @@
 <template>
-    <div class="com-confirm"></div>
+    <div class="com-confirm">
+        <v-modal :show="true">
+            <slot></slot>
+
+            <div slot="footer">
+                <a class="btn btn-default">返回</a>
+                <a class="btn btn-primary">确定</a>
+            </div>
+        </v-modal>
+    </div>
 </template>
 <script>
-import Modal from '.'
+import VModal from './Modal'
 export default {
     name: 'confirm',
 
     props: {
-        opts: {},
+        width: {
+            type: String
+        },
 
-        value: {}
+        show: {
+            type: Boolean
+        },
+
+        title: {
+            type: String
+        },
+
+        hasClose: {
+            type: Boolean,
+            default: false
+        },
+
+        afterClose: {
+            type: Function,
+            default(v){
+                if(undefined === v || null === v) {
+                    return new Function();
+                }
+            }
+        }
     },
 
     methods: {
-        upload() {},
+        ok() {},
 
         close() {}
+    },
+
+    components: {
+        VModal
     }
 }
 </script>

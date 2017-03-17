@@ -1,11 +1,11 @@
 <template>
     <transition name="modal" @after-leave="afterLeave">
-    <div v-show="show" class="com-modal modal" style="modal" @click.self="close">
+    <div v-show="value" class="com-modal modal" style="modal" @click.self="close">
         <div :style="{width: width}" class="modal-dialog">
             <transition name="modal-content">
-            <div v-show="show" class="modal-content">
+            <div v-show="value" class="modal-content">
                 <div class="modal-header" v-if="!!title">
-                    <button v-if="btnClose" @click="show = false" type="button" class="close">
+                    <button v-if="btnClose" @click="close" type="button" class="close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h5 class="modal-title">{{title}}</h5>
@@ -27,20 +27,21 @@ export default {
     name: 'Modal',
 
     props: {
-        width: {
-            type: String
+        value: {
+            type: Boolean
         },
 
-        show: {
-            type: Boolean
+        width: {
+            type: String
         },
 
         title: {
             type: String
         },
 
-        btnClose: {
-            type: Boolean
+        hasClose: {
+            type: Boolean,
+            default: false
         },
 
         afterClose: {
@@ -59,7 +60,7 @@ export default {
         },
 
         close(){
-            this.$emit('close');
+            this.$emit('input', false);
         }
     }
 }

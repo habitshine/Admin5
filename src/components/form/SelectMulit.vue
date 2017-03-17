@@ -19,7 +19,7 @@
             </a>
         </div>
         <!-- popup  -->
-        <v-modal :show="popup.show" @close="close">
+        <v-modal v-model="popup.show">
             <!-- 已选择 -->
             <div class="selected-list">
                 <button @click="selectReverse(option)" v-for="option in selectedOptions" class="btn btn-xs btn-primary">{{option.label}}

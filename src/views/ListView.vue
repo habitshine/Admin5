@@ -1,5 +1,9 @@
 <template>
     <div class="list-view">
+<!--         <v-confirm>
+            是否删除?
+        </v-confirm>
+ -->
         <v-modal :show="modal.show" :width="'200px'">{{modal.content}}</v-modal>
         <transition appear mode="out-in">
             <template v-if="-1 == filterForm.status">
@@ -71,6 +75,7 @@ import VModal from '../components/notice/Modal'
 import VTable from '../components/Table'
 import VPage from '../components/Page'
 import VForm from '../components/Form'
+import VConfirm from '../components/notice/Confirm'
 
 export default {
     name: 'ListView',
@@ -79,10 +84,12 @@ export default {
         FilterLayout,
         FrameLayout,
         VSpinner,
+        VConfirm,
         VModal,
         VTable,
         VPage,
-        VForm
+        VForm,
+
     },
 
     data() {

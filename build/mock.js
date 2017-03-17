@@ -122,7 +122,7 @@ module.exports = function(express, app) {
             var data = {
                 status: 1,
                 data: {
-                    token: req.body.userName + 'ahkjrtklejwkjke2342sdsdj32l4k32hk'
+                    accessToken: req.body.userName + 'ahkjrtklejwkjke2342sdsdj32l4k32hk'
                 },
                 message: '操作成功!',
 

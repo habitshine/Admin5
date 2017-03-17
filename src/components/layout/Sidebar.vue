@@ -39,7 +39,8 @@ export default {
 
     data() {
         return {
-            baseUrl: 'http://113.6.252.23:6688/ndrcs/menus',
+            baseUrl: './mock/menu',
+            // baseUrl: 'http://113.6.252.23:6688/ndrcs/menus',
             menu: []
         }
     },

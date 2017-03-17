@@ -1,10 +1,10 @@
 <template>
     <div class="com-confirm">
-        <v-modal v-model="isShow">
+        <v-modal v-model="isShow" @after-close="afterClose">
             {{title}}
             <div slot="footer">
-                <a class="btn btn-default">返回</a>
-                <a class="btn btn-primary">确定</a>
+                <a class="btn btn-default" @click="close">返回</a>
+                <a class="btn btn-primary" @click="ok">确定</a>
             </div>
         </v-modal>
     </div>
@@ -12,6 +12,7 @@
 <script>
 import VModal from './Modal'
 export default {
+
     name: 'confirm',
 
     computed: {
@@ -38,24 +39,22 @@ export default {
 
         title: {
             type: String
-        },
-
-        afterClose: {
-            type: Function,
-            default (v) {
-                if (undefined === v || null === v) {
-                    return new Function();
-                }
-            }
         }
     },
 
     methods: {
-        change() {},
+        ok(){
+            this.$emit('input', false);
+            this.$emit('ok');
+        },
 
-        ok() {},
+        afterClose() {
+            this.$emit('after-close');
+        },
 
-        close() {}
+        close() {
+            this.$emit('input', false);
+        }
     },
 
     components: {

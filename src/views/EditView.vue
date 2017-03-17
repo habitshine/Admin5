@@ -37,8 +37,8 @@ export default {
     data() {
         return {
             // 初始化渲染数据接口
-            // baseURL: '/mock/editView',
-            baseURL: 'http://113.6.252.23:6688/ndrcs/editNdrcs',
+            baseURL: '/mock/editView',
+            // baseURL: 'http://113.6.252.23:6688/ndrcs/editNdrcs',
 
             message: '', // 弹出框文字提示
 
@@ -93,6 +93,7 @@ export default {
         httpGetBaseView(cb) {
             axios.get(this.baseURL, {
                     params: {
+                        id: this.$route.query.id,
                         accessToken: this.$store.state.accessToken
                     }
                 })

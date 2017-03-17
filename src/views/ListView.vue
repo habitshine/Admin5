@@ -27,7 +27,6 @@
                 </div>
                 <!-- 表格 -->
                 <v-table v-model="table.ids" class="mt15" :table="table.data.list" :status="table.status" :message="table.message" :removeIndex="table.removeIndex">
-
                     <!-- tr th -->
                     <template slot="header">
                         <th v-for="item in filterForm.data.table.header">
@@ -35,7 +34,6 @@
                         </th>
                         <th>操作</th>
                     </template>
-
                     <!-- tr td -->
                     <template slot="row" scope="props">
                         <!-- 数据列 -->
@@ -43,7 +41,7 @@
                             {{props.row[obj.key]}}
                         </td>
                         <!-- 功能列 -->
-                        <td>
+                        <td nowrap>
                             <a class="btn btn-xs btn-danger" @click="del(props.row.id, props.index)">
                                 <i class="fa fa-remove">
                                 </i> 删除
@@ -80,7 +78,6 @@ export default {
         FrameLayout,
         VSpinner,
         VConfirm,
-        VModal,
         VTable,
         VPage,
         VForm,
@@ -122,11 +119,6 @@ export default {
                     list: [],
                     count: 0
                 }
-            },
-            // 弹出框
-            modal: {
-                show: true,
-                content: '确定?'
             }
         };
     },
@@ -264,20 +256,22 @@ export default {
          * 删除
          */
         del(id, index) {
-            this.$store.commit('changeConfirm', {show: true, title: '1234567'});
-
-            axios.delete(this.filterForm.data.table.url.del, qs.stringify({
-                id: id
-            })).then(response => {
-                this.modal.show = true;
-                this.modal.content = response.data.message;
-                setTimeout(() => {
-                    this.table.data.list[index].status = 0;
-                    this.modal.show = false;
-                    this.modal.content = '';
-                }, 2000);
-            }).catch((error) => {
-                syslog(error, {view: 'listView', method: 'del'});
+            var self = this;
+            this.$store.commit('changeConfirm', {
+                show: true,
+                title: '您确定要删除吗?',
+                ok() {
+                    axios.delete(self.filterForm.data.table.url.del, qs.stringify({
+                        id: id
+                    })).then(response => {
+                        self.table.data.list[index].status = 0;
+                    }).catch((error) => {
+                        syslog(error, {
+                            view: 'listView',
+                            method: 'del'
+                        });
+                    });
+                }
             });
         },
 

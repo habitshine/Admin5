@@ -3,16 +3,20 @@
     <div v-show="value" class="com-modal modal" style="modal" @click.self="close">
         <div :style="{width: width}" class="modal-dialog">
             <transition name="modal-content">
+            <!-- content -->
             <div v-show="value" class="modal-content">
+                <!-- header -->
                 <div class="modal-header" v-if="!!title">
                     <button v-if="btnClose" @click="close" type="button" class="close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h5 class="modal-title">{{title}}</h5>
                 </div>
+                <!-- body -->
                 <div class="modal-body">
                     <slot></slot>
                 </div>
+                <!-- footer -->
                 <div class="modal-footer" v-if="$slots.footer">
                     <slot name="footer"></slot>
                 </div>
@@ -24,7 +28,7 @@
 </template>
 <script>
 export default {
-    name: 'Modal',
+    name: 'modal',
 
     props: {
         value: {
@@ -42,21 +46,12 @@ export default {
         hasClose: {
             type: Boolean,
             default: false
-        },
-
-        afterClose: {
-            type: Function,
-            default(v){
-                if(undefined === v || null === v) {
-                    return new Function();
-                }
-            }
         }
     },
 
     methods: {
         afterLeave(){
-            this.afterClose();
+            this.$emit('after-close');
         },
 
         close(){

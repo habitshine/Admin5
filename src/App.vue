@@ -1,6 +1,11 @@
 <template>
     <div class="app">
-        <v-confirm v-model="confirmVisibility" :title="$store.state.confirm.title"></v-confirm>
+        <v-confirm 
+            v-model="isConfirmShow"
+            @ok="$store.state.confirm.ok"
+            :title="$store.state.confirm.title">
+        </v-confirm>
+
         <transition appear mode="out-in">
             <!-- <keep-alive> -->
             <router-view>
@@ -18,15 +23,15 @@ import VModal from './components/notice/Modal'
 export default {
     name: 'App',
 
-    components: {
-        VAlert,
-        VConfirm,
-        VPrompt,
-        VModal
+
+    methods: {
+        ok(){
+            alert(312)
+        }
     },
 
     computed: {
-        confirmVisibility: {
+        isConfirmShow: {
             get() {
                 return this.$store.state.confirm.show;
             },
@@ -37,10 +42,18 @@ export default {
                 })
             }
         }
+    },
+    
+    components: {
+        VAlert,
+        VConfirm,
+        VPrompt,
+        VModal
     }
 }
 </script>
-<style lang=scss>
+
+<style scope lang=scss>
 .app {
     height: 100%;
     width: 100%;
@@ -53,12 +66,12 @@ export default {
 }
 
 .v-enter-active {
-    transition: all .5s;
+    transition: all .3s;
 }
 
 .v-leave-active {
     opacity: 0;
-    transition: all .5s;
+    transition: all .3s;
     transform: translateY(-.5rem);
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
-    <div class="com-upload"></div>
+    <div class="com-alert"></div>
 </template>
 <script>
 export default {
 
-    name: 'Alert',
+    name: 'alert',
 
     props: {
         opts: {},

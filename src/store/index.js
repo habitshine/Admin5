@@ -4,12 +4,44 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         // menu: [],
+        modal: {
+            title: '您确定要执行该操作吗?',
+            show: true
+        },
+        
+        confirm: {
+            title: '您确定要执行该操作吗?',
+            show: false
+        },
+
+        alert: {
+            show: true
+        },
+
+        prompt: {
+            show: true
+        },
+
         accessToken: localStorage.getItem('accessToken') || '',
+
         isLogin: false,
+
         userName: localStorage.getItem('userName') || ''
     },
 
     mutations: {
+        /**
+         * 打开confirem
+         */
+        changeModal(state, options){
+            state.modal = options;
+        },
+        /**
+         * 打开confirem
+         */
+        changeConfirm(state, options){
+            state.confirm = options;
+        },
         /**
          * 存储accessToken
          * 存储userName
@@ -33,7 +65,7 @@ export default new Vuex.Store({
             state.userName = userName
         },
 
-        getAccessToken(){
+        getAccessToken() {
             state.accessToken = localStorage.getItem('accessToken');
         }
 

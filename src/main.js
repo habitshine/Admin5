@@ -2,17 +2,18 @@ import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
-window.superagent = require('superagent');
-
-
+/* awsosme font */
+import '../static/Font-Awesome-master/css/font-awesome.css'
+/* bootstrap */
 import 'bootstrap/dist/css/bootstrap.css'
-import axios from 'axios'
+/* axios */
+window.axios = require('axios');
 // axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-window.axios = axios;
-import qs from 'qs'
-window.qs = qs;
+/* qs */
+window.qs = require('qs');
 
+/* debug */
 window.l = window.syslog = (input) => {
     return console.info(input);
 }
@@ -25,9 +26,6 @@ window.c = (input) => {
     console.log(JSON.stringify(input));
 }
 
-/* awsome font */
-require('../static/Font-Awesome-master/css/font-awesome.css');
-
 
 router.beforeEach((to, from, next) => {
     // 排除404 和 login, 不验证token
@@ -38,9 +36,9 @@ router.beforeEach((to, from, next) => {
             // next({path: '/login'});
         }
     } else {
+        
     }
     next();
-    
 });
 
 

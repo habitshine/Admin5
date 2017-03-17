@@ -1,10 +1,5 @@
 <template>
     <div class="list-view">
-<!--         <v-confirm>
-            是否删除?
-        </v-confirm>
- -->
-        <v-modal :show="modal.show" :width="'200px'">{{modal.content}}</v-modal>
         <transition appear mode="out-in">
             <template v-if="-1 == filterForm.status">
                 <v-spinner></v-spinner>
@@ -130,8 +125,8 @@ export default {
             },
             // 弹出框
             modal: {
-                show: false,
-                content: ''
+                show: true,
+                content: '确定?'
             }
         };
     },
@@ -269,6 +264,8 @@ export default {
          * 删除
          */
         del(id, index) {
+            this.$store.commit('changeConfirm', {show: true, title: '1234567'});
+
             axios.delete(this.filterForm.data.table.url.del, qs.stringify({
                 id: id
             })).then(response => {

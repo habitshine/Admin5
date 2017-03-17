@@ -1,9 +1,9 @@
 <template>
-    <div class="com-upload"></div>
+    <div class="com-prompt"></div>
 </template>
 <script>
 export default {
-    name: 'Modal',
+    name: 'prompt',
 
     props: {
         opts: {},
@@ -12,11 +12,7 @@ export default {
     },
 
     methods: {
-        upload(){
-        },
 
-        close(){
-        }
     }
 }
 </script>

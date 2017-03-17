@@ -1,8 +1,7 @@
 <template>
     <div class="com-confirm">
-        <v-modal :show="true">
-            <slot></slot>
-
+        <v-modal v-model="isShow">
+            {{title}}
             <div slot="footer">
                 <a class="btn btn-default">返回</a>
                 <a class="btn btn-primary">确定</a>
@@ -15,28 +14,36 @@ import VModal from './Modal'
 export default {
     name: 'confirm',
 
+    computed: {
+
+        isShow: {
+            get() {
+                return this.value;
+            },
+
+            set(isShow) {
+                this.$emit('input', isShow);
+            }
+        }
+    },
+
     props: {
-        width: {
-            type: String
+        value: {
+            type: Boolean
         },
 
-        show: {
-            type: Boolean
+        width: {
+            type: String
         },
 
         title: {
             type: String
         },
 
-        hasClose: {
-            type: Boolean,
-            default: false
-        },
-
         afterClose: {
             type: Function,
-            default(v){
-                if(undefined === v || null === v) {
+            default (v) {
+                if (undefined === v || null === v) {
                     return new Function();
                 }
             }
@@ -44,6 +51,8 @@ export default {
     },
 
     methods: {
+        change() {},
+
         ok() {},
 
         close() {}

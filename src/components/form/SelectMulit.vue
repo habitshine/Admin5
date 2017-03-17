@@ -48,7 +48,7 @@
 </template>
 <script>
 import VInput from '../form/Input'
-import VModal from '../Modal'
+import VModal from '../notice/Modal'
 import VListGroup from '../layout/ListGroup'
 
 export default {

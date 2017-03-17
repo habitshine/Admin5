@@ -15,7 +15,7 @@
 </template>
 <script>
 import VInput from '../components/form/Input'
-import VModal from '../components/Modal'
+import VModal from '../components/notice/Modal'
 
 export default {
     name: 'LoginView',

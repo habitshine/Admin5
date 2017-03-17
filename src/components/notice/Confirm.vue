@@ -1,9 +1,10 @@
 <template>
-    <div class="com-upload"></div>
+    <div class="com-confirm"></div>
 </template>
 <script>
+import Modal from '.'
 export default {
-    name: 'Modal',
+    name: 'confirm',
 
     props: {
         opts: {},
@@ -12,14 +13,11 @@ export default {
     },
 
     methods: {
-        upload(){
-        },
+        upload() {},
 
-        close(){
-        }
+        close() {}
     }
 }
 </script>
 <style scoped lang=scss>
-
 </style>

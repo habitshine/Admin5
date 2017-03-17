@@ -3,7 +3,8 @@
 </template>
 <script>
 export default {
-    name: 'Modal',
+
+    name: 'Alert',
 
     props: {
         opts: {},
@@ -13,9 +14,11 @@ export default {
 
     methods: {
         upload(){
+
         },
 
         close(){
+
         }
     }
 }

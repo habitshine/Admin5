@@ -32,7 +32,7 @@
     </div>
 </template>
 <script>
-import VModal from '../Modal'
+import VModal from '../notice/Modal'
 import VTab from '../layout/Tab'
 import VTabPanel from '../layout/TabPanel'
 import VSpinner from '../Spinner'

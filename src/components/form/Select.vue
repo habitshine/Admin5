@@ -20,7 +20,7 @@
     </div>
 </template>
 <script>
-import VModal from '../Modal'
+import VModal from '../notice/Modal'
 import VListGroup from '../layout/ListGroup'
 
 export default {

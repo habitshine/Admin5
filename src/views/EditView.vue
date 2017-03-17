@@ -28,7 +28,7 @@
 <script>
 import FormLayout from '../components/layout/Form'
 import VSpinner from '../components/Spinner'
-import VModal from '../components/Modal'
+import VModal from '../components/notice/Modal'
 import VForm from '../components/Form'
 
 export default {

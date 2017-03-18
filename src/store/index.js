@@ -4,11 +4,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         // menu: [],
-        modal: {
-            title: '您确定要执行该操作吗?',
-            show: true
-        },
-        
         confirm: {
             title: '您确定要执行该操作吗?',
             show: false,
@@ -17,7 +12,10 @@ export default new Vuex.Store({
         },
 
         alert: {
-            show: true
+            title: '提示您',
+            show: false,
+            ok(){},
+            afterClose(){}
         },
 
         prompt: {
@@ -33,13 +31,13 @@ export default new Vuex.Store({
 
     mutations: {
         /**
-         * 打开confirem
+         * alert
          */
-        changeModal(state, options){
-            state.modal = options;
+        changeAlert(state, options){
+            state.alert = {...state.alert, ...options};
         },
         /**
-         * 打开confirem
+         * confirem
          */
         changeConfirm(state, options){
             state.confirm = {...state.confirm, ...options};
@@ -74,18 +72,12 @@ export default new Vuex.Store({
     },
 
     actions: {
-        // changeConfirm(context, options) {
-        //     return new Promise((resolve, reject) => {
-        //         context.commit('changeConfirm', options);
-        //         resolve(options);
-        //     });
-        // },
         login(context, loginData) {
             // context可能是store也可能是module
             // context.commit('xx', true);
             return new Promise((resolve, reject) => {
-                axios.post('http://113.6.252.23:6688/ndrcs/testlogin', qs.stringify(loginData) )
-                // axios.post('./mock/login', loginData)
+                // axios.post('http://113.6.252.23:6688/ndrcs/testlogin', qs.stringify(loginData) )
+                axios.post('./mock/login', loginData)
                     .then((response) => {
                         // 登陆成功
                         if (1 == response.data.status) {

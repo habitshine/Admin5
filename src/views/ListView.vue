@@ -261,17 +261,22 @@ export default {
                 show: true,
                 title: '您确定要删除吗?',
                 ok() {
-                    axios.delete(self.filterForm.data.table.url.del, qs.stringify({
-                        id: id
-                    })).then(response => {
+                    self.httpDel(id).then(()=>{
                         self.table.data.list[index].status = 0;
-                    }).catch((error) => {
-                        syslog(error, {
-                            view: 'listView',
-                            method: 'del'
-                        });
                     });
                 }
+            });
+        },
+
+        httpDel(id) {
+            return new Promise((resolve, reject) => {
+                axios.delete(this.filterForm.data.table.url.del, qs.stringify({
+                    id: id
+                })).then(response => {
+                    resolve();
+                }).catch((error) => {
+                    reject();
+                });                
             });
         },
 

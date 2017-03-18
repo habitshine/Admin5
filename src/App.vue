@@ -6,6 +6,12 @@
             :title="$store.state.confirm.title">
         </v-confirm>
 
+        <v-alert
+            @after-close="$store.state.alert.afterClose"
+            v-model="isAlertShow"
+            :title="$store.state.alert.title">
+        </v-alert>
+
         <transition appear mode="out-in">
             <!-- <keep-alive> -->
             <router-view>
@@ -23,14 +29,20 @@ import VModal from './components/notice/Modal'
 export default {
     name: 'App',
 
-
-    methods: {
-        ok(){
-            alert(312)
-        }
-    },
-
     computed: {
+
+        isAlertShow: {
+            get() {
+                return this.$store.state.alert.show;
+            },
+
+            set() {
+                this.$store.commit('changeAlert', {
+                    show: false
+                });
+            }            
+        },
+
         isConfirmShow: {
             get() {
                 return this.$store.state.confirm.show;

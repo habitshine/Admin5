@@ -103,18 +103,20 @@ export default {
                     ...this.formValues.body
                 }))
                 .then((response) => {
-                    this.$store.commit('changeAlert', {
-                        show: true,
-                        title: response.data.message
-                    });
-                    setTimeout(()=>{
-                        this.$store.commit('changeAlert', {
-                            show: false,
-                            afterClose(){
-                                self.$router.back();
-                            }
-                        });
-                    }, 2000);
+                    this.$store.commit('notify', {type: 'success', text: response.data.message}); 
+                    // this.$store.commit('changeAlert', {
+                    //     show: true,
+                    //     title: response.data.message
+                    // });
+
+                    // setTimeout(()=>{
+                    //     this.$store.commit('changeAlert', {
+                    //         show: false,
+                    //         afterClose(){
+                    //             self.$router.back();
+                    //         }
+                    //     });
+                    // }, 2000);
                 })
                 .catch((error) => {
                     syslog(error);

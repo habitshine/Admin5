@@ -4,6 +4,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         // menu: [],
+        notifyList: [
+            // {type: 'success', text: '恭喜您,成功了!', holdTime: 3000},
+            // {type: 'default', text: 'default!', holdTime: 3000},
+            // {type: 'primary', text: 'primary!', holdTime: 3000},
+            // {type: 'info', text: 'info!', holdTime: 3000},
+            // {type: 'danger', text: 'danger!', holdTime: 3000},
+            // {type: 'warning', text: 'warning!', holdTime: 3000}
+        ],
+
         confirm: {
             title: '您确定要执行该操作吗?',
             show: false,
@@ -22,6 +31,7 @@ export default new Vuex.Store({
             show: true
         },
 
+
         accessToken: localStorage.getItem('accessToken') || '',
 
         isLogin: false,
@@ -30,6 +40,10 @@ export default new Vuex.Store({
     },
 
     mutations: {
+        notify(state, options) {
+            state.notifyList.push(options);
+        },
+
         /**
          * alert
          */

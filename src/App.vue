@@ -1,5 +1,7 @@
 <template>
     <div class="app">
+        <v-notify v-model="$store.state.notifyList"></v-notify>
+
         <v-confirm 
             v-model="isConfirmShow"
             @ok="$store.state.confirm.ok"
@@ -24,12 +26,13 @@
 import VAlert from './components/notice/Alert'
 import VConfirm from './components/notice/Confirm'
 import VPrompt from './components/notice/Prompt'
-import VModal from './components/notice/Modal'
+import VNotify from './components/notice/Notify'
 
 export default {
     name: 'App',
 
     computed: {
+
 
         isAlertShow: {
             get() {
@@ -60,7 +63,7 @@ export default {
         VAlert,
         VConfirm,
         VPrompt,
-        VModal
+        VNotify
     }
 }
 </script>

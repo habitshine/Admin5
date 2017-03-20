@@ -39,6 +39,7 @@ export default {
     
     >.view{
         position: relative;
+        overflow-y: hidden;
         @include flexbox; @include flex(1);
     }
 

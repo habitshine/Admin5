@@ -10,6 +10,14 @@
                     <!-- 表单集合 -->
                     <v-form v-model="formValues.filter" :form="filterForm.data.form">
                     </v-form>
+                    <v-steps>
+                        <v-step
+                                v-for="(item,index) in bar"
+                                :inStep=item.instep
+                                :index="index"
+                                :itemLength="bar.length"
+                                :stepTitle=item.title :current="item.current"></v-step>
+                    </v-steps>
                     <template slot="btn-group">
                         <a class="btn btn-warning">
                             <i class="fa fa-leaf"></i> 自定义按钮
@@ -71,6 +79,8 @@ import VTable from '../components/Table'
 import VPage from '../components/Page'
 import VForm from '../components/Form'
 import VConfirm from '../components/notice/Confirm'
+import VStep from '../components/readonly/Step'
+import VSteps from '../components/readonly/Steps'
 
 export default {
     name: 'ListView',
@@ -84,7 +94,8 @@ export default {
         VTable,
         VPage,
         VForm,
-
+        VStep,
+        VSteps
     },
 
     data() {
@@ -127,7 +138,33 @@ export default {
             modal: {
                 show: true,
                 content: '确定?'
-            }
+            },
+            //步骤条
+            bar:[
+                {
+                    instep:true,
+                    title:"已受理",
+                    current:false
+                },{
+                    instep:true,
+                    title:"已处理",
+                    current:false
+                },
+                {
+                    instep:true,
+                    title:"已确认",
+                    current:false
+                },
+                {
+                    instep:true,
+                    title:"进行中",
+                    current:true
+                },
+                {
+                    instep:false,
+                    title:"待完成",
+                    current:false
+                }]
         };
     },
 

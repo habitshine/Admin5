@@ -7,8 +7,7 @@
             <!-- 页面加载完毕 -->
             <div class="body" v-else>
                 <form-layout v-if="1 == form.status">
-                    <v-form v-model="formValues.body" :form="form.data.form">
-                    </v-form>
+                    <v-form v-model="formValues.body" :form="form.data.form"></v-form>
                     <template slot="btn-group">
                         <a @click="back" class="btn btn-danger">
                             <i class="glyphicon glyphicon-return"></i> 返回
@@ -103,20 +102,21 @@ export default {
                     ...this.formValues.body
                 }))
                 .then((response) => {
-                    this.$store.commit('notify', {type: 'success', text: response.data.message}); 
-                    // this.$store.commit('changeAlert', {
-                    //     show: true,
-                    //     title: response.data.message
-                    // });
+                    // this.$store.commit('notify', {type: 'success', text: response.data.message}); 
+                    this.$store.commit('alert', {
+                        width: '200px',
+                        show: true,
+                        text: response.data.message,
+                        holdTime: 2000,
+                        lock: true,
+                        afterClose() {
+                            try {
+                                self.$router.back();
+                            } catch (e) {
 
-                    // setTimeout(()=>{
-                    //     this.$store.commit('changeAlert', {
-                    //         show: false,
-                    //         afterClose(){
-                    //             self.$router.back();
-                    //         }
-                    //     });
-                    // }, 2000);
+                            }
+                        }
+                    });
                 })
                 .catch((error) => {
                     syslog(error);

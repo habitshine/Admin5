@@ -1,7 +1,14 @@
 <template>
     <div class="com-confirm">
-        <v-modal v-model="isShow" @after-close="afterClose">
-            {{title}}
+        <v-modal             
+            :width="width" 
+            :hasClose="hasClose" 
+            :holdTime="holdTime" 
+            :lock="lock" 
+            :title="title"
+            v-model="isShow" 
+            @after-close="afterClose">
+            {{text}}
             <div slot="footer">
                 <a class="btn btn-default" @click="close">返回</a>
                 <a class="btn btn-primary" @click="ok">确定</a>
@@ -39,9 +46,24 @@ export default {
 
         title: {
             type: String
+        },
+
+        text: {
+            type: String
+        },
+
+        holdTime: {
+            type: Number
+        },
+
+        lock: {
+            type: Boolean
+        },
+
+        hasClose: {
+            type: Boolean
         }
     },
-
     methods: {
         ok(){
             this.$emit('input', false);

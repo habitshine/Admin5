@@ -257,9 +257,10 @@ export default {
          */
         del(id, index) {
             var self = this;
-            this.$store.commit('changeConfirm', {
+            this.$store.commit('confirm', {
                 show: true,
-                title: '您确定要删除吗?',
+                text: '您确定要删除吗?',
+                lock: true,
                 ok() {
                     self.httpDel(id).then(()=>{
                         self.table.data.list[index].status = 0;
@@ -270,9 +271,7 @@ export default {
 
         httpDel(id) {
             return new Promise((resolve, reject) => {
-                axios.delete(this.filterForm.data.table.url.del, qs.stringify({
-                    id: id
-                })).then(response => {
+                axios.delete(this.filterForm.data.table.url.del, {params: {id}}).then(response => {
                     resolve();
                 }).catch((error) => {
                     reject();

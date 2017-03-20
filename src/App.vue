@@ -3,15 +3,26 @@
         <v-notify v-model="$store.state.notifyList"></v-notify>
 
         <v-confirm 
-            v-model="isConfirmShow"
             @ok="$store.state.confirm.ok"
-            :title="$store.state.confirm.title">
+            @after-close="$store.state.confirm.afterClose"
+            v-model="isConfirmShow"
+            :width="$store.state.confirm.width"
+            :lock="$store.state.confirm.lock"
+            :holdTime="$store.state.confirm.holdTime"
+            :title="$store.state.confirm.title"
+            :text="$store.state.confirm.text"
+            >
         </v-confirm>
 
         <v-alert
             @after-close="$store.state.alert.afterClose"
             v-model="isAlertShow"
-            :title="$store.state.alert.title">
+            :width="$store.state.alert.width"
+            :lock="$store.state.alert.lock"
+            :holdTime="$store.state.alert.holdTime"
+            :title="$store.state.alert.title"
+            :text="$store.state.alert.text"
+            >
         </v-alert>
 
         <transition appear mode="out-in">
@@ -32,15 +43,13 @@ export default {
     name: 'App',
 
     computed: {
-
-
         isAlertShow: {
             get() {
                 return this.$store.state.alert.show;
             },
 
             set() {
-                this.$store.commit('changeAlert', {
+                this.$store.commit('alert', {
                     show: false
                 });
             }            
@@ -52,7 +61,7 @@ export default {
             },
 
             set() {
-                this.$store.commit('changeConfirm', {
+                this.$store.commit('confirm', {
                     show: false
                 })
             }

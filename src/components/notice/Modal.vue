@@ -7,7 +7,7 @@
             <div v-show="value" class="modal-content">
                 <!-- header -->
                 <div class="modal-header" v-if="!!title">
-                    <button v-if="btnClose" @click="close" type="button" class="close">
+                    <button v-if="hasClose" @click="close" type="button" class="close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h5 class="modal-title">{{title}}</h5>
@@ -46,6 +46,24 @@ export default {
         hasClose: {
             type: Boolean,
             default: false
+        },
+
+        holdTime: {
+            type: Number
+        },
+
+        lock: {
+            type: Boolean
+        }
+    },
+
+    watch:{
+        value(v){
+            if(-1 == [-1, null, undefined].indexOf(this.holdTime)) {
+                setTimeout(()=>{
+                    this.$emit('input', false);
+                }, this.holdTime);                
+            }
         }
     },
 
@@ -55,7 +73,9 @@ export default {
         },
 
         close(){
-            this.$emit('input', false);
+            if(!this.lock) {
+                this.$emit('input', false);
+            }
         }
     }
 }

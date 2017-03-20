@@ -1,7 +1,14 @@
 <template>
     <div class="com-alert">
-        <v-modal v-model="isShow" @after-close="afterClose">
-            {{title}}
+        <v-modal 
+            :width="width" 
+            :hasClose="hasClose" 
+            :holdTime="holdTime" 
+            :lock="lock" 
+            :title="title"
+            v-model="isShow" 
+            @after-close="afterClose">
+            {{text}}
         </v-modal>
     </div>
 </template>
@@ -35,6 +42,22 @@ export default {
 
         title: {
             type: String
+        },
+
+        text: {
+            type: String
+        },
+
+        holdTime: {
+            type: Number
+        },
+
+        lock: {
+            type: Boolean
+        },
+
+        hasClose: {
+            type: Boolean
         }
     },
 

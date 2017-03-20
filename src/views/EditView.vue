@@ -73,7 +73,7 @@ export default {
         /**
          * 保存提示成功后执行, 回退
          */
-        afterClose(){
+        afterClose() {
             this.$router.back();
         },
 
@@ -111,16 +111,25 @@ export default {
         submit() {
             // http
             axios.put(this.form.data.url.submit, qs.stringify({
+                    id: this.$route.query.id,
                     accessToken: this.$store.state.accessToken,
                     ...this.formValues.body
                 }))
                 .then((response) => {
-                    this.modal.show = true;
-                    this.message = response.data.message;
-                    // 定时关闭modal
-                    setTimeout(() => {
-                        this.modal.show = false;
-                    }, 2000);
+                    this.$store.commit('alert', {
+                        width: '200px',
+                        show: true,
+                        text: response.data.message,
+                        holdTime: 2000,
+                        lock: true,
+                        afterClose() {
+                            try {
+                                self.$router.back();
+                            } catch (e) {
+
+                            }
+                        }
+                    });
                 })
                 .catch((error) => {
                     syslog(error);

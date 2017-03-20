@@ -14,15 +14,19 @@ export default new Vuex.Store({
         ],
 
         confirm: {
-            title: '您确定要执行该操作吗?',
+            title: '提示?',
             show: false,
+            holdTime: -1,
+            width: null,
             ok(){},
-            cancel(){}
+            afterClose(){}
         },
 
         alert: {
-            title: '提示您',
+            title: '提示',
             show: false,
+            holdTime: -1,
+            width: null,
             ok(){},
             afterClose(){}
         },
@@ -30,7 +34,6 @@ export default new Vuex.Store({
         prompt: {
             show: true
         },
-
 
         accessToken: localStorage.getItem('accessToken') || '',
 
@@ -47,13 +50,13 @@ export default new Vuex.Store({
         /**
          * alert
          */
-        changeAlert(state, options){
+        alert(state, options){
             state.alert = {...state.alert, ...options};
         },
         /**
          * confirem
          */
-        changeConfirm(state, options){
+        confirm(state, options){
             state.confirm = {...state.confirm, ...options};
         },
         /**
@@ -90,8 +93,8 @@ export default new Vuex.Store({
             // context可能是store也可能是module
             // context.commit('xx', true);
             return new Promise((resolve, reject) => {
-                // axios.post('http://113.6.252.23:6688/ndrcs/testlogin', qs.stringify(loginData) )
-                axios.post('./mock/login', loginData)
+                axios.post('http://113.6.252.23:6688/ndrcs/testlogin', qs.stringify(loginData) )
+                // axios.post('./mock/login', loginData)
                     .then((response) => {
                         // 登陆成功
                         if (1 == response.data.status) {

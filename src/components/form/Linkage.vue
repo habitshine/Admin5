@@ -74,7 +74,7 @@ export default {
                 this.newValues = [...this.value.values];
                 this.newTexts = [...this.value.texts];
             } else {
-                this.$emit('input', {values: [], texts: []});
+                // this.$emit('input', {values: [], texts: []});
             }
             this.popup.show = true;
         },
@@ -103,12 +103,14 @@ export default {
             } else if (this.activeIndex + 1 == this.pageCount) {
                 // 关闭弹窗
                 this.popup.show = false;
+                
+                // 只有点击最后一页的选项
+                // 才input数据
+                this.$emit('input', {
+                    values: this.newValues,
+                    texts: this.newTexts
+                });
             }
-
-            this.$emit('input', {
-                values: this.newValues,
-                texts: this.newTexts
-            });
         },
 
         close() {

@@ -144,6 +144,9 @@ module.exports = function(express, app) {
     // resful的成功/失败
     methods.forEach(method=> {
         app[method]('/mock/success', function(req, res) {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+            res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
             var data = {
                 status: 1,
                 message: method + ' 成功！'
@@ -153,6 +156,9 @@ module.exports = function(express, app) {
         });
 
         app[method]('/mock/error', function(req, res) {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+            res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
             var data = {
                 "status": 0,
                 "message": method + '失败！'

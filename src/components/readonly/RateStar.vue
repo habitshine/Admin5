@@ -3,11 +3,14 @@
         <span class="rating">
             <span
                     v-for="item in max" class="star"
-                    :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
+                    :class="[classes[item - 1], { 'hover': hoverIndex === item },{'click-star':clickStar === item}]"
                     @mousemove="setCurrentValue(item, $event)"
+                    @mousedown="handleMouseDown(item)"
+                    @mouseup="handleMouseUp"
                     @click="selectValue(item)"
                     @mouseleave="resetCurrentValue"
-                    :style="{ cursor: disabled ? 'auto' : 'pointer' }"></span>
+                    :style="{ cursor: disabled ? 'auto' : 'pointer' }"
+                    ></span>
         </span>
     </div>
 </template>
@@ -17,7 +20,8 @@
         data() {
             return{
                 currentValue: this.value,
-                hoverIndex: -1
+                hoverIndex: -1,
+                clickStar:-1
             }
         },
         props: {
@@ -50,9 +54,7 @@
         },
         watch: {
             value(val) {
-//                this.$emit('change', val);
                 this.currentValue = val;
-                console.log('test watch')
             }
         },
         methods: {
@@ -85,9 +87,13 @@
                 if (this.disabled) {
                     return;
                 }
-
                 this.$emit('input', value);
-                console.log(value)
+            },
+            handleMouseDown(value){
+                this.clickStar=value
+            },
+            handleMouseUp(){
+                this.clickStar= -1
             }
         },
         computed: {
@@ -99,9 +105,6 @@
                 for (; i < threshold; i++) {
                     result.push(this.activeClass);
                 }
-//                for (; i < this.max; i++) {
-//                    result.push(this.voidClass);
-//                }
                 return result;
             },
             activeClass() {
@@ -116,8 +119,6 @@
                 lowClass: this.iconClasses[0],
                 mediumClass: this.iconClasses[1],
                 highClass: this.iconClasses[2],
-//                voidClass: this.voidIconClass,
-//                disabledVoidClass: this.disabledVoidIconClass
             }
         }
     }
@@ -149,7 +150,13 @@
         color:rgb(198, 209, 222);
         transition: .3s
     }
-    /*.rating span.star:hover:before{content:"\f005";color:rgb(247, 186, 42);}*/
     .rating span.active:before{content:"\f005";color:rgb(247, 186, 42);}
-    /*.rating span.star:hover:before,.rating span.star:hover~span.star:before{content:"\f005";color:rgb(247, 186, 42);}*/
+    .rating span.click-star{
+        transform: scale(1) !important;
+    }
+    .rating span.click-star:before{
+        content:"\f005";
+        color: orangered;
+    }
+
 </style>

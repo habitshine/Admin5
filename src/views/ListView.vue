@@ -21,6 +21,7 @@
                 <!-- 步骤条 -->
                 <v-steps>
                     <v-step
+                            :key="index"
                             v-for="(item,index) in bar"
                             :inStep=item.instep
                             :index="index"

@@ -24,10 +24,10 @@
 ``` json
 {
     "title": "联动",
-	"type": "linkage",
-	"value": {"values": [1,1,1,1], "texts": ["世界", "亚洲", "中国", "香坊"]},
-	"name": "linkageValue",
-	"column": [12,12,12,12],
+    "type": "linkage",
+    "value": {"values": [1,1,1,1], "texts": ["世界", "亚洲", "中国", "香坊"]},
+    "name": "linkageValue",
+    "column": [12,12,12,12],
     "placeholder": "请选择",
     "children": [{
         "label": "一级",

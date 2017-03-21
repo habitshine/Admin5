@@ -11,7 +11,7 @@
 |title| 标题文字  |
 |type| 必须"select"  |
 |name   | ajax字段名, 服务端接收参数名  |
-|value   | 默认值, 对应children中的id, 如果没有默认值, 那么为null  |
+|value   | 默认值, 对应children中的value, 如果没有默认值, 那么为null  |
 |column   | 对应bootstrap的栅格布局  |
 |placeholder   | 默认提示文字  |
 |children   | 列表数据, 内容对应联动的列表  |

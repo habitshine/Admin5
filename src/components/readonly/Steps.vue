@@ -1,7 +1,6 @@
-
 <template>
     <div class="com-steps">
-        <div class="stps-bar">
+        <div class="steps-bar">
             <slot></slot>
         </div>
     </div>
@@ -23,12 +22,12 @@
 <style lang="scss" scope rel="stylesheet/scss">
     .com-steps{
         width: 100%;
-        padding: 50px 0 30px 0;
-        .stps-bar{
+        padding: 55px 0 35px 0;
+        .steps-bar{
             display: -webkit-box;
-            height: 18px;
+            height: 12px;
             width: 100%;
-            border-radius: 8px;
+            border-radius: 6px;
             background: #eee;
         }
     }

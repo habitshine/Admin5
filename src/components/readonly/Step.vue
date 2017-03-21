@@ -1,9 +1,9 @@
 <template>
     <div class="step"
          :class="{'step-active': inStep,'step-first':(firstNode == index) ? true : false,'step-last':(itemLength-1 == index) ? true : false}">
-        <span class="step-title" :class="{'title-active': inStep, 'current-title':current}">
+        <span class="step-title" :class="{'title-active': inStep, 'current-title':active}">
             {{stepTitle}}
-            <span v-if="current" class="light"></span>
+            <span v-if="active" class="light"></span>
         </span>
         <span class="step-wrap-annular">
             <span class="step-inner-annular">{{index+1}}</span>
@@ -30,7 +30,7 @@
             itemLength:{
                 type:Number
             },
-            current:{
+            active:{
                 type:Boolean
             },
             stepTitle:{
@@ -58,7 +58,7 @@
         text-align: center;
     }
     .step-active{
-        background-image: linear-gradient(top,#22e8c3,#b2f9ec 50%,#22e8c3 100%);
+        background-image: linear-gradient(top,#56e498,#b2f9ec 50%,#56e498 100%);
     }
     .step-first{
         border-top-left-radius: 8px;
@@ -79,7 +79,7 @@
         font-weight: bold;
     }
     .title-active{
-        color: #22e8c3;
+        color: #56e498;
     }
     .step-wrap-annular{
         display: inline-block;
@@ -107,7 +107,8 @@
     }
     .step-active{
         .step-wrap-annular{
-            background: #22e8c3;
+            /*background: #22e8c3;*/
+            background: #56e498;
             .step-inner-annular{
                 background: #fff;
                 color: #ff5e44;

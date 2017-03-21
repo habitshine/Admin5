@@ -16,6 +16,17 @@
                         </a>
                     </template>
                 </filter-layout>
+                <!-- 用户头像 -->
+                <v-head-pic :opts="info"></v-head-pic>
+                <!-- 步骤条 -->
+                <v-steps>
+                    <v-step
+                            v-for="(item,index) in bar"
+                            :inStep=item.instep
+                            :index="index"
+                            :itemLength="bar.length"
+                            :stepTitle=item.title :active="item.active"></v-step>
+                </v-steps>
                 <!-- 按钮组 -->
                 <div class="btn-bar">
                     <router-link class="btn btn-success" :to="currentPath('add')" tag="a">
@@ -69,6 +80,9 @@
     import VPage from '../components/Page'
     import VForm from '../components/Form'
     import VConfirm from '../components/notice/Confirm'
+    import VSteps from '../components/readonly/Steps'
+    import VStep from '../components/readonly/Step'
+    import VHeadPic from '../components/readonly/HeadPic'
 
     export default {
         name: 'ListView',
@@ -81,7 +95,9 @@
             VTable,
             VPage,
             VForm,
-
+            VStep,
+            VSteps,
+            VHeadPic
         },
 
         data() {
@@ -119,7 +135,37 @@
                         list: [],
                         count: 0
                     }
-                }
+                },
+                //用户头像及信息
+                info:{
+                    imgUrl:'https://cn.vuejs.org/images/logo.png',
+                    userName:'我是Vue',
+                    userDpt:'技术部',
+                    userTel:'13846668888',
+                    userQq:'1234567890'
+                },
+                //步骤条
+                bar:[{
+                    instep:true,
+                    title:"已受理",
+                    active:false
+                },{
+                    instep:true,
+                    title:"已处理",
+                    active:false
+                }, {
+                    instep:true,
+                    title:"已确认",
+                    active:false
+                }, {
+                    instep:true,
+                    title:"进行中",
+                    active:true
+                }, {
+                    instep:false,
+                    title:"待完成",
+                    active:false
+                }]
             };
         },
 

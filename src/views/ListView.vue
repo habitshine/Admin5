@@ -260,7 +260,6 @@ export default {
             this.$store.commit('confirm', {
                 show: true,
                 text: '您确定要删除吗?',
-                lock: true,
                 ok() {
                     self.httpDel(id).then(()=>{
                         self.table.data.list[index].status = 0;

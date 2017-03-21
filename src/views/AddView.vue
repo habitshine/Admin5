@@ -4,6 +4,7 @@
             <!-- 页面加载中 -->
             <v-spinner v-if="-1 == form.status">
             </v-spinner>
+
             <!-- 页面加载完毕 -->
             <div class="body" v-else>
                 <form-layout v-if="1 == form.status">
@@ -131,7 +132,7 @@ export default {
     components: {
         VSpinner,
         FormLayout,
-        VForm,
+        VForm
     },
 
     activated() {}

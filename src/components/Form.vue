@@ -20,13 +20,13 @@ import v_checkboxGroup from '../components/form/CheckboxGroup'
 import v_selectMulit from '../components/form/SelectMulit'
 import v_dateTime from '../components/form/DateTimePicker'
 import v_radioGroup from '../components/form/RadioGroup'
+import v_rateStar from '../components/readonly/RateStar'
 import v_textarea from '../components/form/Textarea'
 import v_linkage from '../components/form/Linkage'
-import v_upload from '../components/form/FileApi'
+import v_upload from '../components/form/Upload'
 import v_editor from '../components/form/Editor'
 import v_select from '../components/form/Select'
 import v_input from '../components/form/Input'
-import v_rateStar from '../components/readonly/RateStar'
 
 export default {
     name: 'Form',

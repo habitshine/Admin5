@@ -2,15 +2,21 @@
     "message": "无数据",
     "status": 1,
     "data": {
-        "form": [
-        {
+        "form": [{
+            "title": "上传",
+            "value": null,
+            "name": "upload",
+            "column": [12, 12, 12, 12],
+            "type": "upload",
+            "placeholder": "请上传!"
+        }, {
             "title": "textarea",
             "value": null,
             "name": "textarea",
             "column": [12, 12, 12, 12],
             "type": "textarea",
             "placeholder": "请编辑textarea!"
-        },{
+        }, {
             "title": "输入框",
             "value": null,
             "name": "inputValue",
@@ -18,7 +24,7 @@
             "placeholder": "输入吧少年",
             "column": [6, 4, 3, 3],
             "tip": "必选哦!"
-        },{
+        }, {
             "title": "复选框组",
             "value": null,
             "name": "checkboxGroupValue",
@@ -37,7 +43,7 @@
                 "value": 33,
                 "disabled": false
             }]
-        },{
+        }, {
             "name": "selectGroupValue",
             "title": "单选支持组",
             "value": null,
@@ -99,7 +105,7 @@
                     "disable": false
                 }]
             }]
-        },{
+        }, {
             "title": "多选支持组",
             "name": "selectMulitGroupValue",
             "column": [6, 4, 3, 3],
@@ -161,14 +167,14 @@
                     "disable": false
                 }]
             }]
-        },{
+        }, {
             "title": "日期选择器",
             "value": null,
             "name": "timeValue",
             "column": [6, 4, 3, 3],
             "type": "dateTime",
             "placeholder": "请选择"
-        },{
+        }, {
             "name": "selectMulitValue",
             "title": "多选列表",
             "column": [6, 4, 3, 3],
@@ -243,7 +249,7 @@
                 "value": 33,
                 "disabled": false
             }]
-        },{
+        }, {
             "name": "linkageValue",
             "value": null,
             "title": "联动",

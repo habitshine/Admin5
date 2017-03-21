@@ -8,7 +8,7 @@ module.exports = function(express, app) {
     app.use('/mock', express.static('./src/mock/'));
 
 
-    app.get('/mock/menu', function(req, res){
+    app.get('/mock/menu', function(req, res) {
         var menu = fs.readFileSync('./src/mock/menu.json', 'utf8');
 
         var data = {
@@ -142,7 +142,7 @@ module.exports = function(express, app) {
     });
 
     // resful的成功/失败
-    methods.forEach(method=> {
+    methods.forEach(method => {
         app[method]('/mock/success', function(req, res) {
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
@@ -165,42 +165,46 @@ module.exports = function(express, app) {
             };
             var json = JSON.stringify(data, null, 4);
             res.send(json);
-        });        
+        });
     });
-
+    
     /*伪装上传服务器*/
+    app.use('/uploads', express.static('./uploads/'));
     var uploadDir = './uploads';
     var multiparty = require('multiparty');
     app.post('/mock/upload', function(req, res) {
-        // res.header('Access-Control-Allow-Origin', '*');
-        // res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-        // res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-
         // 建立上传文件夹
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir);
         }
 
         var form = new multiparty.Form({ uploadDir: uploadDir });
+
         form.on('error', function(err) {
             console.log('Error parsing form: ' + err.stack);
         });
+
         form.parse(req, function(err, fields, files) {
+
             var filesTmp = JSON.stringify(files, null, 2);
             if (err) {
                 console.log('parse error: ' + err);
                 res.send("写文件操作失败。");
             } else {
-                // res.send("文件上传成功");
+                console.log(files)
+                // 不支持es5 map?
+                var fileList = [];
+                for(var k in files.file) {
+                    fileList[k] = files.file[k].path;
+                }
                 var result = {
                     status: 1,
-                    data: { files }
+                    data: { files: fileList }
                 };
                 res.json(result);
             }
         });
     });
-
 
     console.log('Mock数据初始化完成！');
 }

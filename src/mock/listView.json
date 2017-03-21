@@ -8,7 +8,7 @@
             "name": "inputValue",
             "type": "input",
             "placeholder": "输入吧少年",
-            "column": [6, 4, 3, 3],
+            "column": [12, 4, 3, 3],
             "tip": "必选哦!"
         },{
             "title": "复选框组",
@@ -33,7 +33,7 @@
             "name": "selectGroupValue",
             "title": "单选支持组",
             "value": null,
-            "column": [6, 4, 3, 3],
+            "column": [12, 4, 3, 3],
             "type": "select",
             "placeholder": "请选择",
             "children": [{
@@ -94,7 +94,7 @@
         },{
             "title": "多选支持组",
             "name": "selectMulitGroupValue",
-            "column": [6, 4, 3, 3],
+            "column": [12, 4, 3, 3],
             "value": null,
             "type": "selectMulit",
             "placeholder": "请选择",
@@ -157,13 +157,13 @@
             "title": "日期选择器",
             "value": null,
             "name": "timeValue",
-            "column": [6, 4, 3, 3],
+            "column": [12, 4, 3, 3],
             "type": "dateTime",
             "placeholder": "请选择"
         },{
             "name": "selectMulitValue",
             "title": "多选列表",
-            "column": [6, 4, 3, 3],
+            "column": [12, 4, 3, 3],
             "type": "selectMulit",
             "value": null,
             "placeholder": "请选择",
@@ -221,7 +221,7 @@
             "name": "radioGroupValue",
             "type": "radioGroup",
             "value": 11,
-            "column": [6, 4, 3, 3],
+            "column": [12, 4, 3, 3],
             "children": [{
                 "label": "苹果",
                 "value": 11,
@@ -280,7 +280,7 @@
             "name":"rateStarValue",
             "type":"rateStar",
             "value":3,
-            "column": [6, 4, 3, 3]
+            "column": [12, 4, 3, 3]
         }],
         "table": {
             "url": {

@@ -6,12 +6,8 @@
             </v-spinner>
             <!-- 页面加载完毕 -->
             <div class="body" v-else>
-                <v-modal :show="modal.show" :width="'300px'" :afterClose="afterClose">
-                    <p>{{message}}</p>
-                </v-modal>
                 <form-layout v-if="1 == form.status">
-                    <v-form v-model="formValues.body" :form="form.data.form">
-                    </v-form>
+                    <v-form v-model="formValues.body" :form="form.data.form"></v-form>
                     <template slot="btn-group">
                         <a @click="back" class="btn btn-danger">
                             <i class="glyphicon glyphicon-return"></i> 返回
@@ -28,7 +24,6 @@
 <script>
 import FormLayout from '../components/layout/Form'
 import VSpinner from '../components/Spinner'
-import VModal from '../components/notice/Modal'
 import VForm from '../components/Form'
 
 export default {
@@ -42,13 +37,6 @@ export default {
 
             message: '', // 弹出框文字提示
 
-            modal: {
-                title: '系统提示',
-                mask: true,
-                width: '300px',
-                show: false,
-                btnClose: false
-            },
             // 表单结果数据
             formValues: {
                 accessToken: this.$store.state.accessToken,
@@ -73,7 +61,7 @@ export default {
         /**
          * 保存提示成功后执行, 回退
          */
-        afterClose(){
+        afterClose() {
             this.$router.back();
         },
 
@@ -108,18 +96,27 @@ export default {
          * 提交
          */
         submit() {
+            var self = this;
             axios.post(this.form.data.url.submit, qs.stringify({
                     accessToken: this.$store.state.accessToken,
                     ...this.formValues.body
                 }))
                 .then((response) => {
-                    this.modal.show = true;
-                    this.message = response.data.message;
-                    // 定时关闭modal
-                    setTimeout(() => {
-                        this.modal.show = false;
-                    }, 2000);
-                    // 切换页面, 根据afterClose
+                    // this.$store.commit('notify', {type: 'success', text: response.data.message}); 
+                    this.$store.commit('alert', {
+                        width: '200px',
+                        show: true,
+                        text: response.data.message,
+                        holdTime: 2000,
+                        lock: true,
+                        afterClose() {
+                            try {
+                                self.$router.back();
+                            } catch (e) {
+
+                            }
+                        }
+                    });
                 })
                 .catch((error) => {
                     syslog(error);
@@ -135,7 +132,6 @@ export default {
         VSpinner,
         FormLayout,
         VForm,
-        VModal
     },
 
     activated() {}

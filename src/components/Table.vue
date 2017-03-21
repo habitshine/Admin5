@@ -19,6 +19,7 @@
                     </thead>
                     <tbody>
                         <template v-for="(row, i) in table">
+                            <transition>
                             <tr v-if="1 == row.status">
                                 <td>
                                     <v-checkbox style="margin:0" v-model="booleanList[i]">
@@ -26,6 +27,7 @@
                                 </td>
                                 <slot name="row" :row="row" :index="i"></slot>
                             </tr>
+                            </transition>
                         </template>
                     </tbody>
                 </table>
@@ -128,5 +130,20 @@ export default {
 .com-table {
     position: relative;
     >.spinner {}
+
+    .v-enter {
+        opacity: 0;
+        transform: translateY(-.5rem);
+    }
+
+    .v-enter-active {
+        transition: all .5s;
+    }
+
+    .v-leave-active {
+        opacity: 0;
+        transition: all .5s;
+        transform: translateY(-.5rem);
+    }
 }
 </style>

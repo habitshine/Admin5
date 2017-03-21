@@ -1,6 +1,6 @@
 <template>
     <div class="view-home">
-        <h1>到家了!</h1>
+        <div class="alert alert-info">主面板</div>
     </div>
 </template>
 

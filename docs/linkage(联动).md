@@ -9,7 +9,7 @@
 | ------------ | ------------ |
 |title| 标题文字  |
 |type| 必须"linkage"  |
-|value| 默认值  |
+|value| 默认值, 2部分组成, values对应children中的value, texts对应children中的label  |
 |name   | ajax字段名, 服务端接收参数名  |
 |column   | 对应bootstrap的栅格布局  |
 |placeholder   | 默认提示文字  |

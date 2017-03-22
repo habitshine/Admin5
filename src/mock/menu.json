@@ -22,9 +22,9 @@
         "route": {
             "path": "/home/category/goods/add"
         }
-    },{
+    }, {
         "id": 12,
-        "text": "回家",
+        "text": "主面板",
         "route": {
             "path": "/home"
         }

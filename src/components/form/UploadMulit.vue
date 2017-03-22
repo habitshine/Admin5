@@ -1,8 +1,8 @@
 <template>
     <div class="com-upload-mulit">
         <!-- 按钮 -->
-        <label class="btn btn-default" ref="btn-upload">
-            点击上传
+        <label class="btn btn-default" :ref="opts.name">
+            {{opts.placeholder}}
             <input name="upload" class="input-upload" type="file" multiple>
         </label>
         <!-- 预览 -->
@@ -12,7 +12,7 @@
                 <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
                 <p class="progress2">{{preview.progress}}%</p>
                 <p class="title">{{preview.fileName}}</p>
-                <img :src="preview.img">
+                <img :src="preview.url">
             </li>
         </transition-group>
     </div>
@@ -38,38 +38,32 @@ export default {
 
     mounted() {
         // 监听上传事件
-        FileAPI.event.on(this.$refs['btn-upload'], 'change', (evt) => {
+        FileAPI.event.on(this.$refs[this.opts.name], 'change', (evt) => {
             // 文件对象 
             var files = FileAPI.getFiles(evt);
 
-            // 遍历文件
-            FileAPI.each(files, (file) => {
-                // 构造结构
-                // vue监听数据
-                this.previews.push({
+            // 不同文件不同处理
+            // 如果是图片, 进行base64生成预览图
+            files.forEach((file, i) => {
+                this.previews.splice(0, 0, {
                     id: null,
                     progress: 0,
                     fileName: file.name,
                     url: '',
-                    img: '',
                     type: ''
                 });
-                // 最新索引
-                var lastIndex = this.previews.length - 1;
 
-                FileAPI.filterFiles(files, (file, info) => {
-                    // 判断是否图片
-                    return /^image/.test(file.type);
-                }, (list, other) => {
-                    if (0 < list.length) {
-                        // 生成缩略图
-                        this.previewBase64(file, lastIndex);
-                    }
-                });
+                // 如果是图片, 进行base64生成预览图
+                if (/^image/.test(file.type)) {
+                    // i需要函数进行值传递
+                    // 后续想办法code美观
+                    this.previewBase64(file, i);
+                }
 
                 // 上传
-                this.upload(file, lastIndex);
+                this.upload(file, i);
             });
+
         });
     },
 
@@ -78,26 +72,26 @@ export default {
          * 生成缩略图
          * file转base64
          * @param  {Object} file      
-         * @param  {Number} lastIndex 当前上传文件索引
+         * @param  {Number} index 当前上传文件索引
          */
-        previewBase64(file, lastIndex) {
+        previewBase64(file, index) {
             FileAPI.Image(file).preview(100).get((err, img) => {
-                this.previews[lastIndex].img = img.toDataURL();
+                this.previews[index].url = img.toDataURL();
             });
         },
 
         /**
          * 上传, 回馈上传进度
          * @param  {Object} file      
-         * @param  {Number} lastIndex 当前上传文件索引
+         * @param  {Number} index 当前上传文件索引
          */
-        upload(file, lastIndex) {
+        upload(file, index) {
             // return new Promise((resolve, reject)=>{
             FileAPI.upload({
                 url: '/mock/upload',
 
                 progress: (evt) => {
-                    this.previews[lastIndex].progress = Math.floor(evt.loaded / evt.total * 100);
+                    this.previews[index].progress = Math.floor(evt.loaded / evt.total * 100);
                 },
 
                 files: {

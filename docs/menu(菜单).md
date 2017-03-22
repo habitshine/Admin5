@@ -28,7 +28,7 @@
         "id": 11,
         "text": "商品列表",
         "route": {
-            "path": "/home/list",
+            "path": "/home/category/goods/list",
             "query": {
                 "page": 1,
                 "limit": 15

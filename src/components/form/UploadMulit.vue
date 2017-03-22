@@ -12,7 +12,7 @@
                 <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
                 <p class="progress2">{{preview.progress}}%</p>
                 <p class="title">{{preview.fileName}}</p>
-                <img :src="preview.url">
+                <img :src="preview.base64">
             </li>
         </transition-group>
     </div>
@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             previews: [],
+            values: []
         };
     },
 
@@ -49,15 +50,19 @@ export default {
                     id: null,
                     progress: 0,
                     fileName: file.name,
+                    base64: '',
                     url: '',
                     type: ''
                 });
 
                 // 如果是图片, 进行base64生成预览图
                 if (/^image/.test(file.type)) {
+                    this.previews[i].type = 'image';
                     // i需要函数进行值传递
                     // 后续想办法code美观
                     this.previewBase64(file, i);
+                } else {
+                    this.previews[i].type = 'file';
                 }
 
                 // 上传
@@ -76,7 +81,7 @@ export default {
          */
         previewBase64(file, index) {
             FileAPI.Image(file).preview(100).get((err, img) => {
-                this.previews[index].url = img.toDataURL();
+                this.previews[index].base64 = img.toDataURL();
             });
         },
 
@@ -99,7 +104,16 @@ export default {
                 },
 
                 complete: (err, xhr, file, options) => {
-                    console.log(xhr.response)
+                    var json = JSON.parse(xhr.response)
+                    this.previews[index].id = json.data.id;
+                    this.previews[index].url = json.data.url;
+                    this.values.push({
+                        id: this.previews[index].id,
+                        url: this.previews[index].url,
+                        type: this.previews[index].type,
+                        fileName: this.previews[index].fileName
+                    });
+                    this.$emit('input', this.values);
                 }
             });
             // });

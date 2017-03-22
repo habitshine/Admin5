@@ -167,7 +167,7 @@ module.exports = function(express, app) {
             res.send(json);
         });
     });
-    
+
     /*伪装上传服务器*/
     app.use('/uploads', express.static('./uploads/'));
     var uploadDir = './uploads';
@@ -191,16 +191,12 @@ module.exports = function(express, app) {
                 console.log('parse error: ' + err);
                 res.send("写文件操作失败。");
             } else {
-                var fileList = [];
-                for(var k in files.file) {
-                    fileList[k] = {
-                        url: files.file[k].path,
-                        id: Mock.Random.natural()
-                    }
-                }
                 var result = {
                     status: 1,
-                    data: { files: fileList }
+                    data: {
+                        url: files.file[0].path,
+                        id: Mock.Random.natural()
+                    }
                 };
                 res.json(result);
             }

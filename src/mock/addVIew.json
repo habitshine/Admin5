@@ -5,10 +5,10 @@
         "form": [{
             "title": "上传",
             "value": null,
-            "name": "upload",
+            "name": "uploadMulitValue",
             "column": [12, 12, 12, 12],
-            "type": "upload",
-            "placeholder": "请上传!"
+            "type": "uploadMulit",
+            "placeholder": "点击上传多个文件"
         }, {
             "title": "编辑器",
             "value": null,

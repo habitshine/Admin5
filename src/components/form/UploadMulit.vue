@@ -1,5 +1,5 @@
 <template>
-    <div class="com-upload">
+    <div class="com-upload-mulit">
         <!-- 按钮 -->
         <label class="btn btn-default" ref="btn-upload">
             点击上传
@@ -21,7 +21,7 @@
 // fileAPI对于每次多选的文件,如果再次选择相同的几个文件, 那么不触发上传
 import FileAPI from 'fileapi'
 export default {
-    name: 'upload',
+    name: 'uploadMulit',
 
     props: {
         opts: {},
@@ -130,7 +130,7 @@ export default {
 </script>
 <style scoped lang=scss>
 $h: 100px;
-.com-upload {
+.com-upload-mulit {
     overflow: hidden;
     .input-upload {
         display: none;

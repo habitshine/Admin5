@@ -191,11 +191,12 @@ module.exports = function(express, app) {
                 console.log('parse error: ' + err);
                 res.send("写文件操作失败。");
             } else {
-                console.log(files)
-                // 不支持es5 map?
                 var fileList = [];
                 for(var k in files.file) {
-                    fileList[k] = files.file[k].path;
+                    fileList[k] = {
+                        url: files.file[k].path,
+                        id: Mock.Random.natural()
+                    }
                 }
                 var result = {
                     status: 1,

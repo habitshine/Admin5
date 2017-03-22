@@ -36,7 +36,7 @@ export default{
         100% { border-color: #eee;}
     }
     .color-animation{
-        animation: borderColor 10s infinite;
+        animation: borderColor ease-in-out 10s infinite;
     }
     .head-pic{
         overflow: hidden;

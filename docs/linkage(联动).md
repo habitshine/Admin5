@@ -14,6 +14,7 @@
 |column   | 对应bootstrap的栅格布局  |
 |placeholder   | 默认提示文字  |
 |children   | 列表数据, 内容对应联动的列表  |
+|children.url   | 当前级ajax获取选项数据的地址  |
 |children.label   | 当前级显示名  |
 |children.name   | 获取数据时候,ajax对应的data的键值名|
 |children.children   | 当前级下的选项  |

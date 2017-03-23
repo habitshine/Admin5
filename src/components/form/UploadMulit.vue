@@ -7,12 +7,14 @@
         </label>
         <!-- 预览 -->
         <transition-group class="previews" v-show="0 < previews.length" tag="ul">
-            <li v-for="(preview, i) in previews" :key="preview.id">
-                <span @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
+            <li v-for="(preview, i) in previews" :key="preview">
+                <!-- 删除按钮 -->
+                <span v-if="-1 != [100, undefined].indexOf(preview.progress)" @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
+
                 <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
                 <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
                 <p class="title">{{preview.fileName}}</p>
-                <img :src="preview.url">
+                <img v-if="'image' == preview.type" :src="preview.url">
             </li>
         </transition-group>
     </div>
@@ -42,6 +44,7 @@ export default {
 
     mounted() {
         this.previews = null == this.opts.value ? [] : JSON.parse(JSON.stringify(this.opts.value));
+
         this.activeIndex = this.previews.length;
 
         // 监听上传事件
@@ -53,7 +56,7 @@ export default {
 
                 // 初始化一个文件
                 var preview = {
-                    id: '_upload-' + new Date().getTime() + index, // 后续会被服务端id覆盖
+                    id: '',
                     progress: 0,
                     fileName: file.name,
                     type: 'file',
@@ -115,8 +118,13 @@ export default {
                 files: {file},
 
                 complete: (err, xhr, file, options) => {
-                    //$emit
-                    // this.previews[index].url = img.toDataURL();
+                    var {status, data} = JSON.parse(xhr.response);
+                    this.previews[index].id = data.id;
+                    this.previews[index].url = data.url;
+                    this.$emit('input', this.previews.map(item=>{
+                        var {id, fileName, type, url} = item;
+                        return {id, fileName, type, url};
+                    }));
                 }
             });
         },
@@ -131,7 +139,11 @@ export default {
                     id
                 }
             }).then(response => {
-                this.$emit('input', this.newValues);
+                this.activeIndex--;
+                this.$emit('input', this.previews.map(item=>{
+                    var {id, fileName, type, url} = item;
+                    return {id, fileName, type, url};
+                }));
             }).catch((error) => {
 
             });

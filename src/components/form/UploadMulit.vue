@@ -13,7 +13,7 @@
 
                 <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
                 <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
-                <p class="title">{{preview.fileName}}</p>
+                <a target="_new" :href="preview.url" class="title">{{preview.fileName}}</a>
                 <img v-if="'image' == preview.type" :src="preview.url">
             </li>
         </transition-group>
@@ -53,7 +53,6 @@ export default {
 
             // 遍历文件,进行文件类型判断
             files.forEach((file, index) => {
-
                 // 初始化一个文件
                 var preview = {
                     id: '',
@@ -120,9 +119,13 @@ export default {
                 complete: (err, xhr, file, options) => {
                     var {status, data} = JSON.parse(xhr.response);
                     this.previews[index].id = data.id;
-                    this.previews[index].url = data.url;
+
+                    if('image' != this.previews[index].type) {
+                        this.previews[index].url = data.url;
+                    }
+
                     this.$emit('input', this.previews.map(item=>{
-                        var {id, fileName, type, url} = item;
+                        var {id, fileName, type, url} = {...item, url: data.url};
                         return {id, fileName, type, url};
                     }));
                 }
@@ -236,6 +239,7 @@ $h: 100px;
                 height: $h - 16px - 20px;
                 width: 100%;
                 text-align: center;
+                &:hover{cursor: pointer;}
             }
         }
     }

@@ -108,7 +108,7 @@ export default {
          */
         upload(file, index) {
             FileAPI.upload({
-                url: '/mock/upload',
+                url: this.opts.url.upload,
 
                 progress: (evt) => {
                     this.previews[index].progress = Math.floor(evt.loaded / evt.total * 100);
@@ -137,7 +137,7 @@ export default {
         remove(i, id) {
             this.previews.splice(i, 1);
 
-            axios.delete('/mock/success', {
+            axios.delete(this.opts.url.del, {
                 params: {
                     id
                 }

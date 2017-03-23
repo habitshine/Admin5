@@ -3,12 +3,35 @@
     "status": 1,
     "data": {
         "form": [{
+            "title": "上传",
+            "value": [{
+                    "fileName": "1.jpeg",
+                    "id": 1223130728784302,
+                    "type": "image",
+                    "url": "uploads/lFRr60kAf4RobwE8_0HeOmCb.jpeg"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 1000,
+                    "type": "image",
+                    "url": "uploads/zVUQZMfu2Al-hFZH2MmN_VKb.jpg"
+                }
+
+            ],
+            "name": "uploadMulitValue",
+            "column": [12, 12, 12, 12],
+            "type": "uploadMulit",
+            "placeholder": "点击上传多个文件",
+            "url": {
+                "upload": "./mock/upload",
+                "del": "./mock/success"
+            }
+        }, {
             "title": "评分组件",
-            "name":"rateStarValue",
-            "type":"rateStar",
-            "value":3,
+            "name": "rateStarValue",
+            "type": "rateStar",
+            "value": 3,
             "column": [6, 4, 3, 3]
-        },{
+        }, {
             "title": "输入框",
             "value": "工具",
             "name": "inputValue",

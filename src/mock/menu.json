@@ -17,10 +17,16 @@
     "id": 2,
     "text": "菜单2",
     "children": [{
-        "id": 11,
+        "id": 10,
         "text": "新增",
         "route": {
             "path": "/home/category/goods/add"
+        }
+    }, {
+        "id": 11,
+        "text": "编辑id=1",
+        "route": {
+            "path": "/home/category/goods/edit?id=1"
         }
     }, {
         "id": 12,

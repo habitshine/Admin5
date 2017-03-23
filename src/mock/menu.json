@@ -30,9 +30,9 @@
         }
     }, {
         "id": 13,
-        "text": "编辑id=1",
+        "text": "readonly集合",
         "route": {
-            "path": "/home/category/goods/edit?id=1"
+            "path": "/home/readonly"
         }
     }]
 }, {

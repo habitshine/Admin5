@@ -1,10 +1,18 @@
 import HomeView from '../views/HomeView'
+
 export var routes = [
-    { path: '/', component: HomeView, name: 'homeView'},
+    { path: '/', component: HomeView, name: 'homeView' },
     { path: 'login', redirect: '/login' },
-    { path: 'category', redirect: '/' }, 
-    { path: 'category/goods', redirect: '/index' }, 
-    {
+    { path: 'category', redirect: '/' },
+    { path: 'category/goods', redirect: '/index' }, {
+        path: 'readonly',
+        component: resolve => {
+            require.ensure(['../views/ReadOnlyView'], () => {
+                resolve(require('../views/ReadOnlyView'))
+            })
+        },
+        name: 'readonly'
+    }, {
         path: 'category/goods/list',
         component: resolve => {
             require.ensure(['../views/ListView'], () => {

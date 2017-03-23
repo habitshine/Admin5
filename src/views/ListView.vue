@@ -16,18 +16,7 @@
                         </a>
                     </template>
                 </filter-layout>
-                <!-- 用户头像 -->
-                <v-head-pic :opts="info"></v-head-pic>
-                <!-- 步骤条 -->
-                <v-steps>
-                    <v-step
-                            :key="index"
-                            v-for="(item,index) in bar"
-                            :inStep=item.instep
-                            :index="index"
-                            :itemLength="bar.length"
-                            :stepTitle=item.title :active="item.active"></v-step>
-                </v-steps>
+
                 <!-- 按钮组 -->
                 <div class="btn-bar">
                     <router-link class="btn btn-success" :to="currentPath('add')" tag="a">
@@ -76,14 +65,9 @@
     import FilterLayout from '../components/layout/Filter'
     import FrameLayout from '../components/layout/Frame'
     import VSpinner from '../components/Spinner'
-    import VModal from '../components/notice/Modal'
     import VTable from '../components/Table'
     import VPage from '../components/Page'
     import VForm from '../components/Form'
-    import VConfirm from '../components/notice/Confirm'
-    import VSteps from '../components/readonly/Steps'
-    import VStep from '../components/readonly/Step'
-    import VHeadPic from '../components/readonly/HeadPic'
 
     export default {
         name: 'ListView',
@@ -92,13 +76,9 @@
             FilterLayout,
             FrameLayout,
             VSpinner,
-            VConfirm,
             VTable,
             VPage,
-            VForm,
-            VStep,
-            VSteps,
-            VHeadPic
+            VForm
         },
 
         data() {

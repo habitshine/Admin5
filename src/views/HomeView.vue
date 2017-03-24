@@ -17,7 +17,7 @@
                 echarts:[
                     {
                         size: {
-                            width: '600px',
+                            width: '500px',
                             height: '400px'
                         },
                         value:{
@@ -68,7 +68,7 @@
                     },
                     {
                         size: {
-                            width: '600px',
+                            width: '500px',
                             height: '400px'
                         },
                         value:{
@@ -101,7 +101,7 @@
                     },
                     {
                         size: {
-                            width: '600px',
+                            width: '500px',
                             height: '400px'
                         },
                         value:{
@@ -144,7 +144,7 @@
                     },
                     {
                         size: {
-                            width: '600px',
+                            width: '500px',
                             height: '400px'
                         },
                         value:{
@@ -192,7 +192,7 @@
                     },
                     {
                         size: {
-                            width: '600px',
+                            width: '500px',
                             height: '400px'
                         },
                         value:{
@@ -276,7 +276,7 @@
                     },
                     {
                         size: {
-                            width: '600px',
+                            width: '500px',
                             height: '400px'
                         },
                         value:{title: {

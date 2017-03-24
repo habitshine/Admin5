@@ -4,6 +4,12 @@
             <div>
             <!-- 用户头像 -->
             <v-head-pic :opts="info"></v-head-pic>
+            <!--环形进度条-->
+            <v-circle-progress
+                    :parentValue="circleProgress.value"
+                    :radius="circleProgress.radius"
+                    :borderWidth="circleProgress.borderWidth"
+                    :borderColor="circleProgress.borderColor"></v-circle-progress>
             <!-- 步骤条 -->
             <v-steps>
                 <v-step :key="index" v-for="(item,index) in bar" :inStep=item.instep :index="index" :itemLength="bar.length" :stepTitle=item.title :active="item.active"></v-step>
@@ -16,6 +22,7 @@
 import VSteps from '../components/readonly/Steps'
 import VStep from '../components/readonly/Step'
 import VHeadPic from '../components/readonly/HeadPic'
+import VCircleProgress from '../components/readonly/CircleProgress'
 
 export default {
     name: 'readonlyView',
@@ -23,7 +30,8 @@ export default {
     components: {
         VStep,
         VSteps,
-        VHeadPic
+        VHeadPic,
+        VCircleProgress
     },
 
     data() {
@@ -36,6 +44,13 @@ export default {
                 userDpt: '技术部',
                 userTel: '13846668888',
                 userQq: '1234567890'
+            },
+            //svg进度条,radius圆半径，value进度(0~1)，borderWidth边框宽度,borderColor边框颜色
+            circleProgress:{
+                value: 0.6,
+                radius: 60,
+                borderWidth: 6,
+                borderColor: '#77d4ff'
             },
             //步骤条
             bar: [{

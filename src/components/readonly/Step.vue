@@ -58,7 +58,7 @@
         text-align: center;
     }
     .step-active{
-        background-image: linear-gradient(top,#56e498,#b2f9ec 50%,#56e498 100%);
+        background-image: linear-gradient(top,#c8b990,#eddfbb 50%,#c8b990 100%);
     }
     .step-first{
         border-top-left-radius: 8px;
@@ -79,7 +79,7 @@
         font-weight: bold;
     }
     .title-active{
-        color: #56e498;
+        color: #788184;
     }
     .step-wrap-annular{
         display: inline-block;
@@ -107,8 +107,7 @@
     }
     .step-active{
         .step-wrap-annular{
-            /*background: #22e8c3;*/
-            background: #56e498;
+            background: #dacba1;
             .step-inner-annular{
                 background: #fff;
                 color: #ff5e44;
@@ -132,6 +131,6 @@
         to {left:100%;}
     }
     .current-title{
-        color: #00a183;
+        color: #aba082;
     }
 </style>

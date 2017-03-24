@@ -24,6 +24,7 @@ export default {
     },
 
     mounted() {
+        // trix-attachment-add
       this.$el.addEventListener('trix-change', (e)=>{
         console.log(e.target)
       });

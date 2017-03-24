@@ -173,6 +173,8 @@ module.exports = function(express, app) {
     var uploadDir = './uploads';
     var multiparty = require('multiparty');
     app.post('/mock/upload', function(req, res) {
+        console.log(req.body)
+
         // 建立上传文件夹
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir);

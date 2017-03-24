@@ -21,6 +21,7 @@
 </template>
 <script>
 // fileAPI对于每次多选的文件,如果再次选择相同的几个文件, 那么不触发上传
+
 import FileAPI from 'fileapi'
 export default {
     name: 'uploadMulit',
@@ -47,6 +48,8 @@ export default {
 
         this.activeIndex = this.previews.length;
 
+
+
         // 监听上传事件
         FileAPI.event.on(this.$refs[this.opts.name], 'change', (evt) => {
             var files = FileAPI.getFiles(evt);
@@ -56,10 +59,11 @@ export default {
                 // 初始化一个文件
                 var preview = {
                     id: '',
-                    progress: 0,
-                    fileName: file.name,
-                    type: 'file',
-                    url: ''
+                    cover: '', // 缩略图
+                    progress: 0, // 进度条
+                    fileName: file.name, // 文件名
+                    type: 'file', // 文件类型
+                    url: '' // 上传后的资源地址
                 };
 
                 this.previews.push(preview);
@@ -69,7 +73,7 @@ export default {
 
                     this.previews[this.activeIndex].type = 'image';
 
-                    // 转base64(异步)
+                    // 转base64(异步), 作为cover
                     this.file2base64(file, this.activeIndex);
                 }
 
@@ -96,7 +100,7 @@ export default {
                 if (err) {
                    
                 } else {
-                    this.previews[index].url = img.toDataURL();
+                    this.previews[index].cover = img.toDataURL();
                 }
             });
         },
@@ -116,14 +120,15 @@ export default {
 
                 files: {file},
 
+                headers: { 'x-upload': 'fileapi' },
+
+                data: {cover: 123456789},
+
                 complete: (err, xhr, file, options) => {
                     var {status, data} = JSON.parse(xhr.response);
                     this.previews[index].id = data.id;
-
-                    if('image' != this.previews[index].type) {
-                        this.previews[index].url = data.url;
-                    }
-
+                    // 
+                    this.previews[index].url = data.url;
                     this.$emit('input', this.previews.map(item=>{
                         var {id, fileName, type, url} = {...item, url: data.url};
                         return {id, fileName, type, url};

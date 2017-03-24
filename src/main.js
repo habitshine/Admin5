@@ -27,6 +27,9 @@ window.c = (input) => {
 }
 
 
+window.FileAPI = {cors: true, debug: true};
+
+
 router.beforeEach((to, from, next) => {
     // 排除404 和 login, 不验证token
     // 暂时不验证了 2017-02-22 10:56

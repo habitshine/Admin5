@@ -16,24 +16,7 @@
                         </a>
                     </template>
                 </filter-layout>
-                <!-- 用户头像 -->
-                <v-head-pic :opts="info"></v-head-pic>
-                <!-- 环形进度条 -->
-                <v-circle-progress
-                        :parentValue="circleProgress.value"
-                        :radius="circleProgress.radius"
-                        :borderWidth="circleProgress.borderWidth"
-                        :borderColor="circleProgress.borderColor"></v-circle-progress>
-                <!-- 步骤条 -->
-                <v-steps>
-                    <v-step
-                            :key="index"
-                            v-for="(item,index) in bar"
-                            :inStep=item.instep
-                            :index="index"
-                            :itemLength="bar.length"
-                            :stepTitle=item.title :active="item.active"></v-step>
-                </v-steps>
+
                 <!-- 按钮组 -->
                 <div class="btn-bar">
                     <router-link class="btn btn-success" :to="currentPath('add')" tag="a">
@@ -85,11 +68,6 @@
     import VTable from '../components/Table'
     import VPage from '../components/Page'
     import VForm from '../components/Form'
-    import VConfirm from '../components/notice/Confirm'
-    import VSteps from '../components/readonly/Steps'
-    import VStep from '../components/readonly/Step'
-    import VHeadPic from '../components/readonly/HeadPic'
-    import VCircleProgress from '../components/readonly/CircleProgress'
 
     export default {
         name: 'ListView',
@@ -100,11 +78,7 @@
             VSpinner,
             VTable,
             VPage,
-            VForm,
-            VStep,
-            VSteps,
-            VHeadPic,
-            VCircleProgress
+            VForm
         },
 
         data() {
@@ -142,44 +116,6 @@
                         list: [],
                         count: 0
                     }
-                },
-                //用户头像及信息
-                info:{
-                    imgUrl:'https://cn.vuejs.org/images/logo.png',
-                    userName:'我是Vue',
-                    userDpt:'技术部',
-                    userTel:'13846668888',
-                    userQq:'1234567890'
-                },
-                //svg进度条,radius圆半径，value进度(0~1)，borderWidth边框宽度,borderColor边框颜色
-                circleProgress:{
-                    value: 0.6,
-                    radius: 60,
-                    borderWidth: 6,
-                    borderColor: '#77d4ff'
-                },
-                //步骤条
-                bar:[{
-                    instep:true,
-                    title:"已受理",
-                    active:false
-                },{
-                    instep:true,
-                    title:"已处理",
-                    active:false
-                }, {
-                    instep:true,
-                    title:"已确认",
-                    active:false
-                }, {
-                    instep:true,
-                    title:"进行中",
-                    active:true
-                }, {
-                    instep:false,
-                    title:"待完成",
-                    active:false
-                }]
                 }
             };
         },

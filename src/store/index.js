@@ -93,8 +93,7 @@ export default new Vuex.Store({
             // context可能是store也可能是module
             // context.commit('xx', true);
             return new Promise((resolve, reject) => {
-                axios.post('http://113.6.252.23:6688/ndrcs/testlogin', qs.stringify(loginData) )
-                // axios.post('./mock/login', loginData)
+                axios.post(LOGIN_URL, qs.stringify(loginData) )
                     .then((response) => {
                         // 登陆成功
                         if (1 == response.data.status) {

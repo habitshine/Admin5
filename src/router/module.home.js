@@ -13,7 +13,7 @@ export var routes = [
         },
         name: 'readonly'
     }, {
-        path: 'category/goods/list',
+        path: '*/*/list',
         component: resolve => {
             require.ensure(['../views/ListView'], () => {
                 resolve(require('../views/ListView'))
@@ -21,7 +21,7 @@ export var routes = [
         },
         name: 'list'
     }, {
-        path: 'category/goods/add',
+        path: '*/*/add',
         component: resolve => {
             require.ensure(['../views/AddView'], () => {
                 resolve(require('../views/AddView'))
@@ -29,7 +29,7 @@ export var routes = [
         },
         name: 'add'
     }, {
-        path: 'category/goods/edit',
+        path: '*/*/edit',
         component: resolve => {
             require.ensure(['../views/EditView'], () => {
                 resolve(require('../views/EditView'))

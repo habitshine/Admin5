@@ -32,12 +32,12 @@ import VModal from '../components/notice/Modal'
 import VForm from '../components/Form'
 
 export default {
-    name: 'EditView',
+    name: 'editView',
 
     data() {
         return {
             // 初始化渲染数据接口
-            baseURL: '/mock/editView',
+            baseURL: '',
             // baseURL: 'http://113.6.252.23:6688/ndrcs/editNdrcs',
 
             message: '', // 弹出框文字提示
@@ -63,6 +63,7 @@ export default {
     },
 
     created() {
+        this.baseURL = this.$route.path.replace('/home', HOME_PATH);
         this.httpGetBaseView(response => {
             this.form = response.data;
             this.setDefaultValue();

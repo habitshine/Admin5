@@ -56,11 +56,7 @@ export default {
                 if (1 == res.status) {
                     this.status = 1;
                     this.$router.push({
-                        path: 'home/category/goods/list',
-                        query: {
-                            page: 1,
-                            limit: 15
-                        }
+                        path: 'home'
                     });
                 } else {
                     this.status = 0;

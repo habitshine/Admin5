@@ -86,7 +86,7 @@
                 // module/method
                 // goods/infor
                 // 初始化渲染数据接口
-                baseURL: '/mock/listView',
+                baseURL: '',
                 // baseURL: 'http://113.6.252.23:6688/ndrcs/getNdrcsList',
                 // 已勾选数据
                 formValues: {
@@ -116,41 +116,12 @@
                         list: [],
                         count: 0
                     }
-                },
-                //用户头像及信息
-                info:{
-                    imgUrl:'https://cn.vuejs.org/images/logo.png',
-                    userName:'我是Vue',
-                    userDpt:'技术部',
-                    userTel:'13846668888',
-                    userQq:'1234567890'
-                },
-                //步骤条
-                bar:[{
-                    instep:true,
-                    title:"已受理",
-                    active:false
-                },{
-                    instep:true,
-                    title:"已处理",
-                    active:false
-                }, {
-                    instep:true,
-                    title:"已确认",
-                    active:false
-                }, {
-                    instep:true,
-                    title:"进行中",
-                    active:true
-                }, {
-                    instep:false,
-                    title:"待完成",
-                    active:false
-                }]
+                }
             };
         },
 
         created() {
+            this.baseURL = this.$route.path.replace('/home', HOME_PATH);
             // 渲染: 条件筛选
             this.httpGetBaseView(response => {
                 this.filterForm = response.data;

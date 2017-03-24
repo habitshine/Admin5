@@ -12,11 +12,7 @@ export default{
     name:'CircleProgress',
     data(){
         return{
-            testpercent:0,
-//            stylePos:{
-//                position: absolute,
-//                left: radius
-//            }
+
         }
     },
     props:{

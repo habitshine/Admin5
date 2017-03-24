@@ -153,7 +153,7 @@
                     userTel:'13846668888',
                     userQq:'1234567890'
                 },
-                //svg进度条,radius圆半径，value进度(0~1)，borderWidth边宽
+                //svg进度条,radius圆半径，value进度(0~1)，borderWidth边框宽度,borderColor边框颜色
                 circleProgress:{
                     value: 0.6,
                     radius: 60,

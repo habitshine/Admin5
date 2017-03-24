@@ -107,7 +107,6 @@
     }
     .step-active{
         .step-wrap-annular{
-            /*background: #22e8c3;*/
             background: #dacba1;
             .step-inner-annular{
                 background: #fff;

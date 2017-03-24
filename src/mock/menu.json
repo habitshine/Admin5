@@ -6,7 +6,7 @@
         "id": 11,
         "text": "商品列表",
         "route": {
-            "path": "/home/category/goods/list",
+            "path": "/home/category/listgoods/list",
             "query": {
                 "page": 1,
                 "limit": 15
@@ -20,13 +20,14 @@
         "id": 10,
         "text": "新增",
         "route": {
-            "path": "/home/category/goods/add"
+            "path": "/home/category/addgoods/add"
         }
     }, {
         "id": 11,
         "text": "编辑id=1",
         "route": {
-            "path": "/home/category/goods/edit?id=1"
+            "path": "/home/category/editgoods/edit",
+            "query": {"id": 1}
         }
     }, {
         "id": 12,

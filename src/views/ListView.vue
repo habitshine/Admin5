@@ -87,7 +87,7 @@
                 // goods/infor
                 // 初始化渲染数据接口
                 baseURL: '',
-                // baseURL: 'http://113.6.252.23:6688/ndrcs/getNdrcsList',
+
                 // 已勾选数据
                 formValues: {
                     accessToken: this.$store.state.accessToken,
@@ -121,7 +121,9 @@
         },
 
         created() {
-            this.baseURL = this.$route.path.replace('/home', HOME_PATH);
+            var paths = this.$route.path.split('/');
+            this.baseURL = [HOME_PATH, paths[2], paths[3]].join('/');
+            
             // 渲染: 条件筛选
             this.httpGetBaseView(response => {
                 this.filterForm = response.data;

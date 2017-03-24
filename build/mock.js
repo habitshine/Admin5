@@ -26,7 +26,7 @@ module.exports = function(express, app) {
     /*
      * 列表页模板数据
      */
-    app.get('/mock/category/goods/list', function(req, res) {
+    app.get('/mock/category/listgoods', function(req, res) {
         var data = fs.readFileSync('./src/mock/listView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {
@@ -37,7 +37,7 @@ module.exports = function(express, app) {
     /*
      * 新增页模板数据
      */
-    app.get('/mock/category/goods/add', function(req, res) {
+    app.get('/mock/category/addgoods', function(req, res) {
         var data = fs.readFileSync('./src/mock/addView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {
@@ -48,7 +48,7 @@ module.exports = function(express, app) {
     /*
      * 编辑页模板数据
      */
-    app.get('/mock/category/goods/edit', function(req, res) {
+    app.get('/mock/category/editgoods', function(req, res) {
         var data = fs.readFileSync('./src/mock/editView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {

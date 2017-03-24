@@ -32,6 +32,7 @@ export default {
             dateFormat: 'Y-m-d H:i:S',
             enableTime: true,
             // inline: true,
+            // mode: 'multiple',
             time_24hr: true,
             onChange(selectedDates, dateStr) {
                 _this.fp.close();
@@ -49,6 +50,7 @@ export default {
     }
 }
 </script>
-<style scoped lang=scss>
-.com-date-time-picker {}
+<style scoped lang="scss">
+.com-date-time-picker {
+}
 </style>

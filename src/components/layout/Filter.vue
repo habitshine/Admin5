@@ -8,13 +8,16 @@
                 </div>
                 <div class="panel-footer">
                     <!-- 自定义按钮 -->
+                    <div class="btn-group">
                     <slot name="btn-group"></slot>
-                    <a @click="reset" class="btn btn-default">
+                                        <a @click="reset" class="btn btn-default">
                         <i class="glyphicon glyphicon-retweet"></i> 重置
                     </a>
                     <a @click="submit" class="btn btn-primary">
                         <i class="glyphicon glyphicon-ok"></i> 确定
                     </a>
+                    </div>
+
                 </div>
             </div>
         </div>

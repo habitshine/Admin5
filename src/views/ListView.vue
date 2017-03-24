@@ -11,17 +11,24 @@
                     <v-form v-model="formValues.filter" :form="filterForm.data.form">
                     </v-form>
                     <template slot="btn-group">
-                        <a class="btn btn-warning">
-                            <i class="fa fa-leaf"></i> 自定义按钮
+                        <template v-for="btn in filterForm.data.btnGroup">
+                        <router-link  v-if="'route' == btn.type" class="btn btn-success" :to="btn.route" role="a">
+                             <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
+                        </router-link>
+
+                        <a v-else-if="'link' == btn.type" class="btn btn-warning">
+                            <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
                         </a>
+
+                        <a v-else-if="'ajax' == btn.type" class="btn btn-info">
+                            <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
+                        </a>
+                        </template>
                     </template>
                 </filter-layout>
 
                 <!-- 按钮组 -->
                 <div class="btn-bar">
-                    <router-link class="btn btn-success" :to="currentPath('add')" tag="a">
-                        <i class="fa fa-plus"></i> 添加
-                    </router-link>
                     <a class="btn btn-danger">
                         <i class="fa fa-remove"></i> 删除
                     </a>
@@ -106,6 +113,7 @@
                         }
                     }
                 },
+
                 // 表格
                 table: {
                     status: -1,

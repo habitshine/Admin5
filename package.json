@@ -21,6 +21,7 @@
     "multiparty": "^4.1.3",
     "node-sass": "^3.11.3",
     "qs": "^6.4.0",
+    "quill": "^1.2.2",
     "raven-js": "^3.12.1",
     "sass-loader": "^4.0.2",
     "trix": "^0.10.1",

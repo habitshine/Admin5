@@ -282,9 +282,16 @@
             "value":3,
             "column": [12, 4, 3, 3]
         }],
+        "btnGroup": [
+            {"type": "route", "icon": "plus", "text": "新增", "route": "/home/category/addgoods/add",  "class": "success"},
+            {"type": "route", "icon": "leaf", "text": "自定义路由", "route": "/home", "class": "warning"},
+            {"type": "link", "icon": "leaf", "text": "百度", "link": "http://baidu.com", "class": "primary"},
+            {"type": "ajax", "icon": "leaf", "text": "ajax请求", "data": {"a": 1, "b": 2}, "class": "warning"}
+        ],
         "table": {
             "url": {
                 "list": "./mock/table",
+                "add": "",
                 "del": "./mock/success"
             },
             "header": [

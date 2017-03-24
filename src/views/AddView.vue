@@ -34,7 +34,6 @@ export default {
         return {
             // 初始化渲染数据接口
             baseURL: '',
-            // baseURL: 'http://113.6.252.23:6688/ndrcs/addNdrcs',
 
             // 表单结果数据
             formValues: {

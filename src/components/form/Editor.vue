@@ -2,92 +2,94 @@
     <div class="com-editor" @paste="paste"></div>
 </template>
 <script>
-import Fileapi from 'fileapi'
-import Quill from 'quill'
-import 'quill/dist/quill.snow.css'
+    import Fileapi from 'fileapi'
+    import Quill from 'quill'
+    import 'quill/dist/quill.snow.css'
 
-export default {
-    name: 'editor',
+    export default {
+        name: 'editor',
 
-    props: {
-        opts: {
-            type: Object
+        props: {
+            opts: {
+                type: Object
+            },
+
+            value: {
+                type: String
+            }
         },
 
-        value: {
-            type: String
-        }
-    },
+        data() {
+            return {
+                quill: null,
+                modules: {
+                    // toolbar: [['code-block'], ['image']]
+                    toolbar: [['image']]
+                }
+            };
+        },
 
-    data() {
-        return {
-            quill: null,
-            modules: {
-                toolbar: [['code-block'], ['image']]
-            }
-        };
-    },
+        mounted() {
+            this.quill = new Quill(this.$el, {
+                theme: 'snow',
+                modules: this.modules
+            });
 
-    mounted() {
-        this.quill = new Quill(this.$el, {
-            theme: 'snow',
-            modules: this.modules
-        });
+            this.quill.on('text-change', (delta, oldDelta, source) => {
+                var html = this.$el.children[0].innerHTML;
+                // var contents = this.quill.getContents();
+                this.$emit('input', html);
+            });
+        },
 
-        this.quill.on('text-change', (delta, oldDelta, source) => {
-            var html = this.$el.children[0].innerHTML;
-            // var contents = this.quill.getContents();
-            this.$emit('input', html);
-        });
-    },
+        destroyed() {
 
-    destroyed() {
+        },
 
-    },
+        methods: {
+            paste(event) {
+                // console.log(event.clipboardData); // will give you the mime types
+                var clip = event.clipboardData || event.originalEvent.clipboardData;
+                var items = clip.items;
 
-    methods: {
-        paste(event) {
-            // console.log(event.clipboardData); // will give you the mime types
-            var clip = event.clipboardData || event.originalEvent.clipboardData;
-            var items = clip.items;
+                for (var k in items) {
+                    var item = items[k];
+                    if (item.kind === 'file' && -1 != item.type.indexOf('image')) {
+                        var blob = item.getAsFile();
 
-            for (var k in items) {
-                var item = items[k];
-                if (item.kind === 'file' && -1 != item.type.indexOf('image')) {
-                    var blob = item.getAsFile();
+                        var reader = new FileReader();
+                        reader.readAsDataURL(blob);
 
-                    var reader = new FileReader();
-                    reader.readAsDataURL(blob);
+                        reader.onload = event => {
+                            setTimeout(() => {
+                                syslog(this.quill.getSelection())
+                                const index = (this.quill.getSelection() || {}).index || this.quill.getLength();
+                                this.quill.insertEmbed(index, 'image', event.target.result, 'user');
 
-                    reader.onload = event => {
-                        setTimeout(() => {
-                            syslog(this.quill.getSelection())
-                            const index = (this.quill.getSelection() || {}).index || this.quill.getLength();
-                            this.quill.insertEmbed(index, 'image', event.target.result, 'user');
-
-                            // this.$emit('input', this.qui)
-                        }, 0);
-                    };
+                                // this.$emit('input', this.qui)
+                            }, 0);
+                        };
+                    }
                 }
             }
         }
     }
-}
+
 </script>
 <style scoped lang=scss>
-.com-editor {
-    outline: none;
-    padding: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    min-height: 150px;
-    border-radius: 0 0 5px 5px;
-    img {
-        display: block;
-        vertical-align: middle;
-        text-align: center;
-        max-width: 100%;
+    .com-editor {
+        outline: none;
+        padding: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        min-height: 150px;
+        border-radius: 0 0 5px 5px;
+        img {
+            display: block;
+            vertical-align: middle;
+            text-align: center;
+            max-width: 100%;
+        }
     }
-}
 </style>

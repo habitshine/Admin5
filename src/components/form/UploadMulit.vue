@@ -14,7 +14,7 @@
                 <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
                 <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
                 <a target="_new" :href="preview.url" class="title">{{preview.fileName}}</a>
-                <img v-if="'image' == preview.type" :src="preview.url">
+                <img v-if="'image' == preview.type" :src="preview.cover">
             </li>
         </transition-group>
     </div>
@@ -47,8 +47,6 @@ export default {
         this.previews = null == this.opts.value ? [] : JSON.parse(JSON.stringify(this.opts.value));
 
         this.activeIndex = this.previews.length;
-
-
 
         // 监听上传事件
         FileAPI.event.on(this.$refs[this.opts.name], 'change', (evt) => {
@@ -114,6 +112,8 @@ export default {
             FileAPI.upload({
                 url: this.opts.url.upload,
 
+                data: {cover: this.previews[index].cover},
+
                 progress: (evt) => {
                     this.previews[index].progress = Math.floor(evt.loaded / evt.total * 100);
                 },
@@ -122,12 +122,9 @@ export default {
 
                 headers: { 'x-upload': 'fileapi' },
 
-                data: {cover: 123456789},
-
                 complete: (err, xhr, file, options) => {
                     var {status, data} = JSON.parse(xhr.response);
                     this.previews[index].id = data.id;
-                    // 
                     this.previews[index].url = data.url;
                     this.$emit('input', this.previews.map(item=>{
                         var {id, fileName, type, url} = {...item, url: data.url};

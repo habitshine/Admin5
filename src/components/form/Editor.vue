@@ -1,17 +1,19 @@
 <template>
-    <div class="com-editor" contenteditable="true">
-        <input id="x" type="hidden" name="content">
-        <trix-editor input="x"></trix-editor>
-    </div>
+    <div class="com-editor" @paste="paste"></div>
 </template>
 <script>
-import trix from 'trix'
-import 'trix/dist/trix.css'
+import Fileapi from 'fileapi'
+import Quill from 'quill'
+import 'quill/dist/quill.snow.css'
 
 export default {
     name: 'editor',
 
     props: {
+        opts: {
+            type: Object
+        },
+
         value: {
             type: String
         }
@@ -19,23 +21,56 @@ export default {
 
     data() {
         return {
-            content: ''
+            quill: null,
+            modules: {
+                toolbar: [['code-block'], ['image']]
+            }
         };
     },
 
     mounted() {
-        // trix-attachment-add
-      this.$el.addEventListener('trix-change', (e)=>{
-        console.log(e.target)
-      });
+        this.quill = new Quill(this.$el, {
+            theme: 'snow',
+            modules: this.modules
+        });
+
+        this.quill.on('text-change', (delta, oldDelta, source) => {
+            var html = this.$el.children[0].innerHTML;
+            // var contents = this.quill.getContents();
+            this.$emit('input', html);
+        });
     },
 
     destroyed() {
-      
+
     },
 
     methods: {
-       
+        paste(event) {
+            // console.log(event.clipboardData); // will give you the mime types
+            var clip = event.clipboardData || event.originalEvent.clipboardData;
+            var items = clip.items;
+
+            for (var k in items) {
+                var item = items[k];
+                if (item.kind === 'file' && -1 != item.type.indexOf('image')) {
+                    var blob = item.getAsFile();
+
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob);
+
+                    reader.onload = event => {
+                        setTimeout(() => {
+                            syslog(this.quill.getSelection())
+                            const index = (this.quill.getSelection() || {}).index || this.quill.getLength();
+                            this.quill.insertEmbed(index, 'image', event.target.result, 'user');
+
+                            // this.$emit('input', this.qui)
+                        }, 0);
+                    };
+                }
+            }
+        }
     }
 }
 </script>
@@ -47,7 +82,7 @@ export default {
     border: 1px solid #ccc;
     font-size: 14px;
     min-height: 150px;
-    border-radius:0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
     img {
         display: block;
         vertical-align: middle;

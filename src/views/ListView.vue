@@ -16,7 +16,6 @@
                         </a>
                     </template>
                 </filter-layout>
-<<<<<<< HEAD
                 <!-- 用户头像 -->
                 <v-head-pic :opts="info"></v-head-pic>
                 <!-- 环形进度条 -->
@@ -35,9 +34,6 @@
                             :itemLength="bar.length"
                             :stepTitle=item.title :active="item.active"></v-step>
                 </v-steps>
-=======
-
->>>>>>> 946096806b90428a7bc4d659407071e41f48b125
                 <!-- 按钮组 -->
                 <div class="btn-bar">
                     <router-link class="btn btn-success" :to="currentPath('add')" tag="a">
@@ -89,14 +85,11 @@
     import VTable from '../components/Table'
     import VPage from '../components/Page'
     import VForm from '../components/Form'
-<<<<<<< HEAD
     import VConfirm from '../components/notice/Confirm'
     import VSteps from '../components/readonly/Steps'
     import VStep from '../components/readonly/Step'
     import VHeadPic from '../components/readonly/HeadPic'
     import VCircleProgress from '../components/readonly/CircleProgress'
-=======
->>>>>>> 946096806b90428a7bc4d659407071e41f48b125
 
     export default {
         name: 'ListView',

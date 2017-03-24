@@ -28,15 +28,13 @@ import VSpinner from '../components/Spinner'
 import VForm from '../components/Form'
 
 export default {
-    name: 'EditView',
+    name: 'addView',
 
     data() {
         return {
             // 初始化渲染数据接口
-            baseURL: '/mock/addView',
+            baseURL: '',
             // baseURL: 'http://113.6.252.23:6688/ndrcs/addNdrcs',
-
-            message: '', // 弹出框文字提示
 
             // 表单结果数据
             formValues: {
@@ -52,6 +50,7 @@ export default {
     },
 
     created() {
+        this.baseURL = this.$route.path.replace('/home', HOME_PATH);
         this.httpGetBaseView(response => {
             this.form = response.data;
             this.setDefaultValue();

@@ -7,64 +7,82 @@
         </label>
         <!-- 预览 -->
         <transition-group class="previews" v-show="0 < previews.length" tag="ul">
-            <li v-for="(preview, i) in previews" :key="i">
-                <span @click="remove(i, preview.id)" class="remove">X</span>
+            <li v-for="(preview, i) in previews" :key="preview">
+                <!-- 删除按钮 -->
+                <span v-if="-1 != [100, undefined].indexOf(preview.progress)" @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
+
                 <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
-                <p class="progress2">{{preview.progress}}%</p>
-                <p class="title">{{preview.fileName}}</p>
-                <img :src="preview.url">
+                <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
+                <a target="_new" :href="preview.url" class="title">{{preview.fileName}}</a>
+                <img v-if="'image' == preview.type" :src="preview.url">
             </li>
         </transition-group>
     </div>
 </template>
 <script>
 // fileAPI对于每次多选的文件,如果再次选择相同的几个文件, 那么不触发上传
+
 import FileAPI from 'fileapi'
 export default {
     name: 'uploadMulit',
 
     props: {
         opts: {},
-        value: {
 
+        value: {
+            default () {
+                return [];
+            }
         }
     },
 
     data() {
         return {
-            previews: [],
+            activeIndex: 0, // 当前preview的索引
+            previews: [] 
         };
     },
 
     mounted() {
+        this.previews = null == this.opts.value ? [] : JSON.parse(JSON.stringify(this.opts.value));
+
+        this.activeIndex = this.previews.length;
+
+
+
         // 监听上传事件
         FileAPI.event.on(this.$refs[this.opts.name], 'change', (evt) => {
-            // 文件对象 
             var files = FileAPI.getFiles(evt);
 
-            // 不同文件不同处理
-            // 如果是图片, 进行base64生成预览图
-            files.forEach((file, i) => {
-                this.previews.splice(0, 0, {
-                    id: null,
-                    progress: 0,
-                    fileName: file.name,
-                    url: '',
-                    type: ''
-                });
+            // 遍历文件,进行文件类型判断
+            files.forEach((file, index) => {
+                // 初始化一个文件
+                var preview = {
+                    id: '',
+                    cover: '', // 缩略图
+                    progress: 0, // 进度条
+                    fileName: file.name, // 文件名
+                    type: 'file', // 文件类型
+                    url: '' // 上传后的资源地址
+                };
 
-                // 如果是图片, 进行base64生成预览图
+                this.previews.push(preview);
+
+                // 如果是图片, 转base64
                 if (/^image/.test(file.type)) {
-                    this.previews[i].type = 'image';
-                    // i需要函数进行值传递
-                    // 后续想办法code美观
-                    this.previewBase64(file, i);
-                } else {
-                    this.previews[i].type = 'file';
+
+                    this.previews[this.activeIndex].type = 'image';
+
+                    // 转base64(异步), 作为cover
+                    this.file2base64(file, this.activeIndex);
                 }
 
-                // 上传
-                this.upload(file, i);
+                // 上传(异步)
+                this.upload(file, this.activeIndex);
+
+                // // 移动索引到previews的下一个
+                this.activeIndex++;
+
             });
 
         });
@@ -74,12 +92,16 @@ export default {
         /**
          * 生成缩略图
          * file转base64
+         * 压缩尺寸到100px
          * @param  {Object} file      
-         * @param  {Number} index 当前上传文件索引
          */
-        previewBase64(file, index) {
+        file2base64(file, index) {
             FileAPI.Image(file).preview(100).get((err, img) => {
-                this.previews[index].url = img.toDataURL();
+                if (err) {
+                   
+                } else {
+                    this.previews[index].cover = img.toDataURL();
+                }
             });
         },
 
@@ -89,36 +111,47 @@ export default {
          * @param  {Number} index 当前上传文件索引
          */
         upload(file, index) {
-            // return new Promise((resolve, reject)=>{
             FileAPI.upload({
-                url: '/mock/upload',
+                url: this.opts.url.upload,
 
                 progress: (evt) => {
                     this.previews[index].progress = Math.floor(evt.loaded / evt.total * 100);
                 },
 
-                files: {
-                    file: file
-                },
+                files: {file},
+
+                headers: { 'x-upload': 'fileapi' },
+
+                data: {cover: 123456789},
 
                 complete: (err, xhr, file, options) => {
-                    var data = JSON.parse(xhr.response);
-                    console.log(data)
+                    var {status, data} = JSON.parse(xhr.response);
+                    this.previews[index].id = data.id;
+                    // 
+                    this.previews[index].url = data.url;
+                    this.$emit('input', this.previews.map(item=>{
+                        var {id, fileName, type, url} = {...item, url: data.url};
+                        return {id, fileName, type, url};
+                    }));
                 }
             });
-            // });
         },
         /**
          * 删除列表中的文件
          */
         remove(i, id) {
             this.previews.splice(i, 1);
-            axios.delete('/mock/success', {
+
+            axios.delete(this.opts.url.del, {
                 params: {
                     id
                 }
             }).then(response => {
-                syslog(1)
+                this.activeIndex--;
+                this.$emit('input', this.previews.map(item=>{
+                    var {id, fileName, type, url} = item;
+                    return {id, fileName, type, url};
+                }));
             }).catch((error) => {
 
             });
@@ -136,13 +169,13 @@ $h: 100px;
     ul.previews {
         border-radius: 4px;
         margin: 15px 0;
+        padding: 10px;
         overflow-x: auto;
         overflow-y: hidden;
         border: 1px solid #ddd;
         >li {
             background: #777;
             border-radius: 4px;
-            overflow: hidden;
             height: $h;
             width: $h;
             position: relative;
@@ -160,17 +193,24 @@ $h: 100px;
             }
             >.remove {
                 position: absolute;
-                top: 0;
-                left: 0;
-                background: #444;
+                top: -6px;
+                right: -6px;
+                background: rgba(#e4685f, 1);
                 color: #fff;
-                border-radius: 0 0 4px 0;
+                border-radius: 100%;
                 line-height: 20px;
                 height: 20px;
                 width: 20px;
                 text-align: center;
                 z-index: 100;
                 font-size: 12px;
+                transition: all .2s ease-in-out;
+                &:hover {
+                    transform: rotate(90deg);
+                    cursor: pointer;
+                    background: rgba(#98261d, 1);
+                }
+                ;
             }
             >img {
                 width: 100%;
@@ -204,6 +244,7 @@ $h: 100px;
                 height: $h - 16px - 20px;
                 width: 100%;
                 text-align: center;
+                &:hover{cursor: pointer;}
             }
         }
     }

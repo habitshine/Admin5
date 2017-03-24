@@ -1,3 +1,13 @@
+window.HOME_PATH = '/mock';
+window.MENU_URL = './mock/menu';
+window.LOGIN_URL = './mock/login'
+
+
+// window.HOME_PATH = 'http://113.6.252.23:6688';
+// window.MENU_URL = 'http://113.6.252.23:6688/ndrcs/menus';
+// window.LOGIN_URL = 'http://113.6.252.23:6688/ndrcs/testlogin';
+
+
 import Vue from 'vue'
 import App from './App'
 import store from './store'
@@ -25,6 +35,10 @@ window.j = (json) => {
 window.c = (input) => {
     console.log(JSON.stringify(input));
 }
+
+
+
+window.FileAPI = {cors: true, debug: true};
 
 
 router.beforeEach((to, from, next) => {

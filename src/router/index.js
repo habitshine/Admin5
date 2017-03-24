@@ -6,7 +6,6 @@ import FrameLayout from '../components/layout/Frame'
 import LoginView from '../views/LoginView'
 import View404 from '../views/View404'
 
-
 // 路由配置
 const routes = [
     { path: '/', redirect: '/home' },

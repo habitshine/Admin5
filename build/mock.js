@@ -26,7 +26,7 @@ module.exports = function(express, app) {
     /*
      * 列表页模板数据
      */
-    app.get('/mock/listView', function(req, res) {
+    app.get('/mock/category/goods/list', function(req, res) {
         var data = fs.readFileSync('./src/mock/listView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {
@@ -37,7 +37,7 @@ module.exports = function(express, app) {
     /*
      * 新增页模板数据
      */
-    app.get('/mock/addView', function(req, res) {
+    app.get('/mock/category/goods/add', function(req, res) {
         var data = fs.readFileSync('./src/mock/addView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {
@@ -48,7 +48,7 @@ module.exports = function(express, app) {
     /*
      * 编辑页模板数据
      */
-    app.get('/mock/editView', function(req, res) {
+    app.get('/mock/category/goods/edit', function(req, res) {
         var data = fs.readFileSync('./src/mock/editView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {
@@ -167,12 +167,14 @@ module.exports = function(express, app) {
             res.send(json);
         });
     });
-    
+
     /*伪装上传服务器*/
     app.use('/uploads', express.static('./uploads/'));
     var uploadDir = './uploads';
     var multiparty = require('multiparty');
     app.post('/mock/upload', function(req, res) {
+        console.log(req.body)
+
         // 建立上传文件夹
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir);
@@ -191,15 +193,12 @@ module.exports = function(express, app) {
                 console.log('parse error: ' + err);
                 res.send("写文件操作失败。");
             } else {
-                console.log(files)
-                // 不支持es5 map?
-                var fileList = [];
-                for(var k in files.file) {
-                    fileList[k] = files.file[k].path;
-                }
                 var result = {
                     status: 1,
-                    data: { files: fileList }
+                    data: {
+                        url: files.file[0].path,
+                        id: Mock.Random.natural()
+                    }
                 };
                 res.json(result);
             }

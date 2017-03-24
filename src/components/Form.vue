@@ -17,6 +17,7 @@
 </template>
 <script>
 import v_checkboxGroup from '../components/form/CheckboxGroup'
+import v_uploadMulit from '../components/form/UploadMulit'
 import v_selectMulit from '../components/form/SelectMulit'
 import v_dateTime from '../components/form/DateTimePicker'
 import v_radioGroup from '../components/form/RadioGroup'
@@ -75,6 +76,7 @@ export default {
         v_dateTime,
         v_editor,
         v_upload,
+        v_uploadMulit,
         v_rateStar
     }
 }

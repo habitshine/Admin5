@@ -1,11 +1,19 @@
 import HomeView from '../views/HomeView'
+
 export var routes = [
-    { path: '/', component: HomeView, name: 'homeView'},
+    { path: '/', component: HomeView, name: 'homeView' },
     { path: 'login', redirect: '/login' },
-    { path: 'category', redirect: '/' }, 
-    { path: 'category/goods', redirect: '/index' }, 
-    {
-        path: 'category/goods/list',
+    { path: 'category', redirect: '/' },
+    { path: 'category/goods', redirect: '/index' }, {
+        path: 'readonly',
+        component: resolve => {
+            require.ensure(['../views/ReadOnlyView'], () => {
+                resolve(require('../views/ReadOnlyView'))
+            })
+        },
+        name: 'readonly'
+    }, {
+        path: '*/*/list',
         component: resolve => {
             require.ensure(['../views/ListView'], () => {
                 resolve(require('../views/ListView'))
@@ -13,7 +21,7 @@ export var routes = [
         },
         name: 'list'
     }, {
-        path: 'category/goods/add',
+        path: '*/*/add',
         component: resolve => {
             require.ensure(['../views/AddView'], () => {
                 resolve(require('../views/AddView'))
@@ -21,7 +29,7 @@ export var routes = [
         },
         name: 'add'
     }, {
-        path: 'category/goods/edit',
+        path: '*/*/edit',
         component: resolve => {
             require.ensure(['../views/EditView'], () => {
                 resolve(require('../views/EditView'))

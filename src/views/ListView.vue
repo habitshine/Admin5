@@ -16,6 +16,7 @@
                         </a>
                     </template>
                 </filter-layout>
+<<<<<<< HEAD
                 <!-- 用户头像 -->
                 <v-head-pic :opts="info"></v-head-pic>
                 <!-- 环形进度条 -->
@@ -34,6 +35,9 @@
                             :itemLength="bar.length"
                             :stepTitle=item.title :active="item.active"></v-step>
                 </v-steps>
+=======
+
+>>>>>>> 946096806b90428a7bc4d659407071e41f48b125
                 <!-- 按钮组 -->
                 <div class="btn-bar">
                     <router-link class="btn btn-success" :to="currentPath('add')" tag="a">
@@ -82,15 +86,17 @@
     import FilterLayout from '../components/layout/Filter'
     import FrameLayout from '../components/layout/Frame'
     import VSpinner from '../components/Spinner'
-    import VModal from '../components/notice/Modal'
     import VTable from '../components/Table'
     import VPage from '../components/Page'
     import VForm from '../components/Form'
+<<<<<<< HEAD
     import VConfirm from '../components/notice/Confirm'
     import VSteps from '../components/readonly/Steps'
     import VStep from '../components/readonly/Step'
     import VHeadPic from '../components/readonly/HeadPic'
     import VCircleProgress from '../components/readonly/CircleProgress'
+=======
+>>>>>>> 946096806b90428a7bc4d659407071e41f48b125
 
     export default {
         name: 'ListView',
@@ -99,7 +105,6 @@
             FilterLayout,
             FrameLayout,
             VSpinner,
-            VConfirm,
             VTable,
             VPage,
             VForm,
@@ -114,7 +119,7 @@
                 // module/method
                 // goods/infor
                 // 初始化渲染数据接口
-                baseURL: '/mock/listView',
+                baseURL: '',
                 // baseURL: 'http://113.6.252.23:6688/ndrcs/getNdrcsList',
                 // 已勾选数据
                 formValues: {
@@ -182,10 +187,12 @@
                     title:"待完成",
                     active:false
                 }]
+                }
             };
         },
 
         created() {
+            this.baseURL = this.$route.path.replace('/home', HOME_PATH);
             // 渲染: 条件筛选
             this.httpGetBaseView(response => {
                 this.filterForm = response.data;

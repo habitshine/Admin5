@@ -2,7 +2,7 @@
     <div class="com-upload-mulit">
         <!-- 按钮 -->
         <label class="btn btn-default" :ref="opts.name">
-            {{opts.placeholder}}
+            {{opts.text}}
             <input name="upload" class="input-upload" type="file" multiple>
         </label>
         <!-- 预览 -->

@@ -1,7 +1,7 @@
 # table(表格)   
 
 
-![](https://github.com/383514580/Store/blob/master/admin5/docs/images/table.png?raw=true)
+![](https://github.com/MaiYuan/Admin5/blob/master/docs/images/table.png?raw=true)
 
 
 ### 数据说明

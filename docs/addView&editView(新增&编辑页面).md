@@ -1,7 +1,7 @@
 # add/editView(添加/修改页面初始化数据)   
 
 
-![](https://github.com/383514580/Store/blob/master/admin5/docs/images/form.png?raw=true)
+![](https://github.com/MaiYuan/Admin5/blob/master/docs/images/form.png?raw=true)
 
 ### 数据说明
 |键名 |说明 |

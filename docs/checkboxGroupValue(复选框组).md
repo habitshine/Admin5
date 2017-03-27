@@ -1,7 +1,7 @@
 # checkboxGroupValue(复选框组)   
 
 
-![](https://github.com/383514580/Store/blob/master/admin5/docs/images/checkboxGroupValue.jpg?raw=true)
+![](https://github.com/MaiYuan/Admin5/blob/master/docs/images/checkboxGroupValue.jpg?raw=true)
 
 
 ### 数据说明

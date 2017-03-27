@@ -1,7 +1,7 @@
 # linkage(联动)   
 
 
-![](https://github.com/383514580/Store/blob/master/admin5/docs/images/linkage.jpg?raw=true)
+![](https://github.com/MaiYuan/Admin5/blob/master/docs/images/linkage.jpg?raw=true)
 
 
 ### 数据说明

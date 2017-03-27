@@ -118,19 +118,19 @@ module.exports = function(express, app) {
     app.use(bodyParser.json()); // for parsing application/json
     app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
     app.post('/mock/login', function(req, res) {
-        if (10 > req.body.userName) {
+        if (10 > req.body.username) {
             var data = {
                 status: 1,
                 data: {
-                    accessToken: req.body.userName + 'ahkjrtklejwkjke2342sdsdj32l4k32hk'
+                    token: req.body.username + 'ahkjrtklejwkjke2342sdsdj32l4k32hk'
                 },
-                message: '操作成功!',
+                message: '登陆成功!',
 
             };
         } else {
             var data = {
                 status: 0,
-                message: '操作失败!'
+                message: '登陆失败!'
             };
         }
 

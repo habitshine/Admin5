@@ -8,7 +8,7 @@ import View404 from '../views/View404'
 
 // 路由配置
 const routes = [
-    { path: '/', redirect: '/home' },
+    { path: '/', redirect: '/login' },
     { path: '/home', component: FrameLayout, children: require('./module.home.js').routes },
     { path: '/login', component: LoginView, name: 'loginView' },
     { path: '*', component: View404, name: 'view404' },

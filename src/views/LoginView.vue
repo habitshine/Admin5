@@ -1,9 +1,5 @@
 <template>
     <div class="view-login">
-        <v-modal :opts="{show: 0 == status, width: '240px'}">
-            <p class="text text-warning">{{info}}</p>
-        </v-modal>
-
         <h2>登陆</h2>
 
         <v-input class="mt15" v-model="userName" :opts="{placeholder: '请输入用户名'}"></v-input>
@@ -15,10 +11,9 @@
 </template>
 <script>
 import VInput from '../components/form/Input'
-import VModal from '../components/notice/Modal'
 
 export default {
-    name: 'LoginView',
+    name: 'loginView',
 
     mounted() {
         this.$store.commit('exit');
@@ -26,8 +21,6 @@ export default {
 
     data() {
         return {
-            status: -1,
-            info: '',
             password: ''
         }
     },
@@ -39,7 +32,7 @@ export default {
             },
 
             set(value) {
-                this.$store.commit('setUserName', value)
+                this.$store.commit('setUserName', value);
             }
         }
     },
@@ -50,28 +43,19 @@ export default {
          */
         login() {
             this.$store.dispatch('login', {
-                userName: this.userName,
+                username: this.userName,
                 password: this.password
             }).then((res) => {
                 if (1 == res.status) {
-                    this.status = 1;
-                    this.$router.push({
-                        path: 'home'
-                    });
+                    this.$router.push({path: 'home'});
                 } else {
-                    this.status = 0;
-                    this.info = res.info;
-                    // 定时关闭
-                    setTimeout(() => {
-                        this.status = -1;
-                    }, 2000);
-                }
+                    alert(123)
+                }   
             });
         }
     },
 
     components: {
-        VModal,
         VInput
     }
 }

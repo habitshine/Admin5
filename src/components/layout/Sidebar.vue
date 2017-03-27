@@ -24,15 +24,13 @@ export default {
     mounted() {
         axios.get(MENU_URL, {
                 params: {
-                    accessToken: this.$store.state.accessToken
+                    token: this.$store.state.accessToken
                 }
             })
             .then((response) => {
-
-
                 if (1 == response.data.status) {
                     this.menu = response.data.data.menu;
-
+                    
                     var pathMap = {};
 
                     this.menu.forEach(menuItem => {
@@ -43,7 +41,6 @@ export default {
                                 url: menuItem.templateAjaxUrl
                             }
                         }
-
 
                         // 二级菜单
                         if (undefined != menuItem.children) {

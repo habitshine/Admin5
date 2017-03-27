@@ -13,6 +13,8 @@
 |children   | 菜单列表  |
 |children.id   | 菜单id[选填] |
 |children.text   | 菜单显示文字  |
+|children.template   | 模板名[list/add/edit]  |
+|children.templateAjaxUrl   | 页面初始化ajax请求的接口地址, 返回渲染页面的数据  |
 |children.route   | 路由信息  |
 |children.route.path   | 模块名, 默认都是home/xxx|
 |children.route.query   | 参数, ?后面部分|
@@ -27,8 +29,10 @@
     "children": [{
         "id": 11,
         "text": "商品列表",
+        "template": "list",
+        "templateAjaxUrl": "./mock/listView",
         "route": {
-            "path": "/home/category/goods/list",
+            "path": "/home/x/list",
             "query": {
                 "page": 1,
                 "limit": 15
@@ -39,16 +43,33 @@
     "id": 2,
     "text": "菜单2",
     "children": [{
-        "id": 11,
+        "id": 10,
         "text": "新增",
+        "template": "add",
+        "templateAjaxUrl": "./mock/addView",
         "route": {
-            "path": "/home/add"
+            "path": "/home/x/add"
+        }
+    }, {
+        "id": 11,
+        "text": "编辑id=1",
+        "template": "edit",
+        "templateAjaxUrl": "./mock/editView",
+        "route": {
+            "path": "/home/x/edit",
+            "query": { "id": 1 }
         }
     }, {
         "id": 12,
-        "text": "编辑",
+        "text": "主面板",
         "route": {
-            "path": "/home/edit"
+            "path": "/home"
+        }
+    }, {
+        "id": 13,
+        "text": "readonly集合",
+        "route": {
+            "path": "/home/readonly"
         }
     }]
 }, {

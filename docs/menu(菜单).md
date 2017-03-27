@@ -9,7 +9,7 @@
 | ------------ | ------------ |
 |id| [选填]  |
 |icon   | awsome图标库的图标名, 例如"plus, remove"  |
-|text   | 菜单显示文字  |
+|text   | 菜单显示文字  | 
 |children   | 菜单列表  |
 |children.id   | 菜单id[选填] |
 |children.text   | 菜单显示文字  |

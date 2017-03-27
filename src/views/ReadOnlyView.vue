@@ -2,18 +2,19 @@
     <div class="readonly-view">
         <transition appear mode="out-in">
             <div>
-            <!-- 用户头像 -->
-            <v-head-pic :opts="info"></v-head-pic>
-            <!--环形进度条-->
-            <v-circle-progress
-                    :parentValue="circleProgress.value"
-                    :radius="circleProgress.radius"
-                    :borderWidth="circleProgress.borderWidth"
-                    :borderColor="circleProgress.borderColor"></v-circle-progress>
-            <!-- 步骤条 -->
-            <v-steps>
-                <v-step :key="index" v-for="(item,index) in bar" :inStep=item.instep :index="index" :itemLength="bar.length" :stepTitle=item.title :active="item.active"></v-step>
-            </v-steps>
+                <!-- 用户头像 -->
+                <v-head-pic :opts="info"></v-head-pic>
+                <!--环形进度条-->
+                <v-circle-progress
+                        :parentValue="circleProgress.value"
+                        :radius="circleProgress.radius"
+                        :borderWidth="circleProgress.borderWidth"
+                        :borderColor="circleProgress.borderColor"></v-circle-progress>
+                <!-- 步骤条 -->
+                <v-steps>
+                    <v-step :key="index" v-for="(item,index) in bar" :inStep=item.instep :index="index" :itemLength="bar.length" :stepTitle=item.title :active="item.active"></v-step>
+                </v-steps>
+                <v-draggable v-model="val"></v-draggable>
             </div>
         </transition>
     </div>
@@ -23,6 +24,7 @@ import VSteps from '../components/readonly/Steps'
 import VStep from '../components/readonly/Step'
 import VHeadPic from '../components/readonly/HeadPic'
 import VCircleProgress from '../components/readonly/CircleProgress'
+import VDraggable from '../components/readonly/Draggable'
 
 export default {
     name: 'readonlyView',
@@ -31,11 +33,54 @@ export default {
         VStep,
         VSteps,
         VHeadPic,
-        VCircleProgress
+        VCircleProgress,
+        VDraggable
     },
 
     data() {
         return {
+            val:[
+                {
+                    "name": "vue.draggable",
+                    "order": 1,
+                    "fixed": false
+                },
+                {
+                    "name": "draggable",
+                    "order": 22222,
+                    "fixed": false
+                },
+                {
+                    "name": "component",
+                    "order": 333333,
+                    "fixed": false
+                },
+                {
+                    "name": "for",
+                    "order": 4,
+                    "fixed": false
+                },
+                {
+                    "name": "vue.js 2.0",
+                    "order": 5,
+                    "fixed": false
+                },
+                {
+                    "name": "based",
+                    "order": 6,
+                    "fixed": false
+                },
+                {
+                    "name": "on",
+                    "order": 7,
+                    "fixed": false
+                },
+                {
+                    "name": "Sortablejs",
+                    "order": 8,
+                    "fixed": false
+                }
+            ],
 
             //用户头像及信息
             info: {

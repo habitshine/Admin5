@@ -79,6 +79,12 @@
     export default {
         name: 'ListView',
 
+        props: {
+            url: {
+                type: String
+            }
+        },
+
         components: {
             FilterLayout,
             FrameLayout,
@@ -90,11 +96,6 @@
 
         data() {
             return {
-                // module/method
-                // goods/infor
-                // 初始化渲染数据接口
-                baseURL: '',
-
                 // 已勾选数据
                 formValues: {
                     accessToken: this.$store.state.accessToken,
@@ -129,9 +130,6 @@
         },
 
         created() {
-            var paths = this.$route.path.split('/');
-            this.baseURL = [HOME_PATH, paths[2], paths[3]].join('/');
-            
             // 渲染: 条件筛选
             this.httpGetBaseView(response => {
                 this.filterForm = response.data;
@@ -186,7 +184,7 @@
              * @param  {Function} cb
              */
             httpGetBaseView(cb) {
-                axios.get(this.baseURL, {
+                axios.get(this.url, {
                     params: {
                         accessToken: this.$store.state.accessToken,
                     }

@@ -4,7 +4,6 @@
             <!-- 页面加载中 -->
             <v-spinner v-if="-1 == form.status">
             </v-spinner>
-
             <!-- 页面加载完毕 -->
             <div class="body" v-else>
                 <form-layout v-if="1 == form.status">
@@ -30,12 +29,15 @@ import VForm from '../components/Form'
 export default {
     name: 'addView',
 
+    props: {
+        url: {
+            type: String
+        }
+    },
+
     data() {
         return {
-            // 初始化渲染数据接口
-            baseURL: '',
-
-            // 表单结果数据
+              // 表单结果数据
             formValues: {
                 accessToken: this.$store.state.accessToken,
                 body: {}
@@ -49,9 +51,6 @@ export default {
     },
 
     created() {
-        var paths = this.$route.path.split('/');
-        this.baseURL = [HOME_PATH, paths[2], paths[3]].join('/');
-
         this.httpGetBaseView(response => {
             this.form = response.data;
             this.setDefaultValue();
@@ -80,7 +79,7 @@ export default {
          * @param  {Function} cb 回调
          */
         httpGetBaseView(cb) {
-            axios.get(this.baseURL, {
+            axios.get(this.url, {
                     params: {
                         accessToken: this.$store.state.accessToken
                     }

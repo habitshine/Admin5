@@ -28,8 +28,23 @@ export default {
                 }
             })
             .then((response) => {
-                if(1 == response.data.status) {
+
+
+                if (1 == response.data.status) {
                     this.menu = response.data.data.menu;
+
+                    this.$store.commit('setPathMap', {
+                        '/home/category/listgoods/list': {
+                            template: 'list',
+                            url: './mock/category/listgoods'
+                        },
+
+                        '/home/category/addgoods/add': {
+                            template: 'add',
+                            url: './mock/category/addgoods'
+                        }
+                    });
+
                 }
             })
             .catch((error) => {
@@ -52,9 +67,8 @@ export default {
 $bgColor: #fff;
 $hoverColor: #e7e7e7;
 $fontColor: #777;
-
 .layout-sidebar {
-    box-shadow: 1px 0 3px rgba(0,0,0,.1);
+    box-shadow: 1px 0 3px rgba(0, 0, 0, .1);
     /*border-right: 1px solid #e7e7e7;*/
     min-height: 100%;
     background: $bgColor;

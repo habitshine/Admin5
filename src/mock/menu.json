@@ -5,6 +5,8 @@
     "children": [{
         "id": 11,
         "text": "商品列表",
+        "template": "list",
+        "templateAjaxUrl": "./mock/category/listgoods",
         "route": {
             "path": "/home/category/listgoods/list",
             "query": {
@@ -19,15 +21,19 @@
     "children": [{
         "id": 10,
         "text": "新增",
+        "template": "list",
+        "templateAjaxUrl": "./mock/category/addgoods",
         "route": {
             "path": "/home/category/addgoods/add"
         }
     }, {
         "id": 11,
+        "template": "list",
+        "templateAjaxUrl": "./mock/category/editgoods",
         "text": "编辑id=1",
         "route": {
             "path": "/home/category/editgoods/edit",
-            "query": {"id": 1}
+            "query": { "id": 1 }
         }
     }, {
         "id": 12,

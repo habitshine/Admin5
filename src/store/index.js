@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
-        // menu: [],
+        pathMap: {},
         notifyList: [
             // {type: 'success', text: '恭喜您,成功了!', holdTime: 3000},
             // {type: 'default', text: 'default!', holdTime: 3000},
@@ -43,6 +43,10 @@ export default new Vuex.Store({
     },
 
     mutations: {
+        setPathMap(state, options){
+            state.pathMap = options;
+        },
+
         notify(state, options) {
             state.notifyList.push(options);
         },

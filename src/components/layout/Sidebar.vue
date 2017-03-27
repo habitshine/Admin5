@@ -33,22 +33,37 @@ export default {
                 if (1 == response.data.status) {
                     this.menu = response.data.data.menu;
 
-                    this.$store.commit('setPathMap', {
-                        '/home/category/listgoods/list': {
-                            template: 'list',
-                            url: './mock/category/listgoods'
-                        },
+                    var pathMap = {};
 
-                        '/home/category/addgoods/add': {
-                            template: 'add',
-                            url: './mock/category/addgoods'
+                    this.menu.forEach(menuItem => {
+                        // 一级菜单
+                        if (undefined != menuItem.templateAjaxUrl) {
+                            pathMap[menuItem.path] = {
+                                template: menuItem.template,
+                                url: menuItem.templateAjaxUrl
+                            }
+                        }
+
+
+                        // 二级菜单
+                        if (undefined != menuItem.children) {
+                            menuItem.children.forEach(subMenuItem => {
+                                if (undefined != subMenuItem.templateAjaxUrl) {
+
+                                    pathMap[subMenuItem.route.path] = {
+                                        template: subMenuItem.template,
+                                        url: subMenuItem.templateAjaxUrl
+                                    }
+                                }
+                            })
                         }
                     });
 
+                    this.$store.commit('setPathMap', pathMap);
                 }
             })
             .catch((error) => {
-                console.log(error)
+                syslog(error)
             });
     },
 

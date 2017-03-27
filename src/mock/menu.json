@@ -6,9 +6,9 @@
         "id": 11,
         "text": "商品列表",
         "template": "list",
-        "templateAjaxUrl": "./mock/category/listgoods",
+        "templateAjaxUrl": "./mock/listView",
         "route": {
-            "path": "/home/category/listgoods/list",
+            "path": "/home/category/goods/list",
             "query": {
                 "page": 1,
                 "limit": 15
@@ -21,18 +21,18 @@
     "children": [{
         "id": 10,
         "text": "新增",
-        "template": "list",
-        "templateAjaxUrl": "./mock/category/addgoods",
+        "template": "add",
+        "templateAjaxUrl": "./mock/addView",
         "route": {
-            "path": "/home/category/addgoods/add"
+            "path": "/home/category/goods/add"
         }
     }, {
         "id": 11,
-        "template": "list",
-        "templateAjaxUrl": "./mock/category/editgoods",
         "text": "编辑id=1",
+        "template": "edit",
+        "templateAjaxUrl": "./mock/editView",
         "route": {
-            "path": "/home/category/editgoods/edit",
+            "path": "/home/category/goods/edit",
             "query": { "id": 1 }
         }
     }, {

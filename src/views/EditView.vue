@@ -34,11 +34,14 @@ import VForm from '../components/Form'
 export default {
     name: 'editView',
 
+    props: {
+        url: {
+            type: String
+        }
+    },
+
     data() {
         return {
-            // 初始化渲染数据接口
-            baseURL: '',
-
             message: '', // 弹出框文字提示
 
             modal: {
@@ -62,8 +65,6 @@ export default {
     },
 
     created() {
-        var paths = this.$route.path.split('/');
-        this.baseURL = [HOME_PATH, paths[2], paths[3]].join('/');
         
         this.httpGetBaseView(response => {
             this.form = response.data;
@@ -93,7 +94,7 @@ export default {
          * @param  {Function} cb 回调
          */
         httpGetBaseView(cb) {
-            axios.get(this.baseURL, {
+            axios.get(this.url, {
                     params: {
                         id: this.$route.query.id,
                         accessToken: this.$store.state.accessToken

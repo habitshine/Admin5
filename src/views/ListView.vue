@@ -11,6 +11,7 @@
                     <v-form v-model="formValues.filter" :form="filterForm.data.form">
                     </v-form>
                     <template slot="btn-group">
+                        <!-- 循环 -->
                         <template v-for="btn in filterForm.data.btnGroup">
                         <router-link  v-if="'route' == btn.type" class="btn btn-success" :to="btn.route" role="a">
                              <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
@@ -24,15 +25,12 @@
                             <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
                         </a>
                         </template>
+                        <a class="btn btn-danger">
+                            <i class="fa fa-remove"></i> 删除所选
+                        </a>
                     </template>
                 </filter-layout>
 
-                <!-- 按钮组 -->
-                <div class="btn-bar">
-                    <a class="btn btn-danger">
-                        <i class="fa fa-remove"></i> 删除
-                    </a>
-                </div>
                 <!-- 表格 -->
                 <v-table v-model="table.ids" class="mt15" :table="table.data.list" :status="table.status" :message="table.message" :removeIndex="table.removeIndex">
                     <!-- tr th -->

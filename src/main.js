@@ -33,7 +33,7 @@ window.j = (json) => {
 }
 
 window.c = (input) => {
-    console.log(JSON.stringify(input));
+    console.log(JSON.stringify(input, null, 4));
 }
 
 

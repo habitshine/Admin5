@@ -31,7 +31,6 @@ export default {
 
     computed: {
         template(){
-            c(this.$store.state.pathMap);
             if(undefined == this.$store.state.pathMap[this.$route.path]) {
                 return undefined;
             } else {

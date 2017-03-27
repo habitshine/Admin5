@@ -8,10 +8,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Admin5</a>
+                <a class="navbar-brand">Admin5</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+            <div class="collapse navbar-collapse">
+
+<!--                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
                     <li><a href="#">Link</a></li>
                     <li class="dropdown">
@@ -26,12 +27,14 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul> -->
+
+
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a>用户: {{$store.state.userName}}</a></li>
-                    <li>
-                        <router-link role="a" :to="{path: '/login'}">退出登录</router-link>
+                    <li class="envelope">
+                        <span class="label label-default"><i class="fa fa-envelope" aria-hidden="true"></i> 0 </span>
                     </li>
+                    <li class="avator"><img src="../../assets/avator.jpeg"></li>
                 </ul>
             </div>
         </div>
@@ -39,7 +42,7 @@
 </template>
 <script>
 export default {
-    name: 'Nav'
+    name: 'nav'
 }
 </script>
 <style scoped lang=scss>
@@ -51,5 +54,16 @@ export default {
     box-shadow: 1px 2px 3px rgba(0,0,0,.2);
     margin: 0;
     padding: 0;
+    .envelope{margin: 15px;}
+    .avator{
+        margin: 10px;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        border-radius: 4px;
+        img{
+            display: block;width: 100%;
+        }
+    }
 }
 </style>

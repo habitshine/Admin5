@@ -35,11 +35,9 @@ export default new Vuex.Store({
             show: true
         },
 
-        accessToken: localStorage.getItem('accessToken') || '',
+        accessToken: localStorage.getItem('accessToken'),
 
-        isLogin: false,
-
-        userName: localStorage.getItem('userName') || ''
+        userName: localStorage.getItem('userName')
     },
 
     mutations: {
@@ -65,14 +63,17 @@ export default new Vuex.Store({
         },
         /**
          * 存储accessToken
+         */
+        saveAccessToken(state, accessToken) {
+            state.accessToken = accessToken;
+            localStorage.setItem('accessToken', accessToken);
+        },
+        /**
          * 存储userName
          */
-        saveAccessToken(state, { accessToken, userName }) {
-            state.accessToken = accessToken;
-            state.isLogin = true;
+        saveUserName(state, userName) {
             state.userName = userName;
             localStorage.setItem('userName', userName);
-            localStorage.setItem('accessToken', accessToken);
         },
         /**
          * 退出登陆
@@ -93,19 +94,14 @@ export default new Vuex.Store({
     },
 
     actions: {
-        login(context, loginData) {
-            // context可能是store也可能是module
-            // context.commit('xx', true);
+        login(context, {username, password}) {
             return new Promise((resolve, reject) => {
-                axios.post(LOGIN_URL, qs.stringify(loginData) )
+                axios.post(LOGIN_URL, qs.stringify({username, password}) )
                     .then((response) => {
                         // 登陆成功
                         if (1 == response.data.status) {
-                            // mutation: saveAccessToken
-                            context.commit('saveAccessToken', {
-                                accessToken: response.data.data.accessToken,
-                                userName: loginData.userName
-                            });
+                            context.commit('saveUserName', username);
+                            context.commit('saveAccessToken', response.data.data.token);
                         }
                         resolve(response.data);
                     })

@@ -2,10 +2,9 @@ window.HOME_PATH = '/mock';
 window.MENU_URL = './mock/menu';
 window.LOGIN_URL = './mock/login'
 
-
 // window.HOME_PATH = 'http://113.6.252.23:6688';
-// window.MENU_URL = 'http://113.6.252.23:6688/ndrcs/menus';
-// window.LOGIN_URL = 'http://113.6.252.23:6688/ndrcs/testlogin';
+// window.MENU_URL  = [window.HOME_PATH , '/personal/menu'].join('');
+// window.LOGIN_URL = [window.HOME_PATH , '/oauth'].join('');
 
 
 import Vue from 'vue'

@@ -1,5 +1,5 @@
 # uploadMulit(上传多个)   
-![](https://github.com/383514580/Store/blob/master/admin5/docs/images/uploadMulit.png?raw=true)
+![](https://github.com/MaiYuan/Admin5/blob/master/docs/images/uploadMulit.png)
 
 ### 数据说明
 |键名 |说明 |

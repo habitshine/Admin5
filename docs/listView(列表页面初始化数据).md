@@ -12,7 +12,7 @@
 |data   | 渲染页面的数据  |
 |data.form   | 筛选条件数据, 内容为任何组件数据  |
 |data.btnGroup   | 表格上方按钮, 该字段为数组格式, 里面都是按钮(用对象表示)  |
-|data.btnGroup[].type   | 按钮类型[route/link/ajax], *暂时只有route类型可用* |
+|data.btnGroup[].type   | 按钮类型[route/link/ajax],     **暂时只有route类型可用** |
 |data.btnGroup[].icon    | 对应fontAsome图标名,如'plus'代表加号   |
 |data.btnGroup[].text    | 按钮文字  |
 |data.btnGroup[].route   | 对应route类型的路由地址  |

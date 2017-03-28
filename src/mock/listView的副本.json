@@ -239,7 +239,7 @@
             "name": "linkageValue",
             "value": null,
             "title": "联动",
-            "column": [12, 12, 8, 8],
+            "column": [12, 12, 12, 12],
             "type": "linkage",
             "placeholder": "请选择",
             "children": [{

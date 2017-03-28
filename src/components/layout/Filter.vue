@@ -1,31 +1,23 @@
 <template>
-    <!-- <div class="row layout-filter" @mouseenter="showPanel" @mouseleave="hiddenPanel" :style="{marginTop: show ? 0 : (30 - panelHeight) + 'px'}"> -->
-    <div class="row layout-filter">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <slot></slot>
-                </div>
-                <div class="panel-footer">
-                    <!-- 自定义按钮 -->
-                    <div class="btn-group">
-                    <slot name="btn-group"></slot>
-                                        <a @click="reset" class="btn btn-default">
-                        <i class="glyphicon glyphicon-retweet"></i> 重置
-                    </a>
-                    <a @click="submit" class="btn btn-primary">
-                        <i class="glyphicon glyphicon-ok"></i> 确定
-                    </a>
-                    </div>
-
-                </div>
-            </div>
+    <div class=" filter-panel">
+        <div class="body">
+            <slot></slot>
+        </div>
+        <!-- 自定义按钮 -->
+        <div class="footer">
+            <slot name="btn-group"></slot>
+            <a @click="reset" class="btn btn-default">
+                <i class="glyphicon glyphicon-retweet"></i> 重置
+            </a>
+            <a @click="submit" class="btn btn-primary">
+                <i class="glyphicon glyphicon-ok"></i> 确定
+            </a>
         </div>
     </div>
 </template>
 <script>
 export default {
-    name: 'FilterPanel',
+    name: 'filterPanel',
 
     data() {
         return {
@@ -35,7 +27,7 @@ export default {
         };
     },
 
-    mounted(){
+    mounted() {
         this.panelHeight = this.$el.offsetHeight;
     },
 
@@ -58,12 +50,18 @@ export default {
     }
 }
 </script>
-<style scoped>
-.layout-filter {
+<style scoped lang="scss">
+.filter-panel {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 15px;
     transition: all 1s;
-}
-
-h1 {
-    color: #423983;
+    .body{padding: 5px 0;}
+    .footer {
+        margin-top: 15px;
+        border-top:1px solid #e7e7e7;
+        padding: 15px 0 0 0;
+        background: #fff;
+    }
 }
 </style>

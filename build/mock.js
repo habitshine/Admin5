@@ -71,8 +71,7 @@ module.exports = function(express, app) {
             'title': '@ctitle(7,25)',
             'desc': '@cword(10, 50)',
             'create_time': '@datetime(\'yyyy-MM-dd HH:mm:ss\')',
-            'category': '@cword(3,5)',
-            'status': 1
+            'category': '@cword(3,5)'
         }];
 
 

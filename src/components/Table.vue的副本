@@ -22,7 +22,7 @@
                             <transition name="row">
                             <tr v-if="1 == row.status">
                                 <td>
-                                    <v-checkbox style="margin:0" v-model="checkedList[i]">
+                                    <v-checkbox style="margin:0" v-model="booleanList[i]">
                                     </v-checkbox>
                                 </td>
                                 <slot name="row" :row="row" :index="i"></slot>
@@ -57,7 +57,7 @@ export default {
         message: {
             type: String
         },
-
+        // 删除tr的索引
         removeIndex: {
 
         },
@@ -72,27 +72,24 @@ export default {
         if (1 == this.status) {
             this.table.forEach(() => {
                 // 初始化checkbox状态映射
-                this.checkedList.push(false);
-                // 初始化是否删除
-                this.removeList.push(false);
+                this.booleanList.push(false);
             });
         }
 
     },
 
-    data() {
+    data: function() {
         return {
             allSelect: false,
-            checkedList: [],
-            removeList: []
+            booleanList: []
         }
     },
 
     watch: {
-        checkedList() {
+        booleanList() {
             var array = [];
             this.table.forEach((item, i) => {
-                if (this.checkedList[i]) {
+                if (this.booleanList[i]) {
                     array.push(item.id);
                 }
             });
@@ -104,7 +101,7 @@ export default {
             this.allSelect = false;
 
             // 重置行checkbox
-            this.checkedList = this.checkedList.map((bool) => {
+            this.booleanList = this.booleanList.map((bool) => {
                 return false;
             });
 
@@ -117,7 +114,7 @@ export default {
         selectAll() {
             var bool = !this.allSelect;
 
-            this.checkedList = this.checkedList.map(() => {
+            this.booleanList = this.booleanList.map(() => {
                 return !bool;
             });
         }

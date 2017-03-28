@@ -12,12 +12,11 @@
                     </v-form>
                     <template slot="btn-group">
                         <!-- 循环 -->
-                        <router-link v-for="btn in viewData.data.btnGroup" :key="btn.text" class="btn btn-default" :to="btn.route" role="a">
-                            <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
-                        </router-link>
-                        <a class="btn btn-default">
-                            <i class="fa fa-remove"></i> 删除所选
-                        </a>
+                        <template v-for="btn in viewData.data.btnGroup">
+                            <a @click="afterSelectClick(btn.url)" v-if="'table' == btn.source" :key="btn.text" class="btn btn-default">
+                                <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
+                            </a>
+                        </template>
                     </template>
                 </filter-panel>
                 <!-- 表格 -->
@@ -248,13 +247,13 @@ export default {
         /**
          * 删除
          */
-        del(ids, index) {
+        del(id, index) {
             var self = this;
             this.$store.commit('confirm', {
                 show: true,
                 text: '您确定要删除吗?',
                 ok() {
-                    self.httpDel([ids]).then(() => {
+                    self.httpDel(id).then(() => {
                         self.table.data.list[index].status = 0;
                     });
                 }
@@ -262,13 +261,13 @@ export default {
         },
         /**
          * 异步请求
-         * @param  {Array} ids 
+         * @param  {Array} id 
          */
-        httpDel(ids) {
+        httpDel(id) {
             return new Promise((resolve, reject) => {
                 axios.delete(this.viewData.data.table.url.del, {
                     params: {
-                        ids
+                        id
                     }
                 }).then(response => {
                     resolve();
@@ -276,7 +275,31 @@ export default {
                     reject();
                 });
             });
+        },
+
+        afterSelectClick(url) {
+            var self = this;
+            this.$store.commit('confirm', {
+                show: true,
+                text: '您确定执行该操作吗?',
+                ok() {
+                    axios.delete(url, {
+                        params: {
+                            id: self.table.ids
+                        }
+                    }).then(response => {
+                        self.$store.commit('alert', {
+                            holdTime: 1000,
+                            show: true,
+                            text: response.data.message
+                        });
+                    }).catch((error) => {
+                        syslog(error);
+                    });
+                }
+            });
         }
+
     },
 
     computed: {

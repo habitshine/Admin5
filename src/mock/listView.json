@@ -10,7 +10,7 @@
             "placeholder": "输入吧少年",
             "column": [12, 4, 3, 3],
             "tip": "必选哦!"
-        },{
+        }, {
             "title": "复选框组",
             "value": null,
             "name": "checkboxGroupValue",
@@ -29,7 +29,7 @@
                 "value": 33,
                 "disabled": false
             }]
-        },{
+        }, {
             "name": "selectGroupValue",
             "title": "单选支持组",
             "value": null,
@@ -91,7 +91,7 @@
                     "disable": false
                 }]
             }]
-        },{
+        }, {
             "title": "多选支持组",
             "name": "selectMulitGroupValue",
             "column": [12, 4, 3, 3],
@@ -153,14 +153,14 @@
                     "disable": false
                 }]
             }]
-        },{
+        }, {
             "title": "日期选择器",
             "value": null,
             "name": "timeValue",
             "column": [12, 4, 3, 3],
             "type": "dateTime",
             "placeholder": "请选择"
-        },{
+        }, {
             "name": "selectMulitValue",
             "title": "多选列表",
             "column": [12, 4, 3, 3],
@@ -235,7 +235,7 @@
                 "value": 33,
                 "disabled": false
             }]
-        },{
+        }, {
             "name": "linkageValue",
             "value": null,
             "title": "联动",
@@ -275,15 +275,16 @@
                 "children": []
             }]
 
-        },{
+        }, {
             "title": "评分组件",
-            "name":"rateStarValue",
-            "type":"rateStar",
-            "value":3,
+            "name": "rateStarValue",
+            "type": "rateStar",
+            "value": 3,
             "column": [12, 4, 3, 3]
         }],
         "btnGroup": [
-            {"type": "route", "icon": "plus", "text": "新增", "route": "/home/category/addgoods/add",  "class": "success"}
+            {"source": "table", "url": "./mock/success", "text": "删除所选", "icon": "remove"}, 
+            {"source": "table", "url": "./mock/success", "text": "启用禁用", "icon": "toggle-on"}
         ],
         "table": {
             "url": {
@@ -292,13 +293,12 @@
                 "edit": "x/edit"
             },
             "btnGroup": [
-                {"text": "编辑", "path": "/home/x/edit"},
-                {"text": "禁用", "path": "/home/x/disable"}
+                { "text": "编辑", "path": "/home/x/edit" }
             ],
             "header": [
                 { "text": "id", "key": "id" },
                 { "text": "标题", "key": "title" },
-                { "text": "时间", "key": "create_time" , "icon": "clock-o" },
+                { "text": "时间", "key": "create_time", "icon": "clock-o" },
                 { "text": "分类", "key": "category" }
             ]
         }

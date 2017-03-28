@@ -9,21 +9,15 @@
 </template>
 <script>
 export default{
-    name:'CircleProgress',
-    data(){
-        return{
+    name:'circleProgress',
 
-        }
-    },
     props:{
         parentValue: Number,
         radius: Number,
         borderWidth: Number,
         borderColor: String
     },
-    mounted(){
 
-    },
     computed:{
         radiusAdd:function(){
             return this.radius+this.borderWidth

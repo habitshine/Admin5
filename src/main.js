@@ -1,11 +1,10 @@
-window.HOME_PATH = '/mock';
+window.ROOT_URL = '/mock';
 window.MENU_URL = './mock/menu';
 window.LOGIN_URL = './mock/login'
 
-// window.HOME_PATH = 'http://113.6.252.23:6688';
-// window.MENU_URL  = [window.HOME_PATH , '/personal/menu'].join('');
-// window.LOGIN_URL = [window.HOME_PATH , '/oauth'].join('');
-
+// window.ROOT_URL = 'http://113.6.252.23:6688';
+// window.MENU_URL  = [window.ROOT_URL , '/personal/menu'].join('');
+// window.LOGIN_URL = [window.ROOT_URL , '/oauth'].join('');
 
 import Vue from 'vue'
 import App from './App'
@@ -24,34 +23,31 @@ window.qs = require('qs');
 
 /* debug */
 window.l = window.syslog = (input) => {
-    return console.info(input);
-}
-
-window.j = (json) => {
-    return JSON.stringify(json);
+    return console.log(input);
 }
 
 window.c = (input) => {
     console.log(JSON.stringify(input, null, 4));
 }
 
+// 路由根路径
+window.HOME_ROUTE = '/home/';
 
-
-window.FileAPI = {cors: true, debug: true};
+// window.FileAPI = {cors: true, debug: true};
 
 
 router.beforeEach((to, from, next) => {
     // 排除404 和 login, 不验证token
-    // 暂时不验证了 2017-02-22 10:56
-    if(-1 == ['view404', 'loginView'].indexOf(to.name)){
-        // console.log(store.state.accessToken)
-        if('' == store.state.accessToken) {
-            // next({path: '/login'});
-        }
+    if(-1 != ['view404', 'loginView'].indexOf(to.name)){
+        next();
     } else {
-        
+        syslog(store.state.accessToken)
+        if(-1 != ['', undefined, null].indexOf(store.state.accessToken)) {
+            next({path: '/login'});
+        } else {
+            next();
+        }
     }
-    next();
 });
 
 

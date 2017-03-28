@@ -286,7 +286,7 @@
             {"type": "route", "icon": "plus", "text": "新增", "route": "/home/category/addgoods/add",  "class": "success"},
             {"type": "route", "icon": "leaf", "text": "自定义路由", "route": "/home", "class": "warning"},
             {"type": "link", "icon": "leaf", "text": "百度", "link": "http://baidu.com", "class": "primary"},
-            {"type": "ajax", "icon": "leaf", "text": "ajax请求", "data": {"a": 1, "b": 2}, "class": "warning"}
+            {"type": "ajax", "icon": "leaf", "text": "ajax请求", " ": {"a": 1, "b": 2}, "class": "warning"}
         ],
         "table": {
             "url": {

@@ -1,46 +1,72 @@
 <template>
-    <div class="fluid container">
-
-        <div class="col-md-3">
-            <div class="drag-title">待办({{this.list.length}})</div>
-            <draggable class="list-group" element="ul" v-model="list" :options="dragOptions" :move="onMove" @start="isDragging=true" @end="isDragging=false">
-                <transition-group type="transition" :name="'flip-list'">
+    <div>
+        <div class="col-md-12 drag-h1">制定<span class="month">{{opts.month}}月份</span><span class="name">{{opts.name}}</span>的考核表</div>
+        <h4 class="col-md-12 drag-h4">业绩指标</h4>
+        <div class="col-md-6">
+            <div class="drag-head">
+                <div class="drag-title">业绩指标库</div>
+                <div class="drag-tags">
+                    <span
+                            v-for="(tag,index) in opts.tags"
+                            @click="tabChange(index)"
+                            class="tag"
+                            :class="{current:active==index}">{{tag}}</span>
+                </div>
+            </div>
+            <draggable
+                    class="list-group over-flow-scroll"
+                    element="ul"
+                    v-model="list"
+                    :options="dragOptions"
+                    :move="onMove"
+                    @start="isDragging=true"
+                    @end="isDragging=false">
+                <transition-group
+                        type="transition"
+                        :name="'flip-list'">
                     <li class="list-group-item" v-for="element in list" :key="element.order">
-                        <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
-                        {{element.name}}
-                        <span class="badge">{{element.order}}</span>
+                        <div class="drag-contain">
+                            <h5>
+                                <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                                   @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
+                            {{element.name}}
+                            </h5>
+                            <p class="drag-detail">{{element.detail}}</p>
+                        </div>
                     </li>
                 </transition-group>
             </draggable>
         </div>
 
-        <div class="col-md-3">
-            <div class="drag-title">已完成({{this.list2.length}})</div>
-            <draggable element="span" v-model="list2" :options="dragOptions" :move="onMove">
-                <transition-group name="no" class="list-group" tag="ul">
+        <div class="col-md-6">
+            <div class="drag-head-new">
+                <div class="drag-title">业绩指标库</div>
+                <div class="drag-tags">
+                    业绩
+                </div>
+            </div>
+            <draggable class="over-flow-scroll" element="ul" v-model="list2" :options="dragOptions"  :move="onMove">
+                <transition-group name="no" type="transition" class="list-group" tag="ul">
                     <li class="list-group-item" v-for="element in list2" :key="element.order">
-                        <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
-                        {{element.name}}
-                        <span class="badge">{{element.order}}</span>
+                        <div class="drag-contain-new">
+                            <h5>
+                                <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                                   @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
+                                {{element.name}}
+                            </h5>
+                            <p class="drag-detail">{{element.detail}}</p>
+                            <textarea placeholder="请填写考核目标要求"></textarea>
+                            <div>设置权重：<input class="drag-ipt-s" type="text">%</div>
+                        </div>
                     </li>
                 </transition-group>
             </draggable>
-        </div>
-
-
-        <div  class="list-group col-md-3">
-            <pre>{{listString}}</pre>
-        </div>
-        <div  class="list-group col-md-3">
-            <pre>{{list2String}}</pre>
         </div>
     </div>
 </template>
 
 <script>
     import draggable from 'vuedraggable'
-    const message = [ 'vue.draggable', 'draggable', 'component', 'for', 'vue.js 2.0', 'based' , 'on', 'Sortablejs' ]
-
     export default {
         name: 'hello',
         components: {
@@ -48,23 +74,54 @@
         },
         data () {
             return {
+                active:0,
                 list:this.value,
-                list2:[],
+                list2:[{
+                    "name": "前台接待客户满意度",
+                    "detail":"(接待不满意客户/接待总客户数)*100%",
+                    "order": 1,
+                    "fixed": false,
+                    "showForm":false
+                }],
                 isDragging: false,
-                delayedDragging:false
+                delayedDragging:false,
+
             }
         },
         props:{
           value:{
               type:Array
-          }
+          },
+            opts:{
+                type:Object
+            }
         },
         methods:{
+            tabChange(i){
+                this.active=i;
+            },
             onMove ({relatedContext, draggedContext}) {
                 const relatedElement = relatedContext.element;
                 const draggedElement = draggedContext.element;
-                this.$emit('input',this.list2)
                 return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
+            },
+            //onAdd和onAddOld留着备用，
+            onAdd(evt){
+                //移入新列表的时候显示表单
+                this.$nextTick(
+                    ()=>{
+                        this.list[evt.newIndex].showForm=true
+                    }
+                )
+
+            },
+            onAddOld(evt){
+                //移入新列表的时候显示表单
+                this.$nextTick(
+                    ()=>{
+                        this.list[evt.newIndex].showForm=false
+                    }
+                )
             }
         },
         computed: {
@@ -72,8 +129,9 @@
                 return  {
                     animation: 0,
                     group: 'description',
-//                    disabled: !this.editable,
-                    ghostClass: 'ghost'
+                    ghostClass: 'ghost',
+                    scroll: true,
+                    scrollSensitivity: 30,
                 };
             },
             listString(){
@@ -97,13 +155,13 @@
     }
 </script>
 
-<style>
+<style rel="stylesheet/scss" lang="scss">
     .flip-list-move {
         transition: transform 0.5s;
     }
 
     .no-move {
-        transition: transform 0s;
+        transition: transform 0.5s;
     }
 
     .ghost {
@@ -114,9 +172,14 @@
     .list-group {
         min-height: 20px;
     }
+    .over-flow-scroll{
+        max-height: 400px;
+        overflow-y: auto;
+    }
 
     .list-group-item {
         cursor: move;
+        padding: 0 !important;
     }
 
     .list-group-item i{
@@ -128,4 +191,112 @@
         padding: 5px 0;
         color: #5a5a5a;
     }
+    .drag-contain{
+        padding: 10px 20px;
+        background: #eee;
+        h5{
+            font-size: 16px;
+            color: #5a5a5a;
+            margin-bottom: 5px;
+            i{ font-size: 12px !important;}
+        }
+        .drag-detail{
+            font-size: 14px;
+            color: #a5a5a5;
+        }
+    }
+    .drag-contain-new{
+        padding: 10px 20px;
+        background: #fff;
+        h5{
+            font-size: 16px;
+            color: #5a5a5a;
+            margin-bottom: 5px;
+            i{
+                font-size: 12px !important;
+                &.fa-anchor{ color: #00AA88}
+            }
+        }
+        textarea{
+            width: 100%;
+            height: 80px;
+            border: 1px solid #cdcdcd;
+            padding: 5px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            resize: none;
+            font-size: 14px;
+            line-height: 22px;
+        }
+        .drag-detail{
+            font-size: 14px;
+            color: #a5a5a5;
+        }
+        .drag-ipt-s{
+            width: 70px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 4px;
+            border: 1px solid #cdcdcd;
+        }
+    }
+
+    .drag-head{
+        border: 1px solid #cdcdcd;
+        border-bottom: none;
+        .drag-title{
+            text-align: center;
+            line-height: 40px;
+            border-bottom: 1px dashed #cdcdcd;
+        }
+        .drag-tags{
+            padding-top: 10px;
+            .tag{
+                display: inline-block;
+                padding: 5px 8px;
+                margin-right: 5px;
+                cursor: pointer;
+                margin-bottom: 10px;
+            }
+        }
+        .current{
+            background: #efefef;
+            border-radius: 4px;
+        }
+    }
+    .drag-head-new{
+        border: 1px solid #cdcdcd;
+        border-bottom: none;
+        .drag-title{
+            text-align: center;
+            line-height: 40px;
+            color: #60b07b;
+        }
+        .drag-tags{
+            background: #60b07b;
+            color: #fff;
+            line-height: 40px;
+            padding-left: 20px;
+        }
+    }
+    .drag-h4{
+        font-size: 18px;
+        text-align: left;
+        color: #999;
+        font-weight: bold;
+    }
+    .drag-h1{
+        font-size: 18px;
+        text-align: center;
+        color: #999;
+        font-weight: bold;
+        .name{
+            color: #656565;
+            margin: 0 10px;
+        }
+        .month{
+            margin-left: 10px;
+        }
+    }
+
 </style>

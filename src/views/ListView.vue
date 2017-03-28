@@ -20,10 +20,18 @@
                     </template>
                 </filter-panel>
                 <!-- 表格 -->
-                <v-table v-model="table.ids" class="mt15" :table="table.data.list" :status="table.status" :message="table.message" :removeIndex="table.removeIndex">
+                <v-table 
+                    v-model="table.ids"
+                    style="margin-top:15px"
+                    :primaryKey="table.primaryKey"
+                    :table="table.data.list" 
+                    :status="table.status" 
+                    :message="table.message" 
+                    :activePrimaryKey="table.activePrimaryKey"
+                    :action="table.action">
                     <!-- tr th -->
                     <template slot="header">
-                        <th v-for="item in viewData.data.table.header">
+                        <th nowrap v-for="item in viewData.data.table.header">
                             <i :class="['fa', 'fa-' + item.icon]"></i> {{item.text}}
                         </th>
                         <th>操作</th>
@@ -36,13 +44,15 @@
                         </td>
                         <!-- 功能列 -->
                         <td nowrap>
-                            <a class="btn btn-xs btn-link" @click="del(props.row.id, props.index)">
-                                <i class="fa fa-remove">
-                                    </i> 删除
+                            <a class="btn btn-xs btn-link" @click="del(props.primaryKey)">
+                                <i class="fa fa-remove"></i> 删除
                             </a>
-                            <router-link :key="btn.text" v-for="btn in viewData.data.table.btnGroup" :to="{path: btn.path, query: {id: props.row.id}}" class="btn btn-xs btn-link">
-                                <i class="fa fa-edit">
-                                    </i> {{btn.text}}
+                            <router-link 
+                                :key="btn.text" 
+                                v-for="btn in viewData.data.table.btnGroup" 
+                                :to="{path: btn.path, query: {id: props.row.id}}" 
+                                class="btn btn-xs btn-link">
+                                <i class="fa fa-edit"></i> {{btn.text}}
                             </router-link>
                         </td>
                     </template>
@@ -63,7 +73,7 @@ import VPage from '../components/Page'
 import VForm from '../components/Form'
 
 export default {
-    name: 'ListView',
+    name: 'listView',
 
     props: {
         url: {
@@ -105,6 +115,8 @@ export default {
             table: {
                 status: -1,
                 message: '',
+                activePrimaryKey: '',
+                action: '',
                 ids: null,
                 removeIndex: null,
                 data: {
@@ -187,6 +199,7 @@ export default {
          */
         httpGetTable() {
             this.table.status = -1;
+            this.table.primaryKey = this.viewData.data.table.primaryKey;
             axios.get(this.viewData.data.table.url.list, {
                     params: {
                         page: this.$route.query.page,
@@ -247,14 +260,15 @@ export default {
         /**
          * 删除
          */
-        del(id, index) {
+        del(id) {
             var self = this;
             this.$store.commit('confirm', {
                 show: true,
                 text: '您确定要删除吗?',
                 ok() {
                     self.httpDel(id).then(() => {
-                        self.table.data.list[index].status = 0;
+                        self.table.activePrimaryKey = id;
+                        self.table.action = 'remove';
                     });
                 }
             });
@@ -285,7 +299,7 @@ export default {
                 ok() {
                     axios.delete(url, {
                         params: {
-                            id: self.table.ids
+                            [self.table.primaryKey]: self.table.ids
                         }
                     }).then(response => {
                         self.$store.commit('alert', {

@@ -5,7 +5,7 @@
             <a class="btn btn-link btn-xs" @click="$router.go(-1)">返回</a>
         </p>
         <div v-else class="row">
-            <div class="col-lg-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <!-- 表格 -->
                 <table class="table table-striped table-bordered table-hover">
                     <!-- 头 -->
@@ -17,19 +17,17 @@
                             <slot name="header"></slot>
                         </tr>
                     </thead>
-                    <tbody>
-                        <template v-for="(row, i) in table">
-                            <transition name="row">
-                            <tr v-if="1 == row.status">
-                                <td>
-                                    <v-checkbox style="margin:0" v-model="checkedList[i]">
-                                    </v-checkbox>
-                                </td>
-                                <slot name="row" :row="row" :index="i"></slot>
-                            </tr>
-                            </transition>
-                        </template>
-                    </tbody>
+                    <transition-group name="tr" tag="tbody">
+                        <tr v-if="!removeList[row[primaryKey]]"
+                            v-for="(row, i) in table"  
+                            :key="row[primaryKey]">
+                            <td>
+                                <v-checkbox style="margin:0" v-model="checkedList[i]">
+                                </v-checkbox>
+                            </td>
+                            <slot name="row" :row="row" :primaryKey="row[primaryKey]" :index="i"></slot>
+                        </tr>
+                    </transition-group>
                 </table>
             </div>
         </div>
@@ -43,11 +41,11 @@ import Spinner from './Spinner'
 import VCheckbox from './form/Checkbox'
 
 export default {
-    name: 'Table',
-
+    name: 'table',
+    
     props: {
         table: {
-
+            type: Array
         },
 
         status: {
@@ -58,57 +56,65 @@ export default {
             type: String
         },
 
-        removeIndex: {
+        primaryKey: {
+            type: String,
+            require: true
+        },
 
+        activePrimaryKey: {
+            type: String
+        },
+
+        action: {
+            type: String
         },
 
         value: {
-
+            type: Array
         }
-    },
-
-    mounted() {
-        // 给checkbox映射一个Boolean数组
-        if (1 == this.status) {
-            this.table.forEach(() => {
-                // 初始化checkbox状态映射
-                this.checkedList.push(false);
-                // 初始化是否删除
-                this.removeList.push(false);
-            });
-        }
-
     },
 
     data() {
         return {
             allSelect: false,
             checkedList: [],
-            removeList: []
+            removeList: {} // 存储删除行的主键{ArrayLike}
         }
     },
 
     watch: {
-        checkedList() {
+        activePrimaryKey(value){
+            if('remove' == this.action) {
+                this.removeList[value] = true;
+            }
+
+        },
+
+
+        checkedList(value) {
             var array = [];
             this.table.forEach((item, i) => {
-                if (this.checkedList[i]) {
-                    array.push(item.id);
+                if (value[i]) {
+                    array.push(item[this.primaryKey]);
                 }
             });
             this.$emit('input', array);
         },
 
-        status() {
-            // 重置总checkbox
+        status(value) {
+            if (1 == value) {
+                this.table.forEach(row => {
+                    // 初始化checkbox状态映射
+                    this.checkedList.push(false);
+                });
+            }
+            // 清空总checkbox
             this.allSelect = false;
 
-            // 重置行checkbox
-            this.checkedList = this.checkedList.map((bool) => {
-                return false;
-            });
+            // 清空行checkbox
+            this.checkedList = this.checkedList.map(bool => false);
 
-            // 同步到v-model
+            // 清空v-model
             this.$emit('input', []);
         }
     },
@@ -129,15 +135,19 @@ export default {
     }
 };
 </script>
-<style scoped lang=scss>
+<style scoped lang="scss">
 .com-table {
     position: relative;
-    >.spinner {}
-
-    .row-leave-active {
-        opacity: 0;
-        transition: all .5s;
-        transform: translateY(-.5rem);
-    }
+    // .tr-enter {
+    //     opacity: 0;
+    //     transform: translateY(-.5rem);
+    // }
+    // .tr-enter-active {
+    //     transition: all .3s;
+    // }
+    // .tr-leave-active {
+    //     opacity: 0;
+    //     transition: all .3s;
+    // }
 }
 </style>

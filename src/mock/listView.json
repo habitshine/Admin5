@@ -2,304 +2,449 @@
     "message": "无数据",
     "status": 1,
     "data": {
-        "form": [{
-            "title": "输入框",
-            "value": "",
-            "name": "inputValue",
-            "type": "input",
-            "placeholder": "输入吧少年",
-            "column": [12, 4, 3, 3],
-            "tip": "必选哦!"
-        }, {
-            "title": "复选框组",
-            "value": null,
-            "name": "checkboxGroupValue",
-            "column": [12, 12, 6, 6],
-            "type": "checkboxGroup",
-            "children": [{
-                "label": "苹果",
+        "form": [
+            {
+                "title": "输入框",
+                "value": "",
+                "name": "inputValue",
+                "type": "input",
+                "placeholder": "输入吧少年",
+                "column": [
+                    12,
+                    4,
+                    3,
+                    3
+                ],
+                "tip": "必选哦!"
+            },
+            {
+                "title": "复选框组",
+                "value": null,
+                "name": "checkboxGroupValue",
+                "column": [
+                    12,
+                    12,
+                    6,
+                    6
+                ],
+                "type": "checkboxGroup",
+                "children": [
+                    {
+                        "label": "苹果",
+                        "value": 11,
+                        "disabled": false
+                    },
+                    {
+                        "label": "橘子",
+                        "value": 22,
+                        "disabled": false
+                    },
+                    {
+                        "label": "梨",
+                        "value": 33,
+                        "disabled": false
+                    }
+                ]
+            },
+            {
+                "name": "selectGroupValue",
+                "title": "单选支持组",
+                "value": null,
+                "column": [
+                    12,
+                    4,
+                    3,
+                    3
+                ],
+                "type": "select",
+                "placeholder": "请选择",
+                "children": [
+                    {
+                        "title": "A组",
+                        "children": [
+                            {
+                                "value": 1,
+                                "label": "欧美",
+                                "disable": false
+                            },
+                            {
+                                "value": 2,
+                                "label": "日韩超级家具",
+                                "disable": true
+                            },
+                            {
+                                "value": 3,
+                                "label": "地中海",
+                                "disable": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "B组",
+                        "children": [
+                            {
+                                "value": 4,
+                                "label": "紫龙冰河形式",
+                                "disable": false
+                            },
+                            {
+                                "value": 5,
+                                "label": "弗雷",
+                                "disable": true
+                            },
+                            {
+                                "value": 6,
+                                "label": "沙漠",
+                                "disable": false
+                            },
+                            {
+                                "value": 7,
+                                "label": "违和",
+                                "disable": false
+                            },
+                            {
+                                "value": 8,
+                                "label": "郭德纲",
+                                "disable": true
+                            },
+                            {
+                                "value": 9,
+                                "label": "于谦",
+                                "disable": false
+                            },
+                            {
+                                "value": 10,
+                                "label": "三国",
+                                "disable": false
+                            },
+                            {
+                                "value": 11,
+                                "label": "诸葛亮",
+                                "disable": true
+                            },
+                            {
+                                "value": 12,
+                                "label": "三可欧",
+                                "disable": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "多选支持组",
+                "name": "selectMulitGroupValue",
+                "column": [
+                    12,
+                    4,
+                    3,
+                    3
+                ],
+                "value": null,
+                "type": "selectMulit",
+                "placeholder": "请选择",
+                "children": [
+                    {
+                        "title": "A组",
+                        "children": [
+                            {
+                                "value": 1,
+                                "label": "欧美",
+                                "disable": false
+                            },
+                            {
+                                "value": 2,
+                                "label": "日韩超级家具",
+                                "disable": true
+                            },
+                            {
+                                "value": 3,
+                                "label": "地中海",
+                                "disable": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "B组",
+                        "children": [
+                            {
+                                "value": 4,
+                                "label": "紫龙冰河形式",
+                                "disable": false
+                            },
+                            {
+                                "value": 5,
+                                "label": "弗雷",
+                                "disable": true
+                            },
+                            {
+                                "value": 6,
+                                "label": "沙漠",
+                                "disable": false
+                            },
+                            {
+                                "value": 7,
+                                "label": "违和",
+                                "disable": false
+                            },
+                            {
+                                "value": 8,
+                                "label": "郭德纲",
+                                "disable": true
+                            },
+                            {
+                                "value": 9,
+                                "label": "于谦",
+                                "disable": false
+                            },
+                            {
+                                "value": 10,
+                                "label": "三国",
+                                "disable": false
+                            },
+                            {
+                                "value": 11,
+                                "label": "诸葛亮",
+                                "disable": true
+                            },
+                            {
+                                "value": 12,
+                                "label": "三可欧",
+                                "disable": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "日期选择器",
+                "value": null,
+                "name": "timeValue",
+                "column": [
+                    12,
+                    4,
+                    3,
+                    3
+                ],
+                "type": "dateTime",
+                "placeholder": "请选择"
+            },
+            {
+                "name": "selectMulitValue",
+                "title": "多选列表",
+                "column": [
+                    12,
+                    4,
+                    3,
+                    3
+                ],
+                "type": "selectMulit",
+                "value": null,
+                "placeholder": "请选择",
+                "children": [
+                    {
+                        "value": 1,
+                        "label": "欧美",
+                        "disable": false
+                    },
+                    {
+                        "value": 2,
+                        "label": "日韩超级家具",
+                        "disable": true
+                    },
+                    {
+                        "value": 3,
+                        "label": "地中海",
+                        "disable": false
+                    },
+                    {
+                        "value": 4,
+                        "label": "紫龙冰河形式",
+                        "disable": false
+                    },
+                    {
+                        "value": 5,
+                        "label": "弗雷",
+                        "disable": true
+                    },
+                    {
+                        "value": 6,
+                        "label": "沙漠",
+                        "disable": false
+                    },
+                    {
+                        "value": 7,
+                        "label": "违和",
+                        "disable": false
+                    },
+                    {
+                        "value": 8,
+                        "label": "郭德纲",
+                        "disable": true
+                    },
+                    {
+                        "value": 9,
+                        "label": "于谦",
+                        "disable": false
+                    },
+                    {
+                        "value": 10,
+                        "label": "三国",
+                        "disable": false
+                    },
+                    {
+                        "value": 11,
+                        "label": "诸葛亮",
+                        "disable": true
+                    },
+                    {
+                        "value": 12,
+                        "label": "三可欧",
+                        "disable": false
+                    }
+                ]
+            },
+            {
+                "title": "单选框组",
+                "name": "radioGroupValue",
+                "type": "radioGroup",
                 "value": 11,
-                "disabled": false
-            }, {
-                "label": "橘子",
-                "value": 22,
-                "disabled": false
-            }, {
-                "label": "梨",
-                "value": 33,
-                "disabled": false
-            }]
-        }, {
-            "name": "selectGroupValue",
-            "title": "单选支持组",
-            "value": null,
-            "column": [12, 4, 3, 3],
-            "type": "select",
-            "placeholder": "请选择",
-            "children": [{
-                "title": "A组",
-                "children": [{
-                    "value": 1,
-                    "label": "欧美",
-                    "disable": false
-                }, {
-                    "value": 2,
-                    "label": "日韩超级家具",
-                    "disable": true
-                }, {
-                    "value": 3,
-                    "label": "地中海",
-                    "disable": false
-                }]
-            }, {
-                "title": "B组",
-                "children": [{
-                    "value": 4,
-                    "label": "紫龙冰河形式",
-                    "disable": false
-                }, {
-                    "value": 5,
-                    "label": "弗雷",
-                    "disable": true
-                }, {
-                    "value": 6,
-                    "label": "沙漠",
-                    "disable": false
-                }, {
-                    "value": 7,
-                    "label": "违和",
-                    "disable": false
-                }, {
-                    "value": 8,
-                    "label": "郭德纲",
-                    "disable": true
-                }, {
-                    "value": 9,
-                    "label": "于谦",
-                    "disable": false
-                }, {
-                    "value": 10,
-                    "label": "三国",
-                    "disable": false
-                }, {
-                    "value": 11,
-                    "label": "诸葛亮",
-                    "disable": true
-                }, {
-                    "value": 12,
-                    "label": "三可欧",
-                    "disable": false
-                }]
-            }]
-        }, {
-            "title": "多选支持组",
-            "name": "selectMulitGroupValue",
-            "column": [12, 4, 3, 3],
-            "value": null,
-            "type": "selectMulit",
-            "placeholder": "请选择",
-            "children": [{
-                "title": "A组",
-                "children": [{
-                    "value": 1,
-                    "label": "欧美",
-                    "disable": false
-                }, {
-                    "value": 2,
-                    "label": "日韩超级家具",
-                    "disable": true
-                }, {
-                    "value": 3,
-                    "label": "地中海",
-                    "disable": false
-                }]
-            }, {
-                "title": "B组",
-                "children": [{
-                    "value": 4,
-                    "label": "紫龙冰河形式",
-                    "disable": false
-                }, {
-                    "value": 5,
-                    "label": "弗雷",
-                    "disable": true
-                }, {
-                    "value": 6,
-                    "label": "沙漠",
-                    "disable": false
-                }, {
-                    "value": 7,
-                    "label": "违和",
-                    "disable": false
-                }, {
-                    "value": 8,
-                    "label": "郭德纲",
-                    "disable": true
-                }, {
-                    "value": 9,
-                    "label": "于谦",
-                    "disable": false
-                }, {
-                    "value": 10,
-                    "label": "三国",
-                    "disable": false
-                }, {
-                    "value": 11,
-                    "label": "诸葛亮",
-                    "disable": true
-                }, {
-                    "value": 12,
-                    "label": "三可欧",
-                    "disable": false
-                }]
-            }]
-        }, {
-            "title": "日期选择器",
-            "value": null,
-            "name": "timeValue",
-            "column": [12, 4, 3, 3],
-            "type": "dateTime",
-            "placeholder": "请选择"
-        }, {
-            "name": "selectMulitValue",
-            "title": "多选列表",
-            "column": [12, 4, 3, 3],
-            "type": "selectMulit",
-            "value": null,
-            "placeholder": "请选择",
-            "children": [{
-                "value": 1,
-                "label": "欧美",
-                "disable": false
-            }, {
-                "value": 2,
-                "label": "日韩超级家具",
-                "disable": true
-            }, {
+                "column": [
+                    12,
+                    4,
+                    3,
+                    3
+                ],
+                "children": [
+                    {
+                        "label": "苹果",
+                        "value": 11,
+                        "disabled": false
+                    },
+                    {
+                        "label": "橘子",
+                        "value": 22,
+                        "disabled": false
+                    },
+                    {
+                        "label": "梨",
+                        "value": 33,
+                        "disabled": false
+                    }
+                ]
+            },
+            {
+                "name": "linkageValue",
+                "value": null,
+                "title": "联动",
+                "column": [
+                    12,
+                    12,
+                    8,
+                    8
+                ],
+                "type": "linkage",
+                "placeholder": "请选择",
+                "children": [
+                    {
+                        "label": "一级",
+                        "name": "id1",
+                        "children": [
+                            {
+                                "value": 1,
+                                "label": "欧美",
+                                "disable": false
+                            },
+                            {
+                                "value": 2,
+                                "label": "日韩超级家具",
+                                "disable": true
+                            },
+                            {
+                                "value": 3,
+                                "label": "地中海",
+                                "disable": false
+                            }
+                        ]
+                    },
+                    {
+                        "url": "./mock/children?level=2",
+                        "name": "id2",
+                        "label": "二级",
+                        "children": []
+                    },
+                    {
+                        "url": "./mock/children?level=3",
+                        "name": "id3",
+                        "label": "三级",
+                        "children": []
+                    },
+                    {
+                        "url": "./mock/children?level=4",
+                        "name": "id4",
+                        "label": "四级",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "title": "评分组件",
+                "name": "rateStarValue",
+                "type": "rateStar",
                 "value": 3,
-                "label": "地中海",
-                "disable": false
-            }, {
-                "value": 4,
-                "label": "紫龙冰河形式",
-                "disable": false
-            }, {
-                "value": 5,
-                "label": "弗雷",
-                "disable": true
-            }, {
-                "value": 6,
-                "label": "沙漠",
-                "disable": false
-            }, {
-                "value": 7,
-                "label": "违和",
-                "disable": false
-            }, {
-                "value": 8,
-                "label": "郭德纲",
-                "disable": true
-            }, {
-                "value": 9,
-                "label": "于谦",
-                "disable": false
-            }, {
-                "value": 10,
-                "label": "三国",
-                "disable": false
-            }, {
-                "value": 11,
-                "label": "诸葛亮",
-                "disable": true
-            }, {
-                "value": 12,
-                "label": "三可欧",
-                "disable": false
-            }]
-        }, {
-            "title": "单选框组",
-            "name": "radioGroupValue",
-            "type": "radioGroup",
-            "value": 11,
-            "column": [12, 4, 3, 3],
-            "children": [{
-                "label": "苹果",
-                "value": 11,
-                "disabled": false
-            }, {
-                "label": "橘子",
-                "value": 22,
-                "disabled": false
-            }, {
-                "label": "梨",
-                "value": 33,
-                "disabled": false
-            }]
-        }, {
-            "name": "linkageValue",
-            "value": null,
-            "title": "联动",
-            "column": [12, 12, 8, 8],
-            "type": "linkage",
-            "placeholder": "请选择",
-            "children": [{
-                "label": "一级",
-                "name": "id1",
-                "children": [{
-                    "value": 1,
-                    "label": "欧美",
-                    "disable": false
-                }, {
-                    "value": 2,
-                    "label": "日韩超级家具",
-                    "disable": true
-                }, {
-                    "value": 3,
-                    "label": "地中海",
-                    "disable": false
-                }]
-            }, {
-                "url": "./mock/children?level=2",
-                "name": "id2",
-                "label": "二级",
-                "children": []
-            }, {
-                "url": "./mock/children?level=3",
-                "name": "id3",
-                "label": "三级",
-                "children": []
-            }, {
-                "url": "./mock/children?level=4",
-                "name": "id4",
-                "label": "四级",
-                "children": []
-            }]
-
-        }, {
-            "title": "评分组件",
-            "name": "rateStarValue",
-            "type": "rateStar",
-            "value": 3,
-            "column": [12, 4, 3, 3]
-        }],
+                "column": [
+                    12,
+                    4,
+                    3,
+                    3
+                ]
+            }
+        ],
         "btnGroup": [
-            {"source": "table", "url": "./mock/success", "text": "删除所选", "icon": "remove"}, 
-            {"source": "table", "url": "./mock/success", "text": "启用禁用", "icon": "toggle-on"}
+            {
+                "source": "table",
+                "url": "./mock/success",
+                "text": "删除所选",
+                "icon": "remove"
+            },
+            {
+                "source": "table",
+                "url": "./mock/success",
+                "text": "启用禁用",
+                "icon": "toggle-on"
+            }
         ],
         "table": {
+            "primaryKey": "uid",
             "url": {
                 "list": "./mock/table",
                 "del": "./mock/success",
                 "edit": "x/edit"
             },
             "btnGroup": [
-                { "text": "编辑", "path": "/home/x/edit" }
+                {
+                    "text": "编辑",
+                    "path": "/home/x/edit"
+                }
             ],
             "header": [
-                { "text": "id", "key": "id" },
-                { "text": "标题", "key": "title" },
-                { "text": "时间", "key": "create_time", "icon": "clock-o" },
-                { "text": "分类", "key": "category" }
+                {
+                    "text": "用户id",
+                    "key": "uid"
+                },
+                {
+                    "text": "标题",
+                    "key": "title"
+                },
+                {
+                    "text": "时间",
+                    "key": "create_time",
+                    "icon": "clock-o"
+                },
+                {
+                    "text": "分类",
+                    "key": "category"
+                }
             ]
         }
     }

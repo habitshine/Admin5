@@ -18,8 +18,6 @@
 |data.btnGroup[].route   | 对应route类型的路由地址  |
 |data.btnGroup[].link   | 对应link类型的跳转地址  |
 |data.btnGroup[].ajax   | 对应route类型的路由地址  |
-
-
 |data.table   | 表格数据  |
 |data.table.header   | 表格标题  |
 |data.table.url   | 相关接口, 根据业务可自行填充, 填充后沟通前端去实现, 默认有3个已经实现(list/edit/del)  |

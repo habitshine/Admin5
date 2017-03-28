@@ -291,9 +291,13 @@
         "table": {
             "url": {
                 "list": "./mock/table",
-                "add": "",
-                "del": "./mock/success"
+                "del": "./mock/success",
+                "edit": "x/edit"
             },
+            "btnGroup": [
+                {"text": "编辑", "path": "/home/x/edit"},
+                {"text": "禁用", "path": "/home/x/disable"}
+            ],
             "header": [
                 { "text": "id", "key": "id" },
                 { "text": "标题", "key": "title" },

@@ -1,10 +1,10 @@
-window.HOME_PATH = '/mock';
+window.ROOT_URL = '/mock';
 window.MENU_URL = './mock/menu';
 window.LOGIN_URL = './mock/login'
 
-// window.HOME_PATH = 'http://113.6.252.23:6688';
-// window.MENU_URL  = [window.HOME_PATH , '/personal/menu'].join('');
-// window.LOGIN_URL = [window.HOME_PATH , '/oauth'].join('');
+// window.ROOT_URL = 'http://113.6.252.23:6688';
+// window.MENU_URL  = [window.ROOT_URL , '/personal/menu'].join('');
+// window.LOGIN_URL = [window.ROOT_URL , '/oauth'].join('');
 
 import Vue from 'vue'
 import App from './App'
@@ -30,7 +30,8 @@ window.c = (input) => {
     console.log(JSON.stringify(input, null, 4));
 }
 
-
+// 路由根路径
+window.HOME_ROUTE = '/home/';
 
 // window.FileAPI = {cors: true, debug: true};
 

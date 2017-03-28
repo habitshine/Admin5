@@ -101,12 +101,22 @@
                 "disabled": false
             }]
         }],
+        "btnGroup": [
+            {"type": "route", "icon": "plus", "text": "新增", "route": "/home/category/addgoods/add",  "class": "success"},
+            {"type": "route", "icon": "leaf", "text": "自定义路由", "route": "/home", "class": "warning"},
+            {"type": "link", "icon": "leaf", "text": "百度", "link": "http://baidu.com", "class": "primary"},
+            {"type": "ajax", "icon": "leaf", "text": "ajax请求", "data": {"a": 1, "b": 2}, "class": "warning"}
+        ],
         "table": {
             "url": {
                 "list": "./mock/table",
                 "edit": "./mock/success",
                 "del": "./mock/success"
             },
+            "btnGroup": [
+                {"text": "编辑", "path": "/home/x/edit"},
+                {"text": "禁用", "path": "/home/x/disable"}
+            ],
             "header": [
                 { "text": "id" },
                 { "text": "标题" },

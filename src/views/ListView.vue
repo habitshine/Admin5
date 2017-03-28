@@ -1,18 +1,18 @@
 <template>
     <div class="list-view">
         <transition appear mode="out-in">
-            <template v-if="-1 == filterForm.status">
+            <template v-if="-1 == viewData.status">
                 <v-spinner></v-spinner>
             </template>
             <div v-else>
                 <!-- 过滤条件 -->
-                <filter-layout v-if="1 == filterForm.status" @submit="filter" @reset="reset">
+                <filter-layout v-if="1 == viewData.status" @submit="filter" @reset="reset">
                     <!-- 表单集合 -->
-                    <v-form v-model="formValues.filter" :form="filterForm.data.form">
+                    <v-form v-model="formValues.filter" :form="viewData.data.form">
                     </v-form>
                     <template slot="btn-group">
                         <!-- 循环 -->
-                        <template v-for="btn in filterForm.data.btnGroup">
+                        <template v-for="btn in viewData.data.btnGroup">
                         <router-link  v-if="'route' == btn.type" class="btn btn-success" :to="btn.route" role="a">
                              <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
                         </router-link>
@@ -35,7 +35,7 @@
                 <v-table v-model="table.ids" class="mt15" :table="table.data.list" :status="table.status" :message="table.message" :removeIndex="table.removeIndex">
                     <!-- tr th -->
                     <template slot="header">
-                        <th v-for="item in filterForm.data.table.header">
+                        <th v-for="item in viewData.data.table.header">
                             <i :class="['fa', 'fa-' + item.icon]"></i> {{item.text}}
                         </th>
                         <th>操作</th>
@@ -43,19 +43,22 @@
                     <!-- tr td -->
                     <template slot="row" scope="props">
                         <!-- 数据列 -->
-                        <td v-for="obj in filterForm.data.table.header">
+                        <td v-for="obj in viewData.data.table.header">
                             {{props.row[obj.key]}}
                         </td>
                         <!-- 功能列 -->
                         <td nowrap>
-                            <a class="btn btn-xs btn-danger" @click="del(props.row.id, props.index)">
-                                <i class="fa fa-remove">
-                                </i> 删除
-                            </a>
-                            <router-link :to="{path: currentPath('edit'), query: {id: props.row.id}}" class="btn btn-xs btn-success">
-                                <i class="fa fa-edit">
-                                </i> 编辑
-                            </router-link>
+                            <div class="btn-group">
+                                <a class="btn btn-xs btn-danger" @click="del(props.row.id, props.index)">
+                                    <i class="fa fa-remove">
+                                    </i> 删除
+                                </a>
+
+                                <router-link v-for="btn in viewData.data.table.btnGroup" :to="{path: btn.path, query: {id: props.row.id}}" class="btn btn-xs btn-success">
+                                    <i class="fa fa-edit">
+                                    </i> {{btn.text}}
+                                </router-link>
+                            </div>
                         </td>
                     </template>
                 </v-table>
@@ -102,7 +105,7 @@
                     filter: {}
                 },
                 // 构造表单
-                filterForm: {
+                viewData: {
                     status: -1,
                     data: {
                         form: [],
@@ -130,7 +133,7 @@
         created() {
             // 渲染: 条件筛选
             this.httpGetBaseView(response => {
-                this.filterForm = response.data;
+                this.viewData = response.data;
                 // 遍历默认值
                 this.setDefaultValue();
                 // 之后根据默认值, 渲染表格数据
@@ -160,7 +163,7 @@
              * 默认值优先级为: route.query.filter > form[xx].value
              */
             setDefaultValue() {
-                this.filterForm.data.form.forEach(component => {
+                this.viewData.data.form.forEach(component => {
                     // 必须 ===, 否则会把null也当成undefined
                     if (undefined === this.routerFilterObject[component.name]) {
                         // bug 需要根据类型判断是否使用JSON对象转换, 否则赋值不正确
@@ -199,7 +202,7 @@
              */
             httpGetTable() {
                 this.table.status = -1;
-                axios.get(this.filterForm.data.table.url.list, {
+                axios.get(this.viewData.data.table.url.list, {
                     params: {
                         page: this.$route.query.page,
                         limit: this.$route.query.limit,
@@ -274,22 +277,12 @@
 
             httpDel(id) {
                 return new Promise((resolve, reject) => {
-                    axios.delete(this.filterForm.data.table.url.del, {params: {id}}).then(response => {
+                    axios.delete(this.viewData.data.table.url.del, {params: {id}}).then(response => {
                         resolve();
                     }).catch((error) => {
                         reject();
                     });
                 });
-            },
-
-            /**
-             * 获取当前模块path
-             * @param  {String} moduleName 模块名字
-             * @return {String}
-             */
-            currentPath(moduleName) {
-                // 当前模块路径
-                return '/' + this.$route.path.split('/').splice(1, 3).join('/') + '/' + moduleName;
             }
         },
 
@@ -301,21 +294,18 @@
                 try {
                     return JSON.parse(this.$route.query.filter);
                 } catch (e) {
-                    // syslog(e, {view: 'listView', method: 'routerFilterObject'});
                     return {};
                 }
             }
-        },
-
-        activated() {}
+        }
     }
 </script>
 <style scope lang=scss>
     .list-view {
         padding-bottom: 45px;
-    .btn-bar {
-        margin-top: 30px;
-    }
+        .btn-bar {
+            margin-top: 30px;
+        }
     }
 
     .v-enter {

@@ -10,11 +10,14 @@
                 <div class="wrap-border">
                     <h4>环形进度</h4>
                     <!--环形进度条-->
-                    <v-circle-progress
-                            :parentValue="circleProgress.value"
-                            :radius="circleProgress.radius"
-                            :borderWidth="circleProgress.borderWidth"
-                            :borderColor="circleProgress.borderColor"></v-circle-progress>
+                    <div style="float: left" v-for="item in circleProgress">
+                        <v-circle-progress
+                                           :parentValue="item.value"
+                                           :radius="item.radius"
+                                           :borderWidth="item.borderWidth"
+                                           :borderColor="item.borderColor"></v-circle-progress>
+                    </div>
+
                 </div>
                 <div class="wrap-border">
                     <h4>步骤条</h4>
@@ -54,12 +57,45 @@ export default {
                 userQq: '1234567890'
             },
             //svg进度条,radius圆半径，value进度(0~1)，borderWidth边框宽度,borderColor边框颜色
-            circleProgress:{
-                value: 0.6,
-                radius: 60,
-                borderWidth: 6,
-                borderColor: '#77d4ff'
-            },
+            circleProgress:[
+                {
+                    value: 0.2,
+                    radius: 40,
+                    borderWidth: 2,
+                    borderColor: '#77d4ff'
+                },
+                {
+                    value: 0.4,
+                    radius: 40,
+                    borderWidth: 4,
+                    borderColor: '#15d755'
+                },
+                {
+                    value: 0.8,
+                    radius: 40,
+                    borderWidth: 6,
+                    borderColor: '#ffa54e'
+                },
+                {
+                    value: 0.3,
+                    radius: 60,
+                    borderWidth: 4,
+                    borderColor: '#fd4d77'
+                },
+                {
+                    value: 0.6,
+                    radius: 60,
+                    borderWidth: 6,
+                    borderColor: '#d56fe8'
+                },
+                {
+                    value: 0.9,
+                    radius: 60,
+                    borderWidth: 8,
+                    borderColor: '#898ef7'
+                }
+
+            ],
             //步骤条
             bar: [{
                 instep: true,
@@ -109,6 +145,7 @@ export default {
         color: #ccc;
         line-height: 40px;
     }
+    overflow: hidden;
     border: 1px solid #cdcdcd;
     padding: 0 20px 20px 20px;
     border-radius:10px;

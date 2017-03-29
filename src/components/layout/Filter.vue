@@ -4,20 +4,19 @@
             <slot></slot>
         </div>
         <!-- 自定义按钮 -->
-        <div class="footer">
+        <div class="footer btn-group">
             <slot name="btn-group"></slot>
-            <a @click="reset" class="btn btn-default">
-                <i class="glyphicon glyphicon-retweet"></i> 重置
-            </a>
-            <a @click="submit" class="btn btn-primary">
-                <i class="glyphicon glyphicon-ok"></i> 确定
-            </a>
+            <v-button @click="reset" :icon="'refresh'" :type="'default'">重置</v-button>
+            <v-button @click="submit" :icon="'check'" :type="'primary'">确定</v-button>
         </div>
     </div>
 </template>
 <script>
+import VButton from '../form/Button'
 export default {
     name: 'filterPanel',
+
+    components: {VButton},
 
     data() {
         return {
@@ -56,7 +55,7 @@ export default {
     border: 1px solid #ccc;
     padding: 15px;
     transition: all 1s;
-    .body{padding: 5px 0;}
+    .body{}
     .footer {
         margin-top: 15px;
         border-top:1px solid #e7e7e7;

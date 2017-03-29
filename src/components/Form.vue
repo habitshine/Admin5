@@ -33,6 +33,13 @@ export default {
     name: 'Form',
 
     props: {
+        inline: {
+            type: Boolean,
+            default(){
+                return false;
+            }
+        },
+
         form: {
             required: true
         },
@@ -82,4 +89,5 @@ export default {
 }
 </script>
 <style scoped lang=scss>
+.inline-block{display: inline-block;}
 </style>

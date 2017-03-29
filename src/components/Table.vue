@@ -5,9 +5,9 @@
             <a class="btn btn-link btn-xs" @click="$router.go(-1)">返回</a>
         </p>
         <div v-else class="row">
-            <div class="col-lg-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <!-- 表格 -->
-                <table class="table table-striped table-bordered table-hover">
+                <table class="table table-responsive table-striped table-bordered table-hover">
                     <!-- 头 -->
                     <thead>
                         <tr>
@@ -18,17 +18,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template v-for="(row, i) in table">
-                            <transition>
-                            <tr v-if="1 == row.status">
-                                <td>
-                                    <v-checkbox style="margin:0" v-model="booleanList[i]">
-                                    </v-checkbox>
-                                </td>
-                                <slot name="row" :row="row" :index="i"></slot>
-                            </tr>
-                            </transition>
-                        </template>
+                        <tr v-if="!removeList[row[primaryKey]]"
+                            v-for="(row, i) in table"  
+                            :key="row[primaryKey]">
+                            <td>
+                                <v-checkbox style="margin:0" v-model="checkedList[i]">
+                                </v-checkbox>
+                            </td>
+                            <slot name="row" :row="row" :primaryKey="row[primaryKey]" :index="i"></slot>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -43,11 +41,11 @@ import Spinner from './Spinner'
 import VCheckbox from './form/Checkbox'
 
 export default {
-    name: 'Table',
-
+    name: 'table',
+    
     props: {
         table: {
-
+            type: Array
         },
 
         status: {
@@ -57,55 +55,66 @@ export default {
         message: {
             type: String
         },
-        // 删除tr的索引
-        removeIndex: {
 
+        primaryKey: {
+            type: String,
+            require: true
+        },
+
+        activePrimaryKey: {
+            type: [String, Number]
+        },
+
+        action: {
+            type: String
         },
 
         value: {
-
+            type: Array
         }
     },
 
-    mounted() {
-        // 给checkbox映射一个Boolean数组
-        if (1 == this.status) {
-            this.table.forEach(() => {
-                // 初始化checkbox状态映射
-                this.booleanList.push(false);
-            });
-        }
-
-    },
-
-    data: function() {
+    data() {
         return {
             allSelect: false,
-            booleanList: []
+            checkedList: [],
+            removeList: {} // 存储删除行的主键{ArrayLike}
         }
     },
 
     watch: {
-        booleanList() {
+        activePrimaryKey(value){
+            if('remove' == this.action) {
+                this.removeList[value] = true;
+            }
+
+        },
+
+
+        checkedList(value) {
             var array = [];
             this.table.forEach((item, i) => {
-                if (this.booleanList[i]) {
-                    array.push(item.id);
+                if (value[i]) {
+                    array.push(item[this.primaryKey]);
                 }
             });
             this.$emit('input', array);
         },
 
-        status() {
-            // 重置总checkbox
+        status(value) {
+            if (1 == value) {
+                this.table.forEach(row => {
+                    // 初始化checkbox状态映射
+                    this.checkedList.push(false);
+                });
+            }
+            // 清空总checkbox
             this.allSelect = false;
 
-            // 重置行checkbox
-            this.booleanList = this.booleanList.map((bool) => {
-                return false;
-            });
+            // 清空行checkbox
+            this.checkedList = this.checkedList.map(bool => false);
 
-            // 同步到v-model
+            // 清空v-model
             this.$emit('input', []);
         }
     },
@@ -114,7 +123,7 @@ export default {
         selectAll() {
             var bool = !this.allSelect;
 
-            this.booleanList = this.booleanList.map(() => {
+            this.checkedList = this.checkedList.map(() => {
                 return !bool;
             });
         }
@@ -126,24 +135,20 @@ export default {
     }
 };
 </script>
-<style scoped lang=scss>
+<style scoped lang="scss">
+.blur{-webkit-filter:blur(2px);}
 .com-table {
     position: relative;
-    >.spinner {}
-
-    .v-enter {
+    .tr-enter {
         opacity: 0;
         transform: translateY(-.5rem);
     }
-
-    .v-enter-active {
-        transition: all .5s;
+    .tr-enter-active {
+        transition: all .3s;
     }
-
-    .v-leave-active {
+    .tr-leave-active {
         opacity: 0;
-        transition: all .5s;
-        transform: translateY(-.5rem);
+        transition: all .3s;
     }
 }
 </style>

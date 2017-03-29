@@ -139,15 +139,10 @@ export default {
 }
 </script>
 <style scoped lang=scss>
-$color: #69c;
-$padding:15px;
-$disable_color: #ccc;
 .com-select {
     position: relative;
     width: 100%;
-    button {
-        outline: none;
-    }
+
     .rotate {
         -webkit-transform: rotate(180deg);
         transform: rotate(180deg);

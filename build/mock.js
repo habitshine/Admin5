@@ -67,12 +67,11 @@ module.exports = function(express, app) {
         var mock_config = { status: 1, data: { list: [], count: pageCount } };
 
         mock_config.data['list|' + limit] = [{
-            'id|+1': page * limit,
+            'uid|+1': page * limit,
             'title': '@ctitle(7,25)',
             'desc': '@cword(10, 50)',
             'create_time': '@datetime(\'yyyy-MM-dd HH:mm:ss\')',
-            'category': '@cword(3,5)',
-            'status': 1
+            'category': '@cword(3,5)'
         }];
 
 

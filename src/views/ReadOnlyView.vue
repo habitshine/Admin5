@@ -2,19 +2,27 @@
     <div class="readonly-view">
         <transition appear mode="out-in">
             <div>
-                <!-- 用户头像 -->
-                <v-head-pic :opts="info"></v-head-pic>
-                <!--环形进度条-->
-                <v-circle-progress
-                        :parentValue="circleProgress.value"
-                        :radius="circleProgress.radius"
-                        :borderWidth="circleProgress.borderWidth"
-                        :borderColor="circleProgress.borderColor"></v-circle-progress>
-                <!-- 步骤条 -->
-                <v-steps>
-                    <v-step :key="index" v-for="(item,index) in bar" :inStep=item.instep :index="index" :itemLength="bar.length" :stepTitle=item.title :active="item.active"></v-step>
-                </v-steps>
-                <v-draggable v-model="draggable.val" :opts="draggable.opts"></v-draggable>
+                <div class="wrap-border">
+                    <h4>用户画像</h4>
+                    <!-- 用户头像 -->
+                    <v-head-pic :opts="info"></v-head-pic>
+                </div>
+                <div class="wrap-border">
+                    <h4>环形进度</h4>
+                    <!--环形进度条-->
+                    <v-circle-progress
+                            :parentValue="circleProgress.value"
+                            :radius="circleProgress.radius"
+                            :borderWidth="circleProgress.borderWidth"
+                            :borderColor="circleProgress.borderColor"></v-circle-progress>
+                </div>
+                <div class="wrap-border">
+                    <h4>步骤条</h4>
+                    <!-- 步骤条 -->
+                    <v-steps>
+                        <v-step :key="index" v-for="(item,index) in bar" :inStep=item.instep :index="index" :itemLength="bar.length" :stepTitle=item.title :active="item.active"></v-step>
+                    </v-steps>
+                </div>
             </div>
         </transition>
     </div>
@@ -24,7 +32,6 @@ import VSteps from '../components/readonly/Steps'
 import VStep from '../components/readonly/Step'
 import VHeadPic from '../components/readonly/HeadPic'
 import VCircleProgress from '../components/readonly/CircleProgress'
-import VDraggable from '../components/readonly/Draggable'
 
 export default {
     name: 'readonlyView',
@@ -34,69 +41,10 @@ export default {
         VSteps,
         VHeadPic,
         VCircleProgress,
-        VDraggable
     },
 
     data() {
         return {
-            draggable:{
-                opts:{
-                    name:"X某某某X",
-                    month:12,
-                    tags:[
-                        '社会媒体类',
-                        '备选指标',
-                        '订单处理类',
-                        '商品指标',
-                        '社会媒体类',
-                        '备选指标',
-                        '订单处理类',
-                        '商品指标',
-                        '社会媒体类',
-                        '备选指标',
-                        '订单处理类',
-                        '商品指标'
-                    ],
-                },
-                val:[
-                    {
-                        "name": "前台接待客户满意度",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 1,
-                        "fixed": false,
-                        "showForm":false
-                    },
-                    {
-                        "name": "前厅管理有效性",
-                        "detail":"一定周期内工作出错率低于规定比例",
-                        "order": 2,
-                        "fixed": false,
-                        "showForm":false
-                    },
-                    {
-                        "name": "前厅工作达成率",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 3,
-                        "fixed": false,
-                        "showForm":false
-                    },
-                    {
-                        "name": "前厅经营成本节省率",
-                        "detail":"一定周期内工作出错率低于规定比例",
-                        "order": 4,
-                        "fixed": false,
-                        "showForm":false
-                    },
-                    {
-                        "name": "前台接待客户满意度",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 5,
-                        "fixed": false,
-                        "showForm":false
-                    }
-                ]
-            },
-
             //用户头像及信息
             info: {
                 imgUrl: 'https://cn.vuejs.org/images/logo.png',
@@ -139,7 +87,7 @@ export default {
 
 }
 </script>
-<style scope lang=scss>
+<style lang=scss rel="stylesheet/scss">
 .v-enter {
     opacity: 0;
     transform: translateY(-.5rem);
@@ -153,5 +101,17 @@ export default {
     opacity: 0;
     transition: all .5s;
     transform: translateY(-.5rem);
+}
+.wrap-border{
+    h4{
+        text-align: center;
+        font-size: 16px;
+        color: #ccc;
+        line-height: 40px;
+    }
+    border: 1px solid #cdcdcd;
+    padding: 0 20px 20px 20px;
+    border-radius:10px;
+    margin-bottom: 20px;
 }
 </style>

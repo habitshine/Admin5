@@ -47,6 +47,12 @@
         "route": {
             "path": "/home/readonly"
         }
+    }, {
+        "id": 14,
+        "text": "拖拽",
+        "route": {
+            "path": "/home/draggable"
+        }
     }]
 }, {
     "id": 33,

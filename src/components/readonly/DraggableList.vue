@@ -14,8 +14,8 @@
                 </div>
             </div>
             <draggable
-                    class="list-group over-flow-scroll"
-                    element="ul"
+                    class="list-group over-flow-scroll pt-1"
+                    element="div"
                     v-model="list"
                     :options="dragOptions"
                     :move="onMove"
@@ -23,7 +23,8 @@
                     @end="isDragging=false">
                 <transition-group
                         type="transition"
-                        :name="'flip-list'">
+                        class="list-group"
+                        :name="'flip-list'" tag="ul">
                     <li class="list-group-item" v-for="element in list" :key="element.order">
                         <div class="drag-contain">
                             <h5>
@@ -42,10 +43,11 @@
             <div class="drag-head-new">
                 <div class="drag-title">业绩指标库</div>
                 <div class="drag-tags">
+                    <div class="line-left"></div><div class="line-right"></div>
                     业绩
                 </div>
             </div>
-            <draggable class="over-flow-scroll" element="ul" v-model="list2" :options="dragOptions"  :move="onMove">
+            <draggable class="over-flow-scroll" element="div" v-model="list2" :options="dragOptions"  :move="onMove">
                 <transition-group name="no" type="transition" class="list-group" tag="ul">
                     <li class="list-group-item" v-for="element in list2" :key="element.order">
                         <div class="drag-contain-new">
@@ -68,7 +70,7 @@
 <script>
     import draggable from 'vuedraggable'
     export default {
-        name: 'hello',
+        name: 'DraggableList',
         components: {
             draggable,
         },
@@ -76,16 +78,17 @@
             return {
                 active:0,
                 list:this.value,
-                list2:[{
-                    "name": "前台接待客户满意度",
-                    "detail":"(接待不满意客户/接待总客户数)*100%",
-                    "order": 1,
-                    "fixed": false,
-                    "showForm":false
-                }],
+                list2:[
+//                    {
+//                        "name": "前台接待客户满意度",
+//                        "detail":"(接待不满意客户/接待总客户数)*100%",
+//                        "order": 1,
+//                        "fixed": false,
+//                        "showForm":false
+//                    }
+                ],
                 isDragging: false,
                 delayedDragging:false,
-
             }
         },
         props:{
@@ -173,8 +176,12 @@
         min-height: 20px;
     }
     .over-flow-scroll{
-        max-height: 400px;
+        max-height: 416px;
         overflow-y: auto;
+    }
+    .pt-1{
+        position: relative;
+        top:-1px;
     }
 
     .list-group-item {
@@ -186,14 +193,14 @@
         cursor: pointer;
     }
     .drag-title{
-        font-weight: bold;
-        font-size: 14px;
+        /*font-weight: bold;*/
+        font-size: 16px;
         padding: 5px 0;
-        color: #5a5a5a;
+        color: #999;
     }
     .drag-contain{
         padding: 10px 20px;
-        background: #eee;
+        background: #f8f8f8;
         h5{
             font-size: 16px;
             color: #5a5a5a;
@@ -243,25 +250,29 @@
 
     .drag-head{
         border: 1px solid #cdcdcd;
-        border-bottom: none;
         .drag-title{
             text-align: center;
             line-height: 40px;
             border-bottom: 1px dashed #cdcdcd;
         }
         .drag-tags{
-            padding-top: 10px;
+            padding: 10px 10px 0 10px;
             .tag{
                 display: inline-block;
                 padding: 5px 8px;
                 margin-right: 5px;
                 cursor: pointer;
-                margin-bottom: 10px;
+                margin-bottom: 5px;
+                font-size: 12px;
+                color: #5a5a5a;
+                background: #fff;
+                transition: all .3s ease-in-out;
             }
         }
         .current{
-            background: #efefef;
+            background: #bbb !important;
             border-radius: 4px;
+            color: #fff !important;
         }
     }
     .drag-head-new{
@@ -270,32 +281,51 @@
         .drag-title{
             text-align: center;
             line-height: 40px;
-            color: #60b07b;
+            color: #14bb9d;
         }
         .drag-tags{
-            background: #60b07b;
+            position: relative;
+            background: #14bb9d;
             color: #fff;
             line-height: 40px;
             padding-left: 20px;
+            .line-left{
+                width: 1px;
+                height: 40px;
+                background: #14bb9d;
+                position: absolute;
+                left: -1px;
+                top: 0;
+            }
+            .line-right{
+                width: 1px;
+                height: 40px;
+                background: #14bb9d;
+                position: absolute;
+                right: -1px;
+                top: 0;
+            }
         }
     }
     .drag-h4{
-        font-size: 18px;
+        font-size: 16px;
         text-align: left;
         color: #999;
-        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
     .drag-h1{
+        padding-top: 10px;
         font-size: 18px;
         text-align: center;
         color: #999;
         font-weight: bold;
         .name{
             color: #656565;
-            margin: 0 10px;
+            margin: 0 6px;
         }
         .month{
-            margin-left: 10px;
+            margin-left: 4px;
         }
     }
 

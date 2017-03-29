@@ -17,5 +17,14 @@ export var routes = [{
         },
         name: 'readonlyView'
     },
+    {
+        path: 'draggable',
+        component: resolve => {
+            require.ensure(['../views/DraggableView'], () => {
+                resolve(require('../views/DraggableView'))
+            })
+        },
+        name: 'DraggableView'
+    },
     { path: '*', component: SmartView, name: 'SmartView' },
 ]

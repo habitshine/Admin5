@@ -58,7 +58,7 @@
         text-align: center;
     }
     .step-active{
-        background-image: linear-gradient(top,#c8b990,#eddfbb 50%,#c8b990 100%);
+        background-image: linear-gradient(top,#ababab,#eee 50%,#ababab 100%);
     }
     .step-first{
         border-top-left-radius: 8px;
@@ -107,10 +107,10 @@
     }
     .step-active{
         .step-wrap-annular{
-            background: #dacba1;
+            background: #bababa;
             .step-inner-annular{
                 background: #fff;
-                color: #ff5e44;
+                color: #f98451;
             }
         }
     }
@@ -132,5 +132,6 @@
     }
     .current-title{
         color: #aba082;
+        /*color: #f98451;*/
     }
 </style>

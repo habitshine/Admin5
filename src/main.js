@@ -41,7 +41,7 @@ router.beforeEach((to, from, next) => {
     if(-1 != ['view404', 'loginView'].indexOf(to.name)){
         next();
     } else {
-        if(-1 != ['', undefined, null].indexOf(store.state.accessToken)) {
+        if(-1 != ['', undefined, null].indexOf(store.state.loginModule.accessToken)) {
             next({path: '/login'});
         } else {
             next();

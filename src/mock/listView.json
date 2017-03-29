@@ -346,22 +346,25 @@
             "primaryKey": "uid",
             "url": {
                 "list": "./mock/table",
-                "del": "./mock/edit"
+                "del": "./mock/success"
             },
             "btnGroupInRow": [{ "text": "新增", "icon": "edit", "path": "/home/x/add" }, { "text": "查看", "icon": "eye", "path": "/home/readonly" }],
             "header": [{
                 "text": "用户id",
-                "key": "uid"
+                "key": "uid",
+                "icon": "user"
             }, {
                 "text": "标题",
-                "key": "title"
+                "key": "title",
+                "icon": "car"
             }, {
                 "text": "时间",
                 "key": "create_time",
                 "icon": "clock-o"
             }, {
                 "text": "分类",
-                "key": "category"
+                "key": "category",
+                "icon": "coffee"
             }]
         }
     }

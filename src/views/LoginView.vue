@@ -1,12 +1,11 @@
 <template>
     <div class="view-login">
         <h2>登陆</h2>
-
         <v-input class="mt15" v-model="userName" :opts="{placeholder: '请输入用户名'}"></v-input>
-
         <v-input class="mt15" v-model="password" :opts="{placeholder: '请输入密码', type: 'password'}"></v-input>
-        
-        <button @click="login" class="mt15 btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        <button @click="login" class="mt15 btn btn-lg btn-primary btn-block" type="submit">
+            <i class="fa fa-arrow-circle-right"></i> 登陆
+        </button>
     </div>
 </template>
 <script>
@@ -28,7 +27,7 @@ export default {
     computed: {
         userName: {
             get() {
-                return this.$store.state.userName;
+                return this.$store.state.loginModule.userName;
             },
 
             set(value) {
@@ -39,18 +38,19 @@ export default {
 
     methods: {
         /**
-         * 登陆, 触发action
+         * 登陆, 获取accessToken
          */
         login() {
+            
             this.$store.dispatch('login', {
-                username: this.userName,
+                userName: this.userName,
                 password: this.password
             }).then((res) => {
                 if (1 == res.status) {
-                    this.$router.push({path: 'home'});
+                    this.$router.push({path: '/home'});
                 } else {
                     alert(123)
-                }   
+                }
             });
         }
     },

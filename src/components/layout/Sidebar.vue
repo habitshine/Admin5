@@ -2,9 +2,11 @@
     <div class="layout-sidebar">
         <ul class="menu">
             <li v-for="level1 in menu" @click="toggle">
+                <!-- 有子菜单 -->
                 <router-link v-if="level1.route" role="a" :to="level1.route">
                     {{level1.text}}
                 </router-link>
+                <!-- 无子菜单 -->
                 <a v-else>{{level1.text}} <span class="caret rotate"></span></a>
                 <ul>
                     <li v-for="level2 in level1.children">
@@ -20,6 +22,10 @@
 <script>
 export default {
     name: 'Menu',
+
+    data(){
+        return {toggleMap: {}};
+    },
 
     mounted() {
         axios.get(MENU_URL, {

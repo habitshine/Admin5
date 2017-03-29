@@ -1,7 +1,7 @@
 <template>
     <div class="smart-view">
         <transition appear mode="out-in">
-        <component v-if="undefined != template" :url="template.url" :is="template.name"></component>
+            <component v-if="undefined != template" :url="template.url" :is="template.name"></component>
         </transition>
     </div>
 </template>
@@ -30,13 +30,13 @@ export default {
     },
 
     computed: {
-        template(){
-            if(undefined == this.$store.state.pathMap[this.$route.path]) {
+        template() {
+            if (undefined == this.$store.state.pathMap.map[this.$route.path]) {
                 return undefined;
             } else {
                 return {
-                    name: this.$store.state.pathMap[this.$route.path].template,
-                    url: this.$store.state.pathMap[this.$route.path].url
+                    name: this.$store.state.pathMap.map[this.$route.path].template,
+                    url: this.$store.state.pathMap.map[this.$route.path].url
                 };
             }
         }

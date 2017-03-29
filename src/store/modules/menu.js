@@ -2,20 +2,22 @@ import axios from 'axios';
 import qs from 'qs';
 // initial state
 const state = {
-    accessToken: localStorage.getItem('accessToken'),
-    userName: localStorage.getItem('userName')
+    status: 0,
+    data: {
+        menu: []
+    }
 };
 
 // actions
 const actions = {
-    login({ commit, state }, { userName, password }) {
+    getMenuList({ commit, state }, accessToken) {
         return new Promise((resolve, reject) => {
-            axios.post(LOGIN_URL, qs.stringify({ userName, password }))
+            axios.get(MENU_URL, {params: {
+                    accessToken
+                }})
                 .then((response) => {
-                    // 登陆成功
                     if (1 == response.data.status) {
-                        commit('saveUserName', userName);
-                        commit('saveAccessToken', response.data.data.accessToken);
+
                     }
                     resolve(response.data);
                 })
@@ -34,28 +36,6 @@ const mutations = {
     saveAccessToken(state, accessToken) {
         state.accessToken = accessToken;
         localStorage.setItem('accessToken', accessToken);
-    },
-    /**
-     * 存储userName
-     */
-    saveUserName(state, userName) {
-        state.userName = userName;
-        localStorage.setItem('userName', userName);
-    },
-    /**
-     * 退出登陆
-     */
-    exit(state) {
-        state.accessToken = '';
-        localStorage.removeItem('accessToken');
-    },
-
-    setUserName(state, userName) {
-        state.userName = userName
-    },
-
-    getAccessToken() {
-        state.accessToken = localStorage.getItem('accessToken');
     }
 };
 

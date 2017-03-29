@@ -79,13 +79,13 @@
                 active:0,
                 list:this.value,
                 list2:[
-//                    {
-//                        "name": "前台接待客户满意度",
-//                        "detail":"(接待不满意客户/接待总客户数)*100%",
-//                        "order": 1,
-//                        "fixed": false,
-//                        "showForm":false
-//                    }
+                    {
+                        "name": "前台接待客户满意度",
+                        "detail":"(接待不满意客户/接待总客户数)*100%",
+                        "order": 1,
+                        "fixed": false,
+                        "showForm":false
+                    }
                 ],
                 isDragging: false,
                 delayedDragging:false,
@@ -201,6 +201,9 @@
     .drag-contain{
         padding: 10px 20px;
         background: #f8f8f8;
+        &:hover{
+            background: #eee;
+        }
         h5{
             font-size: 16px;
             color: #5a5a5a;
@@ -267,11 +270,17 @@
                 color: #5a5a5a;
                 background: #fff;
                 transition: all .3s ease-in-out;
+                user-select: none;
+                border-radius: 4px;
+                &:hover{
+                    background: #bbb;
+                    border-radius: 4px;
+                    color: #fff;
+                }
             }
         }
         .current{
             background: #bbb !important;
-            border-radius: 4px;
             color: #fff !important;
         }
     }

@@ -7,10 +7,10 @@
                 <div class="drag-title">业绩指标库</div>
                 <div class="drag-tags">
                     <span
-                            v-for="(tag,index) in opts.tags"
+                            v-for="(item,index) in opts.tagsNew"
                             @click="tabChange(index)"
                             class="tag"
-                            :class="{current:active==index}">{{tag}}</span>
+                            :class="{current:active==index}">{{item.tag}}</span>
                 </div>
             </div>
             <draggable
@@ -25,14 +25,14 @@
                         type="transition"
                         class="list-group"
                         :name="'flip-list'" tag="ul">
-                    <li class="list-group-item" v-for="element in list" :key="element.order">
+                    <li class="list-group-item" v-for="list in opts.tagsNew[active].val" :key="list.order">
                         <div class="drag-contain">
                             <h5>
-                                <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
-                                   @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
-                            {{element.name}}
+                                <i :class="list.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                                   @click=" list.fixed=! list.fixed" aria-hidden="true"></i>
+                            {{list.name}}
                             </h5>
-                            <p class="drag-detail">{{element.detail}}</p>
+                            <p class="drag-detail">{{list.detail}}</p>
                         </div>
                     </li>
                 </transition-group>

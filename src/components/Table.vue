@@ -7,7 +7,7 @@
         <div v-else class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <!-- 表格 -->
-                <table class="table table-striped table-bordered table-hover">
+                <table class="table table-responsive table-striped table-bordered table-hover">
                     <!-- 头 -->
                     <thead>
                         <tr>
@@ -17,7 +17,7 @@
                             <slot name="header"></slot>
                         </tr>
                     </thead>
-                    <transition-group name="tr" tag="tbody">
+                    <tbody>
                         <tr v-if="!removeList[row[primaryKey]]"
                             v-for="(row, i) in table"  
                             :key="row[primaryKey]">
@@ -27,7 +27,7 @@
                             </td>
                             <slot name="row" :row="row" :primaryKey="row[primaryKey]" :index="i"></slot>
                         </tr>
-                    </transition-group>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -62,7 +62,7 @@ export default {
         },
 
         activePrimaryKey: {
-            type: String
+            type: [String, Number]
         },
 
         action: {
@@ -136,18 +136,19 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.blur{-webkit-filter:blur(2px);}
 .com-table {
     position: relative;
-    // .tr-enter {
-    //     opacity: 0;
-    //     transform: translateY(-.5rem);
-    // }
-    // .tr-enter-active {
-    //     transition: all .3s;
-    // }
-    // .tr-leave-active {
-    //     opacity: 0;
-    //     transition: all .3s;
-    // }
+    .tr-enter {
+        opacity: 0;
+        transform: translateY(-.5rem);
+    }
+    .tr-enter-active {
+        transition: all .3s;
+    }
+    .tr-leave-active {
+        opacity: 0;
+        transition: all .3s;
+    }
 }
 </style>

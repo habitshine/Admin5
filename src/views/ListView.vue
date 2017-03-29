@@ -13,22 +13,14 @@
                     <template slot="btn-group">
                         <!-- 循环 -->
                         <template v-for="btn in viewData.data.btnGroup">
-                            <a @click="afterSelectClick(btn.url)" v-if="'table' == btn.source" :key="btn.text" class="btn btn-default">
+                            <a @click="commonHttpReqest(btn.url)" v-if="'table' == btn.source" :key="btn.text" class="btn btn-default">
                                 <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
                             </a>
                         </template>
                     </template>
                 </filter-panel>
                 <!-- 表格 -->
-                <v-table 
-                    v-model="table.ids"
-                    style="margin-top:15px"
-                    :primaryKey="table.primaryKey"
-                    :table="table.data.list" 
-                    :status="table.status" 
-                    :message="table.message" 
-                    :activePrimaryKey="table.activePrimaryKey"
-                    :action="table.action">
+                <v-table v-model="table.ids" style="margin-top:15px" :primaryKey="table.primaryKey" :table="table.data.list" :status="table.status" :message="table.message" :activePrimaryKey="table.activePrimaryKey" :action="table.action">
                     <!-- tr th -->
                     <template slot="header">
                         <th nowrap v-for="item in viewData.data.table.header">
@@ -47,11 +39,7 @@
                             <a class="btn btn-xs btn-link" @click="del(props.primaryKey)">
                                 <i class="fa fa-remove"></i> 删除
                             </a>
-                            <router-link 
-                                :key="btn.text" 
-                                v-for="btn in viewData.data.table.btnGroup" 
-                                :to="{path: btn.path, query: {id: props.row.id}}" 
-                                class="btn btn-xs btn-link">
+                            <router-link :key="btn.text" v-for="btn in viewData.data.table.btnGroupInRow" :to="{path: btn.path, query: {id: props.row.id}}" class="btn btn-xs btn-link">
                                 <i class="fa fa-edit"></i> {{btn.text}}
                             </router-link>
                         </td>
@@ -290,30 +278,35 @@ export default {
                 });
             });
         },
-
-        afterSelectClick(url) {
-            var self = this;
-            this.$store.commit('confirm', {
-                show: true,
-                text: '您确定执行该操作吗?',
-                ok() {
-                    axios.delete(url, {
-                        params: {
-                            [self.table.primaryKey]: self.table.ids
-                        }
-                    }).then(response => {
-                        self.$store.commit('alert', {
-                            holdTime: 1000,
-                            show: true,
-                            text: response.data.message
+        /**
+         * 通用ajax请求
+         * @param  {String} url
+         */
+        commonHttpReqest(url) {
+            if (0 < this.table.ids.length) {
+                var self = this;
+                this.$store.commit('confirm', {
+                    show: true,
+                    text: '您确定执行该操作吗?',
+                    ok() {
+                        axios.delete(url, {
+                            params: {
+                                [self.table.primaryKey]: self.table.ids
+                            }
+                        }).then(response => {
+                            self.$store.commit('alert', {
+                                holdTime: 1000,
+                                show: true,
+                                text: response.data.message
+                            });
+                            self.httpGetTable();
+                        }).catch((error) => {
+                            syslog(error);
                         });
-                    }).catch((error) => {
-                        syslog(error);
-                    });
-                }
-            });
+                    }
+                });
+            }
         }
-
     },
 
     computed: {

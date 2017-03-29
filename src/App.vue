@@ -1,27 +1,27 @@
 <template>
     <div class="app">
-        <v-notify v-model="$store.state.notifyList"></v-notify>
+        <v-notify v-model="$store.state.dialogModule.notifyList"></v-notify>
 
         <v-confirm 
-            @ok="$store.state.confirm.ok"
-            @after-close="$store.state.confirm.afterClose"
+            @ok="$store.state.dialogModule.confirm.ok"
+            @after-close="$store.state.dialogModule.confirm.afterClose"
             v-model="isConfirmShow"
-            :width="$store.state.confirm.width"
-            :lock="$store.state.confirm.lock"
-            :holdTime="$store.state.confirm.holdTime"
-            :title="$store.state.confirm.title"
-            :text="$store.state.confirm.text"
+            :width="$store.state.dialogModule.confirm.width"
+            :lock="$store.state.dialogModule.confirm.lock"
+            :holdTime="$store.state.dialogModule.confirm.holdTime"
+            :title="$store.state.dialogModule.confirm.title"
+            :text="$store.state.dialogModule.confirm.text"
             >
         </v-confirm>
 
         <v-alert
-            @after-close="$store.state.alert.afterClose"
+            @after-close="$store.state.dialogModule.alert.afterClose"
             v-model="isAlertShow"
-            :width="$store.state.alert.width"
-            :lock="$store.state.alert.lock"
-            :holdTime="$store.state.alert.holdTime"
-            :title="$store.state.alert.title"
-            :text="$store.state.alert.text"
+            :width="$store.state.dialogModule.alert.width"
+            :lock="$store.state.dialogModule.alert.lock"
+            :holdTime="$store.state.dialogModule.alert.holdTime"
+            :title="$store.state.dialogModule.alert.title"
+            :text="$store.state.dialogModule.alert.text"
             >
         </v-alert>
 
@@ -45,7 +45,7 @@ export default {
     computed: {
         isAlertShow: {
             get() {
-                return this.$store.state.alert.show;
+                return this.$store.state.dialogModule.alert.show;
             },
 
             set() {
@@ -57,7 +57,7 @@ export default {
 
         isConfirmShow: {
             get() {
-                return this.$store.state.confirm.show;
+                return this.$store.state.dialogModule.confirm.show;
             },
 
             set() {

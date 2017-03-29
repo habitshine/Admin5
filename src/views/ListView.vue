@@ -26,7 +26,7 @@
                         <th nowrap v-for="item in viewData.data.table.header">
                             <i :class="['fa', 'fa-' + item.icon]"></i> {{item.text}}
                         </th>
-                        <th>操作</th>
+                        <th><i class="fa fa-wrench"></i> 操作</th>
                     </template>
                     <!-- tr td -->
                     <template slot="row" scope="props">
@@ -36,11 +36,11 @@
                         </td>
                         <!-- 功能列 -->
                         <td nowrap>
-                            <a class="btn btn-xs btn-link" @click="del(props.primaryKey)">
+                            <a class="btn btn-xs btn-link" @click="del(props.primaryKey)" >
                                 <i class="fa fa-remove"></i> 删除
                             </a>
                             <router-link :key="btn.text" v-for="btn in viewData.data.table.btnGroupInRow" :to="{path: btn.path, query: {id: props.row.id}}" class="btn btn-xs btn-link">
-                                <i class="fa fa-edit"></i> {{btn.text}}
+                                <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
                             </router-link>
                         </td>
                     </template>

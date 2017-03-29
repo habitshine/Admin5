@@ -1,5 +1,5 @@
 <template>
-    <nav class="layout-nav navbar navbar-default">
+    <nav v-once class="layout-nav navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -11,25 +11,6 @@
                 <a class="navbar-brand">Admin5</a>
             </div>
             <div class="collapse navbar-collapse">
-
-<!--                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                </ul> -->
-
-
                 <ul class="nav navbar-nav navbar-right">
                     <li class="envelope">
                         <span class="label label-default"><i class="fa fa-envelope" aria-hidden="true"></i> 0 </span>
@@ -51,18 +32,21 @@ export default {
     position: relative;
     z-index: 1958;
     background: #fff;
-    box-shadow: 1px 2px 3px rgba(0,0,0,.2);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, .2);
     margin: 0;
     padding: 0;
-    .envelope{margin: 15px;}
-    .avator{
+    .envelope {
+        margin: 15px;
+    }
+    .avator {
         margin: 10px;
         width: 30px;
         height: 30px;
         overflow: hidden;
         border-radius: 4px;
-        img{
-            display: block;width: 100%;
+        img {
+            display: block;
+            width: 100%;
         }
     }
 }

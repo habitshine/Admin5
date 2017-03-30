@@ -28,24 +28,25 @@
                         </td>
                         <!-- 功能列 -->
                         <td nowrap>
-                            <a class="btn btn-xs btn-link" @click="del(props.primaryKey)" >
-                                <i class="fa fa-remove"></i> 删除
-                            </a>
-                            <router-link :key="btn.text" v-for="btn in viewData.data.table.btnGroupInRow" :to="{path: btn.path, query: {id: props.row.id}}" class="btn btn-xs btn-link">
-                                <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
-                            </router-link>
+                            <template v-for="btn in viewData.data.table.btnGroupInRow">
+                                <a v-if="'remove' == btn.type" class="btn btn-xs btn-link" @click="remove(btn.url, props.primaryKey)">
+                                    <i class="fa fa-remove"></i> 删除
+                                </a>
+                                <router-link v-else :key="btn.text" :to="{path: btn.path, query: {id: props.row.id}}" class="btn btn-xs btn-link">
+                                    <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
+                                </router-link>
+                            </template>
                         </td>
                     </template>
                 </v-table>
                 <!-- 分页 -->
-    
                 <div class="btn-group pull-left">
-                    <a v-for="btn in viewData.data.table.btnGroupForSelect" @click="commonHttpReqest(btn.url)" :key="btn.text" class="btn btn-default">
+                    <a v-for="btn in viewData.data.table.btnGroupForSelect" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
                         <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
                     </a>
                 </div>
-
-                <v-page class=" pull-right" @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
+                <v-page class=" pull-right" 
+                @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
                 </v-page>
             </div>
         </transition>
@@ -147,7 +148,7 @@ export default {
          * 默认值优先级为: route.query.filter > form[xx].value
          */
         setDefaultValue() {
-            if(undefined != this.viewData.data.form) {
+            if (undefined != this.viewData.data.form) {
                 this.viewData.data.form.forEach(component => {
                     // 必须 ===, 否则会把null也当成undefined
                     if (undefined === this.routerFilterObject[component.name]) {
@@ -162,7 +163,7 @@ export default {
                     } else {
                         this.formValues.filter[component.name] = this.routerFilterObject[component.name];
                     }
-                });                
+                });
             }
         },
         /**
@@ -188,8 +189,9 @@ export default {
         httpGetTable() {
             this.table.status = -1;
             this.table.primaryKey = this.viewData.data.table.primaryKey;
-            axios.get(this.viewData.data.table.url.list, {
+            axios.get(this.viewData.data.table.url, {
                     params: {
+                        accessToken: this.$store.state.loginModule.accessToken,
                         page: this.$route.query.page,
                         limit: this.$route.query.limit,
                         ...this.formValues.filter
@@ -228,7 +230,8 @@ export default {
                 query: {
                     page: 1,
                     limit: this.formValues.limit,
-                    filter: JSON.stringify(this.formValues.filter)
+                    filter: JSON.stringify(this.formValues.filter),
+                    accessToken: this.$store.state.loginModule.accessToken
                 }
             });
         },
@@ -240,7 +243,8 @@ export default {
             this.$router.push({
                 query: {
                     page: 1,
-                    limit: this.formValues.limit
+                    limit: this.formValues.limit,
+                    accessToken: this.$store.state.loginModule.accessToken
                 }
             });
         },
@@ -248,41 +252,30 @@ export default {
         /**
          * 删除
          */
-        del(id) {
-            var self = this;
+        remove(url, id) {
             this.$store.commit('confirm', {
                 show: true,
                 text: '您确定要删除吗?',
-                ok() {
-                    self.httpDel(id).then(() => {
-                        self.table.activePrimaryKey = id;
-                        self.table.action = 'remove';
+                ok: () => {
+                    axios.delete(url, {
+                        params: {
+                            accessToken: this.$store.state.loginModule.accessToken,
+                            id
+                        }
+                    }).then(response => {
+                        this.table.activePrimaryKey = id;
+                        this.table.action = 'remove';
+                    }).catch((error) => {
+                        reject();
                     });
                 }
-            });
-        },
-        /**
-         * 异步请求
-         * @param  {Array} id 
-         */
-        httpDel(id) {
-            return new Promise((resolve, reject) => {
-                axios.delete(this.viewData.data.table.url.del, {
-                    params: {
-                        id
-                    }
-                }).then(response => {
-                    resolve();
-                }).catch((error) => {
-                    reject();
-                });
             });
         },
         /**
          * 通用ajax请求
          * @param  {String} url
          */
-        commonHttpReqest(url) {
+        httpRequestForSelect(url) {
             if (0 < this.table.ids.length) {
                 var self = this;
                 this.$store.commit('confirm', {
@@ -291,6 +284,7 @@ export default {
                     ok() {
                         axios.delete(url, {
                             params: {
+
                                 [self.table.primaryKey]: self.table.ids
                             }
                         }).then(response => {

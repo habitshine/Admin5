@@ -2,6 +2,7 @@
     "message": "无数据",
     "status": 1,
     "data": {
+        "template": "list",
         "form": [{
             "title": "输入框",
             "value": "",
@@ -328,11 +329,12 @@
         }],
         "table": {
             "primaryKey": "uid",
-            "url": {
-                "list": "./mock/table",
-                "del": "./mock/success"
-            },
-            "btnGroupInRow": [{ "text": "新增", "icon": "edit", "path": "/home/x/add" }, { "text": "查看", "icon": "eye", "path": "/home/readonly" }],
+            "url": "./mock/table",
+            "btnGroupInRow": [
+                { "text": "删除", "icon": "remove", "url": "./mock/success", "type": "remove" },
+                { "text": "新增", "icon": "edit", "path": "/home/x/add", "type": "route" },
+                { "text": "查看", "icon": "eye", "path": "/home/readonly", "type": "route" }
+            ],
             "btnGroupForSelect": [{
                 "url": "./mock/success?remove",
                 "text": "删除所选",

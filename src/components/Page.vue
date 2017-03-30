@@ -15,30 +15,45 @@ export default {
         page: {
             type: Number
         },
+
         count: {
             type: Number
         },
+
         limit: {
             type: Number
+        },
+
+        max: {
+            type: [Number, String],
+
+            default(){
+                return 10;
+            }
         }
     },
 
     computed: {
         pageNumber() {
             var array = [];
+            // 总数是否超过max
+            if(this.max < this.count) {
+                for (var i = 4; i > 0; i--) {
+                    if (0 < this.page - i) {
+                        array.push(this.page - i);
+                    }
+                }
 
-            for (var i = 4; i > 0; i--) {
-                if (0 < this.page - i) {
-                    array.push(this.page - i);
+                for (var i = 0; i < 5; i++) {
+                    if (this.count + 1 > this.page + i) {
+                        array.push(this.page + i);
+                    }
+                }
+            } else {
+                for(var i = 1; i <= this.count; i++) {
+                    array.push(i);
                 }
             }
-
-            for (var i = 0; i < 5; i++) {
-                if (this.count + 1 > this.page + i) {
-                    array.push(this.page + i);
-                }
-            }
-
             return array;
         }
     },
@@ -64,8 +79,6 @@ export default {
 </script>
 <style scoped lang=scss>
 .pagination {
-/*    display: table;
-    margin: 0 auto;*/
     li {
         &.active {
             a {

@@ -81,7 +81,7 @@ export default {
         httpGetBaseView(cb) {
             axios.get(this.url, {
                     params: {
-                        accessToken: this.$store.state.accessToken
+                        accessToken: this.$store.state.loginModule.accessToken
                     }
                 })
                 .then((response) => {

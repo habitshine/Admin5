@@ -21,6 +21,7 @@
                             <slot name="header"></slot>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr v-if="!removeList[row[primaryKey]]"
                             v-for="(row, i) in table"  
@@ -146,16 +147,23 @@ export default {
     position: relative;
     .spinner{background: rgba(0,0,0,.8);display: table;margin:10% auto;padding: 15px 0;border-radius: 8px;box-shadow: 1px 2px 3px rgba(0,0,0,.2);}
 
-    .tr-enter {
-        opacity: 0;
-        transform: translateY(-.5rem);
-    }
-    .tr-enter-active {
-        transition: all .3s;
-    }
-    .tr-leave-active {
-        opacity: 0;
-        transition: all .3s;
-    }
+
+.tr-enter {
+    opacity: 0;
+    transform: translateX(-.5rem);
 }
+
+.tr-enter-active {
+    transition: all .5s;
+}
+
+.tr-leave-active {
+    opacity: 0;
+    transition: all .5s;
+    transform: translateX(-.5rem);
+}
+
+
+}
+
 </style>

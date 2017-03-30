@@ -22,14 +22,6 @@ export default {
 
         limit: {
             type: Number
-        },
-
-        max: {
-            type: [Number, String],
-
-            default(){
-                return 10;
-            }
         }
     },
 
@@ -37,16 +29,18 @@ export default {
         pageNumber() {
             var array = [];
             // 总数是否超过max
-            if(this.max < this.count) {
-                for (var i = 4; i > 0; i--) {
-                    if (0 < this.page - i) {
-                        array.push(this.page - i);
+            if(10 < this.count) {
+                if(4 >= this.page) {
+                    for(var i = 1; i <= 10; i++) {
+                        array.push(i);
                     }
-                }
-
-                for (var i = 0; i < 5; i++) {
-                    if (this.count + 1 > this.page + i) {
-                        array.push(this.page + i);
+                } else if(this.count < this.page + 5){
+                    for(var i = this.count - 10; i <= this.count; i++){
+                        array.push(i);
+                    }
+                } else {
+                     for(var i = this.page - 4; i <= this.page + 5; i++){
+                        array.push(i);
                     }
                 }
             } else {

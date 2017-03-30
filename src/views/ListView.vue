@@ -6,18 +6,10 @@
             </template>
             <div v-else>
                 <!-- 过滤条件 -->
-                <filter-panel v-if="1 == viewData.status" @submit="filter" @reset="reset">
+                <filter-panel v-if="1 == viewData.status && undefined != viewData.data.form" @submit="filter" @reset="reset">
                     <!-- 表单集合 -->
                     <v-form v-model="formValues.filter" :form="viewData.data.form">
                     </v-form>
-                    <template slot="btn-group">
-                        <!-- 循环 -->
-                        <template v-for="btn in viewData.data.btnGroup">
-                            <a @click="commonHttpReqest(btn.url)" v-if="'table' == btn.source" :key="btn.text" class="btn btn-default">
-                                <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
-                            </a>
-                        </template>
-                    </template>
                 </filter-panel>
                 <!-- 表格 -->
                 <v-table v-model="table.ids" style="margin-top:15px" :primaryKey="table.primaryKey" :table="table.data.list" :status="table.status" :message="table.message" :activePrimaryKey="table.activePrimaryKey" :action="table.action">
@@ -46,7 +38,14 @@
                     </template>
                 </v-table>
                 <!-- 分页 -->
-                <v-page v-show="1 == table.status" @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
+    
+                <div class="btn-group pull-left">
+                    <a v-for="btn in viewData.data.table.btnGroupForSelect" @click="commonHttpReqest(btn.url)" :key="btn.text" class="btn btn-default">
+                        <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
+                    </a>
+                </div>
+
+                <v-page class=" pull-right" @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
                 </v-page>
             </div>
         </transition>
@@ -82,7 +81,7 @@ export default {
         return {
             // 已勾选数据
             formValues: {
-                accessToken: this.$store.state.accessToken,
+                accessToken: this.$store.state.loginModule.accessToken,
                 limit: this.$route.query.limit,
                 page: this.$route.query.page,
                 filter: {}
@@ -148,22 +147,23 @@ export default {
          * 默认值优先级为: route.query.filter > form[xx].value
          */
         setDefaultValue() {
-            this.viewData.data.form.forEach(component => {
-                // 必须 ===, 否则会把null也当成undefined
-                if (undefined === this.routerFilterObject[component.name]) {
-                    // bug 需要根据类型判断是否使用JSON对象转换, 否则赋值不正确
-                    var type = Object.prototype.toString.call(component.value);
-                    // 一定要找到原因...
-                    if (-1 == ['[object Array]', '[object Object]'].indexOf(type)) {
-                        this.formValues.filter[component.name] = component.value;
+            if(undefined != this.viewData.data.form) {
+                this.viewData.data.form.forEach(component => {
+                    // 必须 ===, 否则会把null也当成undefined
+                    if (undefined === this.routerFilterObject[component.name]) {
+                        // bug 需要根据类型判断是否使用JSON对象转换, 否则赋值不正确
+                        var type = Object.prototype.toString.call(component.value);
+                        // 一定要找到原因...
+                        if (-1 == ['[object Array]', '[object Object]'].indexOf(type)) {
+                            this.formValues.filter[component.name] = component.value;
+                        } else {
+                            this.formValues.filter[component.name] = JSON.parse(JSON.stringify(component.value));
+                        }
                     } else {
-                        this.formValues.filter[component.name] = JSON.parse(JSON.stringify(component.value));
+                        this.formValues.filter[component.name] = this.routerFilterObject[component.name];
                     }
-                } else {
-                    this.formValues.filter[component.name] = this.routerFilterObject[component.name];
-                }
-
-            });
+                });                
+            }
         },
         /**
          * 获取渲染页面所需基础数据
@@ -172,7 +172,7 @@ export default {
         httpGetBaseView(cb) {
             axios.get(this.url, {
                     params: {
-                        accessToken: this.$store.state.accessToken,
+                        accessToken: this.$store.state.loginModule.accessToken,
                     }
                 })
                 .then((response) => {

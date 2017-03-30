@@ -1,74 +1,33 @@
 <template>
     <div class="layout-sidebar">
         <ul class="menu">
-            <li v-for="level1 in menu" @click="toggle">
+            <template v-for="item in menu">
+                <li v-if="undefined == item.children" :key="item.id">
+                    <!-- 无子菜单 -->
+                    <router-link :to="item.route" @click="toggle(item)">
+                        {{item.text}}
+                    </router-link>
+                </li>
                 <!-- 有子菜单 -->
-                <router-link v-if="level1.route" role="a" :to="level1.route">
-                    {{level1.text}}
-                </router-link>
-                <!-- 无子菜单 -->
-                <a v-else>{{level1.text}} <span class="caret rotate"></span></a>
-                <ul>
-                    <li v-for="level2 in level1.children">
-                        <router-link role="a" :to="level2.route">
-                            {{level2.text}}
-                        </router-link>
-                    </li>
-                </ul>
-            </li>
+                <li v-else :key="item.id" class="hasChildren">
+                    <!-- 三角形 -->
+                    <a @click="toggle(item)">{{item.text}}<span :class="{caret: true, rotate: item.open}"></span></a>
+                    <!-- 菜单 -->
+                    <ul class="children" v-show="item.open">
+                        <li v-for="subItem in item.children">
+                            <router-link role="a" :to="subItem.route">
+                                {{subItem.text}}
+                            </router-link>
+                        </li>
+                    </ul>
+                </li>
+            </template>
         </ul>
     </div>
 </template>
 <script>
 export default {
-    name: 'Menu',
-
-    data(){
-        return {toggleMap: {}};
-    },
-
-    mounted() {
-        axios.get(MENU_URL, {
-                params: {
-                    token: this.$store.state.accessToken
-                }
-            })
-            .then((response) => {
-                if (1 == response.data.status) {
-                    this.menu = response.data.data.menu;
-                    
-                    var pathMap = {};
-
-                    this.menu.forEach(menuItem => {
-                        // 一级菜单
-                        if (undefined != menuItem.templateAjaxUrl) {
-                            pathMap[menuItem.path] = {
-                                template: menuItem.template,
-                                url: menuItem.templateAjaxUrl
-                            }
-                        }
-
-                        // 二级菜单
-                        if (undefined != menuItem.children) {
-                            menuItem.children.forEach(subMenuItem => {
-                                if (undefined != subMenuItem.templateAjaxUrl) {
-
-                                    pathMap[subMenuItem.route.path] = {
-                                        template: subMenuItem.template,
-                                        url: subMenuItem.templateAjaxUrl
-                                    }
-                                }
-                            })
-                        }
-                    });
-
-                    this.$store.commit('setPathMap', pathMap);
-                }
-            })
-            .catch((error) => {
-                syslog(error)
-            });
-    },
+    name: 'sidebar',
 
     data() {
         return {
@@ -76,26 +35,69 @@ export default {
         }
     },
 
+    mounted() {
+        this.$store.dispatch('getMenuList', this.$store.state.loginModule.accessToken).then(response => {
+            if (1 == response.status) {
+                this.menu = response.data.menu;
+                this.$store.commit('setPathMap', this.mapPath(this.menu));
+            }
+        });
+    },
+
     methods: {
-        toggle() {}
+        mapPath(menuData) {
+            var pathMap = {};
+            menuData.forEach(menuItem => {
+                // 一级菜单
+                if (undefined != menuItem.templateAjaxUrl) {
+                    pathMap[menuItem.path] = {
+                        template: menuItem.template,
+                        url: menuItem.templateAjaxUrl
+                    }
+                }
+
+                // 二级菜单
+                if (undefined != menuItem.children) {
+                    menuItem.children.forEach(subMenuItem => {
+                        if (undefined != subMenuItem.templateAjaxUrl) {
+                            pathMap[subMenuItem.route.path] = {
+                                template: subMenuItem.template,
+                                url: subMenuItem.templateAjaxUrl
+                            }
+                        }
+                    })
+                }
+            });
+            return pathMap;
+        },
+
+        toggle(item) {
+            item.open = !item.open;
+        }
     }
 }
 </script>
-<style scoped lang=scss>
+<style scoped lang="scss">
 $bgColor: #fff;
 $hoverColor: #e7e7e7;
 $fontColor: #777;
 .layout-sidebar {
+    width: 160px;
+    transition: all .3s;
     box-shadow: 1px 0 3px rgba(0, 0, 0, .1);
-    /*border-right: 1px solid #e7e7e7;*/
     min-height: 100%;
     background: $bgColor;
-    .rotate {
-        transform: rotate(270deg);
+    .caret {
         transition: all .3s;
+    }
+    .rotate {
+        transform: rotate(-90deg);
     }
     ul.menu {
         >li {
+            &.hasChildren {
+                overflow: hidden;
+            }
             a {
                 font-size: 13px;
                 display: block;
@@ -109,6 +111,7 @@ $fontColor: #777;
             >a {
                 padding: 15px;
             }
+            >ul {}
             >ul>li {
                 >a {
                     padding: 15px 30px;

@@ -9,11 +9,6 @@
 |status   | 1: 成功, 0: 失败  |
 |data   | 渲染页面的数据  |
 |data.form   | 筛选条件数据, 内容为任何组件数据  |
-|data.btnGroup   | 表格上方按钮, 该字段为数组格式, 里面都是按钮(用对象表示)  |
-|data.btnGroup[].url    | ajax请求地址  |
-|data.btnGroup[].source   | ajax发送数据来源, 'table'/'filter' |
-|data.btnGroup[].icon    | 对应fontAsome图标名,如'plus'代表加号   |
-|data.btnGroup[].text    | 按钮文字  |
 |data.table   | 表格数据  |
 |data.table.primaryKey   | 主键名,比如'uid'  |
 |data.table.url   | 相关接口, 根据业务可自行填充, 填充后沟通前端去实现, 默认有2个已经实现(list/del)  |
@@ -24,6 +19,10 @@
 |data.table.btnGroupInRow[].icon   | 对应fontAsome图标名  |
 |data.table.btnGroupInRow[].path   | 路由地址  |
 |data.table.header   | 表格标题  |
+|data.table.btnGroupForSelect   | 底部用来操作表格所选数据的按钮 |
+|data.table.btnGroupForSelect[].url    | ajax请求地址  |
+|data.table.btnGroupForSelect[].icon    | 对应fontAsome图标名,如'plus'代表加号   |
+|data.table.btnGroupForSelect[].text    | 按钮文字  |
 
 ### 数据示例
 ``` json
@@ -355,42 +354,42 @@
                 3
             ]
         }],
-        "btnGroup": [{
-            "source": "table",
-            "url": "./mock/success?remove",
-            "text": "删除所选",
-            "icon": "remove"
-        }, {
-            "source": "table",
-            "url": "./mock/success?toggle",
-            "text": "启用禁用",
-            "icon": "toggle-on"
-        }, {
-            "source": "table",
-            "url": "./mock/success?reset",
-            "text": "设置为休息",
-            "icon": "toggle-off"
-        }],
         "table": {
             "primaryKey": "uid",
             "url": {
                 "list": "./mock/table",
-                "del": "./mock/edit"
+                "del": "./mock/success"
             },
             "btnGroupInRow": [{ "text": "新增", "icon": "edit", "path": "/home/x/add" }, { "text": "查看", "icon": "eye", "path": "/home/readonly" }],
+            "btnGroupForSelect": [{
+                "url": "./mock/success?remove",
+                "text": "删除所选",
+                "icon": "remove"
+            }, {
+                "url": "./mock/success?toggle",
+                "text": "启用禁用",
+                "icon": "toggle-on"
+            }, {
+                "url": "./mock/success?reset",
+                "text": "设置为休息",
+                "icon": "toggle-off"
+            }],
             "header": [{
                 "text": "用户id",
-                "key": "uid"
+                "key": "uid",
+                "icon": "user"
             }, {
                 "text": "标题",
-                "key": "title"
+                "key": "title",
+                "icon": "car"
             }, {
                 "text": "时间",
                 "key": "create_time",
                 "icon": "clock-o"
             }, {
                 "text": "分类",
-                "key": "category"
+                "key": "category",
+                "icon": "coffee"
             }]
         }
     }

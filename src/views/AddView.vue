@@ -39,7 +39,7 @@ export default {
         return {
               // 表单结果数据
             formValues: {
-                accessToken: this.$store.state.accessToken,
+                accessToken: this.$store.state.loginModule.accessToken,
                 body: {}
             },
             // 构造表单
@@ -98,7 +98,7 @@ export default {
         submit() {
             var self = this;
             axios.post(this.form.data.url.submit, qs.stringify({
-                    accessToken: this.$store.state.accessToken,
+                    accessToken: this.$store.state.loginModule.accessToken,
                     ...this.formValues.body
                 }))
                 .then((response) => {

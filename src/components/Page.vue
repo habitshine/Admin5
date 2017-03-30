@@ -64,8 +64,8 @@ export default {
 </script>
 <style scoped lang=scss>
 .pagination {
-    display: table;
-    margin: 0 auto;
+/*    display: table;
+    margin: 0 auto;*/
     li {
         &.active {
             a {

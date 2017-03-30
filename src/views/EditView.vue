@@ -53,7 +53,7 @@ export default {
             },
             // 表单结果数据
             formValues: {
-                accessToken: this.$store.state.accessToken,
+                accessToken: this.$store.state.loginModule.accessToken,
                 body: {}
             },
             // 构造表单
@@ -97,7 +97,7 @@ export default {
             axios.get(this.url, {
                     params: {
                         id: this.$route.query.id,
-                        accessToken: this.$store.state.accessToken
+                        accessToken: this.$store.state.loginModule.accessToken
                     }
                 })
                 .then((response) => {
@@ -115,7 +115,7 @@ export default {
             // http
             axios.put(this.form.data.url.submit, qs.stringify({
                     id: this.$route.query.id,
-                    accessToken: this.$store.state.accessToken,
+                    accessToken: this.$store.state.loginModule.accessToken,
                     ...this.formValues.body
                 }))
                 .then((response) => {

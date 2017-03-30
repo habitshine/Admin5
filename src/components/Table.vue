@@ -1,5 +1,9 @@
 <template>
     <div class="com-table">
+        <v-mask v-show="-1 == status">
+            <v-spinner class="spinner"></v-spinner>
+        </v-mask>
+
         <p v-if="0 == status" class="alert alert-warning">
             <strong>系统: </strong>{{message}}
             <a class="btn btn-link btn-xs" @click="$router.go(-1)">返回</a>
@@ -31,13 +35,12 @@
                 </table>
             </div>
         </div>
-        <div v-show="-1 == status" class="spinner">
-            <spinner></spinner>
-        </div>
+
     </div>
 </template>
 <script>
-import Spinner from './Spinner'
+import VMask from './Mask'
+import VSpinner from './Spinner'
 import VCheckbox from './form/Checkbox'
 
 export default {
@@ -130,7 +133,8 @@ export default {
     },
 
     components: {
-        Spinner,
+        VMask,
+        VSpinner,
         VCheckbox
     }
 };
@@ -138,7 +142,10 @@ export default {
 <style scoped lang="scss">
 .blur{-webkit-filter:blur(2px);}
 .com-table {
+    overflow: hidden;
     position: relative;
+    .spinner{background: rgba(0,0,0,.8);display: table;margin:10% auto;padding: 15px 0;border-radius: 8px;box-shadow: 1px 2px 3px rgba(0,0,0,.2);}
+
     .tr-enter {
         opacity: 0;
         transform: translateY(-.5rem);

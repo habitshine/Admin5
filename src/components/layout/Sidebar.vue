@@ -1,32 +1,27 @@
 <template>
     <div class="layout-sidebar">
         <ul class="menu">
-            <li v-for="level1 in menu" @click="toggle(level1.id)" :key="level1.id">
-                <!-- 无子菜单 -->
-                <template v-if="undefined == level1.children">
-                    <router-link role="a" :to="level1.route">
-                        {{level1.text}}
+            <template v-for="item in menu">
+                <li v-if="undefined == item.children" :key="item.id">
+                    <!-- 无子菜单 -->
+                    <router-link :to="item.route" @click="toggle(item)">
+                        {{item.text}}
                     </router-link>
-                </template>
-
+                </li>
                 <!-- 有子菜单 -->
-                <template v-else>
+                <li v-else :key="item.id" class="hasChildren">
                     <!-- 三角形 -->
-                    <a>
-                        {{level1.text}} 
-                        <span :class="{caret: true, rotate: toggleMap[level1.id]}"></span>
-                    </a>
-                    <transition name="menu">
-                    <ul v-show="toggleMap[level1.id]">
-                        <li v-for="level2 in level1.children">
-                            <router-link role="a" :to="level2.route">
-                                {{level2.text}}
+                    <a @click="toggle(item)">{{item.text}}<span :class="{caret: true, rotate: item.open}"></span></a>
+                    <!-- 菜单 -->
+                    <ul class="children" v-show="item.open">
+                        <li v-for="subItem in item.children">
+                            <router-link role="a" :to="subItem.route">
+                                {{subItem.text}}
                             </router-link>
                         </li>
                     </ul>
-                    </transition>
-                </template>
-            </li>
+                </li>
+            </template>
         </ul>
     </div>
 </template>
@@ -36,16 +31,12 @@ export default {
 
     data() {
         return {
-            menu: [],
-            toggleMap: {
-                '1': true,
-                '2': false
-            }
+            menu: []
         }
     },
 
     mounted() {
-        this.$store.dispatch('getMenuList', this.$store.state.accessToken).then(response => {
+        this.$store.dispatch('getMenuList', this.$store.state.loginModule.accessToken).then(response => {
             if (1 == response.status) {
                 this.menu = response.data.menu;
                 this.$store.commit('setPathMap', this.mapPath(this.menu));
@@ -80,48 +71,18 @@ export default {
             return pathMap;
         },
 
-        toggle(id) {
-            this.toggleMap[id] = !this.toggleMap[id];
+        toggle(item) {
+            item.open = !item.open;
         }
     }
 }
 </script>
-<style scoped lang=scss>
+<style scoped lang="scss">
 $bgColor: #fff;
 $hoverColor: #e7e7e7;
 $fontColor: #777;
-
-
-.menu-enter-active {
-    animation: menIn .3s;
-}
-
-
-.menu-leave-active {
-    animation: menuOut .3s;
-}
-
-@keyframes menIn {
-    0% {
-        height: 0;
-    }
-    100% {
-        height: 50px;
-    }
-}
-
-@keyframes menuOut {
-    0% {
-        height: 50px;
-    }
-    100% {
-        height: 0;
-        
-        
-    }
-}
-
 .layout-sidebar {
+    width: 160px;
     transition: all .3s;
     box-shadow: 1px 0 3px rgba(0, 0, 0, .1);
     min-height: 100%;
@@ -134,6 +95,9 @@ $fontColor: #777;
     }
     ul.menu {
         >li {
+            &.hasChildren {
+                overflow: hidden;
+            }
             a {
                 font-size: 13px;
                 display: block;
@@ -147,9 +111,7 @@ $fontColor: #777;
             >a {
                 padding: 15px;
             }
-
-            >ul{}
-
+            >ul {}
             >ul>li {
                 >a {
                     padding: 15px 30px;

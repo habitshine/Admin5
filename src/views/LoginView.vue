@@ -41,7 +41,6 @@ export default {
          * 登陆, 获取accessToken
          */
         login() {
-            
             this.$store.dispatch('login', {
                 userName: this.userName,
                 password: this.password

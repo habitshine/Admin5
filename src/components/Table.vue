@@ -143,7 +143,7 @@ export default {
 <style scoped lang="scss">
 .blur{-webkit-filter:blur(2px);}
 .com-table {
-    min-height: 200px;
+    min-height: 274px;
     overflow: hidden;
     position: relative;
     .spinner{background: rgba(0,0,0,.8);display: table;margin:10% auto;padding: 15px 0;border-radius: 8px;box-shadow: 1px 2px 3px rgba(0,0,0,.2);}

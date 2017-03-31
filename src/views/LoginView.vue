@@ -41,7 +41,7 @@ export default {
          * 登陆, 获取accessToken
          */
         login(e) {
-            if(undefined == e.keycode || 13 == e.keycode) {
+            if(undefined == e.keyCode || 13 == e.keyCode) {
                 this.$store.dispatch('login', {
                     userName: this.userName,
                     password: this.password

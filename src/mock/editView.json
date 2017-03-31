@@ -2,6 +2,7 @@
     "message": "无数据",
     "status": 1,
     "data": {
+        "template": "edit",
         "form": [{
             "title": "上传",
             "value": [{

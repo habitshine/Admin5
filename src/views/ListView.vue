@@ -1,10 +1,15 @@
 <template>
     <div class="list-view">
         <transition appear mode="out-in">
+
             <template v-if="-1 == viewData.status">
                 <v-spinner></v-spinner>
             </template>
             <div v-else>
+                
+                <!-- 面包屑 -->
+                <v-breadcrumb :value="['世界','亚洲', '中国']"></v-breadcrumb>
+
                 <!-- 过滤条件 -->
                 <filter-panel v-if="1 == viewData.status && undefined != viewData.data.form" @submit="filter" @reset="reset">
                     <!-- 表单集合 -->
@@ -54,6 +59,7 @@
 <script>
 import FilterPanel from '../components/layout/Filter'
 import FrameLayout from '../components/layout/Frame'
+import VBreadcrumb from '../components/Breadcrumb'
 import VSpinner from '../components/Spinner'
 import VTable from '../components/Table'
 import VPage from '../components/Page'
@@ -74,7 +80,8 @@ export default {
         VSpinner,
         VTable,
         VPage,
-        VForm
+        VForm,
+        VBreadcrumb
     },
 
     data() {

@@ -332,8 +332,8 @@
             "url": "./mock/table",
             "btnGroupInRow": [
                 { "text": "删除", "icon": "remove", "url": "./mock/success", "type": "remove" },
-                { "text": "新增", "icon": "edit", "path": "/home/x/add", "type": "route" },
-                { "text": "查看", "icon": "eye", "path": "/home/readonly", "type": "route" }
+                { "text": "新增", "icon": "edit", "url": "/home/x/add", "type": "route" },
+                { "text": "查看", "icon": "eye", "url": "/home/readonly", "type": "route" }
             ],
             "btnGroupForSelect": [{
                 "url": "./mock/success?remove",

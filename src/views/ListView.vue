@@ -32,7 +32,7 @@
                                 <a v-if="'remove' == btn.type" class="btn btn-xs btn-link" @click="remove(btn.url, props.primaryKey)">
                                     <i class="fa fa-remove"></i> 删除
                                 </a>
-                                <router-link v-else :key="btn.text" :to="{path: btn.path, query: {id: props.row.id}}" class="btn btn-xs btn-link">
+                                <router-link v-else :key="btn.text" :to="{path: btn.url, query: {id: props.row.id}}" class="btn btn-xs btn-link">
                                     <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
                                 </router-link>
                             </template>
@@ -45,8 +45,7 @@
                         <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
                     </a>
                 </div>
-                <v-page class=" pull-right" 
-                @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
+                <v-page class=" pull-right" @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
                 </v-page>
             </div>
         </transition>

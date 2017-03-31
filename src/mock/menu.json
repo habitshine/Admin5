@@ -29,15 +29,6 @@
             "path": "/home/x/add"
         }
     }, {
-        "id": 11,
-        "text": "编辑id=1",
-        "template": "edit",
-        "templateAjaxUrl": "./mock/editView",
-        "route": {
-            "path": "/home/x/edit",
-            "query": { "id": 1 }
-        }
-    }, {
         "id": 12,
         "text": "主面板",
         "route": {

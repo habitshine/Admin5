@@ -418,17 +418,20 @@
                     "type": "remove"
                 },
                 {
-                    "text": "新增",
+                    "text": "编辑",
                     "icon": "edit",
-                    "path": "/home/x/add",
-                    "url": "./mock/addView",
-                    "type": "route"
+                    "path": "/home/x/edit",
+                    "url": "./mock/editView",
+                    "type": "route",
+                    "template": "edit"
                 },
                 {
                     "text": "查看",
                     "icon": "eye",
-                    "url": "/home/readonly",
-                    "type": "route"
+                    "path": "/home/readonly",
+                    "url": "./mock/editView",
+                    "type": "route",
+                    "template": "edit"
                 }
             ],
             "btnGroupForSelect": [

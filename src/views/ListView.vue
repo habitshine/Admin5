@@ -47,9 +47,9 @@
                                 <a v-if="'remove' == btn.type" class="btn btn-xs btn-link" @click="remove(btn.url, props.primaryKey)">
                                     <i class="fa fa-remove"></i> 删除
                                 </a>
-                                <router-link v-else :key="btn.text" :to="{path: btn.url, query: {id: props.row.id}}" class="btn btn-xs btn-link">
+                                <a v-else @click="changeView(btn.path, btn.url, btn.template, props.row.id)" class="btn btn-xs btn-link">
                                     <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
-                                </router-link>
+                                </a>
                             </template>
                         </td>
                     </template>
@@ -315,6 +315,13 @@ export default {
                     }
                 });
             }
+        },
+
+        changeView(path, url, template, id){
+            var pathMap = this.$store.state.pathMap.map
+            pathMap[path] = {template, url};
+            this.$store.commit('setPathMap', pathMap);
+            this.$router.push({path, query: {id}});
         }
     },
 

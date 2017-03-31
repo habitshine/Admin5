@@ -31,59 +31,159 @@
                             '订单处理类',
                             '商品指标',
                             '社会媒体类',
-                            '备选指标',
-                            '订单处理类',
-                            '商品指标'
+                            '备选指标'
                         ],
-                        val:[
-                            [
-                                {
-                                    "name": "前台接待客户满意度11111111111",
-                                    "detail":"(接待不满意客户/接待总客户数)*100%",
-                                    "order": 1,
-                                    "fixed": false,
-                                    "showForm":false
-                                },
-                                {
-                                    "name": "前厅管理有效性1111111111111",
-                                    "detail":"一定周期内工作出错率低于规定比例",
-                                    "order": 2,
-                                    "fixed": false,
-                                    "showForm":false
-                                }
-                            ],
-                            [
-                                {
-                                    "name": "前台接待客户满意度222222222",
-                                    "detail":"(接待不满意客户/接待总客户数)*100%",
-                                    "order": 1,
-                                    "fixed": false,
-                                    "showForm":false
-                                },
-                                {
-                                    "name": "前厅管理有效性2222222222",
-                                    "detail":"一定周期内工作出错率低于规定比例",
-                                    "order": 2,
-                                    "fixed": false,
-                                    "showForm":false
-                                }
-                            ],
-                            [
-                                {
-                                    "name": "前台接待客户满意度333333333",
-                                    "detail":"(接待不满意客户/接待总客户数)*100%",
-                                    "order": 1,
-                                    "fixed": false,
-                                    "showForm":false
-                                },
-                                {
-                                    "name": "前厅管理有效性111111111",
-                                    "detail":"一定周期内工作出错率低于规定比例",
-                                    "order": 2,
-                                    "fixed": false,
-                                    "showForm":false
-                                }
-                            ]
+                        list:[
+                            {
+                                "name": "前台接待客户满意度type0",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "order": 1,
+                                "fixed": false,
+                                "type":0
+                            },
+                            {
+                                "name": "前厅管理有效性type0",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 2,
+                                "fixed": false,
+                                "type":0
+                            },
+                            {
+                                "name": "前台接待客户满意度type000000",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "order": 1,
+                                "fixed": false,
+                                "type":0
+                            },
+                            {
+                                "name": "前厅管理有效性type0000777799",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 2,
+                                "fixed": false,
+                                "type":0
+                            },
+                            {
+                                "name": "前台接待客户满意度type1",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "order": 3,
+                                "fixed": false,
+                                "type":1
+                            },
+                            {
+                                "name": "前厅管理有效性type1",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 4,
+                                "fixed": false,
+                                "type":1
+                            },
+                            {
+                                "name": "前台接待客户满意度type2",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "order": 99,
+                                "fixed": false,
+                                "type":2
+                            },
+                            {
+                                "name": "前厅管理有效性type2",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 98,
+                                "fixed": false,
+                                "type":2
+                            },
+                            {
+                                "name": "前台接待客户满意度type22",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "order": 97,
+                                "fixed": false,
+                                "type":2
+                            },
+                            {
+                                "name": "前厅管理有效性type22",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 96,
+                                "fixed": false,
+                                "type":2
+                            },
+                            {
+                                "name": "前台接待客户满意度type3",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "order": 7,
+                                "fixed": false,
+                                "type":3
+                            },
+                            {
+                                "name": "前台接待客户满意度type33",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "order": 7,
+                                "fixed": false,
+                                "type":3
+                            },
+                            {
+                                "name": "前厅管理有效性type3",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 8,
+                                "fixed": false,
+                                "type":3
+                            },
+                            {
+                                "name": "前台接待客户满意度type4",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "order": 9,
+                                "fixed": false,
+                                "type":4
+                            },
+                            {
+                                "name": "前厅管理有效性type4",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 10,
+                                "fixed": false,
+                                "type":4
+                            },
+                            {
+                                "name": "前厅管理有效性type5",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 11,
+                                "fixed": false,
+                                "type":5
+                            },
+                            {
+                                "name": "前厅管理有效性type6",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 12,
+                                "fixed": false,
+                                "type":6
+                            },
+                            {
+                                "name": "前厅管理有效性type7",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 13,
+                                "fixed": false,
+                                "type":7
+                            },
+                            {
+                                "name": "前厅管理有效性type8",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 14,
+                                "fixed": false,
+                                "type":8
+                            },
+                            {
+                                "name": "前厅管理有效性type9",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 15,
+                                "fixed": false,
+                                "type":9
+                            },
+
+                        ],
+                        list2:[
+                            {
+                                "name": "前厅管理有效性type9",
+                                "detail":"一定周期内工作出错率低于规定比例",
+                                "order": 1,
+                                "fixed": false,
+                                "type":9
+                            }
                         ],
                     },
 

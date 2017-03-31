@@ -8,7 +8,7 @@
                 "title": "输入框",
                 "value": "123",
                 "name": "inputValue",
-                "type": "input",
+                "is": "input",
                 "placeholder": "输入吧少年",
                 "column": [
                     12,
@@ -28,7 +28,7 @@
                     6,
                     6
                 ],
-                "type": "checkboxGroup",
+                "is": "checkboxGroup",
                 "children": [
                     {
                         "label": "苹果",
@@ -57,7 +57,7 @@
                     3,
                     3
                 ],
-                "type": "select",
+                "is": "select",
                 "placeholder": "请选择",
                 "children": [
                     {
@@ -142,7 +142,7 @@
                     3
                 ],
                 "value": null,
-                "type": "selectMulit",
+                "is": "selectMulit",
                 "placeholder": "请选择",
                 "children": [
                     {
@@ -227,7 +227,7 @@
                     3,
                     3
                 ],
-                "type": "dateTime",
+                "is": "dateTime",
                 "thirdPartyOptions": {
                     "dateFormat": "Y-m-d H:i:S",
                     "enableTime": true,
@@ -244,7 +244,7 @@
                     3,
                     3
                 ],
-                "type": "selectMulit",
+                "is": "selectMulit",
                 "value": null,
                 "placeholder": "请选择",
                 "children": [
@@ -313,7 +313,7 @@
             {
                 "title": "单选框组",
                 "name": "radioGroupValue",
-                "type": "radioGroup",
+                "is": "radioGroup",
                 "value": 11,
                 "column": [
                     12,
@@ -349,7 +349,7 @@
                     8,
                     8
                 ],
-                "type": "linkage",
+                "is": "linkage",
                 "placeholder": "请选择",
                 "children": [
                     {
@@ -396,7 +396,7 @@
             {
                 "title": "评分组件",
                 "name": "rateStarValue",
-                "type": "rateStar",
+                "is": "rateStar",
                 "value": 3,
                 "column": [
                     12,

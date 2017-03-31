@@ -8,7 +8,7 @@ import Flatpickr from 'flatpickr'
 import 'flatpickr/dist/flatpickr.css'
 import {zh} from 'flatpickr/dist/l10n/zh.js';
 export default {
-    name: 'DateTimePicker',
+    name: 'dateTimePicker',
 
     props: {
         value: {

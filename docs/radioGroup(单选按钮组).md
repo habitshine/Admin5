@@ -6,7 +6,7 @@
 |键名 |说明 |
 | ------------ | ------------ |
 |title| 标题文字  |
-|type| 必须"radioGroup"  |
+|is| 必须"radioGroup"  |
 |name   | ajax字段名, 服务端接收参数名  |
 |column   | 对应bootstrap的栅格布局  |
 |value   | 默认值  |
@@ -21,7 +21,7 @@
 ```json
 {
     "title": "单选组",
-    "type": "radioGroup",
+    "is": "radioGroup",
     "name": "radioGroupValue",
     "column": [6, 4, 3, 3],
     "value": 11,

@@ -8,7 +8,7 @@
                     'col-md-' + component.column[2], 
                     'col-lg-' + component.column[3]]">
                     <h5>{{component.title}}</h5>
-                    <component v-model="formValues[component.name]" :is="'v_' + component.type" :opts="component">
+                    <component v-model="formValues[component.name]" :is="'v_' + component.is" :opts="component">
                     </component>
                 </div>
             </template>
@@ -65,12 +65,6 @@ export default {
     computed: {
 
     },
-
-    // watch: {
-    //     value(values) {
-    //         this.$emit('input', this.formValues);
-    //     }
-    // },
 
     components: {
         v_textarea,

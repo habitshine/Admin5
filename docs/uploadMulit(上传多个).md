@@ -5,7 +5,7 @@
 |键名 |说明 |
 | ------------ | ------------ |
 |title| 标题文字  |
-|type| 必须"uploadMulit"  |
+|is| 必须"uploadMulit"  |
 |name   | ajax字段名, 服务端接收参数名  |
 |column   | 对应bootstrap的栅格布局  |
 |value   | 默认值, 无默认值用null表示, 默认值结构为  {"fileName": "显示的文件名","cover": "缩略图","id": "id","type": "'image'或者'file'","url": "文件地址"}|
@@ -20,7 +20,7 @@
 ```json
 {
     "title": "上传",
-    "type": "uploadMulit",
+    "is": "uploadMulit",
     "name": "uploadMulitValue",
     "column": [12, 12, 12, 12],
     "value": [{

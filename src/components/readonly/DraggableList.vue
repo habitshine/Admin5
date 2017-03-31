@@ -50,7 +50,7 @@
             <draggable class="over-flow-scroll" element="div" v-model="list2" :options="dragOptions" :move="onMove">
                 <transition-group name="no" type="transition" class="list-group" tag="ul" ref='myUl'>
                     <li class="list-group-item" v-for="(element,index) in list2" :key="element.order">
-                        <div class="drag-contain-new">
+                        <div class="drag-contain-new" style="position: relative">
                             <h5>
                                 <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
                                    @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
@@ -59,7 +59,9 @@
                             <p class="drag-detail">{{element.detail}}</p>
                             <textarea placeholder="请填写考核目标要求"></textarea>
                             <div>设置权重：<input class="drag-ipt-s" type="text">%</div>
-                            <span style="cursor: pointer">删除试试啊</span>
+                            <span class="close-btn" @click="removeItem(index,element)">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </span>
                         </div>
                     </li>
                 </transition-group>
@@ -78,210 +80,8 @@
         data () {
             return {
                 active:0,
-                list:[
-                    {
-                        "name": "前台接待客户满意度type0",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 1,
-                        "fixed": false,
-                        "type":0
-                    },
-                    {
-                        "name": "前厅管理有效性type0",
-                        "detail":"一定周期内工作出错率低于规定比例",
-                        "order": 2,
-                        "fixed": false,
-                        "type":0
-                    },
-                    {
-                        "name": "前台接待客户满意度type1",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 1,
-                        "fixed": false,
-                        "type":1
-                    },
-                    {
-                        "name": "前厅管理有效性type1",
-                        "detail":"一定周期内工作出错率低于规定比例",
-                        "order": 2,
-                        "fixed": false,
-                        "type":1
-                    },
-                    {
-                        "name": "前台接待客户满意度type2",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 1,
-                        "fixed": false,
-                        "type":2
-                    },
-                    {
-                        "name": "前厅管理有效性type2",
-                        "detail":"一定周期内工作出错率低于规定比例",
-                        "order": 2,
-                        "fixed": false,
-                        "type":2
-                    },
-                    {
-                        "name": "前台接待客户满意度type3",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 1,
-                        "fixed": false,
-                        "type":3
-                    },
-                    {
-                        "name": "前厅管理有效性type3",
-                        "detail":"一定周期内工作出错率低于规定比例",
-                        "order": 2,
-                        "fixed": false,
-                        "type":3
-                    },
-                    {
-                        "name": "前台接待客户满意度type4",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 1,
-                        "fixed": false,
-                        "type":4
-                    },
-                    {
-                        "name": "前厅管理有效性type4",
-                        "detail":"一定周期内工作出错率低于规定比例",
-                        "order": 2,
-                        "fixed": false,
-                        "type":4
-                    }
-                ],
-                list2:[
-                    {
-                        "name": "前台接待客户满意度",
-                        "detail":"(接待不满意客户/接待总客户数)*100%",
-                        "order": 1,
-                        "fixed": false,
-                        "showForm":false
-                    }
-                ],
-//                listnew:[
-//                    [{
-//                        "name": "前台接待客户满意度11111111111",
-//                        "detail":"(接待不满意客户/接待总客户数)*100%",
-//                        "order": 1,
-//                        "fixed": false,
-//                        "showForm":false
-//                    },
-//                        {
-//                            "name": "前厅管理有效性1111111111111",
-//                            "detail":"一定周期内工作出错率低于规定比例",
-//                            "order": 2,
-//                            "fixed": false,
-//                            "showForm":false
-//                        },{
-//                        "name": "前台接待客户满意度11111111111",
-//                        "detail":"(接待不满意客户/接待总客户数)*100%",
-//                        "order": 1,
-//                        "fixed": false,
-//                        "showForm":false
-//                    },
-//                        {
-//                            "name": "前厅管理有效性1111111111111",
-//                            "detail":"一定周期内工作出错率低于规定比例",
-//                            "order": 2,
-//                            "fixed": false,
-//                            "showForm":false
-//                        },{
-//                        "name": "前台接待客户满意度11111111111",
-//                        "detail":"(接待不满意客户/接待总客户数)*100%",
-//                        "order": 1,
-//                        "fixed": false,
-//                        "showForm":false
-//                    },
-//                        {
-//                            "name": "前厅管理有效性1111111111111",
-//                            "detail":"一定周期内工作出错率低于规定比例",
-//                            "order": 2,
-//                            "fixed": false,
-//                            "showForm":false
-//                        }],[
-//                        {
-//                            "name": "前台接待客户满意度2222222",
-//                            "detail":"(接待不满意客户/接待总客户数)*100%",
-//                            "order": 1,
-//                            "fixed": false,
-//                            "showForm":false
-//                        },
-//                        {
-//                            "name": "前厅管理有效性22222222",
-//                            "detail":"一定周期内工作出错率低于规定比例",
-//                            "order": 2,
-//                            "fixed": false,
-//                            "showForm":false
-//                        }
-//                    ],[
-//                        {
-//                            "name": "前台接待客户满意度3333333",
-//                            "detail":"(接待不满意客户/接待总客户数)*100%",
-//                            "order": 1,
-//                            "fixed": false,
-//                            "showForm":false
-//                        },
-//                        {
-//                            "name": "前厅管理有效性33333333",
-//                            "detail":"一定周期内工作出错率低于规定比例",
-//                            "order": 2,
-//                            "fixed": false,
-//                            "showForm":false
-//                        }
-//                    ],[
-//                        {
-//                            "name": "前台接待客户满意度44444444",
-//                            "detail":"(接待不满意客户/接待总客户数)*100%",
-//                            "order": 1,
-//                            "fixed": false,
-//                            "showForm":false
-//                        },
-//                        {
-//                            "name": "前厅管理有效性44444444",
-//                            "detail":"一定周期内工作出错率低于规定比例",
-//                            "order": 2,
-//                            "fixed": false,
-//                            "showForm":false
-//                        }
-//                    ]
-//                ],
-//                listnew2:[
-//                    [
-//                        {
-//                            "name": "前台接待客户满意度1",
-//                            "detail":"(接待不满意客户/接待总客户数)*100%",
-//                            "order": 1,
-//                            "fixed": false,
-//                            "showForm":false
-//                        }
-//                    ],[
-//                        {
-//                            "name": "前台接待客户满意度2",
-//                            "detail":"(接待不满意客户/接待总客户数)*100%",
-//                            "order": 1,
-//                            "fixed": false,
-//                            "showForm":false
-//                        }
-//                    ],
-//                    [
-//                        {
-//                            "name": "前台接待客户满意度3",
-//                            "detail":"(接待不满意客户/接待总客户数)*100%",
-//                            "order": 1,
-//                            "fixed": false,
-//                            "showForm":false
-//                        }
-//                    ],[
-//                        {
-//                            "name": "前台接待客户满意度4",
-//                            "detail":"(接待不满意客户/接待总客户数)*100%",
-//                            "order": 1,
-//                            "fixed": false,
-//                            "showForm":false
-//                        }
-//                    ]
-//                ],
+                list:[],
+                list2:[],
                 isDragging: false,
                 delayedDragging:false,
             }
@@ -294,51 +94,25 @@
                 type:Object
             }
         },
+        mounted: function() {
+            this.list = this.opts.list;
+            this.list2 = this.opts.list2;
+        },
         methods:{
-            reback(i){
-                console.log(i)
+            removeItem(idx,el){
+               this.list2.splice(idx,1);
+               this.list.push(el);
             },
-//            onFilter(evt){
-////                console.log(evt.item.parentNode)
-////                console.log(evt);
-////                console.log(evt.item);
-////                console.log(this.$refs.myUl)
-////                evt.item.parentNode.removeChild(evt.item)
-////                el && el.parentNode.removeChild(el);
-//            },
             tabChange(i){
                 this.active=i;
-//                this.list=this.listnew[i];
-//                this.list2=this.listnew2[i];
             },
             onMove ({relatedContext, draggedContext}) {
                 const relatedElement = relatedContext.element;
                 const draggedElement = draggedContext.element;
                 return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
             },
-            //onAdd和onAddOld留着备用，
-            onAdd(evt){
-                //移入新列表的时候显示表单
-                this.$nextTick(
-                    ()=>{
-                        this.list[evt.newIndex].showForm=true
-                    }
-                )
-
-            },
-            onAddOld(evt){
-                //移入新列表的时候显示表单
-                this.$nextTick(
-                    ()=>{
-                        this.list[evt.newIndex].showForm=false
-                    }
-                )
-            }
         },
         computed: {
-//            activeAddOne(){
-//                return active+1;
-//            },
             dragOptions () {
                 return  {
                     animation: 0,
@@ -346,7 +120,7 @@
                     ghostClass: 'ghost',
                     scroll: true,
                     scrollSensitivity: 30,
-                    filter: '.js-remove'
+//                    filter: '.js-remove'
                 };
             },
             listString(){
@@ -405,7 +179,6 @@
         cursor: pointer;
     }
     .drag-title{
-        /*font-weight: bold;*/
         font-size: 16px;
         padding: 5px 0;
         color: #999;
@@ -481,7 +254,7 @@
                 font-size: 12px;
                 color: #5a5a5a;
                 background: #fff;
-                transition: all .3s ease-in-out;
+                transition: all .1s ease-in-out;
                 user-select: none;
                 border-radius: 4px;
                 &:hover{
@@ -549,5 +322,25 @@
             margin-left: 4px;
         }
     }
-
+    .close-btn{
+        display: block;
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #fff;
+        text-align: center;
+        line-height: 26px;
+        border-radius: 15px;
+        background: rgba(0,0,0,0.2);
+        transform:rotate(0deg);
+        transition: all .3s ease-in-out;
+        &:hover{
+            background: rgba(0,0,0,0.5);
+            transform:rotate(-90deg);
+        }
+    }
 </style>

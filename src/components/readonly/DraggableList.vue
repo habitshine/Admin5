@@ -20,12 +20,12 @@
                     :options="dragOptions"
                     :move="onMove"
                     @start="isDragging=true"
-                    @end="isDragging=false">
+                    @end="isDragging=false" >
                 <transition-group
                         type="transition"
                         class="list-group"
                         :name="'flip-list'" tag="ul">
-                    <li class="list-group-item" v-if="element.type==active" v-for="element in list" :key="element.order">
+                    <li class="list-group-item" v-show="element.type==active" v-for="element in list" :key="element.order">
                         <div class="drag-contain">
                             <h5>
                                 <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"

@@ -8,15 +8,13 @@
             <strong>系统: </strong>{{message}}
             <a class="btn btn-link btn-xs" @click="$router.go(-1)">返回</a>
         </p>
-        <div v-else class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <!-- 表格 -->
-                <table class="table table-responsive table-striped table-bordered table-hover">
+                <!-- 表格 暂时不加class: table-bordered  table-striped-->
+                <table v-else class="table table-responsive table-hover table-bordered  table-striped">
                     <!-- 头 -->
                     <thead>
                         <tr>
                             <th @click="selectAll">
-                                <v-checkbox v-model="allSelect"></v-checkbox>
+                                <v-checkbox style="margin:0" :size="checkboxSize" v-model="allSelect"></v-checkbox>
                             </th>
                             <slot name="header"></slot>
                         </tr>
@@ -27,15 +25,13 @@
                             v-for="(row, i) in table"  
                             :key="row[primaryKey]">
                             <td>
-                                <v-checkbox style="margin:0" v-model="checkedList[i]">
+                                <v-checkbox style="margin:0" :size="checkboxSize" v-model="checkedList[i]">
                                 </v-checkbox>
                             </td>
                             <slot name="row" :row="row" :primaryKey="row[primaryKey]" :index="i"></slot>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
 
     </div>
 </template>
@@ -80,6 +76,7 @@ export default {
 
     data() {
         return {
+            checkboxSize: '15px',
             allSelect: false,
             checkedList: [],
             removeList: {} // 存储删除行的主键{ArrayLike}
@@ -141,12 +138,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.blur{-webkit-filter:blur(2px);}
 .com-table {
-    min-height: 274px;
+    margin: 0;
+    min-height: 200px;
     overflow: hidden;
     position: relative;
-    .spinner{background: rgba(0,0,0,.8);display: table;margin:10% auto;padding: 15px 0;border-radius: 8px;box-shadow: 1px 2px 3px rgba(0,0,0,.2);}
+
+    .spinner{background: rgba(0,0,0,.8);display: table;margin:10% auto;padding: 15px 0;border-radius: 8px;box-shadow: 0 1px 3px rgba(0,0,0,.25);}
 
 
 .tr-enter {

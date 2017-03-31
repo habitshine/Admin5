@@ -3,6 +3,7 @@
     "status": 1,
     "data": {
         "template": "list",
+        "breadcrumb": [{"icon": "file-o", "text": "世界"}, {"icon": "file-o", "text": "中国"}, {"icon":"file-o", "text": "农村"}],
         "form": [
             {
                 "title": "输入框",
@@ -419,7 +420,8 @@
                 {
                     "text": "新增",
                     "icon": "edit",
-                    "url": "/home/x/add",
+                    "path": "/home/x/add",
+                    "url": "./mock/addView",
                     "type": "route"
                 },
                 {
@@ -450,7 +452,7 @@
                 {
                     "text": "用户id",
                     "key": "uid",
-                    "icon": "user"
+                    "icon": "user-circle-o"
                 },
                 {
                     "text": "标题",

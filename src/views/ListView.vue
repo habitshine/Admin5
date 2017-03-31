@@ -6,9 +6,12 @@
                 <v-spinner></v-spinner>
             </template>
             <div v-else>
-                
+
+
+
+
                 <!-- 面包屑 -->
-                <v-breadcrumb :value="['世界','亚洲', '中国']"></v-breadcrumb>
+                <v-breadcrumb v-if="undefined != viewData.data.breadcrumb" :value="viewData.data.breadcrumb"></v-breadcrumb>
 
                 <!-- 过滤条件 -->
                 <filter-panel v-if="1 == viewData.status && undefined != viewData.data.form" @submit="filter" @reset="reset">
@@ -16,6 +19,13 @@
                     <v-form v-model="formValues.filter" :form="viewData.data.form">
                     </v-form>
                 </filter-panel>
+
+
+                <div class="btn-group" style="margin-top:45px;">
+                    <a v-for="btn in viewData.data.table.btnGroupForSelect" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
+                        <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
+                    </a>
+                </div>
                 <!-- 表格 -->
                 <v-table v-model="table.ids" style="margin-top:15px" :primaryKey="table.primaryKey" :table="table.data.list" :status="table.status" :message="table.message" :activePrimaryKey="table.activePrimaryKey" :action="table.action">
                     <!-- tr th -->
@@ -45,12 +55,7 @@
                     </template>
                 </v-table>
                 <!-- 分页 -->
-                <div class="btn-group pull-left">
-                    <a v-for="btn in viewData.data.table.btnGroupForSelect" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
-                        <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
-                    </a>
-                </div>
-                <v-page class=" pull-right" @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
+                <v-page @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
                 </v-page>
             </div>
         </transition>
@@ -65,6 +70,9 @@ import VTable from '../components/Table'
 import VPage from '../components/Page'
 import VForm from '../components/Form'
 
+import VPanel from '../components/layout/Panel'
+
+
 export default {
     name: 'listView',
 
@@ -75,13 +83,14 @@ export default {
     },
 
     components: {
+        VBreadcrumb,
         FilterPanel,
         FrameLayout,
         VSpinner,
         VTable,
+        VPanel,
         VPage,
         VForm,
-        VBreadcrumb
     },
 
     data() {

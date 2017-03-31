@@ -1,7 +1,7 @@
 <template>
     <div class="com-checkbox-group">
         <div class="group">
-            <v-checkbox @input="select(checkbox.value)" v-model="booleanList[i]" v-for="(checkbox, i) in opts.children" :key="checkbox.value" :opts="checkbox">
+            <v-checkbox class="v-checkbox" @input="select(checkbox.value)" v-model="booleanList[i]" v-for="(checkbox, i) in opts.children" :key="checkbox.value" :opts="checkbox">
                 {{checkbox.label}}
             </v-checkbox>
         </div>
@@ -77,6 +77,7 @@ export default {
 .com-checkbox-group {
     .group {
         margin-top: 19px;
+        .v-checkbox{margin-right: 15px;}
     }
 }
 </style>

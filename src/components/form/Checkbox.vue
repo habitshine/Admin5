@@ -1,6 +1,6 @@
 <template>
     <div @click="select(opts)" class="checkbox">
-        <i class="box">
+        <i class="box" :style="{width: size, height: size}">
             <transition>
             <div v-show="value" class="dot"></div>
             </transition>
@@ -18,6 +18,14 @@ export default {
         opts: {
             type: Object
         },
+
+        size: {
+            type: String,
+            default () {
+                return '16px';
+            }
+        },
+
         value: {
             type: Boolean
         }
@@ -29,24 +37,22 @@ export default {
     }
 }
 </script>
-<style scoped lang=scss>
+<style scoped lang="scss">
 $color: #666;
-$height: 16px;
 div.checkbox {
     display: inline-block;
     overflow: hidden;
     padding: 0;
-    margin: 0 15px 0 0;
+    margin: 0 0 0 0;
     cursor: pointer;
     i.box {
         display: inline-block;
         vertical-align: top;
-        width: $height;
-        height: $height;
         border: 1px solid $color;
         box-sizing: content-box;
         border-radius: 2px;
         div.dot {
+            border-radius: 2px;
             box-sizing: border-box;
             background: $color;
             height: 50%;

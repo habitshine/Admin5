@@ -9,6 +9,7 @@
 | ------------ | ------------ |
 |type| 必须"input"  |
 |value| 默认值  |
+|icon| 图标  |
 |name   | ajax字段名, 服务端接收参数名  |
 |column   | 对应bootstrap的栅格布局  |
 |placeholder   | 默认提示文字  |
@@ -19,6 +20,7 @@
 {
 	"type": "input",
 	"value": "",
+	"icon": "",
 	"name": "inputValue",
 	"column": [12,12,12,12],
     "placeholder": "输入吧少年",

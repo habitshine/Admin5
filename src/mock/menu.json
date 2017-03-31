@@ -2,7 +2,7 @@
     "id": 1,
     "icon": "plus",
     "text": "系统设置",
-    "open": false,
+    "open": true,
     "children": [{
         "id": 11,
         "text": "商品列表",

@@ -8,7 +8,7 @@
 |键名 |说明 |
 | ------------ | ------------ |
 |title| 标题文字  |
-|type| 必须"linkage"  |
+|is| 必须"linkage"  |
 |value| 默认值, 2部分组成, values对应children中的value, texts对应children中的label  |
 |name   | ajax字段名, 服务端接收参数名  |
 |column   | 对应bootstrap的栅格布局  |
@@ -25,7 +25,7 @@
 ``` json
 {
     "title": "联动",
-    "type": "linkage",
+    "is": "linkage",
     "value": {"values": [1,1,1,1], "texts": ["世界", "亚洲", "中国", "香坊"]},
     "name": "linkageValue",
     "column": [12,12,12,12],

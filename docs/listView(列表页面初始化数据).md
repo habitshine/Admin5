@@ -11,13 +11,12 @@
 |data.form   | 筛选条件数据, 内容为任何组件数据  |
 |data.table   | 表格数据  |
 |data.table.primaryKey   | 主键名,比如'uid'  |
-|data.table.url   | 相关接口, 根据业务可自行填充, 填充后沟通前端去实现, 默认有2个已经实现(list/del)  |
-|data.table.url.list   | 列表数据接口地址  |
-|data.table.url.del   | 删除数据接口地址  |
+|data.table.url   | 列表数据接口地址  |
 |data.table.btnGroupInRow   | 行内的按钮  |
 |data.table.btnGroupInRow[].text   | 按钮文字  |
 |data.table.btnGroupInRow[].icon   | 对应fontAsome图标名  |
-|data.table.btnGroupInRow[].path   | 路由地址  |
+|data.table.btnGroupInRow[].url   | ajax请求地址/路由地址  |
+|data.table.btnGroupInRow[].type   | 按钮类型, 分为删除功能: 'remove';跳转路由功能: 'route'  |
 |data.table.header   | 表格标题  |
 |data.table.btnGroupForSelect   | 底部用来操作表格所选数据的按钮 |
 |data.table.btnGroupForSelect[].url    | ajax请求地址  |
@@ -30,6 +29,7 @@
     "message": "无数据",
     "status": 1,
     "data": {
+        "template": "list",
         "form": [{
             "title": "输入框",
             "value": "",
@@ -356,11 +356,12 @@
         }],
         "table": {
             "primaryKey": "uid",
-            "url": {
-                "list": "./mock/table",
-                "del": "./mock/success"
-            },
-            "btnGroupInRow": [{ "text": "新增", "icon": "edit", "path": "/home/x/add" }, { "text": "查看", "icon": "eye", "path": "/home/readonly" }],
+            "url": "./mock/table",
+            "btnGroupInRow": [
+                { "text": "删除", "icon": "remove", "url": "./mock/success", "type": "remove" },
+                { "text": "新增", "icon": "edit", "url": "/home/x/add", "type": "route" },
+                { "text": "查看", "icon": "eye", "url": "/home/readonly", "type": "route" }
+            ],
             "btnGroupForSelect": [{
                 "url": "./mock/success?remove",
                 "text": "删除所选",

@@ -1,11 +1,11 @@
 <template>
     <div class="view-login">
         <h2>登陆</h2>
-        <v-input class="mt15" v-model="userName" :opts="{placeholder: '请输入用户名'}"></v-input>
-        <v-input class="mt15" v-model="password" :opts="{placeholder: '请输入密码', type: 'password'}"></v-input>
-        <button @click="login" class="mt15 btn btn-lg btn-primary btn-block" type="submit">
+        <v-input class="v-input" v-model="userName" :opts="{placeholder: '请输入用户名'}" @keyup="login"></v-input>
+        <v-input class="v-input" v-model="password" :opts="{placeholder: '请输入密码', type: 'password'}" @keyup="login"></v-input>
+        <a @click="login" class="btn-login btn btn-lg btn-primary btn-block">
             <i class="fa fa-arrow-circle-right"></i> 登陆
-        </button>
+        </a>
     </div>
 </template>
 <script>
@@ -40,17 +40,21 @@ export default {
         /**
          * 登陆, 获取accessToken
          */
-        login() {
-            this.$store.dispatch('login', {
-                userName: this.userName,
-                password: this.password
-            }).then((res) => {
-                if (1 == res.status) {
-                    this.$router.push({path: '/home'});
-                } else {
-                    alert(123)
-                }
-            });
+        login(e) {
+            if(undefined == e.keyCode || 13 == e.keyCode) {
+                this.$store.dispatch('login', {
+                    userName: this.userName,
+                    password: this.password
+                }).then((res) => {
+                    if (1 == res.status) {
+                        this.$router.push({
+                            path: '/home'
+                        });
+                    } else {
+                        alert(res.message);
+                    }
+                });                
+            }
         }
     },
 
@@ -59,12 +63,15 @@ export default {
     }
 }
 </script>
-<style>
+<style scope lang="scss">
 .view-login {
     max-width: 320px;
     width: 100%;
     margin: 15% auto;
-    .mt15 {
+    .v-input {
+        margin-top: 15px;
+    }
+    .btn-login {
         margin-top: 15px;
     }
 }

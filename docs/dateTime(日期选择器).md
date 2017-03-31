@@ -6,7 +6,8 @@
 ### 数据说明
 |键名 |说明 |
 | ------------ | ------------ |
-|type| 必须为"dateTime"  |
+|is| 必须为"dateTime"  |
+|plusOptions| 第三发插件本身参数, 参照文档: https://chmln.github.io/flatpickr/options/ |
 |value| 默认值 |
 |name   | ajax字段名, 服务端接收参数名  |
 |column   | 对应bootstrap的栅格布局  |
@@ -16,11 +17,16 @@
 ### 数据示例
 ``` json
 {
-	"type": "dateTime",
+    "is": "dateTime",
+    "thirdPartyOptions": {
+        "dateFormat": "Y-m-d H:i:S",
+        "enableTime": true,
+        "time_24hr": true
+    },
 	"value": "2017-07-18 12:00:00",
 	"name": "timeValue",
     "column": [6, 4, 3, 3],
-    "placeholder": "请选择"
+    "placeholder": "请选择",
     "title": "日期选择器"
 }
 ```

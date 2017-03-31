@@ -10,7 +10,7 @@
 |title| 标题文字  |
 |name   | ajax字段名, 服务端接收参数名  |
 |column   | 对应bootstrap的栅格布局  |
-|type| 必须"checkboxGroup"  |
+|is| 必须"checkboxGroup"  |
 |value| 默认值  |
 |children   | 复选框, 内容对应单个复选框  |
 |children.label   | 当前复选框对应的名字  |
@@ -23,7 +23,7 @@
     "title": "复选框组",
     "name": "checkboxGroupValue",
     "column": [12, 12, 12, 12],
-    "type": "checkboxGroup",
+    "is": "checkboxGroup",
     "value": "11",
     "children": [{
                     "label": "苹果",

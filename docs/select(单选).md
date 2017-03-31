@@ -9,7 +9,7 @@
 |键名 |说明 |
 | ------------ | ------------ |
 |title| 标题文字  |
-|type| 必须"select"  |
+|is| 必须"select"  |
 |name   | ajax字段名, 服务端接收参数名  |
 |value   | 默认值, 对应children中的value, 如果没有默认值, 那么为null  |
 |column   | 对应bootstrap的栅格布局  |
@@ -23,7 +23,7 @@
 ``` json
 {
     "title": "单选",
-    "type": "select",
+    "is": "select",
     "name": "selectValue",
     "value": "3",
     "column": [6, 4, 3, 3],

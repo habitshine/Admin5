@@ -17,7 +17,7 @@
 ### 数据示例
 ``` json
 {
-	"type": "dateTime",
+    "type": "dateTime",
     "plusOptions": {
         "dateFormat": "Y-m-d H:i:S",
         "enableTime": true,

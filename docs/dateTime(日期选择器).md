@@ -18,7 +18,7 @@
 ``` json
 {
     "type": "dateTime",
-    "plusOptions": {
+    "thirdPartyOptions": {
         "dateFormat": "Y-m-d H:i:S",
         "enableTime": true,
         "time_24hr": true

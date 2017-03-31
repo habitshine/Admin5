@@ -28,7 +28,7 @@ export default {
     mounted() {
         this.fp = new Flatpickr(document.querySelector('.flatpickr'), {
             locale: zh,
-            ...this.opts.plusOptions,
+            ...this.opts.thirdPartyOptions,
             onChange: (selectedDates, dateStr)=> {
                 this.fp.close();
                 this.$emit('input', dateStr);

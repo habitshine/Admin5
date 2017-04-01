@@ -9,7 +9,7 @@
                 <form-layout v-if="1 == form.status">
                     <v-form v-model="formValues.body" :form="form.data.form"></v-form>
                     <template slot="btn-group">
-                        <a @click="back" class="btn btn-danger">
+                        <a @click="back" class="btn btn-default">
                             <i class="glyphicon glyphicon-return"></i> 返回
                         </a>
                         <a @click="submit" class="btn btn-primary">

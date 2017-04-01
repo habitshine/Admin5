@@ -16,7 +16,7 @@
                     <ul class="children" v-show="item.open">
                         <li v-for="subItem in item.children">
                             <router-link role="a" :to="subItem.route">
-                                {{subItem.text}}
+                                <i :class="['fa', 'fa-'+subItem.icon]"></i> {{subItem.text}}
                             </router-link>
                         </li>
                     </ul>
@@ -60,6 +60,8 @@ $fontColor: #777;
     box-shadow: 1px 0 3px rgba(0, 0, 0, .1);
     min-height: 100%;
     background: $bgColor;
+
+    // .router-link-active{background:#69c;}
     .caret {
         transition: all .3s;
     }

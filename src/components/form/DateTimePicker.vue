@@ -29,8 +29,7 @@ export default {
         this.fp = new Flatpickr(this.$el.children[0], {
             locale: zh,
             ...this.opts.thirdPartyOptions,
-            onChange: (selectedDates, dateStr)=> {
-                this.fp.close();
+            onClose: (selectedDates, dateStr)=> {
                 this.$emit('input', dateStr);
             }
         });

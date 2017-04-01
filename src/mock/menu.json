@@ -29,7 +29,8 @@
     "open": true,
     "children": [{
         "id": 10,
-        "text": "新增",
+        "text": "新增商品",
+        "icon": "plus",
         "route": {
             "path": "/home/goods/add"
         }

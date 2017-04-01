@@ -1,17 +1,13 @@
 <template>
-    <div class="edit-view">
+    <div class="add-view">
         <transition appear mode="out-in">
             <!-- 页面加载中 -->
             <v-spinner v-if="-1 == form.status">
             </v-spinner>
             <!-- 页面加载完毕 -->
             <div class="body" v-else>
-                <v-modal :show="modal.show" :width="'300px'" :afterClose="afterClose">
-                    <p>{{message}}</p>
-                </v-modal>
                 <form-layout v-if="1 == form.status">
-                    <v-form v-model="formValues.body" :form="form.data.form">
-                    </v-form>
+                    <v-form v-model="formValues.body" :form="form.data.form"></v-form>
                     <template slot="btn-group">
                         <a @click="back" class="btn btn-danger">
                             <i class="glyphicon glyphicon-return"></i> 返回
@@ -26,32 +22,17 @@
     </div>
 </template>
 <script>
-import FormLayout from '../components/layout/Form'
-import VSpinner from '../components/Spinner'
-import VModal from '../components/notice/Modal'
-import VForm from '../components/Form'
+import FormLayout from '../../components/layout/Form'
+import VSpinner from '../../components/Spinner'
+import VForm from '../../components/Form'
 
 export default {
-    name: 'editView',
-
-    props: {
-        url: {
-            type: String
-        }
-    },
+    name: 'addView',
 
     data() {
         return {
-            message: '', // 弹出框文字提示
-
-            modal: {
-                title: '系统提示',
-                mask: true,
-                width: '300px',
-                show: false,
-                btnClose: false
-            },
-            // 表单结果数据
+            baseUrl: './mock/addView',
+              // 表单结果数据
             formValues: {
                 accessToken: this.$store.state.loginModule.accessToken,
                 body: {}
@@ -65,7 +46,6 @@ export default {
     },
 
     created() {
-        
         this.httpGetBaseView(response => {
             this.form = response.data;
             this.setDefaultValue();
@@ -94,9 +74,8 @@ export default {
          * @param  {Function} cb 回调
          */
         httpGetBaseView(cb) {
-            axios.get(this.url, {
+            axios.get(this.baseUrl, {
                     params: {
-                        id: this.$route.query.id,
                         accessToken: this.$store.state.loginModule.accessToken
                     }
                 })
@@ -112,13 +91,13 @@ export default {
          * 提交
          */
         submit() {
-            // http
-            axios.put(this.form.data.url.submit, qs.stringify({
-                    id: this.$route.query.id,
+            var self = this;
+            axios.post(this.form.data.url.submit, qs.stringify({
                     accessToken: this.$store.state.loginModule.accessToken,
                     ...this.formValues.body
                 }))
                 .then((response) => {
+                    // this.$store.commit('notify', {type: 'success', text: response.data.message}); 
                     this.$store.commit('alert', {
                         width: '200px',
                         show: true,
@@ -147,8 +126,7 @@ export default {
     components: {
         VSpinner,
         FormLayout,
-        VForm,
-        VModal
+        VForm
     },
 
     activated() {}

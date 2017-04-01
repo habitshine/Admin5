@@ -39,38 +39,11 @@ export default {
         this.$store.dispatch('getMenuList', this.$store.state.loginModule.accessToken).then(response => {
             if (1 == response.status) {
                 this.menu = response.data.menu;
-                this.$store.commit('setPathMap', this.mapPath(this.menu));
             }
         });
     },
 
     methods: {
-        mapPath(menuData) {
-            var pathMap = {};
-            menuData.forEach(menuItem => {
-                // 一级菜单
-                if (undefined != menuItem.templateAjaxUrl) {
-                    pathMap[menuItem.path] = {
-                        template: menuItem.template,
-                        url: menuItem.templateAjaxUrl
-                    }
-                }
-
-                // 二级菜单
-                if (undefined != menuItem.children) {
-                    menuItem.children.forEach(subMenuItem => {
-                        if (undefined != subMenuItem.templateAjaxUrl) {
-                            pathMap[subMenuItem.route.path] = {
-                                template: subMenuItem.template,
-                                url: subMenuItem.templateAjaxUrl
-                            }
-                        }
-                    })
-                }
-            });
-            return pathMap;
-        },
-
         toggle(item) {
             item.open = !item.open;
         }

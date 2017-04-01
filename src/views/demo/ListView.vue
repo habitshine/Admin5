@@ -15,16 +15,12 @@
                 </filter-panel>
                 <div class="btn-group" style="margin-top:45px;">
                     <template v-for="btn in viewData.data.table.btnGroupForTable">
-
                         <a v-if="'ajax' == btn.type" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
                             <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
                         </a>
-    
                         <a v-else @click="changeView(btn.path, btn.url, btn.template)" class="btn  btn-default">
                             <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
                         </a>
-
-
                     </template>
                 </div>
                 <!-- 表格 -->
@@ -63,25 +59,16 @@
     </div>
 </template>
 <script>
-import FilterPanel from '../components/layout/Filter'
-import FrameLayout from '../components/layout/Frame'
-import VBreadcrumb from '../components/Breadcrumb'
-import VSpinner from '../components/Spinner'
-import VTable from '../components/Table'
-import VPage from '../components/Page'
-import VForm from '../components/Form'
-
-import VPanel from '../components/layout/Panel'
-
+import FilterPanel from '../../components/layout/Filter'
+import FrameLayout from '../../components/layout/Frame'
+import VBreadcrumb from '../../components/Breadcrumb'
+import VSpinner from '../../components/Spinner'
+import VTable from '../../components/Table'
+import VPage from '../../components/Page'
+import VForm from '../../components/Form'
 
 export default {
     name: 'listView',
-
-    props: {
-        url: {
-            type: String
-        }
-    },
 
     components: {
         VBreadcrumb,
@@ -89,13 +76,13 @@ export default {
         FrameLayout,
         VSpinner,
         VTable,
-        VPanel,
         VPage,
-        VForm,
+        VForm
     },
 
     data() {
         return {
+            baseUrl: './mock/listView',
             // 已勾选数据
             formValues: {
                 accessToken: this.$store.state.loginModule.accessToken,
@@ -187,7 +174,7 @@ export default {
          * @param  {Function} cb
          */
         httpGetBaseView(cb) {
-            axios.get(this.url, {
+            axios.get(this.baseUrl, {
                     params: {
                         accessToken: this.$store.state.loginModule.accessToken,
                     }

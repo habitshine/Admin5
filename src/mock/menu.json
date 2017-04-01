@@ -6,13 +6,20 @@
     "children": [{
         "id": 11,
         "text": "商品列表",
-        "template": "list",
-        "templateAjaxUrl": "./mock/listView",
         "route": {
-            "path": "/home/x/list",
+            "path": "/home/demo",
             "query": {
                 "page": 1,
                 "limit": 5
+            }
+        }
+    }, {
+        "id": 19,
+        "text": "商品编辑",
+        "route": {
+            "path": "/home/demo/edit",
+            "query": {
+                "id": 1
             }
         }
     }]
@@ -23,10 +30,8 @@
     "children": [{
         "id": 10,
         "text": "新增",
-        "template": "add",
-        "templateAjaxUrl": "./mock/addView",
         "route": {
-            "path": "/home/x/add"
+            "path": "/home/demo/add"
         }
     }, {
         "id": 12,

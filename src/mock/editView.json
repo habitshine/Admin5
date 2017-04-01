@@ -43,8 +43,7 @@
         "is": "input",
         "type": "input",
         "value": "",
-        "icon": "",
-        "name": "inputValue",
+        "name": "inputValue1",
         "column": [
           12,
           12,
@@ -58,8 +57,7 @@
         "is": "input",
         "type": "input",
         "value": "",
-        "icon": "",
-        "name": "inputValue",
+        "name": "inputValue2",
         "column": [
           12,
           12,
@@ -73,8 +71,7 @@
         "is": "input",
         "type": "input",
         "value": "",
-        "icon": "",
-        "name": "inputValue",
+        "name": "inputValue3",
         "column": [
           12,
           12,

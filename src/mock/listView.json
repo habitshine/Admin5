@@ -2,7 +2,6 @@
     "message": "无数据",
     "status": 1,
     "data": {
-        "template": "list",
         "breadcrumb": [{ "icon": "file-o", "text": "世界" }, { "icon": "file-o", "text": "中国" }, { "icon": "file-o", "text": "农村" }],
         "form": [{
             "title": "输入框",
@@ -344,25 +343,20 @@
             }, {
                 "text": "编辑",
                 "icon": "edit",
-                "path": "/home/x/edit",
-                "url": "./mock/editView",
-                "type": "route",
-                "template": "edit"
+                "path": "/home/demo/edit",
+                "type": "route"
             }, {
                 "text": "查看",
                 "icon": "eye",
                 "path": "/home/readonly",
                 "url": "./mock/editView",
-                "type": "route",
-                "template": "edit"
+                "type": "route"
             }],
             "btnGroupForTable": [{
                 "text": "添加数据",
                 "icon": "plus",
-                "path": "/home/x/add",
-                "url": "./mock/addView",
-                "type": "route",
-                "template": "add"
+                "path": "/home/demo/add",
+                "type": "route"
             }, {
                 "url": "./mock/success?remove",
                 "text": "删除所选",

@@ -17,11 +17,20 @@
 |data.table.btnGroupInRow[].icon   | 对应fontAsome图标名  |
 |data.table.btnGroupInRow[].url   | ajax请求地址/路由地址  |
 |data.table.btnGroupInRow[].type   | 按钮类型, 分为删除功能: 'remove';跳转路由功能: 'route'  |
+|data.table.btnGroupInRow[].url    | 当type为'route'时, 对应页面的初始化数据的ajax请求地址  |
+|data.table.btnGroupInRow[].path    | 路由地址  |
+|data.table.btnGroupInRow[].template    | 页面对应的模板'add/list/edit'等  |
+
+### 数据示例
 |data.table.header   | 表格标题  |
-|data.table.btnGroupForSelect   | 底部用来操作表格所选数据的按钮 |
-|data.table.btnGroupForSelect[].url    | ajax请求地址  |
-|data.table.btnGroupForSelect[].icon    | 对应fontAsome图标名,如'plus'代表加号   |
-|data.table.btnGroupForSelect[].text    | 按钮文字  |
+|data.table.btnGroupForTable   | 用来操作表格所选数据的按钮 |
+|data.table.btnGroupForTable[].url    | ajax请求地址  |
+|data.table.btnGroupForTable[].icon    | 对应fontAsome图标名,如'plus'代表加号   |
+|data.table.btnGroupForTable[].text    | 按钮文字  |
+|data.table.btnGroupForTable[].type   | 按钮类型, 分为ajax功能: 'ajax';跳转路由功能: 'route'  |
+|data.table.btnGroupForTable[].url    | 当type为'route'时, 对应页面的初始化数据的ajax请求地址  |
+|data.table.btnGroupForTable[].path    | 路由地址  |
+|data.table.btnGroupForTable[].template    | 页面对应的模板'add/list/edit'等  |
 
 ### 数据示例
 ``` json
@@ -30,11 +39,12 @@
     "status": 1,
     "data": {
         "template": "list",
+        "breadcrumb": [{ "icon": "file-o", "text": "世界" }, { "icon": "file-o", "text": "中国" }, { "icon": "file-o", "text": "农村" }],
         "form": [{
             "title": "输入框",
-            "value": "",
+            "value": "123",
             "name": "inputValue",
-            "type": "input",
+            "is": "input",
             "placeholder": "输入吧少年",
             "column": [
                 12,
@@ -53,7 +63,7 @@
                 6,
                 6
             ],
-            "type": "checkboxGroup",
+            "is": "checkboxGroup",
             "children": [{
                 "label": "苹果",
                 "value": 11,
@@ -77,7 +87,7 @@
                 3,
                 3
             ],
-            "type": "select",
+            "is": "select",
             "placeholder": "请选择",
             "children": [{
                 "title": "A组",
@@ -144,7 +154,7 @@
                 3
             ],
             "value": null,
-            "type": "selectMulit",
+            "is": "selectMulit",
             "placeholder": "请选择",
             "children": [{
                 "title": "A组",
@@ -211,7 +221,12 @@
                 3,
                 3
             ],
-            "type": "dateTime",
+            "is": "dateTime",
+            "thirdPartyOptions": {
+                "dateFormat": "Y-m-d H:i:S",
+                "enableTime": true,
+                "time_24hr": true
+            },
             "placeholder": "请选择"
         }, {
             "name": "selectMulitValue",
@@ -222,7 +237,7 @@
                 3,
                 3
             ],
-            "type": "selectMulit",
+            "is": "selectMulit",
             "value": null,
             "placeholder": "请选择",
             "children": [{
@@ -277,7 +292,7 @@
         }, {
             "title": "单选框组",
             "name": "radioGroupValue",
-            "type": "radioGroup",
+            "is": "radioGroup",
             "value": 11,
             "column": [
                 12,
@@ -308,7 +323,7 @@
                 8,
                 8
             ],
-            "type": "linkage",
+            "is": "linkage",
             "placeholder": "请选择",
             "children": [{
                 "label": "一级",
@@ -345,7 +360,7 @@
         }, {
             "title": "评分组件",
             "name": "rateStarValue",
-            "type": "rateStar",
+            "is": "rateStar",
             "value": 3,
             "column": [
                 12,
@@ -357,28 +372,53 @@
         "table": {
             "primaryKey": "uid",
             "url": "./mock/table",
-            "btnGroupInRow": [
-                { "text": "删除", "icon": "remove", "url": "./mock/success", "type": "remove" },
-                { "text": "新增", "icon": "edit", "url": "/home/x/add", "type": "route" },
-                { "text": "查看", "icon": "eye", "url": "/home/readonly", "type": "route" }
-            ],
-            "btnGroupForSelect": [{
+            "btnGroupInRow": [{
+                "text": "删除",
+                "icon": "remove",
+                "url": "./mock/success",
+                "type": "remove"
+            }, {
+                "text": "编辑",
+                "icon": "edit",
+                "path": "/home/x/edit",
+                "url": "./mock/editView",
+                "type": "route",
+                "template": "edit"
+            }, {
+                "text": "查看",
+                "icon": "eye",
+                "path": "/home/readonly",
+                "url": "./mock/editView",
+                "type": "route",
+                "template": "edit"
+            }],
+            "btnGroupForTable": [{
+                "text": "添加数据",
+                "icon": "plus",
+                "path": "/home/x/add",
+                "url": "./mock/addView",
+                "type": "route",
+                "template": "add"
+            }, {
                 "url": "./mock/success?remove",
                 "text": "删除所选",
-                "icon": "remove"
+                "icon": "remove",
+                "type": "ajax"
             }, {
                 "url": "./mock/success?toggle",
                 "text": "启用禁用",
-                "icon": "toggle-on"
+                "icon": "toggle-on",
+                "type": "ajax"
             }, {
                 "url": "./mock/success?reset",
                 "text": "设置为休息",
-                "icon": "toggle-off"
+                "icon": "toggle-off",
+                "type": "ajax"
             }],
             "header": [{
                 "text": "用户id",
                 "key": "uid",
-                "icon": "user"
+                "icon": "user-circle-o"
             }, {
                 "text": "标题",
                 "key": "title",
@@ -395,5 +435,4 @@
         }
     }
 }
-
 ```

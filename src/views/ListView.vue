@@ -1,30 +1,31 @@
 <template>
     <div class="list-view">
         <transition appear mode="out-in">
-
             <template v-if="-1 == viewData.status">
                 <v-spinner></v-spinner>
             </template>
             <div v-else>
-
-
-
-
                 <!-- 面包屑 -->
                 <v-breadcrumb v-if="undefined != viewData.data.breadcrumb" :value="viewData.data.breadcrumb"></v-breadcrumb>
-
                 <!-- 过滤条件 -->
                 <filter-panel v-if="1 == viewData.status && undefined != viewData.data.form" @submit="filter" @reset="reset">
                     <!-- 表单集合 -->
                     <v-form v-model="formValues.filter" :form="viewData.data.form">
                     </v-form>
                 </filter-panel>
-
-
                 <div class="btn-group" style="margin-top:45px;">
-                    <a v-for="btn in viewData.data.table.btnGroupForSelect" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
-                        <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
-                    </a>
+                    <template v-for="btn in viewData.data.table.btnGroupForTable">
+
+                        <a v-if="'ajax' == btn.type" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
+                            <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
+                        </a>
+    
+                        <a v-else @click="changeView(btn.path, btn.url, btn.template)" class="btn  btn-default">
+                            <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
+                        </a>
+
+
+                    </template>
                 </div>
                 <!-- 表格 -->
                 <v-table v-model="table.ids" style="margin-top:15px" :primaryKey="table.primaryKey" :table="table.data.list" :status="table.status" :message="table.message" :activePrimaryKey="table.activePrimaryKey" :action="table.action">
@@ -317,11 +318,19 @@ export default {
             }
         },
 
-        changeView(path, url, template, id){
+        changeView(path, url, template, id) {
             var pathMap = this.$store.state.pathMap.map
-            pathMap[path] = {template, url};
+            pathMap[path] = {
+                template,
+                url
+            };
             this.$store.commit('setPathMap', pathMap);
-            this.$router.push({path, query: {id}});
+            this.$router.push({
+                path,
+                query: {
+                    id
+                }
+            });
         }
     },
 

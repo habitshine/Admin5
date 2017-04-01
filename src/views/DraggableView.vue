@@ -37,140 +37,168 @@
                             {
                                 "name": "前台接待客户满意度type0",
                                 "detail":"(接待不满意客户/接待总客户数)*100%",
-                                "order": 1,
+                                "id": 0,
                                 "fixed": false,
                                 "type":0
                             },
                             {
                                 "name": "前厅管理有效性type0",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 2,
+                                "id": 1,
                                 "fixed": false,
                                 "type":0
                             },
                             {
                                 "name": "前台接待客户满意度type000000",
                                 "detail":"(接待不满意客户/接待总客户数)*100%",
-                                "order": 1,
+                                "id": 2,
                                 "fixed": false,
                                 "type":0
                             },
                             {
                                 "name": "前厅管理有效性type0000777799",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 2,
+                                "id": 3,
                                 "fixed": false,
                                 "type":0
                             },
                             {
                                 "name": "前台接待客户满意度type1",
                                 "detail":"(接待不满意客户/接待总客户数)*100%",
-                                "order": 3,
+                                "id": 4,
+                                "fixed": false,
+                                "type":1
+                            },
+                            {
+                                "name": "前台接待客户满意度type1",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "id": 4,
+                                "fixed": false,
+                                "type":1
+                            },
+                            {
+                                "name": "前台接待客户满意度type1",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "id": 4,
+                                "fixed": false,
+                                "type":1
+                            },
+                            {
+                                "name": "前台接待客户满意度type1",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "id": 4,
+                                "fixed": false,
+                                "type":1
+                            },
+                            {
+                                "name": "前台接待客户满意度type1",
+                                "detail":"(接待不满意客户/接待总客户数)*100%",
+                                "id": 4,
                                 "fixed": false,
                                 "type":1
                             },
                             {
                                 "name": "前厅管理有效性type1",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 4,
+                                "id": 5,
                                 "fixed": false,
                                 "type":1
                             },
                             {
                                 "name": "前台接待客户满意度type2",
                                 "detail":"(接待不满意客户/接待总客户数)*100%",
-                                "order": 99,
+                                "id": 6,
                                 "fixed": false,
                                 "type":2
                             },
                             {
                                 "name": "前厅管理有效性type2",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 98,
+                                "id": 7,
                                 "fixed": false,
                                 "type":2
                             },
                             {
                                 "name": "前台接待客户满意度type22",
                                 "detail":"(接待不满意客户/接待总客户数)*100%",
-                                "order": 97,
+                                "id": 8,
                                 "fixed": false,
                                 "type":2
                             },
                             {
                                 "name": "前厅管理有效性type22",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 96,
+                                "id": 9,
                                 "fixed": false,
                                 "type":2
                             },
                             {
                                 "name": "前台接待客户满意度type3",
                                 "detail":"(接待不满意客户/接待总客户数)*100%",
-                                "order": 7,
+                                "id": 10,
                                 "fixed": false,
                                 "type":3
                             },
                             {
                                 "name": "前台接待客户满意度type33",
                                 "detail":"(接待不满意客户/接待总客户数)*100%",
-                                "order": 7,
+                                "id": 11,
                                 "fixed": false,
                                 "type":3
                             },
                             {
                                 "name": "前厅管理有效性type3",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 8,
+                                "id": 12,
                                 "fixed": false,
                                 "type":3
                             },
                             {
                                 "name": "前台接待客户满意度type4",
                                 "detail":"(接待不满意客户/接待总客户数)*100%",
-                                "order": 9,
+                                "id": 13,
                                 "fixed": false,
                                 "type":4
                             },
                             {
                                 "name": "前厅管理有效性type4",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 10,
+                                "id": 14,
                                 "fixed": false,
                                 "type":4
                             },
                             {
                                 "name": "前厅管理有效性type5",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 11,
+                                "id": 15,
                                 "fixed": false,
                                 "type":5
                             },
                             {
                                 "name": "前厅管理有效性type6",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 12,
+                                "id": 16,
                                 "fixed": false,
                                 "type":6
                             },
                             {
                                 "name": "前厅管理有效性type7",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 13,
+                                "id": 17,
                                 "fixed": false,
                                 "type":7
                             },
                             {
                                 "name": "前厅管理有效性type8",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 14,
+                                "id": 18,
                                 "fixed": false,
                                 "type":8
                             },
                             {
                                 "name": "前厅管理有效性type9",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 15,
+                                "id": 19,
                                 "fixed": false,
                                 "type":9
                             },
@@ -180,7 +208,7 @@
                             {
                                 "name": "前厅管理有效性type9",
                                 "detail":"一定周期内工作出错率低于规定比例",
-                                "order": 1,
+                                "id": 20,
                                 "fixed": false,
                                 "type":9
                             }

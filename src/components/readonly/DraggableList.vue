@@ -20,12 +20,12 @@
                     :options="dragOptions"
                     :move="onMove"
                     @start="isDragging=true"
-                    @end="isDragging=false">
+                    @end="isDragging=false" >
                 <transition-group
                         type="transition"
                         class="list-group"
                         :name="'flip-list'" tag="ul">
-                    <li class="list-group-item" v-if="element.type==active" v-for="element in list" :key="element.order">
+                    <li class="list-group-item" v-show="element.type==active" v-for="element in list" :key="element.id">
                         <div class="drag-contain">
                             <h5>
                                 <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
@@ -49,7 +49,7 @@
             </div>
             <draggable class="over-flow-scroll" element="div" v-model="list2" :options="dragOptions" :move="onMove">
                 <transition-group name="no" type="transition" class="list-group" tag="ul" ref='myUl'>
-                    <li class="list-group-item" v-for="(element,index) in list2" :key="element.order">
+                    <li class="list-group-item" v-for="(element,index) in list2" :key="element.id">
                         <div class="drag-contain-new" style="position: relative">
                             <h5>
                                 <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
@@ -162,7 +162,7 @@
         min-height: 20px;
     }
     .over-flow-scroll{
-        max-height: 416px;
+        height: 416px;
         overflow-y: auto;
     }
     .pt-1{

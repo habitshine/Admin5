@@ -12,6 +12,10 @@
 |data.table   | 表格数据  |
 |data.table.primaryKey   | 主键名,比如'uid'  |
 |data.table.url   | 列表数据接口地址  |
+|data.table.header   | 表格标题栏  |
+|data.table.header[].text   | 表格标题  |
+|data.table.header[].key   | 数据库中该字段对应的键名  |
+|data.table.header[].icon  | 表头图标  |
 |data.table.btnGroupInRow   | 行内的按钮  |
 |data.table.btnGroupInRow[].text   | 按钮文字  |
 |data.table.btnGroupInRow[].icon   | 对应fontAsome图标名  |
@@ -20,9 +24,6 @@
 |data.table.btnGroupInRow[].url    | 当type为'route'时, 对应页面的初始化数据的ajax请求地址  |
 |data.table.btnGroupInRow[].path    | 路由地址  |
 |data.table.btnGroupInRow[].template    | 页面对应的模板'add/list/edit'等  |
-
-### 数据示例
-|data.table.header   | 表格标题  |
 |data.table.btnGroupForTable   | 用来操作表格所选数据的按钮 |
 |data.table.btnGroupForTable[].url    | ajax请求地址  |
 |data.table.btnGroupForTable[].icon    | 对应fontAsome图标名,如'plus'代表加号   |

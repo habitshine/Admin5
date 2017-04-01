@@ -7,7 +7,7 @@
         "id": 11,
         "text": "商品列表",
         "route": {
-            "path": "/home/demo",
+            "path": "/home/goods/list",
             "query": {
                 "page": 1,
                 "limit": 5
@@ -17,7 +17,7 @@
         "id": 19,
         "text": "商品编辑",
         "route": {
-            "path": "/home/demo/edit",
+            "path": "/home/goods/edit",
             "query": {
                 "id": 1
             }
@@ -31,7 +31,7 @@
         "id": 10,
         "text": "新增",
         "route": {
-            "path": "/home/demo/add"
+            "path": "/home/goods/add"
         }
     }, {
         "id": 12,

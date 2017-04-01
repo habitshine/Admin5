@@ -31,7 +31,6 @@ export default {
 
     data() {
         return {
-            baseUrl: './mock/addView',
               // 表单结果数据
             formValues: {
                 accessToken: this.$store.state.loginModule.accessToken,
@@ -74,7 +73,8 @@ export default {
          * @param  {Function} cb 回调
          */
         httpGetBaseView(cb) {
-            axios.get(this.baseUrl, {
+            var url = [API_ROOT, this.$route.params[0], this.$route.params[1]].join('/');
+            axios.get(url, {
                     params: {
                         accessToken: this.$store.state.loginModule.accessToken
                     }

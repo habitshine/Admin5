@@ -191,6 +191,23 @@
                 "time_24hr": true
             },
             "placeholder": "请选择"
+        },{
+            "title": "日期选择器",
+            "value": null,
+            "name": "timeValue1",
+            "column": [
+                12,
+                4,
+                3,
+                3
+            ],
+            "is": "dateTime",
+            "thirdPartyOptions": {
+                "dateFormat": "Y-m-d H:i:S",
+                "enableTime": true,
+                "time_24hr": true
+            },
+            "placeholder": "请选择"
         }, {
             "name": "selectMulitValue",
             "title": "多选列表",
@@ -343,7 +360,7 @@
             }, {
                 "text": "编辑",
                 "icon": "edit",
-                "path": "/home/demo/edit",
+                "path": "/home/goods/edit",
                 "type": "route"
             }, {
                 "text": "查看",
@@ -355,7 +372,7 @@
             "btnGroupForTable": [{
                 "text": "添加数据",
                 "icon": "plus",
-                "path": "/home/demo/add",
+                "path": "/home/goods/add",
                 "type": "route"
             }, {
                 "url": "./mock/success?remove",

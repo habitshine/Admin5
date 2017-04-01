@@ -18,9 +18,9 @@
                         <a v-if="'ajax' == btn.type" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
                             <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
                         </a>
-                        <router-link v-else :to="{path: btn.path}" class="btn btn-default">
+                        <a v-else @click="changeView(btn.path, btn.url, btn.template)" class="btn  btn-default">
                             <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
-                        </router-link>
+                        </a>
                     </template>
                 </div>
                 <!-- 表格 -->
@@ -44,9 +44,9 @@
                                 <a v-if="'remove' == btn.type" class="btn btn-xs btn-link" @click="remove(btn.url, props.primaryKey)">
                                     <i class="fa fa-remove"></i> 删除
                                 </a>
-                                <router-link v-else :to="{path: btn.path, query: {id: props.primaryKey}}" class="btn btn-xs btn-link">
+                                <a v-else @click="changeView(btn.path, btn.url, btn.template, props.row.id)" class="btn btn-xs btn-link">
                                     <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
-                                </router-link>
+                                </a>
                             </template>
                         </td>
                     </template>
@@ -68,7 +68,7 @@ import VPage from '../../components/Page'
 import VForm from '../../components/Form'
 
 export default {
-    name: 'listView',
+    name: 'user',
 
     components: {
         VBreadcrumb,
@@ -82,6 +82,7 @@ export default {
 
     data() {
         return {
+            baseUrl: './mock',
             // 已勾选数据
             formValues: {
                 accessToken: this.$store.state.loginModule.accessToken,
@@ -118,7 +119,6 @@ export default {
     },
 
     created() {
-
         // 渲染: 条件筛选
         this.httpGetBaseView(response => {
             this.viewData = response.data;
@@ -174,9 +174,7 @@ export default {
          * @param  {Function} cb
          */
         httpGetBaseView(cb) {
-
-            var url = [API_ROOT, this.$route.params[0]].join('/');
-            axios.get(url, {
+            axios.get(this.baseUrl, {
                     params: {
                         accessToken: this.$store.state.loginModule.accessToken,
                     }
@@ -305,6 +303,21 @@ export default {
                     }
                 });
             }
+        },
+
+        changeView(path, url, template, id) {
+            var pathMap = this.$store.state.pathMap.map
+            pathMap[path] = {
+                template,
+                url
+            };
+            this.$store.commit('setPathMap', pathMap);
+            this.$router.push({
+                path,
+                query: {
+                    id
+                }
+            });
         }
     },
 

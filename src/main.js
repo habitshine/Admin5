@@ -1,11 +1,11 @@
 // 开发/上线阶段全局变量
 // http://113.6.252.23:6688/tools/vue?page=1&limit=15
 if(process.env.NODE_ENV == 'production') {
-    window.ROOT_URL = 'http://113.6.252.23:6688';
-    window.MENU_URL  = [window.ROOT_URL , '/personal/menu'].join('');
-    window.LOGIN_URL = [window.ROOT_URL , '/oauth'].join('');  
+    window.API_ROOT = 'http://113.6.252.23:6688';
+    window.MENU_URL  = [window.API_ROOT , '/personal/menu'].join('');
+    window.LOGIN_URL = [window.API_ROOT , '/oauth'].join('');  
 } else {
-    window.ROOT_URL = '/mock';
+    window.API_ROOT = './mock';
     window.MENU_URL = './mock/menu';
     window.LOGIN_URL = './mock/login'    
 }

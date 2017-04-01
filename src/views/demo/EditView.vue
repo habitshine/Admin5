@@ -36,8 +36,6 @@ export default {
 
     data() {
         return {
-            baseUrl: './mock/editView',
-
             message: '', // 弹出框文字提示
 
             modal: {
@@ -90,7 +88,8 @@ export default {
          * @param  {Function} cb 回调
          */
         httpGetBaseView(cb) {
-            axios.get(this.baseUrl, {
+            var url = [API_ROOT, this.$route.params[0], this.$route.params[1]].join('/');
+            axios.get(url, {
                     params: {
                         id: this.$route.query.id,
                         accessToken: this.$store.state.loginModule.accessToken

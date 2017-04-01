@@ -39,7 +39,7 @@ export var routes = [{
     },
     name: 'editView'
 }, {
-    path: '*/(list|index|show)*',
+    path: '*/(list|index|show|statistics)*',
     component: resolve => {
         require.ensure(['../views/demo/ListView'], () => {
             resolve(require('../views/demo/ListView'))

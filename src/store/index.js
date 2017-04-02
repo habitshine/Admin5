@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 // 模块
 import menuModul from './modules/menu.js'
-import pathMap from './modules/pathMap.js'
 import loginModule from './modules/login.js'
 import dialogModule from './modules/dialog.js'
 
@@ -12,7 +11,6 @@ export default new Vuex.Store({
 	actions: require('./actions.js'),
 
     modules: {
-        pathMap,
         menuModul,
         loginModule,
         dialogModule

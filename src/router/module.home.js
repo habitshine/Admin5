@@ -25,24 +25,24 @@ export var routes = [{
 }, {
     path: '*/(add|auth)+',
     component: resolve => {
-        require.ensure(['../views/demo/AddView'], () => {
-            resolve(require('../views/demo/AddView'))
+        require.ensure(['../views/template/AddView'], () => {
+            resolve(require('../views/template/AddView'))
         });
     },
     name: 'addView'
 }, {
     path: '*/(edit|set|save)+',
     component: resolve => {
-        require.ensure(['../views/demo/EditView'], () => {
-            resolve(require('../views/demo/EditView'))
+        require.ensure(['../views/template/EditView'], () => {
+            resolve(require('../views/template/EditView'))
         });
     },
     name: 'editView'
 }, {
     path: '*/(list|index|show|statistics)*',
     component: resolve => {
-        require.ensure(['../views/demo/ListView'], () => {
-            resolve(require('../views/demo/ListView'))
+        require.ensure(['../views/template/ListView'], () => {
+            resolve(require('../views/template/ListView'))
         });
     },
     name: 'listView'

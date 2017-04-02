@@ -1,4 +1,4 @@
-// import * as types from '../mutation-types'
+import { SAVE_ACCESS_TOKEN, SAVE_USER_NAME, EXIT } from '../mutation-types.js'
 import axios from 'axios';
 import qs from 'qs';
 // initial state
@@ -32,31 +32,23 @@ const mutations = {
     /**
      * 存储accessToken
      */
-    saveAccessToken(state, accessToken) {
+    [SAVE_ACCESS_TOKEN](state, accessToken) {
         state.accessToken = accessToken;
         localStorage.setItem('accessToken', accessToken);
     },
     /**
      * 存储userName
      */
-    saveUserName(state, userName) {
+    [SAVE_USER_NAME](state, userName) {
         state.userName = userName;
         localStorage.setItem('userName', userName);
     },
     /**
      * 退出登陆
      */
-    exit(state) {
+    [EXIT](state) {
         state.accessToken = '';
         localStorage.removeItem('accessToken');
-    },
-
-    setUserName(state, userName) {
-        state.userName = userName
-    },
-
-    getAccessToken() {
-        state.accessToken = localStorage.getItem('accessToken');
     }
 };
 

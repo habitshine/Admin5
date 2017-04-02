@@ -1,5 +1,6 @@
+import { APP_CONFIRM, APP_NOTIFY, APP_ALERT, APP_PROMPT } from '../mutation-types.js'
 const state = {
-    notifyList: [
+    [APP_NOTIFY]: [
         // {type: 'success', text: '恭喜您,成功了!', holdTime: 3000},
         // {type: 'default', text: 'default!', holdTime: 3000},
         // {type: 'primary', text: 'primary!', holdTime: 3000},
@@ -8,7 +9,7 @@ const state = {
         // {type: 'warning', text: 'warning!', holdTime: 3000}
     ],
 
-    confirm: {
+    [APP_CONFIRM]: {
         title: '提示?',
         show: false,
         holdTime: -1,
@@ -17,7 +18,7 @@ const state = {
         afterClose() {}
     },
 
-    alert: {
+    [APP_ALERT]: {
         title: '提示',
         show: false,
         holdTime: -1,
@@ -26,7 +27,7 @@ const state = {
         afterClose() {}
     },
 
-    prompt: {
+    [APP_PROMPT]: {
         show: true
     }
 };

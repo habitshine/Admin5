@@ -4,5 +4,6 @@ export const APP_PROMPT = 'prompt'
 export const APP_ALERT = 'alert'
 
 export const SAVE_ACCESS_TOKEN = 'saveAccessToken'
+// export const GET_ACCESS_TOKEN = 'getAccessToken'
 export const SAVE_USER_NAME = 'saveUserName'
 export const EXIT = 'exit'

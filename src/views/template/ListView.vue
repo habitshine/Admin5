@@ -282,23 +282,22 @@ export default {
          */
         httpRequestForSelect(url) {
             if (0 < this.table.ids.length) {
-                var self = this;
                 this.$store.commit('confirm', {
                     show: true,
                     text: '您确定执行该操作吗?',
-                    ok() {
+                    ok: () => {
                         axios.delete(url, {
                             params: {
 
-                                [self.table.primaryKey]: self.table.ids
+                                [this.table.primaryKey]: this.table.ids
                             }
                         }).then(response => {
-                            self.$store.commit('alert', {
+                            this.$store.commit('alert', {
                                 holdTime: 1000,
                                 show: true,
                                 text: response.data.message
                             });
-                            self.httpGetTable();
+                            this.httpGetTable();
                         }).catch((error) => {
                             syslog(error);
                         });

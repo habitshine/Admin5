@@ -31,7 +31,6 @@
 |data.table.btnGroupForTable[].type   | 按钮类型, 分为ajax功能: 'ajax';跳转路由功能: 'route'  |
 |data.table.btnGroupForTable[].url    | 当type为'route'时, 对应页面的初始化数据的ajax请求地址  |
 |data.table.btnGroupForTable[].path    | 路由地址  |
-|data.table.btnGroupForTable[].template    | 页面对应的模板'add/list/edit'等  |
 
 ### 数据示例
 ``` json
@@ -39,7 +38,6 @@
     "message": "无数据",
     "status": 1,
     "data": {
-        "template": "list",
         "breadcrumb": [{ "icon": "file-o", "text": "世界" }, { "icon": "file-o", "text": "中国" }, { "icon": "file-o", "text": "农村" }],
         "form": [{
             "title": "输入框",
@@ -49,7 +47,7 @@
             "placeholder": "输入吧少年",
             "column": [
                 12,
-                4,
+                12,
                 3,
                 3
             ],
@@ -229,6 +227,23 @@
                 "time_24hr": true
             },
             "placeholder": "请选择"
+        },{
+            "title": "日期选择器",
+            "value": null,
+            "name": "timeValue1",
+            "column": [
+                12,
+                4,
+                3,
+                3
+            ],
+            "is": "dateTime",
+            "thirdPartyOptions": {
+                "dateFormat": "Y-m-d H:i:S",
+                "enableTime": true,
+                "time_24hr": true
+            },
+            "placeholder": "请选择"
         }, {
             "name": "selectMulitValue",
             "title": "多选列表",
@@ -297,9 +312,9 @@
             "value": 11,
             "column": [
                 12,
+                12,
                 4,
-                3,
-                3
+                4
             ],
             "children": [{
                 "label": "苹果",
@@ -381,25 +396,20 @@
             }, {
                 "text": "编辑",
                 "icon": "edit",
-                "path": "/home/x/edit",
-                "url": "./mock/editView",
-                "type": "route",
-                "template": "edit"
+                "path": "/home/goods/edit",
+                "type": "route"
             }, {
                 "text": "查看",
                 "icon": "eye",
                 "path": "/home/readonly",
                 "url": "./mock/editView",
-                "type": "route",
-                "template": "edit"
+                "type": "route"
             }],
             "btnGroupForTable": [{
                 "text": "添加数据",
                 "icon": "plus",
-                "path": "/home/x/add",
-                "url": "./mock/addView",
-                "type": "route",
-                "template": "add"
+                "path": "/home/goods/add",
+                "type": "route"
             }, {
                 "url": "./mock/success?remove",
                 "text": "删除所选",
@@ -436,4 +446,5 @@
         }
     }
 }
+
 ```

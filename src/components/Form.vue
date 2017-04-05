@@ -27,6 +27,7 @@ import v_linkage from '../components/form/Linkage'
 import v_upload from '../components/form/Upload'
 import v_editor from '../components/form/Editor'
 import v_select from '../components/form/Select'
+import v_number from '../components/form/Number'
 import v_input from '../components/form/Input'
 
 export default {
@@ -78,7 +79,8 @@ export default {
         v_editor,
         v_upload,
         v_uploadMulit,
-        v_rateStar
+        v_rateStar,
+        v_number
     }
 }
 </script>

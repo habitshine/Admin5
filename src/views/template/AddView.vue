@@ -31,7 +31,7 @@ export default {
 
     data() {
         return {
-              // 表单结果数据
+            // 表单结果数据
             formValues: {
                 accessToken: this.$store.state.loginModule.accessToken,
                 body: {}
@@ -91,7 +91,6 @@ export default {
          * 提交
          */
         submit() {
-            var self = this;
             axios.post(this.form.data.url.submit, qs.stringify({
                     accessToken: this.$store.state.loginModule.accessToken,
                     ...this.formValues.body
@@ -104,11 +103,14 @@ export default {
                         text: response.data.message,
                         holdTime: 2000,
                         lock: true,
-                        afterClose() {
+                        afterClose: () => {
                             try {
-                                self.$router.back();
+                                this.$router.push({
+                                    path: response.data.data.path,
+                                    query: response.data.data.query
+                                });
                             } catch (e) {
-
+                                syslog(e);
                             }
                         }
                     });

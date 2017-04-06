@@ -1,1 +1,11 @@
-{"status": 1, "message": "恭喜你,成功了!"}
+{
+    "status": 1,
+    "message": "恭喜你,成功了!",
+    "data": {
+        "path": "/home/goods/list",
+        "query": {
+            "page": 1,
+            "limit": 15
+        }
+    }
+}

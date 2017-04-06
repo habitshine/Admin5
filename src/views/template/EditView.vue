@@ -59,7 +59,7 @@ export default {
     },
 
     created() {
-        
+
         this.httpGetBaseView(response => {
             this.form = response.data;
             this.setDefaultValue();
@@ -120,11 +120,14 @@ export default {
                         text: response.data.message,
                         holdTime: 2000,
                         lock: true,
-                        afterClose() {
+                        afterClose: () => {
                             try {
-                                self.$router.back();
+                                this.$router.push({
+                                    path: response.data.data.path,
+                                    query: response.data.data.query
+                                });
                             } catch (e) {
-
+                                syslog(e);
                             }
                         }
                     });

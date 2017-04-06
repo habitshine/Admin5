@@ -142,28 +142,14 @@ module.exports = function(express, app) {
 
     // resful的成功/失败
     methods.forEach(method => {
+        var data1 = fs.readFileSync('./src/mock/success.json', 'utf8');
         app[method]('/mock/success', function(req, res) {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-            res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-            var data = {
-                status: 1,
-                message: method + ' 成功！'
-            };
-            var json = JSON.stringify(data, null, 4);
-            res.send(json);
+            res.send(data1);
         });
 
+        var data2 = fs.readFileSync('./src/mock/error.json', 'utf8');
         app[method]('/mock/error', function(req, res) {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-            res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-            var data = {
-                "status": 0,
-                "message": method + '失败！'
-            };
-            var json = JSON.stringify(data, null, 4);
-            res.send(json);
+            res.send(data2);
         });
     });
 

@@ -33,12 +33,14 @@ export default {
 
     methods: {
         _validate(){
-            if('' == this.value) {
-                this.warning = true;
-                this.warningText = '必填项';
-            } else {
-                this.warning = false;
-            }            
+            if(this.opts.validate.require) {
+                if('' == this.value) {
+                    this.warning = true;
+                    this.warningText = '必填项';
+                } else {
+                    this.warning = false;
+                }                     
+            }
         },
 
         input(e) {

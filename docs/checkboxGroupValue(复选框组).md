@@ -24,19 +24,19 @@
     "name": "checkboxGroupValue",
     "column": [12, 12, 12, 12],
     "is": "checkboxGroup",
-    "value": "11",
+    "value": [11],
     "children": [{
-                    "label": "苹果",
-                    "value": 11,
-                    "disabled": false
-                }, {
-                    "label": "橘子",
-                    "value": 22,
-                    "disabled": false
-                }, {
-                    "label": "梨",
-                    "value": 33,
-                    "disabled": false
-                }]
+        "label": "苹果",
+        "value": 11,
+        "disabled": false
+    }, {
+        "label": "橘子",
+        "value": 22,
+        "disabled": false
+    }, {
+        "label": "梨",
+        "value": 33,
+        "disabled": false
+    }]
 }
 ```

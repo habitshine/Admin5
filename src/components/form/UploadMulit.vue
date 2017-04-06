@@ -6,11 +6,10 @@
             <input name="upload" class="input-upload" type="file" multiple>
         </label>
         <!-- 预览 -->
-        <transition-group class="previews" v-show="0 < previews.length" tag="ul">
+        <transition-group name="previews" class="previews" v-show="0 < previews.length" tag="ul">
             <li v-for="(preview, i) in previews" :key="preview">
                 <!-- 删除按钮 -->
                 <span v-if="-1 != [100, undefined].indexOf(preview.progress)" @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
-
                 <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
                 <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
                 <a target="_new" :href="preview.url" class="title">{{preview.fileName}}</a>
@@ -39,7 +38,7 @@ export default {
     data() {
         return {
             activeIndex: 0, // 当前preview的索引
-            previews: [] 
+            previews: []
         };
     },
 
@@ -96,7 +95,7 @@ export default {
         file2base64(file, index) {
             FileAPI.Image(file).preview(100).get((err, img) => {
                 if (err) {
-                   
+
                 } else {
                     this.previews[index].cover = img.toDataURL();
                 }
@@ -112,23 +111,44 @@ export default {
             FileAPI.upload({
                 url: this.opts.url.upload,
 
-                data: {cover: this.previews[index].cover},
+                data: {
+                    cover: this.previews[index].cover
+                },
 
                 progress: (evt) => {
                     this.previews[index].progress = Math.floor(evt.loaded / evt.total * 100);
                 },
 
-                files: {file},
+                files: {
+                    file
+                },
 
-                headers: { 'x-upload': 'fileapi' },
+                headers: {
+                    'x-upload': 'fileapi'
+                },
 
                 complete: (err, xhr, file, options) => {
-                    var {status, data} = JSON.parse(xhr.response);
+                    var {
+                        status,
+                        data
+                    } = JSON.parse(xhr.response);
                     this.previews[index].id = data.id;
                     this.previews[index].url = data.url;
-                    this.$emit('input', this.previews.map(item=>{
-                        var {id, fileName, type, url} = {...item, url: data.url};
-                        return {id, fileName, type, url};
+                    this.$emit('input', this.previews.map(item => {
+                        var {
+                            id,
+                            fileName,
+                            type,
+                            url
+                        } = {...item,
+                            url: data.url
+                        };
+                        return {
+                            id,
+                            fileName,
+                            type,
+                            url
+                        };
                     }));
                 }
             });
@@ -145,9 +165,19 @@ export default {
                 }
             }).then(response => {
                 this.activeIndex--;
-                this.$emit('input', this.previews.map(item=>{
-                    var {id, fileName, type, url} = item;
-                    return {id, fileName, type, url};
+                this.$emit('input', this.previews.map(item => {
+                    var {
+                        id,
+                        fileName,
+                        type,
+                        url
+                    } = item;
+                    return {
+                        id,
+                        fileName,
+                        type,
+                        url
+                    };
                 }));
             }).catch((error) => {
 
@@ -176,8 +206,7 @@ $h: 100px;
             height: $h;
             width: $h;
             position: relative;
-            display: block;
-            float: left;
+            display: inline-block;
             margin: 5px;
             box-shadow: 1px 2px 3px rgba(0, 0, 0, .1);
             >.mask {
@@ -241,18 +270,24 @@ $h: 100px;
                 height: $h - 16px - 20px;
                 width: 100%;
                 text-align: center;
-                &:hover{cursor: pointer;}
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }
-    .v-enter {
-        opacity: 0;
-        transform: translateY(-.5rem);
+    .previews-move {
+        transition: transform 1s;
     }
-    .v-enter-active {
+    .previews-enter {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    .previews-enter-active {
         transition: all .3s;
     }
-    .v-leave-active {
+    .previews-leave-active {
+        position: absolute;
         opacity: 0;
         transition: all .3s;
     }

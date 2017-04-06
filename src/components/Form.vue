@@ -29,6 +29,7 @@ import v_editor from '../components/form/Editor'
 import v_select from '../components/form/Select'
 import v_number from '../components/form/Number'
 import v_input from '../components/form/Input'
+import v_time from '../components/form/Time'
 
 export default {
     name: 'Form',
@@ -68,19 +69,20 @@ export default {
     },
 
     components: {
+        v_checkboxGroup,
         v_textarea,
         v_linkage,
         v_radioGroup,
         v_input,
         v_select,
         v_selectMulit,
-        v_checkboxGroup,
         v_dateTime,
         v_editor,
         v_upload,
         v_uploadMulit,
         v_rateStar,
-        v_number
+        v_number,
+        v_time
     }
 }
 </script>

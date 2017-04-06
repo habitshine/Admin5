@@ -246,7 +246,7 @@
             "title": "单选框组",
             "name": "radioGroupValue",
             "is": "radioGroup",
-            "value": null,
+            "value": 11,
             "column": [6, 4, 3, 3],
             "children": [{
                 "label": "苹果",

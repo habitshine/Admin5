@@ -9,6 +9,7 @@
 </template>
 <script>
 export default {
+
     name: 'number',
 
     props: {
@@ -27,15 +28,7 @@ export default {
 
     methods: {
         input(e){
-            if(this.min > e.target.value) {
-                e.target.value = this.min;
-                this.$emit('input', this.min);
-                syslog(e.target.value)
-            } else if(this.min < e.target.value){
-                e.target.value = this.max;
-                this.$emit('input', this.max);
-                syslog(e.target.value)
-            }
+            this.$emit('input', e.target.value);
         },
 
         reduce() {

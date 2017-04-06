@@ -40,6 +40,33 @@
     "data": {
         "breadcrumb": [{ "icon": "file-o", "text": "世界" }, { "icon": "file-o", "text": "中国" }, { "icon": "file-o", "text": "农村" }],
         "form": [{
+            "title": "时间选择器",
+            "value": "08:20",
+            "name": "timePickValue",
+            "is": "time",
+            "placeholder": "请输入数字",
+            "column": [
+                12,
+                12,
+                2,
+                2
+            ]
+        },{
+            "title": "数字选择器",
+            "value": 5,
+            "min":3,
+            "max": 12,
+            "name": "numberValue",
+            "is": "number",
+            "placeholder": "请输入数字",
+            "column": [
+                12,
+                12,
+                2,
+                2
+            ]
+        },{
+            "validate": {"require": true},
             "title": "输入框",
             "value": "123",
             "name": "inputValue",
@@ -446,5 +473,4 @@
         }
     }
 }
-
 ```

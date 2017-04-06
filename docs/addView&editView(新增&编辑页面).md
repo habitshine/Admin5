@@ -9,30 +9,56 @@
 |message| 文字提示[选填]  |
 |status   | 1: 成功, 0: 失败  |
 |data   | 渲染页面的数据  |
+|data.formHiddenValue   | 可以理解为隐藏域  |
 |data.form   | 表单数据, 内容为任何组件数据  |
 
 
 ### 数据示例
 ``` json
-
 {
     "message": "无数据",
     "status": 1,
     "data": {
+        "formHiddenValue": { "a": 1, "b": [2, 3, 4] },
         "form": [{
+            "title": "上传",
+            "value": null,
+            "name": "uploadMulitValue",
+            "column": [12, 12, 12, 12],
+            "is": "uploadMulit",
+            "text": "点击上传多个文件",
+            "url": {
+                "upload": "./mock/upload",
+                "del": "./mock/success"
+            }
+        }, {
+            "title": "编辑器",
+            "value": null,
+            "name": "editor",
+            "column": [12, 12, 12, 12],
+            "is": "editor",
+            "placeholder": "请编辑器!"
+        }, {
+            "title": "textarea",
+            "value": null,
+            "name": "textarea",
+            "column": [12, 12, 12, 12],
+            "is": "textarea",
+            "placeholder": "请编辑textarea!"
+        }, {
             "title": "输入框",
-            "value": "工具",
+            "value": null,
             "name": "inputValue",
-            "type": "input",
+            "is": "input",
             "placeholder": "输入吧少年",
             "column": [6, 4, 3, 3],
             "tip": "必选哦!"
         }, {
             "title": "复选框组",
-            "value": [33],
+            "value": null,
             "name": "checkboxGroupValue",
             "column": [12, 12, 12, 12],
-            "type": "checkboxGroup",
+            "is": "checkboxGroup",
             "children": [{
                 "label": "苹果",
                 "value": 11,
@@ -49,9 +75,9 @@
         }, {
             "name": "selectGroupValue",
             "title": "单选支持组",
-            "value": 3,
+            "value": null,
             "column": [6, 4, 3, 3],
-            "type": "select",
+            "is": "select",
             "placeholder": "请选择",
             "children": [{
                 "title": "A组",
@@ -112,8 +138,8 @@
             "title": "多选支持组",
             "name": "selectMulitGroupValue",
             "column": [6, 4, 3, 3],
-            "value": [1, 3, 7],
-            "type": "selectMulit",
+            "value": null,
+            "is": "selectMulit",
             "placeholder": "请选择",
             "children": [{
                 "title": "A组",
@@ -172,17 +198,17 @@
             }]
         }, {
             "title": "日期选择器",
-            "value": "2017-01-01 12:13:14",
+            "value": null,
             "name": "timeValue",
             "column": [6, 4, 3, 3],
-            "type": "dateTime",
+            "is": "dateTime",
             "placeholder": "请选择"
         }, {
             "name": "selectMulitValue",
             "title": "多选列表",
             "column": [6, 4, 3, 3],
-            "type": "selectMulit",
-            "value": [1, 3, 4],
+            "is": "selectMulit",
+            "value": null,
             "placeholder": "请选择",
             "children": [{
                 "value": 1,
@@ -236,8 +262,8 @@
         }, {
             "title": "单选框组",
             "name": "radioGroupValue",
-            "type": "radioGroup",
-            "value": 22,
+            "is": "radioGroup",
+            "value": 11,
             "column": [6, 4, 3, 3],
             "children": [{
                 "label": "苹果",
@@ -254,10 +280,10 @@
             }]
         }, {
             "name": "linkageValue",
-            "value": { "values": [1, 1, 1, 1], "texts": ["欧美", "水果", "热带", "玻璃"] },
+            "value": null,
             "title": "联动",
             "column": [12, 12, 12, 12],
-            "type": "linkage",
+            "is": "linkage",
             "placeholder": "请选择",
             "children": [{
                 "label": "一级",
@@ -294,7 +320,7 @@
 
         }],
         "url": {
-            "submit": "./mock/success"
+            "submit": "./mock/error"
         }
     }
 }

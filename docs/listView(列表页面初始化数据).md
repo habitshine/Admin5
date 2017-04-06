@@ -8,7 +8,9 @@
 |message| 文字提示[选填]  |
 |status   | 1: 成功, 0: 失败  |
 |data   | 渲染页面的数据  |
-|data.form   | 筛选条件数据, 内容为任何组件数据  |
+|data.breadcrumb   | 面包屑  |
+|data.formHiddenValue   | 可以理解为隐藏域 |
+|data.form[]   | 筛选条件数据, 内容为任何组件数据  |
 |data.table   | 表格数据  |
 |data.table.primaryKey   | 主键名,比如'uid'  |
 |data.table.url   | 列表数据接口地址  |
@@ -39,6 +41,7 @@
     "status": 1,
     "data": {
         "breadcrumb": [{ "icon": "file-o", "text": "世界" }, { "icon": "file-o", "text": "中国" }, { "icon": "file-o", "text": "农村" }],
+        "formHiddenValue": { "a": 1, "b": [2, 3, 4] },
         "form": [{
             "title": "时间选择器",
             "value": "08:20",
@@ -51,10 +54,10 @@
                 2,
                 2
             ]
-        },{
+        }, {
             "title": "数字选择器",
             "value": 5,
-            "min":3,
+            "min": 3,
             "max": 12,
             "name": "numberValue",
             "is": "number",
@@ -65,8 +68,8 @@
                 2,
                 2
             ]
-        },{
-            "validate": {"require": true},
+        }, {
+            "validate": { "require": true },
             "title": "输入框",
             "value": "123",
             "name": "inputValue",
@@ -254,7 +257,7 @@
                 "time_24hr": true
             },
             "placeholder": "请选择"
-        },{
+        }, {
             "title": "日期选择器",
             "value": null,
             "name": "timeValue1",
@@ -473,4 +476,5 @@
         }
     }
 }
+
 ```

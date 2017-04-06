@@ -93,7 +93,8 @@ export default {
         submit() {
             axios.post(this.form.data.url.submit, qs.stringify({
                     accessToken: this.$store.state.loginModule.accessToken,
-                    ...this.formValues.body
+                    ...this.formValues.body,
+                    ...this.form.data.formHiddenValue
                 }))
                 .then((response) => {
                     // this.$store.commit('notify', {type: 'success', text: response.data.message}); 

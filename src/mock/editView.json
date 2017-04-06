@@ -2,6 +2,7 @@
     "message": "无数据",
     "status": 1,
     "data": {
+        "formHiddenValue": { "a": 1, "b": [2, 3, 4] },
         "form": [{
             "title": "上传",
             "value": [{

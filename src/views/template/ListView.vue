@@ -199,7 +199,8 @@ export default {
                         accessToken: this.$store.state.loginModule.accessToken,
                         page: this.$route.query.page,
                         limit: this.$route.query.limit,
-                        ...this.formValues.filter
+                        ...this.formValues.filter,
+                        ...this.viewData.data.formHiddenValue
                     }
                 })
                 .then((response) => {

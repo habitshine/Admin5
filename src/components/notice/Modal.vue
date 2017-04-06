@@ -57,10 +57,15 @@ export default {
         }
     },
 
+    data(){
+        return {_timer: null};
+    },
+
     watch:{
         value(v){
             if(-1 == [-1, null, undefined].indexOf(this.holdTime)) {
-                setTimeout(()=>{
+                clearTimeout(this._timer);
+                this._timer = setTimeout(()=>{
                     this.$emit('input', false);
                 }, this.holdTime);                
             }

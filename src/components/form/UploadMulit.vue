@@ -7,20 +7,21 @@
         </label>
         <!-- 预览 -->
         <transition-group name="previews" class="previews" v-show="0 < previews.length" tag="ul">
-            <li v-for="(preview, i) in previews" :key="preview">
-                <!-- 删除按钮 -->
-                <span v-if="-1 != [100, undefined].indexOf(preview.progress)" @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
-                <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
-                <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
-                <a target="_new" :href="preview.url" class="title">{{preview.fileName}}</a>
-                <img v-if="'image' == preview.type" :src="preview.cover">
+            <li v-for="(preview, i) in previews" :key="preview.id">
+                <div class="pos-r">
+                    <!-- 删除按钮 -->
+                    <span v-if="-1 != [100, undefined].indexOf(preview.progress)" @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
+                    <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
+                    <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
+                    <a target="_new" :href="preview.url" class="title">{{preview.fileName}}</a>
+                    <img v-if="'image' == preview.type" :src="preview.cover">
+                </div>
             </li>
         </transition-group>
     </div>
 </template>
 <script>
 // fileAPI对于每次多选的文件,如果再次选择相同的几个文件, 那么不触发上传
-
 import FileAPI from 'fileapi'
 export default {
     name: 'uploadMulit',
@@ -186,7 +187,17 @@ export default {
     }
 }
 </script>
-<style scoped lang=scss>
+<style scoped lang="scss">
+.previews-enter,
+.previews-leave-active {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.previews-leave-active {
+    position: absolute;
+}
+
 $h: 100px;
 .com-upload-mulit {
     overflow: hidden;
@@ -201,95 +212,83 @@ $h: 100px;
         overflow-y: hidden;
         border: 1px solid #ddd;
         >li {
+            transition: all .3s;
             background: #777;
             border-radius: 4px;
             height: $h;
             width: $h;
-            position: relative;
             display: inline-block;
             margin: 5px;
             box-shadow: 1px 2px 3px rgba(0, 0, 0, .1);
-            >.mask {
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 3;
-                width: 100%;
-                height: 100%;
-            }
-            >.remove {
-                position: absolute;
-                top: -6px;
-                right: -6px;
-                background: rgba(#e4685f, 1);
-                color: #fff;
-                border-radius: 100%;
-                line-height: 20px;
-                height: 20px;
-                width: 20px;
-                text-align: center;
-                z-index: 100;
-                font-size: 12px;
-                transition: all .2s ease-in-out;
-                &:hover {
-                    transform: rotate(90deg);
-                    cursor: pointer;
-                    background: rgba(#98261d, 1);
+            .pos-r {
+                position: relative;
+                >.mask {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 3;
+                    width: 100%;
+                    height: 100%;
                 }
-                ;
-            }
-            >img {
-                width: 100%;
-                height: 100%;
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 2;
-            }
-            /*和boot样式冲突*/
-            >.progress2 {
-                color: #fff;
-                font-size: 14px;
-                position: absolute;
-                bottom: 0;
-                z-index: 3;
-                height: 16px;
-                width: 100%;
-                text-align: center;
-            }
-            >.title {
-                word-break: break-all;
-                overflow-x: hidden;
-                overflow-y: auto;
-                padding: 20px 5px;
-                color: #fff;
-                font-size: 12px;
-                position: absolute;
-                z-index: 3;
-                height: $h - 16px - 20px;
-                width: 100%;
-                text-align: center;
-                &:hover {
-                    cursor: pointer;
+                >.remove {
+                    position: absolute;
+                    top: -6px;
+                    right: -6px;
+                    background: rgba(#e4685f, 1);
+                    color: #fff;
+                    border-radius: 100%;
+                    line-height: 20px;
+                    height: 20px;
+                    width: 20px;
+                    text-align: center;
+                    z-index: 100;
+                    font-size: 12px;
+                    transition: all .2s ease-in-out;
+                    &:hover {
+                        transform: rotate(90deg);
+                        cursor: pointer;
+                        background: rgba(#98261d, 1);
+                    }
+                    ;
+                }
+                >img {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 2;
+                }
+                /*和boot样式冲突*/
+                >.progress2 {
+                    color: #fff;
+                    font-size: 14px;
+                    position: absolute;
+                    bottom: 0;
+                    z-index: 3;
+                    height: 16px;
+                    width: 100%;
+                    text-align: center;
+                }
+                >.title {
+                    word-break: break-all;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    padding: 20px 5px;
+                    color: #fff;
+                    font-size: 12px;
+                    position: absolute;
+                    z-index: 3;
+                    height: $h - 16px - 20px;
+                    width: 100%;
+                    text-align: center;
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }
-    }
-    .previews-move {
-        transition: transform 1s;
-    }
-    .previews-enter {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    .previews-enter-active {
-        transition: all .3s;
-    }
-    .previews-leave-active {
-        position: absolute;
-        opacity: 0;
-        transition: all .3s;
     }
 }
 </style>

@@ -12,11 +12,60 @@
                     "url": "https://cn.vuejs.org/images/logo.png"
                 }, {
                     "fileName": "2.jpeg",
+                    "id": 1,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 2,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 3,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 4,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 5,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 6,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 7,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 8,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 9,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
                     "id": 1000,
                     "is": "image",
                     "url": "https://cn.vuejs.org/images/logo.png"
+                }, {
+                    "fileName": "2.jpeg",
+                    "id": 1090,
+                    "is": "image",
+                    "url": "https://cn.vuejs.org/images/logo.png"
                 }
-
             ],
             "name": "uploadMulitValue",
             "column": [12, 12, 12, 12],

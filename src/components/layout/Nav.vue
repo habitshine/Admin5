@@ -54,7 +54,9 @@ $h: 50px;
         .envelope {
             float: left;
             margin: 15px;
-            &:hover{cursor: pointer;}
+            &:hover {
+                cursor: pointer;
+            }
         }
         .avator {
             float: left;
@@ -63,7 +65,9 @@ $h: 50px;
             height: 30px;
             overflow: hidden;
             border-radius: 3px;
-            &:hover{cursor: pointer;}
+            &:hover {
+                cursor: pointer;
+            }
             img {
                 display: block;
                 width: 100%;

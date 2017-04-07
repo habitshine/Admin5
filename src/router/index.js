@@ -5,12 +5,15 @@ Vue.use(VueRouter)
 import FrameLayout from '../components/layout/Frame'
 import LoginView from '../views/LoginView'
 import View404 from '../views/View404'
+import TestView from '../views/TestView'
+
 
 // 路由配置
 const routes = [
     { path: '/', redirect: '/home' },
     { path: '/home', component: FrameLayout, children: require('./module.home.js').routes },
     { path: '/login', component: LoginView, name: 'loginView' },
+    { path: '/test', component: TestView, name: 'testView' },
     { path: '*', component: View404, name: 'view404' },
 ];
 

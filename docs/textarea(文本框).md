@@ -6,6 +6,7 @@
 |键名 |说明 |
 | ------------ | ------------ |
 |is| 必须"textarea"  |
+|disabled   | 只读, 可选true/false |
 |name   | ajax字段名, 服务端接收参数名  |
 |column   | 对应bootstrap的栅格布局  |
 |placeholder   | 默认提示文字  |
@@ -17,6 +18,7 @@
 ``` json
 {
 	"is": "textarea",
+	"disabled": true,
 	"name": "textareaValue",
     "column": [12, 12, 12, 12],
     "placeholder": "请输入您的id",

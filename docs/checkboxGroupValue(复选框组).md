@@ -9,6 +9,7 @@
 | ------------ | ------------ |
 |title| 标题文字  |
 |name   | ajax字段名, 服务端接收参数名  |
+|disabled   | 只读, 可选true/false |
 |column   | 对应bootstrap的栅格布局  |
 |is| 必须"checkboxGroup"  |
 |value| 默认值  |
@@ -22,6 +23,7 @@
 {
     "title": "复选框组",
     "name": "checkboxGroupValue",
+    "disabled": false,
     "column": [12, 12, 12, 12],
     "is": "checkboxGroup",
     "value": [11],

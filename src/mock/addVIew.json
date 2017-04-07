@@ -24,6 +24,7 @@
         }, {
             "title": "textarea",
             "value": null,
+            "disabled": true,
             "name": "textarea",
             "column": [12, 12, 12, 12],
             "is": "textarea",

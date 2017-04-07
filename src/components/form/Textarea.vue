@@ -1,6 +1,17 @@
 <template>
 	<div class="com-textarea">
+		<textarea 
+			v-if="opts.disabled"
+			disabled 
+	    	:placeholder="opts.placeholder" 
+	    	:value="value" 
+	    	class="form-control" 
+	    	:style="{height: opts.height, resize: opts.resize ? 'auto' : 'none' }">
+	    </textarea>
+
+
 	    <textarea 
+	    	v-else
 	    	:placeholder="opts.placeholder" 
 	    	:value="value" 
 	    	@blur="input"

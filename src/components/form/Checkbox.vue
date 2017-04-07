@@ -1,5 +1,17 @@
 <template>
-    <div @click="select(opts)" class="checkbox">
+
+    <div v-if="disabled" class="checkbox">
+        <i class="box box-disabled" :style="{width: size, height: size}">
+            <transition>
+            <div v-show="value" class="dot"></div>
+            </transition>
+        </i>
+        <a class="text text-disabled">
+            <slot></slot>
+        </a>
+    </div>
+
+    <div v-else @click="select(opts)" class="checkbox">
         <i class="box" :style="{width: size, height: size}">
             <transition>
             <div v-show="value" class="dot"></div>
@@ -9,6 +21,7 @@
             <slot></slot>
         </a>
     </div>
+
 </template>
 <script>
 export default {
@@ -17,6 +30,13 @@ export default {
     props: {
         opts: {
             type: Object
+        },
+
+        disabled: {
+            type: Boolean,
+            default(){
+                return false;
+            }
         },
 
         size: {
@@ -38,7 +58,9 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-$color: #666;
+$color: #444;
+$disabled_color: #ccc;
+
 div.checkbox {
     display: inline-block;
     overflow: hidden;
@@ -61,15 +83,28 @@ div.checkbox {
             border-radius: 1px;
         }
     }
+    
+    i.box-disabled{
+        border: 1px solid $disabled_color;
+        div.dot {
+            background: $disabled_color;
+        }
+    }
+
     a.text {
         font-size: 14px;
-        color: #444;
+        color: $color;
         display: inline-block;
         vertical-align: top;
         line-height: 1.4;
         margin-left: 5px;
         text-decoration: none;
     }
+
+    a.text-disabled {
+        color: $disabled_color;
+    }
+
 }
 
 .v-enter-active {

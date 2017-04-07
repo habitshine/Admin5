@@ -8,6 +8,7 @@
 |键名 |说明 |
 | ------------ | ------------ |
 |is| 必须"input"  |
+|disabled|只读, 可选值true/false|
 |type| 对应html中input的type属性的值, 比如'password'/ 'input'  |
 |value| 默认值  |
 |icon| 图标  |
@@ -20,6 +21,7 @@
 ``` json
 {
 	"is": "input",
+	"disabled": true,
 	"type": "input",
 	"value": "",
 	"icon": "",

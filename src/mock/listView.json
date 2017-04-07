@@ -36,6 +36,7 @@
             "value": "123",
             "name": "inputValue",
             "is": "input",
+            "disabled": false,
             "placeholder": "输入吧少年",
             "column": [
                 12,
@@ -46,7 +47,7 @@
             "tip": "必选哦!"
         }, {
             "title": "复选框组",
-            "value": null,
+            "value": [11,12],
             "name": "checkboxGroupValue",
             "column": [
                 12,
@@ -58,7 +59,7 @@
             "children": [{
                 "label": "苹果",
                 "value": 11,
-                "disabled": false
+                "disabled": true
             }, {
                 "label": "橘子",
                 "value": 22,
@@ -311,11 +312,11 @@
             "children": [{
                 "label": "苹果",
                 "value": 11,
-                "disabled": false
+                "disabled": true
             }, {
                 "label": "橘子",
                 "value": 22,
-                "disabled": false
+                "disabled": true
             }, {
                 "label": "梨",
                 "value": 33,

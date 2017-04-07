@@ -1,4 +1,4 @@
-# listView(列表页面初始化数据)   
+list# listView(列表页面初始化数据)   
 
 ![](https://github.com/MaiYuan/Admin5/blob/master/docs/images/listView.png?raw=true)
 
@@ -432,7 +432,6 @@
                 "text": "查看",
                 "icon": "eye",
                 "path": "/home/readonly",
-                "url": "./mock/editView",
                 "type": "route"
             }],
             "btnGroupForTable": [{

@@ -1,13 +1,15 @@
 <template>
     <div class="com-input" :class="{'input-group': opts.icon}">
         <transition>
-        <div class="warning" v-show="warning">
-            {{warningText}}
-        </div>
+            <div class="warning" v-show="warning">
+                {{warningText}}
+            </div>
         </transition>
-
         <span v-if="undefined != opts.icon" class="input-group-addon"><i :class="['fa', 'fa-'+opts.icon]"></i></span>
-        <input @blur="blur" @keyup="keyup" @keydown="keydown" @focus="selectAll" :value="value" @input="input" class="form-control" :placeholder="opts.placeholder" :type="opts.type">
+        
+        <input v-if="opts.disabled" disabled @blur="blur" @keyup="keyup" @keydown="keydown" @focus="selectAll" :value="value" @input="input" class="form-control" :placeholder="opts.placeholder" :type="opts.type">
+
+        <input v-else @blur="blur" @keyup="keyup" @keydown="keydown" @focus="selectAll" :value="value" @input="input" class="form-control" :placeholder="opts.placeholder" :type="opts.type">
     </div>
 </template>
 <script>
@@ -32,14 +34,14 @@ export default {
     },
 
     methods: {
-        _validate(){
-            if(this.opts.validate.require) {
-                if('' == this.value) {
+        _validate() {
+            if (this.opts.validate.require) {
+                if ('' == this.value) {
                     this.warning = true;
                     this.warningText = '必填项';
                 } else {
                     this.warning = false;
-                }                     
+                }
             }
         },
 

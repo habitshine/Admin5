@@ -1,7 +1,7 @@
 <template>
     <div class="com-radio-group">
         <div class="group">
-            <v-radio v-for="radio in opts.children" :key="radio.value" @input="select" :value="value" :opts="radio">
+            <v-radio v-for="radio in opts.children" :key="radio.value" @input="select" :value="value" :opts="radio" :disabled="radio.disabled">
             </v-radio>
         </div>
     </div>

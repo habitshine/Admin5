@@ -23,33 +23,41 @@ export default {
     },
 
     methods: {
-        selectAll(e){
+        selectAll(e) {
             e.target.select();
         },
 
         changeHour(e) {
-            var hour = e.target.value;
-            if(1 > hour) {
-                hour = 1;
-            } else if(24 < hour) {
-                hour = 24;
+            var hour = parseInt(e.target.value);
+            if (24 <= hour || 0 > hour) {
+                hour = 0;
+            }
+            hour = '' + hour;
+            if (1 >= hour.length) {
+                hour = '0' + hour;
             }
             this.$emit('input', hour + ':' + this.time[1]);
         },
 
         changeMinute(e) {
-            var minute = e.target.value;
-            if(1 > minute) {
-                minute = 1;
-            } else if(60 < minute) {
+            var minute = parseInt(e.target.value);
+            if (60 <= minute || 0 > minute) {
                 minute = 0;
+            }
+
+            syslog(minute)
+            syslog(minute.length)
+
+            minute = '' + minute;
+            if (1 >= minute.length) {
+                minute = '0' + minute;
             }
             this.$emit('input', this.time[0] + ':' + minute);
         }
     },
 
     computed: {
-        time(){
+        time() {
             return this.value.split(':');
         }
     }

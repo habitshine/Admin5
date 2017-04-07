@@ -1,7 +1,7 @@
 <template>
     <div class="com-checkbox-group">
         <div class="group">
-            <v-checkbox class="v-checkbox" @input="select(checkbox.value)" v-model="booleanList[i]" v-for="(checkbox, i) in opts.children" :key="checkbox.value" :opts="checkbox">
+            <v-checkbox class="v-checkbox" @input="select(checkbox.value)" v-model="booleanList[i]" v-for="(checkbox, i) in opts.children" :key="checkbox.value" :opts="checkbox" :disabled="checkbox.disabled">
                 {{checkbox.label}}
             </v-checkbox>
         </div>
@@ -10,7 +10,7 @@
 <script>
 import VCheckbox from './Checkbox'
 export default {
-    name: 'CheckboxGroup',
+    name: 'checkboxGroup',
 
     computed: {
         booleanList() {

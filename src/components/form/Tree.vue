@@ -58,9 +58,12 @@ export default {
         select(item) {
             this.$emit('input', item.value);
         },
-
-        bubble(v){
-            this.$emit('input', v);
+        /**
+         * 冒泡value到父组件
+         * @param  {Any} value 
+         */
+        bubble(value){
+            this.$emit('input', value);
         }
     }
 }

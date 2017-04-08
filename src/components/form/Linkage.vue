@@ -9,24 +9,19 @@
                 <i class="fa fa-remove"></i>
             </a>
         </div>
-
         <v-modal v-model="popup.show">
             <v-tab v-model="activeIndex">
                 <!-- panel -->
                 <v-tab-panel v-for="(page, i) in opts.children" :key="i" :label="page.label" :disabled="!newValues[i] && 0 == group[i].children.length">
                     <!-- spinner -->
                     <v-spinner v-show="loading" class="spinner-gutter"></v-spinner>
-                    
                     <!-- listGroup -->
-
                     <!-- 无默认值 -->
                     <v-list-group v-if="null == value" v-show="!loading" :isGroup="false" :list="group[i].children" @clickItem="select">
                     </v-list-group>
-
                     <!-- 有默认值 -->
                     <v-list-group v-else v-model="value.values[i]" v-show="!loading" :isGroup="false" :list="group[i].children" @clickItem="select">
                     </v-list-group>
-
                 </v-tab-panel>
             </v-tab>
         </v-modal>
@@ -69,7 +64,7 @@ export default {
     methods: {
         showPopup(e) {
             // 如果不为空, 那么可以假设当前激活页为最后一页
-            if(null != this.value) {
+            if (null != this.value) {
                 this.activeIndex = this.pageCount - 1;
                 this.newValues = [...this.value.values];
                 this.newTexts = [...this.value.texts];
@@ -103,14 +98,21 @@ export default {
             } else if (this.activeIndex + 1 == this.pageCount) {
                 // 关闭弹窗
                 this.popup.show = false;
-                
+
                 // 只有点击最后一页的选项
                 // 才input数据
+                // this.$emit('input', {
+                //     values: this.newValues,
+                //     texts: this.newTexts
+                // });
+            }
+
                 this.$emit('input', {
                     values: this.newValues,
                     texts: this.newTexts
                 });
-            }
+
+            
         },
 
         close() {
@@ -121,8 +123,8 @@ export default {
             this.newValues = [];
             this.newTexts = [];
             this.activeIndex = 0;
-            this.group.map((page, i)=>{
-                if(0 == i) {
+            this.group.map((page, i) => {
+                if (0 == i) {
                     return page;
                 } else {
                     return page.children = [];

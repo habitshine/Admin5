@@ -1,66 +1,92 @@
 <template>
-    <div class="view-test">
-        <div class="box-test">
-            <div id="list-complete-demo" class="demo">
-                <button v-on:click="shuffle">Shuffle</button>
-                <button v-on:click="add">Add</button>
-                <button v-on:click="remove">Remove</button>
-                <transition-group name="list-complete" tag="ul">
-                    <li v-for="item in items" v-bind:key="item" class="list-complete-item">{{ item }}</li>
-                </transition-group>
-            </div>
-        </div>
+    <div>
+        <h1>{{which}}</h1>
+        <v-tree v-model="which" :data="tree"></v-tree>
     </div>
 </template>
 <script>
-import _ from 'lodash'
+import VTree from '../components/form/Tree'
 export default {
     name: 'testView',
 
-
     data() {
         return {
-            items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            nextNum: 10
+            which: 0,
+
+            tree: [{
+                "value": 1,
+                "label": "欧洲",
+                "open": true,
+                "children": [{
+                    "value": 11,
+                    "label": "希腊",
+                    "open": true,
+                    "children": [{
+                        "value": 111,
+                        "label": "雅典"
+                    }]
+                }, {
+                    "value": 22,
+                    "label": "意大利",
+                    "open": true,
+                    "children": [{
+                        "value": 222,
+                        "label": "都灵"
+                    }]
+                }]
+            }, {
+                "value": 3,
+                "label": "亚洲",
+                "open": true,
+                "children": [{
+                    "value": 33,
+                    "label": "中国",
+                    "open": true,
+                    "children": [{
+                        "value": 331,
+                        "label": "黑龙江",
+                        "open": true,
+                        "children": [{
+                            "value": 3311,
+                            "label": "哈尔滨"
+                        }, {
+                            "value": 3312,
+                            "label": "齐齐哈尔"
+                        }, {
+                            "value": 3313,
+                            "label": "牡丹江"
+                        }]
+                    }, {
+                        "value": 122,
+                        "label": "西安",
+                    }, {
+                        "value": 123,
+                        "label": "武汉",
+                    }]
+                }, {
+                    "value": 44,
+                    "label": "日本",
+                    "open": true,
+                    "children": [{
+                        "value": 99,
+                        "label": "东京"
+                    }]
+                }, {
+                    "value": 100,
+                    "label": "韩国"
+                }]
+            }, {
+                "value": 8,
+                "label": "地中海",
+                "disable": true
+            }]
         }
     },
-    methods: {
-        randomIndex: function() {
-            return Math.floor(Math.random() * this.items.length)
-        },
-        add: function() {
-            this.items.splice(this.randomIndex(), 0, this.nextNum++)
-        },
-        remove: function() {
-            this.items.splice(this.randomIndex(), 1)
-        },
-        shuffle: function() {
-            this.items = _.shuffle(this.items)
-        }
+
+    components: {
+        VTree
     }
 }
 </script>
 <style lang=scss scope>
-.box-test{padding: 15px;width: 960px;margin: 20% auto; border: 2px solid #444;}
-
-.list-complete-item {
-    background: #444;
-    color: #fff;
-    font-size: 32px;text-align: center;line-height: 100px;
-    transition: all 1s;
-    display: inline-block;
-    margin: 10px;
-    position: relative;
-    width: 100px;height: 100px;
-}
-
-.list-complete-enter,
-.list-complete-leave-active {
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.list-complete-leave-active {
-    position: absolute;
-}
 </style>

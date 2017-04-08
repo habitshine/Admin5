@@ -1,5 +1,4 @@
 <template>
-
     <div v-if="disabled" class="checkbox">
         <i class="box box-disabled" :style="{width: size, height: size}">
             <transition>

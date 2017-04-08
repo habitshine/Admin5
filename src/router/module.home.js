@@ -23,27 +23,73 @@ export var routes = [{
     },
     name: 'DraggableView'
 }, {
-    path: '*/(add|auth)+',
+    path: '*/(add)+',
     component: resolve => {
         require.ensure(['../views/template/AddView'], () => {
             resolve(require('../views/template/AddView'))
         });
-    },
-    name: 'addView'
+    }
 }, {
-    path: '*/(edit|set|save)+',
+    path: '*/(auth)+',
+    component: resolve => {
+        require.ensure(['../views/template/AddView'], () => {
+            resolve(require('../views/template/AddView'))
+        });
+    }
+}, {
+    path: '*/(edit)+',
     component: resolve => {
         require.ensure(['../views/template/EditView'], () => {
             resolve(require('../views/template/EditView'))
         });
-    },
-    name: 'editView'
+    }
 }, {
-    path: '*/(list|index|show|readonly|read|see|view)*',
+    path: '*/(set)+',
+    component: resolve => {
+        require.ensure(['../views/template/EditView'], () => {
+            resolve(require('../views/template/EditView'))
+        });
+    }
+}, {
+    path: '*/(save)+',
+    component: resolve => {
+        require.ensure(['../views/template/EditView'], () => {
+            resolve(require('../views/template/EditView'))
+        });
+    }
+}, {
+    path: '*/(list)*',
     component: resolve => {
         require.ensure(['../views/template/ListView'], () => {
             resolve(require('../views/template/ListView'))
         });
-    },
-    name: 'listView'
+    }
+}, {
+    path: '*/(index)*',
+    component: resolve => {
+        require.ensure(['../views/template/ListView'], () => {
+            resolve(require('../views/template/ListView'))
+        });
+    }
+}, {
+    path: '*/(readonly)*',
+    component: resolve => {
+        require.ensure(['../views/template/ListView'], () => {
+            resolve(require('../views/template/ListView'))
+        });
+    }
+}, {
+    path: '*/(show)*',
+    component: resolve => {
+        require.ensure(['../views/template/ListView'], () => {
+            resolve(require('../views/template/ListView'))
+        });
+    }
+}, {
+    path: '*/(view)*',
+    component: resolve => {
+        require.ensure(['../views/template/ListView'], () => {
+            resolve(require('../views/template/ListView'))
+        });
+    }
 }]

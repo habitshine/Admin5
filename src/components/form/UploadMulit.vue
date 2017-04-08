@@ -113,7 +113,8 @@ export default {
                 url: this.opts.url.upload,
 
                 data: {
-                    cover: this.previews[index].cover
+                    cover: this.previews[index].cover,
+                    ...this.$route.query
                 },
 
                 progress: (evt) => {
@@ -122,10 +123,6 @@ export default {
 
                 files: {
                     file
-                },
-
-                headers: {
-                    'x-upload': 'fileapi'
                 },
 
                 complete: (err, xhr, file, options) => {

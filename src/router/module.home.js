@@ -7,13 +7,12 @@ export var routes = [{
     },
     name: 'homeView'
 }, {
-    path: 'readonly',
+    path: 'readonly100',
     component: resolve => {
         require.ensure(['../views/ReadOnlyView'], () => {
             resolve(require('../views/ReadOnlyView'))
         });
-    },
-    name: 'readonlyView'
+    }
 }, {
     path: 'draggable',
     component: resolve => {

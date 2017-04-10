@@ -44,7 +44,7 @@
         "id": 13,
         "text": "readonly集合",
         "route": {
-            "path": "/home/readonly"
+            "path": "/home/readonly100"
         }
     }, {
         "id": 14,

@@ -96,8 +96,7 @@
         }]
     }, {
         "value": 8,
-        "label": "地中海",
-        "disable": true
+        "label": "地中海"
     }]
 }
 ```

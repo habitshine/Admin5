@@ -3,6 +3,9 @@
 
 > log by Raven https://sentry.io
 
+
+## 使用方法
+
 ### 第一步, 安装node.js
 
 ### 第二步, 安装cnpm

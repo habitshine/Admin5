@@ -34,6 +34,19 @@ module.exports = function(express, app) {
         }, 300);
     });
 
+
+    /*
+     * 列表页模板数据
+     */
+    app.get('/mock/goods/readonly', function(req, res) {
+        var data = fs.readFileSync('./src/mock/listView.json', 'utf8');
+        var json = JSON.parse(data);
+        setTimeout(() => {
+            res.send(JSON.stringify(json, null, 4));
+        }, 300);
+    });
+
+
     /*
      * 新增页模板数据
      */

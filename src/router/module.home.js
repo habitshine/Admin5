@@ -7,6 +7,13 @@ export var routes = [{
     },
     name: 'homeView'
 }, {
+    path: 'goods/iframe',
+    component: resolve => {
+        require.ensure(['../views/template/IFrame'], () => {
+            resolve(require('../views/template/IFrame'))
+        });
+    }
+}, {
     path: 'readonly100',
     component: resolve => {
         require.ensure(['../views/ReadOnlyView'], () => {
@@ -73,8 +80,8 @@ export var routes = [{
 }, {
     path: '*/(readonly)*',
     component: resolve => {
-        require.ensure(['../views/template/ListView'], () => {
-            resolve(require('../views/template/ListView'))
+        require.ensure(['../views/template/EditView'], () => {
+            resolve(require('../views/template/EditView'))
         });
     }
 }, {
@@ -86,6 +93,13 @@ export var routes = [{
     }
 }, {
     path: '*/(view)*',
+    component: resolve => {
+        require.ensure(['../views/template/ListView'], () => {
+            resolve(require('../views/template/ListView'))
+        });
+    }
+}, {
+    path: '*/(archivepage)*',
     component: resolve => {
         require.ensure(['../views/template/ListView'], () => {
             resolve(require('../views/template/ListView'))

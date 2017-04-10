@@ -46,6 +46,13 @@
         "route": {
             "path": "/home/readonly100"
         }
+    },
+    {
+        "id": 1876,
+        "text": "iframe",
+        "route": {
+            "path": "/home/goods/iframe"
+        }
     }, {
         "id": 14,
         "text": "拖拽",

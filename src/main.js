@@ -56,9 +56,9 @@ new Vue({
 });
 
 // Raven
-import Raven from 'raven-js';
-import RavenVue from 'raven-js/plugins/vue';
-Raven
-    .config('https://91523ac45c3a4c0b99ff408d89c46e56@sentry.io/148184')
-    .addPlugin(RavenVue, Vue)
-    .install();
+// import Raven from 'raven-js';
+// import RavenVue from 'raven-js/plugins/vue';
+// Raven
+//     .config('https://91523ac45c3a4c0b99ff408d89c46e56@sentry.io/148184')
+//     .addPlugin(RavenVue, Vue)
+//     .install();

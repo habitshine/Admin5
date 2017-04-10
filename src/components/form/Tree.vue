@@ -4,16 +4,16 @@
             <!-- 有子节点 -->
             <template v-if="undefined != item.children">
                 <div class="node" :style="{paddingLeft: level * paddingIndex + 'px'}" @click="toggle(item)">
-                    <a>{{item.label}}-{{item.value}} </a>
+                    <a>{{item.label}} </a>
                     <i class="fa fa-caret-right" :class="item.open && 'rotate'"></i>
                 </div>
-                <v-tree :level="level + 1" v-show="item.open" :data="item.children" @input="bubble">
+                <v-tree :value="value" :level="level + 1" v-show="item.open" :data="item.children" @input="bubble">
                 </v-tree>
             </template>
             <!-- 无子节点 -->
             <template v-else>
                 <div @click="select(item)" class="node" :style="{paddingLeft: level * paddingIndex + 'px'}">
-                    <a>{{item.label}}-{{item.value}} </a>
+                    <a :class="{active: value.value == item.value}">{{item.label}} </a>
                 </div>
             </template>
         </li>
@@ -56,14 +56,14 @@ export default {
         },
 
         select(item) {
-            this.$emit('input', item.value);
+            this.$emit('input', item);
         },
         /**
          * 冒泡value到父组件
-         * @param  {Any} value 
+         * @param  {Any} item 
          */
-        bubble(value) {
-            this.$emit('input', value);
+        bubble(item) {
+            this.$emit('input', item);
         }
     }
 }
@@ -72,21 +72,29 @@ export default {
 ul.com-tree {
     >li {
         overflow: hidden;
+        /* 包含自己的子节点 */
         .node {
-            padding: 5px 15px;
+            padding: 10px 30px;
             overflow: hidden;
+            border-radius: 4px;
             &:hover {
                 cursor: pointer;
                 background: #ccc;
             }
             >a {
+                transition: all .3s;
+                padding: 0 5px;
                 font-size: 14px;
+                line-height: 1.4;
                 margin: 0;
                 text-decoration: none;
                 display: block;
                 height: 20px;
                 float: left;
                 color: #444;
+                &.active {
+                    color: #69c;
+                }
             }
             >i {
                 margin-left: 5px;

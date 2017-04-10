@@ -24,11 +24,13 @@
     "name": "uploadMulitValue",
     "column": [12, 12, 12, 12],
     "value": [{
+        "cover": "https://cn.vuejs.org/images/logo.png",
         "fileName": "1.jpeg",
         "id": 1223130728784302,
         "type": "image",
         "url": "https://cn.vuejs.org/images/logo.png"
     }, {
+        "cover": "https://cn.vuejs.org/images/logo.png",
         "fileName": "2.jpeg",
         "id": 1000,
         "type": "image",

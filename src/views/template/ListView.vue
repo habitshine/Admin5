@@ -13,7 +13,7 @@
                     <v-form v-model="formValues.filter" :form="viewData.data.form">
                     </v-form>
                 </filter-panel>
-                <div class="btn-group" style="margin-top:45px;">
+                <div v-if="undefined != viewData.data.table.btnGroupForTable" class="btn-group" style="margin-top:45px;"> 
                     <template v-for="btn in viewData.data.table.btnGroupForTable">
                         <a v-if="'ajax' == btn.type" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
                             <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
@@ -40,7 +40,7 @@
                         </td>
                         <!-- 功能列 -->
                         <td nowrap>
-                            <template v-for="btn in viewData.data.table.btnGroupInRow">
+                            <template v-if="undefined != viewData.data.table.btnGroupInRow" v-for="btn in viewData.data.table.btnGroupInRow">
                                 <a v-if="'remove' == btn.type" class="btn btn-xs btn-link" @click="remove(btn.url, props.primaryKey)">
                                     <i class="fa fa-remove"></i> 删除
                                 </a>

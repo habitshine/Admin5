@@ -2,7 +2,7 @@
     <div class="com-tree-view">
         <div class="btn-group">
             <a @click="showModal" class="btn btn-default">
-                {{opts.placeholder}}
+                {{activeNode.label || opts.placeholder}}
                 <i class="caret" :class="{rotate: isShowModal}"></i>
             </a>
             <a class="btn btn-default">
@@ -10,7 +10,7 @@
             </a>
         </div>
         <v-modal v-model="isShowModal">
-            <!-- <v-tree v-model="" :data="opts.data"></v-tree> -->
+            <v-tree :value="activeNode" @input="changeTreeValue" :data="opts.data"></v-tree>
         </v-modal>
     </div>
 </template>
@@ -26,14 +26,19 @@ export default {
         },
 
         value: {
-
+            type: [String, Number]
         }
     },
 
     data() {
         return {
-            isShowModal: this.value
+            isShowModal: false,
+            activeNode: {}
         };
+    },
+
+    mounted() {
+        this.activeNode = this.findTreeNode(this.value, this.opts.data);
     },
 
     methods: {
@@ -41,8 +46,28 @@ export default {
             this.isShowModal = true;
         },
 
-        _find(){
+        changeTreeValue(item) {
+            this.activeNode = item;
+            this.$emit('input', item.value);
+        },
 
+        findTreeNode(value, nodes) {
+            var activeNode = {};
+            var length = nodes.length;
+            for (var i = 0; i < length; i++) {
+                if(value == nodes[i].value) {
+                    activeNode = nodes[i];
+                    return activeNode;
+                } else {
+                    if(undefined != nodes[i].children) {
+                        activeNode = this.findTreeNode(value, nodes[i].children);
+                        if(undefined != activeNode) {
+                            return activeNode;
+                        }
+                    }
+                }
+            }
+            
         }
     },
 

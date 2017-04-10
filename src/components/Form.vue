@@ -30,6 +30,8 @@ import v_select from '../components/form/Select'
 import v_number from '../components/form/Number'
 import v_input from '../components/form/Input'
 import v_time from '../components/form/Time'
+import v_tree from '../components/form/TreeView'
+
 
 export default {
     name: 'Form',
@@ -82,7 +84,8 @@ export default {
         v_uploadMulit,
         v_rateStar,
         v_number,
-        v_time
+        v_time,
+        v_tree
     }
 }
 </script>

@@ -24,7 +24,7 @@ import VModal from '../notice/Modal'
 import VListGroup from '../layout/ListGroup'
 
 export default {
-    name: 'Select',
+    name: 'select',
 
     props: {
         opts: {

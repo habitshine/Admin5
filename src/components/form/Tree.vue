@@ -62,7 +62,7 @@ export default {
          * 冒泡value到父组件
          * @param  {Any} value 
          */
-        bubble(value){
+        bubble(value) {
             this.$emit('input', value);
         }
     }

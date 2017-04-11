@@ -13,7 +13,7 @@
                     <v-form v-model="formValues.filter" :form="viewData.data.form">
                     </v-form>
                 </filter-panel>
-                <div v-if="undefined != viewData.data.table.btnGroupForTable" class="btn-group" style="margin-top:45px;"> 
+                <div v-if="undefined != viewData.data.table.btnGroupForTable" class="btn-group" style="margin-top:45px;">
                     <template v-for="btn in viewData.data.table.btnGroupForTable">
                         <a v-if="'ajax' == btn.type" @click="httpRequestForSelect(btn.url)" :key="btn.text" class="btn btn-default">
                             <i :class="['fa', 'fa-' + btn.icon]"></i> {{btn.text}}
@@ -135,11 +135,23 @@ export default {
          * 触发: 处理表单(过滤)的默认值
          * 触发: 获取表格数据
          */
-        $route() {
-            // 遍历默认值
-            this.setDefaultValue();
-            // 之后根据默认值, 渲染表格数据
-            this.httpGetTable();
+        $route(newValue, oldValue) {
+            // 判断是否切换初始化数据变化
+            if (newValue.path != oldValue.path) {
+                this.httpGetBaseView(response => {
+                    this.viewData = response.data;
+                    // 遍历默认值
+                    this.setDefaultValue();
+                    // 之后根据默认值, 渲染表格数据
+                    this.httpGetTable();
+                });
+            } else {
+                // 遍历默认值
+                this.setDefaultValue();
+                // 之后根据默认值, 渲染表格数据
+                this.httpGetTable();
+            }
+
         }
     },
 
@@ -174,8 +186,8 @@ export default {
          * @param  {Function} cb
          */
         httpGetBaseView(cb) {
-
-            var url = [API_ROOT, this.$route.params[0]].join('/');
+            // var url = [API_ROOT, this.$route.params[0]].join('/');
+            var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
             axios.get(url, {
                     params: {
                         accessToken: this.$store.state.loginModule.accessToken,

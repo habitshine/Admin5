@@ -67,4 +67,12 @@
     "route": {
         "path": "/login"
     }
+}, {
+    "open": false,
+    "id": 133,
+    "text": "index",
+    "route": {
+        "path": "/home/goods/readonly",
+        "query": {"page": 1, "limit": 3}
+    }
 }]

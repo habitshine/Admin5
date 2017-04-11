@@ -78,10 +78,10 @@ export var routes = [{
         });
     }
 }, {
-    path: '*/(readonly)*',
+    path: '=]/readonly',
     component: resolve => {
-        require.ensure(['../views/template/EditView'], () => {
-            resolve(require('../views/template/EditView'))
+        require.ensure(['../views/template/ListView'], () => {
+            resolve(require('../views/template/ListView'))
         });
     }
 }, {

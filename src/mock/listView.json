@@ -473,8 +473,7 @@
             }, {
                 "text": "查看",
                 "icon": "eye",
-                "path": "/home/readonly",
-                "url": "./mock/editView",
+                "path": "/home/goods/readonly?page=1&limit=10",
                 "type": "route"
             }],
             "btnGroupForTable": [{

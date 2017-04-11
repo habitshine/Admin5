@@ -137,7 +137,9 @@ export default {
          */
         $route(newValue, oldValue) {
             // 判断是否切换初始化数据变化
+            // 是否切换了页面
             if (newValue.path != oldValue.path) {
+                this.viewData.status = -1;
                 this.httpGetBaseView(response => {
                     this.viewData = response.data;
                     // 遍历默认值
@@ -186,7 +188,6 @@ export default {
          * @param  {Function} cb
          */
         httpGetBaseView(cb) {
-            // var url = [API_ROOT, this.$route.params[0]].join('/');
             var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
             axios.get(url, {
                     params: {

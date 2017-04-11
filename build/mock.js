@@ -26,31 +26,18 @@ module.exports = function(express, app) {
     /*
      * 列表页模板数据
      */
-    app.get('/mock/goods/list', function(req, res) {
+    app.get('/mock/*/list', function(req, res) {
         var data = fs.readFileSync('./src/mock/listView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {
             res.send(JSON.stringify(json, null, 4));
         }, 300);
     });
-
-
-    /*
-     * 列表页模板数据
-     */
-    app.get('/mock/goods/readonly', function(req, res) {
-        var data = fs.readFileSync('./src/mock/listView.json', 'utf8');
-        var json = JSON.parse(data);
-        setTimeout(() => {
-            res.send(JSON.stringify(json, null, 4));
-        }, 300);
-    });
-
 
     /*
      * 新增页模板数据
      */
-    app.get('/mock/goods/add', function(req, res) {
+    app.get('/mock/*/add', function(req, res) {
         var data = fs.readFileSync('./src/mock/addView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {
@@ -61,7 +48,7 @@ module.exports = function(express, app) {
     /*
      * 编辑页模板数据
      */
-    app.get('/mock/goods/edit', function(req, res) {
+    app.get('/mock/*/edit', function(req, res) {
         var data = fs.readFileSync('./src/mock/editView.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {
@@ -155,14 +142,19 @@ module.exports = function(express, app) {
 
     // resful的成功/失败
     methods.forEach(method => {
-        var data1 = fs.readFileSync('./src/mock/success.json', 'utf8');
+
         app[method]('/mock/success', function(req, res) {
-            res.send(data1);
+            setTimeout(() => {
+                var data = fs.readFileSync('./src/mock/success.json', 'utf8');
+                res.send(data);
+            }, 300);
         });
 
-        var data2 = fs.readFileSync('./src/mock/error.json', 'utf8');
         app[method]('/mock/error', function(req, res) {
-            res.send(data2);
+            setTimeout(() => {
+                var data = fs.readFileSync('./src/mock/error.json', 'utf8');
+                res.send(data);
+            }, 300);
         });
     });
 

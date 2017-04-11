@@ -46,8 +46,7 @@
         "route": {
             "path": "/home/readonly100"
         }
-    },
-    {
+    }, {
         "id": 1876,
         "text": "iframe",
         "route": {
@@ -68,11 +67,34 @@
         "path": "/login"
     }
 }, {
-    "open": false,
-    "id": 133,
-    "text": "index",
-    "route": {
-        "path": "/home/goods/readonly",
-        "query": {"page": 1, "limit": 3}
-    }
+    "id": 1000,
+    "icon": "plus",
+    "text": "人员",
+    "open": true,
+    "children": [{
+        "id": 10001,
+        "text": "人员列表",
+        "route": {
+            "path": "/home/staff/list",
+            "query": {
+                "page": 1,
+                "limit": 3
+            }
+        }
+    }, {
+        "id": 10002,
+        "text": "人员新增",
+        "route": {
+            "path": "/home/staff/add"
+        }
+    }, {
+        "id": 10003,
+        "text": "人员编辑",
+        "route": {
+            "path": "/home/staff/edit",
+            "query": {
+                "id": 1
+            }
+        }
+    }]
 }]

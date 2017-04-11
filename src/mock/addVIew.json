@@ -11,7 +11,7 @@
             "is": "uploadMulit",
             "text": "点击上传多个文件",
             "url": {
-                "upload": "./mock/upload",
+                "upload": "./mock/error",
                 "del": "./mock/success"
             }
         }, {
@@ -304,7 +304,7 @@
 
         }],
         "url": {
-            "submit": "./mock/error"
+            "submit": "./mock/success"
         }
     }
 }

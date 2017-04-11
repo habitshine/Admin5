@@ -6,7 +6,7 @@
             <input name="upload" class="input-upload" type="file" multiple>
         </label>
         <!-- 预览 -->
-        <ul name="previews" class="previews" v-show="0 < previews.length">
+        <transition-group name="previews" class="previews" v-show="0 < previews.length" tag="ul">
             <li v-for="(preview, i) in previews" :key="preview.id">
                 <div class="pos-r">
                     <!-- 删除按钮 -->
@@ -17,7 +17,7 @@
                     <img v-if="'image' == preview.type" :src="preview.cover">
                 </div>
             </li>
-        </ul>
+        </transition-group>
     </div>
 </template>
 <script>
@@ -68,21 +68,19 @@ export default {
 
                 // 如果是图片, 转base64
                 if (/^image/.test(file.type)) {
+
                     this.previews[this.activeIndex].type = 'image';
 
-                    // 值传递, 生成块级作用域
-                    let activeIndex = this.activeIndex;
                     // 转base64(异步), 作为cover
-                    this.file2base64(file, activeIndex).then(base64 => {
-                        this.previews[activeIndex].cover = base64;
-                        this.upload(file, activeIndex);
-                    });
-                } else {
-                    // 上传(异步)
-                    this.upload(file, this.activeIndex);
+                    this.file2base64(file, this.activeIndex);
                 }
-                // 移动索引到previews的下一个
+
+                // 上传(异步)
+                this.upload(file, this.activeIndex);
+
+                // // 移动索引到previews的下一个
                 this.activeIndex++;
+
             });
 
         });
@@ -96,14 +94,12 @@ export default {
          * @param  {Object} file      
          */
         file2base64(file, index) {
-            return new Promise((resolve, reject) => {
-                FileAPI.Image(file).preview(100).get((err, img) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(img.toDataURL());
-                    }
-                });
+            FileAPI.Image(file).preview(100).get((err, img) => {
+                if (err) {
+
+                } else {
+                    this.previews[index].cover = img.toDataURL();
+                }
             });
         },
 
@@ -130,29 +126,28 @@ export default {
                 },
 
                 complete: (err, xhr, file, options) => {
-
                     var {
                         status,
-                        message,
                         data
                     } = JSON.parse(xhr.response);
-
-                    if(1 == status) {
-                        this.previews[index].id = data.id;
-                        this.previews[index].url = data.url;
-                        this.$emit('input', this.previews.map(item => {
-                            var {id,fileName,type,url} = {...item, url: data.url};
-                            return {
-                                id,
-                                fileName,
-                                type,
-                                url
-                            };
-                        }));                        
-                    } else {
-                        this.previews.splice(index, 1);
-                    }
-
+                    this.previews[index].id = data.id;
+                    this.previews[index].url = data.url;
+                    this.$emit('input', this.previews.map(item => {
+                        var {
+                            id,
+                            fileName,
+                            type,
+                            url
+                        } = {...item,
+                            url: data.url
+                        };
+                        return {
+                            id,
+                            fileName,
+                            type,
+                            url
+                        };
+                    }));
                 }
             });
         },
@@ -190,6 +185,15 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.previews-enter,
+.previews-leave-active {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.previews-leave-active {
+    position: absolute;
+}
 
 $h: 100px;
 .com-upload-mulit {
@@ -278,7 +282,6 @@ $h: 100px;
                     height: $h - 16px - 20px;
                     width: 100%;
                     text-align: center;
-                    text-shadow:1px 2px 30px #000;
                     &:hover {
                         cursor: pointer;
                     }

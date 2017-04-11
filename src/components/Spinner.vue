@@ -18,6 +18,7 @@ export default {
 @mixin loading() {
     .loading {
         overflow: hidden;
+        margin:auto;
         width: 150px;
         text-align: center;
         padding-top: 0.15rem;

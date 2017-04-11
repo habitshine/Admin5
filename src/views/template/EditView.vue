@@ -144,13 +144,15 @@ export default {
                         lock: true,
                         afterClose: () => {
                             try {
-                                if (undefined != response.data.data.path) {
-                                    this.$router.push({
-                                        path: response.data.data.path,
-                                        query: response.data.data.query
-                                    });
-                                } else if (undefined != response.data.data.link) {
-                                    window.location.href = response.data.data.link;
+                                if (undefined != response.data.data) {
+                                    if (undefined != response.data.data.path) {
+                                        this.$router.push({
+                                            path: response.data.data.path,
+                                            query: response.data.data.query
+                                        });
+                                    } else if (undefined != response.data.data.link) {
+                                        window.location.href = response.data.data.link;
+                                    }
                                 }
                             } catch (e) {
                                 syslog(e);

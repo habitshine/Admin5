@@ -141,21 +141,19 @@ module.exports = function(express, app) {
     });
 
     // resful的成功/失败
-    methods.forEach(method => {
 
-        app[method]('/mock/success', function(req, res) {
-            setTimeout(() => {
-                var data = fs.readFileSync('./src/mock/success.json', 'utf8');
-                res.send(data);
-            }, 300);
-        });
+    app.all('/mock/success', function(req, res) {
+        setTimeout(() => {
+            var data = fs.readFileSync('./src/mock/success.json', 'utf8');
+            res.send(data);
+        }, 300);
+    });
 
-        app[method]('/mock/error', function(req, res) {
-            setTimeout(() => {
-                var data = fs.readFileSync('./src/mock/error.json', 'utf8');
-                res.send(data);
-            }, 300);
-        });
+    app.all('/mock/error', function(req, res) {
+        setTimeout(() => {
+            var data = fs.readFileSync('./src/mock/error.json', 'utf8');
+            res.send(data);
+        }, 300);
     });
 
     /*伪装上传服务器*/
@@ -163,7 +161,7 @@ module.exports = function(express, app) {
     var uploadDir = './uploads';
     var multiparty = require('multiparty');
     app.post('/mock/upload', function(req, res) {
-        console.log(req.body)
+        
 
         // 建立上传文件夹
         if (!fs.existsSync(uploadDir)) {
@@ -177,7 +175,9 @@ module.exports = function(express, app) {
         });
 
         form.parse(req, function(err, fields, files) {
-
+            console.log(fields)
+            console.log('@')
+            console.log(files)
             var filesTmp = JSON.stringify(files, null, 2);
             if (err) {
                 console.log('parse error: ' + err);

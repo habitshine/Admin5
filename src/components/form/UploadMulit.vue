@@ -219,6 +219,7 @@ $h: 100px;
             box-shadow: 1px 2px 3px rgba(0, 0, 0, .1);
             .pos-r {
                 position: relative;
+                width: 100%;height: 100%;
                 >.mask {
                     position: absolute;
                     top: 0;

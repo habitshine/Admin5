@@ -3,36 +3,31 @@
         <v-mask v-show="-1 == status">
             <v-spinner class="spinner"></v-spinner>
         </v-mask>
-
         <p v-if="0 == status" class="alert alert-warning">
             <strong>系统: </strong>{{message}}
             <a class="btn btn-link btn-xs" @click="$router.go(-1)">返回</a>
         </p>
-                <!-- 表格 暂时不加class: table-bordered  table-striped-->
-                <table v-else class="table table-responsive table-hover table-bordered  table-striped">
-                    <!-- 头 -->
-                    <thead>
-                        <tr>
-                            <th @click="selectAll">
-                                <v-checkbox style="margin:0" :size="checkboxSize" v-model="allSelect"></v-checkbox>
-                            </th>
-                            <slot name="header"></slot>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr v-if="!removeList[row[primaryKey]]"
-                            v-for="(row, i) in table"  
-                            :key="row[primaryKey]">
-                            <td>
-                                <v-checkbox style="margin:0" :size="checkboxSize" v-model="checkedList[i]">
-                                </v-checkbox>
-                            </td>
-                            <slot name="row" :row="row" :primaryKey="row[primaryKey]" :index="i"></slot>
-                        </tr>
-                    </tbody>
-                </table>
-
+        <!-- 表格 暂时不加class: table-bordered  table-striped-->
+        <table v-else class="table table-responsive table-hover table-bordered  table-striped">
+            <!-- 头 -->
+            <thead>
+                <tr>
+                    <th @click="selectAll">
+                        <v-checkbox style="margin:0" :size="checkboxSize" v-model="allSelect"></v-checkbox>
+                    </th>
+                    <slot name="header"></slot>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-if="!removeList[row[primaryKey]]" v-for="(row, i) in table" :key="row[primaryKey]">
+                    <td>
+                        <v-checkbox style="margin:0" :size="checkboxSize" v-model="checkedList[i]">
+                        </v-checkbox>
+                    </td>
+                    <slot name="row" :row="row" :primaryKey="row[primaryKey]" :index="i"></slot>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 <script>
@@ -42,7 +37,7 @@ import VCheckbox from './form/Checkbox'
 
 export default {
     name: 'table',
-    
+
     props: {
         table: {
             type: Array
@@ -84,8 +79,8 @@ export default {
     },
 
     watch: {
-        activePrimaryKey(value){
-            if('remove' == this.action) {
+        activePrimaryKey(value) {
+            if ('remove' == this.action) {
                 this.removeList[value] = true;
             }
 
@@ -143,26 +138,31 @@ export default {
     min-height: 200px;
     overflow: hidden;
     position: relative;
-
-    .spinner{background: rgba(0,0,0,.8);display: table;margin:10% auto;padding: 15px 0;border-radius: 8px;box-shadow: 0 1px 3px rgba(0,0,0,.25);}
-
-
-.tr-enter {
-    opacity: 0;
-    transform: translateX(-.5rem);
+    .spinner {
+        background: rgba(0, 0, 0, .8);
+        // display: table;
+        width: 150px;
+        height: 90px;
+        margin: auto;
+        position: absolute;
+        top: 0; bottom: 0; 
+        right: 0;left:0;
+        z-index: 1986;
+        padding: 15px 0;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+    }
+    .tr-enter {
+        opacity: 0;
+        transform: translateX(-.5rem);
+    }
+    .tr-enter-active {
+        transition: all .5s;
+    }
+    .tr-leave-active {
+        opacity: 0;
+        transition: all .5s;
+        transform: translateX(-.5rem);
+    }
 }
-
-.tr-enter-active {
-    transition: all .5s;
-}
-
-.tr-leave-active {
-    opacity: 0;
-    transition: all .5s;
-    transform: translateX(-.5rem);
-}
-
-
-}
-
 </style>

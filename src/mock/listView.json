@@ -2,7 +2,7 @@
     "message": "无数据",
     "status": 1,
     "data": {
-        "breadcrumb": [{ "icon": "file-o", "text": "世界" }, { "icon": "file-o", "text": "中国" }, { "icon": "file-o", "text": "农村" }],
+        "breadcrumb": [{ "icon": "file-o", "text": "世界", "route": {"path": "/home/goods/list", "query": {"id": 1}} }, { "icon": "file-o", "text": "中国", "route": {"path": "/home/goods/list", "query": {"id": 2}} }, { "icon": "file-o", "text": "农村" , "route": {"path": "/home/goods/list", "query": {"id": 3}}}],
         "formHiddenValue": { "a": 1, "b": [2, 3, 4] },
         "form": [{
             "title": "树形选择器",

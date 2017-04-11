@@ -84,7 +84,6 @@ export default {
         return {
             // 已勾选数据
             formValues: {
-                accessToken: this.$store.state.loginModule.accessToken,
                 limit: this.$route.query.limit,
                 page: this.$route.query.page,
                 filter: {}
@@ -210,8 +209,9 @@ export default {
             axios.get(this.viewData.data.table.url, {
                     params: {
                         accessToken: this.$store.state.loginModule.accessToken,
-                        page: this.$route.query.page,
-                        limit: this.$route.query.limit,
+                        // page: this.$route.query.page,
+                        // limit: this.$route.query.limit,
+                        ...{...this.$route.query, filter: undefined},
                         ...this.formValues.filter,
                         ...this.viewData.data.formHiddenValue
                     }
@@ -249,8 +249,7 @@ export default {
                 query: {
                     page: 1,
                     limit: this.formValues.limit,
-                    filter: JSON.stringify(this.formValues.filter),
-                    accessToken: this.$store.state.loginModule.accessToken
+                    filter: JSON.stringify(this.formValues.filter)
                 }
             });
         },
@@ -262,8 +261,7 @@ export default {
             this.$router.push({
                 query: {
                     page: 1,
-                    limit: this.formValues.limit,
-                    accessToken: this.$store.state.loginModule.accessToken
+                    limit: this.formValues.limit
                 }
             });
         },

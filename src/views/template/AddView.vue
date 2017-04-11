@@ -90,7 +90,8 @@ export default {
          * @param  {Function} cb 回调
          */
         httpGetBaseView(cb) {
-            var url = [API_ROOT, this.$route.params[0], this.$route.params[1]].join('/');
+            // var url = [API_ROOT, this.$route.params[0], this.$route.params[1]].join('/');
+            var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
             axios.get(url, {
                     params: {
                         accessToken: this.$store.state.loginModule.accessToken
@@ -123,10 +124,14 @@ export default {
                         lock: true,
                         afterClose: () => {
                             try {
-                                this.$router.push({
-                                    path: response.data.data.path,
-                                    query: response.data.data.query
-                                });
+                                if (undefined != response.data.data.path) {
+                                    this.$router.push({
+                                        path: response.data.data.path,
+                                        query: response.data.data.query
+                                    });
+                                } else if (undefined != response.data.data.link) {
+                                    window.location.href = response.data.data.link;
+                                }
                             } catch (e) {
                                 syslog(e);
                             }

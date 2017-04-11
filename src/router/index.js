@@ -10,7 +10,7 @@ import TestView from '../views/TestView'
 
 // 路由配置
 const routes = [
-    { path: '/', redirect: '/home' },
+    { path: '/', redirect: '/home/index/index' },
     { path: '/home', component: FrameLayout, children: require('./module.home.js').routes },
     { path: '/login', component: LoginView, name: 'loginView' },
     { path: '/test', component: TestView, name: 'testView' },

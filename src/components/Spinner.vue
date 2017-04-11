@@ -1,6 +1,6 @@
 <template>
-    <div class="com-loader">
-        <div class="spinner">
+    <div class="com-spinner">
+        <div class="loading">
             <div class="bounce1"></div>
             <div class="bounce2"></div>
             <div class="bounce3"></div>
@@ -16,9 +16,8 @@ export default {
 
 <style scoped lang=scss>
 @mixin loading() {
-    .spinner {
+    .loading {
         overflow: hidden;
-        margin:0.15rem auto;
         width: 150px;
         text-align: center;
         padding-top: 0.15rem;
@@ -67,7 +66,7 @@ export default {
     }
 }
 
-.com-loader {
+.com-spinner {
     @include loading;
     p {
         font-size: 0.14rem;

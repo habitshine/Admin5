@@ -1,5 +1,5 @@
 export var routes = [{
-    path: '/',
+    path: 'index/index',
     component: resolve => {
         require.ensure(['../views/HomeView'], () => {
             resolve(require('../views/HomeView'))
@@ -29,21 +29,21 @@ export var routes = [{
     },
     name: 'DraggableView'
 }, {
-    path: '*/(add|append|post)+',
+    path: '*/(.)*(add|append|post)+(.)*',
     component: resolve => {
         require.ensure(['../views/template/AddView'], () => {
             resolve(require('../views/template/AddView'))
         });
     }
 }, {
-    path: '*/(edit|save|view|operate|setting|config|put)+',
+    path: '*/(.)*(edit|save|view|operate|setting|config|put)+(.)*',
     component: resolve => {
         require.ensure(['../views/template/EditView'], () => {
             resolve(require('../views/template/EditView'))
         });
     }
 }, {
-    path: '*/(list|index|get|table)+',
+    path: '*/(.)*(list|index|get|table)+(.)*',
     component: resolve => {
         require.ensure(['../views/template/ListView'], () => {
             resolve(require('../views/template/ListView'))

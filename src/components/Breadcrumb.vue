@@ -1,6 +1,6 @@
 <template>
     <ol class="com-breadcrumb">
-        <li v-for="item in value"><i :class="['fa', 'fa-'+item.icon]"></i> {{item.text}}</li>
+        <li v-for="item in value" @click="changeRoute(item.route)"><i :class="['fa', 'fa-'+item.icon]"></i> {{item.text}}</li>
     </ol>
 </template>
 <script>
@@ -10,6 +10,12 @@ export default {
     props: {
         value: {
             type: Array
+        }
+    },
+
+    methods: {
+        changeRoute(route) {
+            this.$router.push(route);
         }
     }
 }
@@ -22,6 +28,9 @@ export default {
     box-shadow: 1px 2px 3px #eee;
     >li {
         display: inline-block;
+        &:hover {
+            cursor: pointer;
+        }
     }
     >li+li:before {
         color: #ddd;

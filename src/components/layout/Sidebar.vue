@@ -1,6 +1,6 @@
 <template>
     <div class="layout-sidebar">
-        <ul class="menu">
+        <ul class="menu-part">
             <template v-for="item in menu">
                 <li v-if="undefined == item.children" :key="item.id">
                     <!-- 无子菜单 -->
@@ -68,8 +68,10 @@ $fontColor: #777;
     .rotate {
         transform: rotate(-90deg);
     }
-    ul.menu {
+   
+    ul.menu-part {
         >li {
+
             &.hasChildren {
                 overflow: hidden;
             }
@@ -82,11 +84,13 @@ $fontColor: #777;
                     background: $hoverColor;
                     cursor: pointer;
                 }
+                
+                &.router-link-active{color: #fff;background: #777;}
+
             }
             >a {
                 padding: 15px;
             }
-            >ul {}
             >ul>li {
                 >a {
                     padding: 15px 30px;

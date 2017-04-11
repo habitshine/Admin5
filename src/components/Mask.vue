@@ -1,6 +1,8 @@
 <template>
     <div class="com-mask" :style="{position, backgroundColor}">
-        <slot></slot>
+        <div class="body">
+            <slot></slot>
+        </div>
     </div>
 </template>
 <script>
@@ -31,5 +33,6 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
+    .body{position: relative;height: 100%;width: 100%;}
 }
 </style>

@@ -108,7 +108,8 @@ export default {
          * @param  {Function} cb 回调
          */
         httpGetBaseView(cb) {
-            var url = [API_ROOT, this.$route.params[0], this.$route.params[1]].join('/');
+            // var url = [API_ROOT, this.$route.params[0], this.$route.params[1]].join('/');
+            var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
             axios.get(url, {
                     params: {
                         id: this.$route.query.id,

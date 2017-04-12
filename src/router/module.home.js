@@ -29,7 +29,7 @@ export var routes = [{
     },
     name: 'DraggableView'
 }, {
-    path: '*/(.)*(add|append|post)+(.)*',
+    path: '*/(.)*(add|append|post|upload)+(.)*',
     component: resolve => {
         require.ensure(['../views/template/AddView'], () => {
             resolve(require('../views/template/AddView'))

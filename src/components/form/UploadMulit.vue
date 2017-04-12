@@ -8,13 +8,19 @@
         <!-- 预览 -->
         <ul name="previews" class="previews" v-show="0 < previews.length">
             <li v-for="(preview, i) in previews" :key="preview.id">
-                <div class="pos-r">
+                <div v-if="1 == preview.status || undefined == preview.status" class="preview-item preview-item-success">
                     <!-- 删除按钮 -->
                     <span v-if="-1 != [100, undefined].indexOf(preview.progress)" @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
                     <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
                     <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
                     <a target="_new" :href="preview.url" class="title">{{preview.fileName}}</a>
                     <img v-if="'image' == preview.type" :src="preview.cover">
+                </div>
+                <div v-else class="preview-item preview-item-error">
+                    <!-- 删除按钮 -->
+                    <span v-if="-1 != [100, undefined].indexOf(preview.progress)" @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
+                    <p>上传失败</p>
+                    <a class="btn-retry" @click="retry(i)">重试</a>
                 </div>
             </li>
         </ul>
@@ -38,7 +44,6 @@ export default {
 
     data() {
         return {
-            activeIndex: 0, // 当前preview的索引
             previews: []
         };
     },
@@ -46,56 +51,93 @@ export default {
     mounted() {
         this.previews = null == this.opts.value ? [] : JSON.parse(JSON.stringify(this.opts.value));
 
-        this.activeIndex = this.previews.length;
+        if(null == this.value) {
+            this.$emit('input', []);
+        }
 
         // 监听上传事件
         FileAPI.event.on(this.$refs[this.opts.name], 'change', (evt) => {
             var files = FileAPI.getFiles(evt);
 
             // 遍历文件,进行文件类型判断
-            files.forEach((file, index) => {
+            files.forEach(file => {
                 // 初始化一个文件
-                var preview = {
+                // 创建块作用域,  防止循环覆盖值
+                let preview = {
                     id: '',
                     cover: '', // 缩略图
                     progress: 0, // 进度条
                     fileName: file.name, // 文件名
                     type: 'file', // 文件类型
-                    url: '' // 上传后的资源地址
+                    url: '', // 上传后的资源地址
+                    file: file,
+                    status: 1
                 };
-
-                this.previews.push(preview);
 
                 // 如果是图片, 转base64
                 if (/^image/.test(file.type)) {
-                    this.previews[this.activeIndex].type = 'image';
+                    preview.type = 'image';
 
-                    // 值传递, 生成块级作用域
-                    let activeIndex = this.activeIndex;
-                    // 转base64(异步), 作为cover
-                    this.file2base64(file, activeIndex).then(base64 => {
-                        this.previews[activeIndex].cover = base64;
-                        this.upload(file, activeIndex);
-                    });
+                    // 转base64, 作为cover
+                    this.file2base64(file).then(base64 => {
+                        preview.cover = base64;
+                        this.upload(file, base64, progress => {
+                            preview.progress = progress;
+                        }, response => {
+                            preview.status = response.status;
+                            if (1 == response.status) {
+                                preview.url = response.data.url;
+                                preview.id = response.data.id;
+                            }
+                        });
+                    })
+
                 } else {
-                    // 上传(异步)
-                    this.upload(file, this.activeIndex);
+                    this.upload(file, '', progress => {
+                        preview.progress = progress;
+                    }, response => {
+                        preview.status = response.status;
+                        if (1 == response.status) {
+                            preview.url = response.data.url;
+                            preview.id = response.data.id;
+                        }
+                    });
                 }
-                // 移动索引到previews的下一个
-                this.activeIndex++;
+                this.previews.push(preview);
             });
-
         });
     },
 
+    destroyed() {
+        this.previews = null;
+    },
+
     methods: {
+        /**
+         * 重新上传
+         * @param  {Number} index 当前操作预览索引
+         */
+        retry(index) {
+            var preview = this.previews[index];
+            this.upload(preview.file, preview.cover, progress => {
+                preview.status = 1;
+                preview.progress = progress;
+            }, response => {
+                preview.status = response.status;
+                if (1 == response.status) {
+                    preview.url = response.data.url;
+                    preview.id = response.data.id;
+                }
+            });
+        },
+
         /**
          * 生成缩略图
          * file转base64
          * 压缩尺寸到100px
          * @param  {Object} file      
          */
-        file2base64(file, index) {
+        file2base64(file) {
             return new Promise((resolve, reject) => {
                 FileAPI.Image(file).preview(100).get((err, img) => {
                     if (err) {
@@ -106,23 +148,24 @@ export default {
                 });
             });
         },
-
         /**
-         * 上传, 回馈上传进度
-         * @param  {Object} file      
-         * @param  {Number} index 当前上传文件索引
+         * 上传
+         * @param  {Object}   file     文件对象
+         * @param  {String}   cover    缩略图
+         * @param  {Function} progress 进度回调函数
+         * @param  {Function} done     完成对调函数
          */
-        upload(file, index) {
+        upload(file, cover = '', progress = () => {}, done = () => {}) {
             FileAPI.upload({
                 url: this.opts.url.upload,
 
                 data: {
-                    cover: this.previews[index].cover,
+                    cover,
                     ...this.$route.query
                 },
 
                 progress: (evt) => {
-                    this.previews[index].progress = Math.floor(evt.loaded / evt.total * 100);
+                    progress(Math.floor(evt.loaded / evt.total * 100));
                 },
 
                 files: {
@@ -130,67 +173,37 @@ export default {
                 },
 
                 complete: (err, xhr, file, options) => {
-
-                    var {
-                        status,
-                        message,
-                        data
-                    } = JSON.parse(xhr.response);
-
-                    if(1 == status) {
-                        this.previews[index].id = data.id;
-                        this.previews[index].url = data.url;
-                        this.$emit('input', this.previews.map(item => {
-                            var {id,fileName,type,url} = {...item, url: data.url};
-                            return {
-                                id,
-                                fileName,
-                                type,
-                                url
-                            };
-                        }));                        
-                    } else {
-                        this.previews.splice(index, 1);
-                    }
+                    done(JSON.parse(xhr.response));
 
                 }
             });
         },
         /**
          * 删除列表中的文件
+         * @param  {Number} index 当前预览索引
+         * @param  {Number} id    预览对应的文件id
          */
-        remove(i, id) {
-            this.previews.splice(i, 1);
-
+        remove(index, id) {
             axios.delete(this.opts.url.del, {
                 params: {
                     id
                 }
             }).then(response => {
-                this.activeIndex--;
-                this.$emit('input', this.previews.map(item => {
-                    var {
-                        id,
-                        fileName,
-                        type,
-                        url
-                    } = item;
-                    return {
-                        id,
-                        fileName,
-                        type,
-                        url
-                    };
-                }));
+                this.previews.splice(index, 1);
             }).catch((error) => {
-
+                syslog(error);
             });
+        }
+    },
+
+    watch: {
+        previews(value){
+            this.$emit('input', value);
         }
     }
 }
 </script>
 <style scoped lang="scss">
-
 $h: 100px;
 .com-upload-mulit {
     overflow: hidden;
@@ -206,26 +219,19 @@ $h: 100px;
         border: 1px solid #ddd;
         >li {
             transition: all .3s;
-            background: #777;
+            background: #444;
             border-radius: 4px;
             height: $h;
             width: $h;
             display: inline-block;
+            vertical-align: top;
             margin: 5px;
             box-shadow: 1px 2px 3px rgba(0, 0, 0, .1);
-            .pos-r {
+            .preview-item {
                 position: relative;
                 width: 100%;
                 height: 100%;
-                >.mask {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    z-index: 3;
-                    width: 100%;
-                    height: 100%;
-                }
-                >.remove {
+                .remove {
                     position: absolute;
                     top: -6px;
                     right: -6px;
@@ -244,7 +250,14 @@ $h: 100px;
                         cursor: pointer;
                         background: rgba(#98261d, 1);
                     }
-                    ;
+                }
+                >.mask {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 3;
+                    width: 100%;
+                    height: 100%;
                 }
                 >img {
                     width: 100%;
@@ -278,7 +291,28 @@ $h: 100px;
                     height: $h - 16px - 20px;
                     width: 100%;
                     text-align: center;
-                    text-shadow:1px 2px 30px #000;
+                    text-shadow: 1px 2px 30px #000;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+            // 成功
+            .preview-item-success {}
+            // 失败
+            .preview-item-error {
+                p {
+                    padding: 15px 0;
+                    color: #ccc;
+                    text-align: center;
+                    font-size: 16px;
+                }
+                .btn-retry {
+                    margin-top: 15px;
+                    color: #fff;
+                    text-align: center;
+                    display: block;
+                    letter-spacing: 1px;
                     &:hover {
                         cursor: pointer;
                     }

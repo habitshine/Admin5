@@ -43,8 +43,12 @@ router.beforeEach((to, from, next) => {
         }
     }
 });
-Vue.config.productionTip = false
-    /* eslint-disable no-new */
+Vue.config.productionTip = false;
+
+import Dialog from './dialog';
+Vue.use(Dialog)
+
+/* eslint-disable no-new */
 new Vue({
     store,
     el: '#app',

@@ -1,12 +1,14 @@
 <template>
-    <div class="com-prompt"></div>
+    <div class="com-prompt">
+    	<h1>{{text}}</h1>
+    </div>
 </template>
 <script>
 export default {
     name: 'prompt',
 
     props: {
-        opts: {},
+        text: {},
 
         value: {}
     },

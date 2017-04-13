@@ -30,7 +30,9 @@
                         <th nowrap v-for="item in viewData.data.table.header">
                             <i :class="['fa', 'fa-' + item.icon]"></i> {{item.text}}
                         </th>
-                        <th><i class="fa fa-wrench"></i> 操作</th>
+                        <th v-if="-1 == [undefined, [], null].indexOf(viewData.data.table.btnGroupInRow)">
+                            <i class="fa fa-wrench"></i> 操作
+                        </th>
                     </template>
                     <!-- tr td -->
                     <template slot="row" scope="props">

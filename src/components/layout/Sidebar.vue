@@ -36,7 +36,7 @@ export default {
     },
 
     mounted() {
-        this.$store.dispatch('getMenuList', this.$store.state.loginModule.accessToken).then(response => {
+        this.$store.dispatch('getMenuList').then(response => {
             if (1 == response.status) {
                 this.menu = response.data.menu;
             }

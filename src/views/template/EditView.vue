@@ -47,7 +47,6 @@ export default {
             },
             // 表单结果数据
             formValues: {
-                accessToken: this.$store.state.loginModule.accessToken,
                 body: {}
             },
             // 构造表单
@@ -112,8 +111,7 @@ export default {
             var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
             axios.get(url, {
                     params: {
-                        id: this.$route.query.id,
-                        accessToken: this.$store.state.loginModule.accessToken
+                        id: this.$route.query.id
                     }
                 })
                 .then((response) => {
@@ -131,7 +129,6 @@ export default {
             // http
             axios.put(this.form.data.url.submit, qs.stringify({
                     id: this.$route.query.id,
-                    accessToken: this.$store.state.loginModule.accessToken,
                     ...this.formValues.body,
                     ...this.form.data.formHiddenValue
                 }))

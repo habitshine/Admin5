@@ -33,7 +33,6 @@ export default {
         return {
             // 表单结果数据
             formValues: {
-                accessToken: this.$store.state.loginModule.accessToken,
                 body: {}
             },
             // 构造表单
@@ -92,11 +91,7 @@ export default {
         httpGetBaseView(cb) {
             // var url = [API_ROOT, this.$route.params[0], this.$route.params[1]].join('/');
             var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
-            axios.get(url, {
-                    params: {
-                        accessToken: this.$store.state.loginModule.accessToken
-                    }
-                })
+            axios.get(url)
                 .then((response) => {
                     cb(response);
                 })
@@ -110,7 +105,6 @@ export default {
          */
         submit() {
             axios.post(this.form.data.url.submit, qs.stringify({
-                    accessToken: this.$store.state.loginModule.accessToken,
                     ...this.formValues.body,
                     ...this.form.data.formHiddenValue
                 }))

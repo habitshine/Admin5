@@ -1,24 +1,22 @@
 // 开发/上线阶段全局变量
 // http://113.6.252.23:6688/tools/vue?page=1&limit=15
-if(process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV == 'production') {
     window.API_ROOT = 'http://113.6.252.23:6688';
-    window.MENU_URL  = [window.API_ROOT , '/personal/menu'].join('');
-    window.LOGIN_URL = [window.API_ROOT , '/oauth'].join('');  
+    window.MENU_URL = [window.API_ROOT, '/personal/menu'].join('');
+    window.LOGIN_URL = [window.API_ROOT, '/oauth'].join('');
 } else {
     window.API_ROOT = './mock';
     window.MENU_URL = './mock/menu';
-    window.LOGIN_URL = './mock/login'    
+    window.LOGIN_URL = './mock/login'
 }
 
 import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
-// import 'font-awesome/css/font-awesome.css'
 import 'bootstrap/dist/css/bootstrap.css'
 window.axios = require('axios');
-// axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.common['Access-Token'] = store.state.loginModule.accessToken;
 window.qs = require('qs');
 
 // debug
@@ -35,18 +33,18 @@ window.HOME_ROUTE = '/home/';
  */
 router.beforeEach((to, from, next) => {
     // 排除404 和 login, 不验证token
-    if(-1 != ['view404', 'loginView'].indexOf(to.name)){
+    if (-1 != ['view404', 'loginView'].indexOf(to.name)) {
         next();
     } else {
-        if(-1 != ['', undefined, null].indexOf(store.state.loginModule.accessToken)) {
-            next({path: '/login'});
+        if (-1 != ['', undefined, null].indexOf(store.state.loginModule.accessToken)) {
+            next({ path: '/login' });
         } else {
             next();
         }
     }
 });
 Vue.config.productionTip = false
-/* eslint-disable no-new */
+    /* eslint-disable no-new */
 new Vue({
     store,
     el: '#app',

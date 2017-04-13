@@ -1,7 +1,5 @@
 import { SAVE_ACCESS_TOKEN, SAVE_USER_NAME, EXIT } from '../mutation-types.js'
-import axios from 'axios';
-import qs from 'qs';
-// initial state
+
 const state = {
     accessToken: localStorage.getItem('accessToken'),
     userName: localStorage.getItem('userName')
@@ -17,6 +15,8 @@ const actions = {
                     if (1 == response.data.status) {
                         commit('saveUserName', userName);
                         commit('saveAccessToken', response.data.data.accessToken);
+                        // 设置全局token
+                        axios.defaults.headers.common['Access-Token'] = response.data.data.accessToken;
                     }
                     resolve(response.data);
                 })

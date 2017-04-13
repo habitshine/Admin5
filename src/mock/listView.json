@@ -513,6 +513,11 @@
                 "text": "分类",
                 "key": "category",
                 "icon": "coffee"
+            }, {
+                "text": "下载",
+                "key": "url",
+                "icon": "coffee",
+                "type": "link"
             }]
         }
     }

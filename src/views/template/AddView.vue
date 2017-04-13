@@ -12,9 +12,7 @@
                         <a @click="back" class="btn btn-default">
                             <i class="glyphicon glyphicon-return"></i> 返回
                         </a>
-                        <a @click="submit" class="btn btn-primary">
-                            <i class="glyphicon glyphicon-ok"></i> 确定
-                        </a>
+                        <v-button @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
                     </template>
                 </form-layout>
             </div>
@@ -25,6 +23,7 @@
 import FormLayout from '../../components/layout/Form'
 import VSpinner from '../../components/Spinner'
 import VForm from '../../components/Form'
+import VButton from '../../components/form/Button'
 
 export default {
     name: 'addView',
@@ -39,6 +38,11 @@ export default {
             form: {
                 status: -1,
                 data: {}
+            },
+            btnSubmit: {
+                disabled: false,
+                loading: false,
+                text: '确定'
             }
         };
     },
@@ -104,12 +108,19 @@ export default {
          * 提交
          */
         submit() {
+            this.btnSubmit.disabled = true;
+            this.btnSubmit.loading = true;
+            this.btnSubmit.text = '处理中...';
+
             axios.post(this.form.data.url.submit, qs.stringify({
                     ...this.formValues.body,
                     ...this.form.data.formHiddenValue
                 }))
                 .then((response) => {
-                    // this.$store.commit('notify', {type: 'success', text: response.data.message}); 
+                    this.btnSubmit.disabled = false;
+                    this.btnSubmit.loading = false;
+                    this.btnSubmit.text = '确定';
+
                     this.$store.commit('alert', {
                         width: '200px',
                         show: true,
@@ -147,7 +158,8 @@ export default {
     components: {
         VSpinner,
         FormLayout,
-        VForm
+        VForm,
+        VButton
     },
 
     activated() {}

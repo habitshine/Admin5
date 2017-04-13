@@ -37,7 +37,7 @@
                         <!-- 数据列 -->
                         <td v-for="obj in viewData.data.table.header">
                             <template v-if="'link' == obj.type">
-                                <a :href="props.row[obj.key]" class="btn btn-xs btn-link"><i class="fa fa-cloud"></i> 下载</a>
+                                <a :href="props.row[obj.key]" class="btn btn-xs btn-link"><i class="fa fa-download"></i> 下载</a>
                             </template>
                             
                             <template v-else>

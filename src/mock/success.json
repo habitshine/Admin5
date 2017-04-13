@@ -1,11 +1,8 @@
 {
     "status": 1,
     "message": "恭喜你,成功了!",
+    "delay": 3000,
     "data": {
-        "path": "/home/goods/list",
-        "query": {
-            "page": 1,
-            "limit": 15
-        }
+
     }
 }

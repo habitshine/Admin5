@@ -1,6 +1,6 @@
 <template>
     <transition>
-        <iframe width="100%" :height="h" frameborder="0" src="http://baidu.com"></iframe>
+        <iframe width="100%" :height="h" frameborder="0" :src="url"></iframe>
     </transition>
 </template>
 <script>
@@ -15,8 +15,10 @@ export default {
         return {h: 1000};
     },
 
-    methods: {
-
+    computed: {
+        url(){
+            return this.$route.query.url;
+        }
     }
 }
 </script>

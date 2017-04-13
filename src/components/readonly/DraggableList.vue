@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="drap-wrap">
         <div class="col-md-12 drag-h1">制定<span class="month">{{opts.month}}月份</span><span class="name">{{opts.name}}</span>的考核表</div>
         <h4 class="col-md-12 drag-h4">业绩指标</h4>
         <div class="col-md-6">
@@ -67,6 +67,7 @@
                 </transition-group>
             </draggable>
         </div>
+        <div class="wrap-drag-btn"><input class="drag-btn" type="button" value="确定"></div>
     </div>
 </template>
 
@@ -341,6 +342,25 @@
         &:hover{
             background: rgba(0,0,0,0.5);
             transform:rotate(-90deg);
+        }
+    }
+    .drap-wrap{
+        overflow: hidden;
+    }
+    .wrap-drag-btn{
+        clear: both;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .drag-btn{
+        font-size: 14px;
+        background: #14bb9d;
+        color: #fff;
+        height: 40px;
+        width: 100px;
+        transition: opacity .3s;
+        &:hover{
+            opacity: .8;
         }
     }
 </style>

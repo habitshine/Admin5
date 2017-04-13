@@ -100,6 +100,18 @@
             this.list2 = this.opts.list2;
         },
         methods:{
+            httpPostData(){
+                axios.post('', {
+                    firstName: 'Fred',
+                    lastName: 'Flintstone'
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
             removeItem(idx,el){
                this.list2.splice(idx,1);
                this.list.push(el);

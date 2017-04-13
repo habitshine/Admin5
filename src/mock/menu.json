@@ -47,10 +47,18 @@
             "path": "/home/readonly100"
         }
     }, {
-        "id": 1876,
-        "text": "iframe",
+        "id": 1230,
+        "text": "baidu.com",
         "route": {
-            "path": "/home/goods/iframe"
+            "path": "/home/goods/iframeA",
+            "query": { "url": "http://baidu.com" }
+        }
+    }, {
+        "id": 1231,
+        "text": "taobao.com",
+        "route": {
+            "path": "/home/goods/iframeB",
+            "query": { "url": "http://taobao.com" }
         }
     }, {
         "id": 14,

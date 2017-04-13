@@ -50,5 +50,12 @@ export var routes = [
                 resolve(require('../views/template/ListView'))
             });
         }
+    }, {
+        path: '*/(.)*(iframe)+(.)*',
+        component: resolve => {
+            require.ensure(['../views/template/IFrame'], () => {
+                resolve(require('../views/template/IFrame'))
+            });
+        }
     }
 ]

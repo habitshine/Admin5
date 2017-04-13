@@ -13,7 +13,6 @@
 |data.count   | 总页数  |
 |data.list   | 列表数据(数组) |
 |data.list.id   | 必填属性 |
-|data.list.status   | 必填属性, 默认为1即可 |
 
 
 ### 数据示例
@@ -23,8 +22,8 @@
 	"data": {
 		"count": 15,
 		"list": [
-				{"id": 1, "title": "标题1", "status": 1},
-				{"id": 2, "title": "标题1", "status": 1}
+				{"id": 1, "title": "标题1"},
+				{"id": 2, "title": "标题1"}
 			]
 	}
 }

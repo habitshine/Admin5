@@ -36,7 +36,13 @@
                     <template slot="row" scope="props">
                         <!-- 数据列 -->
                         <td v-for="obj in viewData.data.table.header">
-                            {{props.row[obj.key]}}
+                            <template v-if="'link' == obj.type">
+                                <a :href="props.row[obj.key]" class="btn btn-xs btn-link"><i class="fa fa-cloud"></i> 下载</a>
+                            </template>
+                            
+                            <template v-else>
+                                {{props.row[obj.key]}}
+                            </template>
                         </td>
                         <!-- 功能列 -->
                         <td nowrap>
@@ -44,9 +50,11 @@
                                 <a v-if="'remove' == btn.type" class="btn btn-xs btn-link" @click="remove(btn.url, props.primaryKey)">
                                     <i class="fa fa-remove"></i> 删除
                                 </a>
-                                <router-link v-else :to="{path: btn.path, query: {id: props.primaryKey}}" class="btn btn-xs btn-link">
+                                <router-link v-else-if="'route' == btn.type" :to="{path: btn.path, query: {id: props.primaryKey}}" class="btn btn-xs btn-link">
                                     <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
                                 </router-link>
+
+
                             </template>
                         </td>
                     </template>
@@ -188,11 +196,7 @@ export default {
          */
         httpGetBaseView(cb) {
             var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
-            axios.get(url, {
-                    params: {
-                        accessToken: this.$store.state.loginModule.accessToken,
-                    }
-                })
+            axios.get(url)
                 .then((response) => {
                     cb(response);
                 })
@@ -208,10 +212,10 @@ export default {
             this.table.primaryKey = this.viewData.data.table.primaryKey;
             axios.get(this.viewData.data.table.url, {
                     params: {
-                        accessToken: this.$store.state.loginModule.accessToken,
                         // page: this.$route.query.page,
                         // limit: this.$route.query.limit,
-                        ...{...this.$route.query, filter: undefined},
+                        ... {...this.$route.query, filter: undefined
+                        },
                         ...this.formValues.filter,
                         ...this.viewData.data.formHiddenValue
                     }
@@ -276,7 +280,6 @@ export default {
                 ok: () => {
                     axios.delete(url, {
                         params: {
-                            accessToken: this.$store.state.loginModule.accessToken,
                             id
                         }
                     }).then(response => {

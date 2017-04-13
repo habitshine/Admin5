@@ -18,6 +18,7 @@ list# listView(列表页面初始化数据)
 |data.table.header[].text   | 表格标题  |
 |data.table.header[].key   | 数据库中该字段对应的键名  |
 |data.table.header[].icon  | 表头图标  |
+|data.table.header[].type  | 表格内容类型, link代表内容为链接, 默认可无该字段  |
 |data.table.btnGroupInRow   | 行内的按钮  |
 |data.table.btnGroupInRow[].text   | 按钮文字  |
 |data.table.btnGroupInRow[].icon   | 对应fontAsome图标名  |

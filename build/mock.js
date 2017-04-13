@@ -70,7 +70,6 @@ module.exports = function(express, app) {
         var mock_config = { status: 1, data: { list: [], count: pageCount } };
 
         json['uid|+1'] = page * limit;
-        console.log(json)
 
         mock_config.data['list|' + limit] = [json];
 
@@ -143,17 +142,19 @@ module.exports = function(express, app) {
     // resful的成功/失败
 
     app.all('/mock/success', function(req, res) {
+        var string = fs.readFileSync('./src/mock/success.json', 'utf8');
+        var obj = JSON.parse(string);
         setTimeout(() => {
-            var data = fs.readFileSync('./src/mock/success.json', 'utf8');
-            res.send(data);
-        }, 300);
+            res.send(obj);
+        }, obj.delay || 300);
     });
 
     app.all('/mock/error', function(req, res) {
+        var string = fs.readFileSync('./src/mock/error.json', 'utf8');
+        var obj = JSON.parse(string);
         setTimeout(() => {
-            var data = fs.readFileSync('./src/mock/error.json', 'utf8');
-            res.send(data);
-        }, 300);
+            res.send(obj);
+        }, obj.delay || 300);
     });
 
     /*伪装上传服务器*/

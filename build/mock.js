@@ -60,19 +60,19 @@ module.exports = function(express, app) {
      * 表格数据(table)
      */
     app.get('/mock/table', function(req, res) {
+        var data = fs.readFileSync('./src/mock/table.json', 'utf8');
+        var json = JSON.parse(data);
+
         var pageCount = 15;
         // 生成limit条数据
         limit = req.query.limit;
         page = req.query.page;
         var mock_config = { status: 1, data: { list: [], count: pageCount } };
 
-        mock_config.data['list|' + limit] = [{
-            'uid|+1': page * limit,
-            'title': '@ctitle(7,25)',
-            'desc': '@cword(10, 50)',
-            'create_time': '@datetime(\'yyyy-MM-dd HH:mm:ss\')',
-            'category': '@cword(3,5)'
-        }];
+        json['uid|+1'] = page * limit;
+        console.log(json)
+
+        mock_config.data['list|' + limit] = [json];
 
 
         if (pageCount >= req.query.page) {

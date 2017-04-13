@@ -93,6 +93,8 @@ export default {
             FileAPI.upload({
                 url: '/mock/upload',
 
+                headers: { 'Access-Token': this.$store.state.loginModule.accessToken },
+
                 progress: (evt) => {
                     this.previews[index].progress = Math.floor(evt.loaded / evt.total * 100);
                 },

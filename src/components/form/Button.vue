@@ -1,8 +1,9 @@
 <template>
     <a :class="['com-button', 'btn', 'btn-'+type, !!disabled && 'disabled']" @click="click" @mouseleave="mouseleave" @mouseenter="mouseenter">
-        <i :class="['fa', 'fa-'+icon]"></i>
+        <i v-show="!loading" :class="['fa', 'fa-'+icon]"></i>
         <span v-show="openText">
             <slot></slot>
+            <i v-show="loading" class="fa fa-spinner fa-spin"></i>
         </span>
     </a>
 </template>
@@ -11,6 +12,10 @@ export default {
     name: 'button',
 
     props: {
+        loading: {
+            type: Boolean
+        },
+
         showText: {
             type: Boolean,
             default(){

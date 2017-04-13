@@ -6,9 +6,6 @@
             </v-spinner>
             <!-- 页面加载完毕 -->
             <div class="body" v-else>
-                <v-modal :show="modal.show" :width="'300px'" :afterClose="afterClose">
-                    <p>{{message}}</p>
-                </v-modal>
                 <form-layout v-if="1 == form.status">
                     <v-form v-model="formValues.body" :form="form.data.form">
                     </v-form>
@@ -16,9 +13,7 @@
                         <a @click="back" class="btn btn-default">
                             <i class="glyphicon glyphicon-return"></i> 返回
                         </a>
-                        <a @click="submit" class="btn btn-primary">
-                            <i class="glyphicon glyphicon-ok"></i> 确定
-                        </a>
+                        <v-button @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
                     </template>
                 </form-layout>
             </div>
@@ -28,8 +23,8 @@
 <script>
 import FormLayout from '../../components/layout/Form'
 import VSpinner from '../../components/Spinner'
-import VModal from '../../components/notice/Modal'
 import VForm from '../../components/Form'
+import VButton from '../../components/form/Button'
 
 export default {
     name: 'editView',
@@ -53,6 +48,11 @@ export default {
             form: {
                 status: -1,
                 data: {}
+            },
+            btnSubmit: {
+                disabled: false,
+                loading: false,
+                text: '确定'
             }
         };
     },
@@ -126,6 +126,9 @@ export default {
          * 提交
          */
         submit() {
+            this.btnSubmit.disabled = true;
+            this.btnSubmit.loading = true;
+            this.btnSubmit.text = '处理中...';
             // http
             axios.put(this.form.data.url.submit, qs.stringify({
                     id: this.$route.query.id,
@@ -133,6 +136,9 @@ export default {
                     ...this.form.data.formHiddenValue
                 }))
                 .then((response) => {
+                    this.btnSubmit.disabled = false;
+                    this.btnSubmit.loading = false;
+                    this.btnSubmit.text = '确定';
                     this.$store.commit('alert', {
                         width: '200px',
                         show: true,
@@ -171,7 +177,7 @@ export default {
         VSpinner,
         FormLayout,
         VForm,
-        VModal
+        VButton
     },
 
     activated() {}

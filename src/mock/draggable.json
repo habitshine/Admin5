@@ -3,6 +3,7 @@
   "message":"success",
   "data":[
     {
+      "url":"./mock/success",
       "name": "日期选择器",
       "month": "2017-04",
       "tags": [
@@ -23,21 +24,27 @@
           "detail": "(接待不满意客户/接待总客户数)*100%",
           "id": 0,
           "fixed": false,
-          "type": 0
+          "type": 0,
+          "textAreaVal":"",
+          "iptVal":""
         },
         {
           "name": "前厅管理有效性type0",
           "detail": "一定周期内工作出错率低于规定比例",
           "id": 1,
           "fixed": false,
-          "type": 0
+          "type": 0,
+          "textAreaVal":"",
+          "iptVal":""
         },
         {
           "name": "台接待客户满意度type000000",
           "detail": "(接待不满意客户/接待总客户数)*100%",
           "id": 2,
           "fixed": false,
-          "type": 0
+          "type": 0,
+          "textAreaVal":"",
+          "iptVal":""
         }
       ],
       "list2": [
@@ -46,7 +53,9 @@
           "detail": "(接待不满意客户/接待总客户数)*100%",
           "id": 0,
           "fixed": false,
-          "type": 9
+          "type": 9,
+          "textAreaVal":"",
+          "iptVal":""
         }
       ]
     },
@@ -71,21 +80,27 @@
           "detail": "(接待不满意客户/接待总客户数)*100%",
           "id": 0,
           "fixed": false,
-          "type": 0
+          "type": 0,
+          "textAreaVal":"",
+          "iptVal":""
         },
         {
           "name": "前厅管理有效性type0",
           "detail": "一定周期内工作出错率低于规定比例",
           "id": 1,
           "fixed": false,
-          "type": 0
+          "type": 0,
+          "textAreaVal":"",
+          "iptVal":""
         },
         {
           "name": "台接待客户满意度type000000",
           "detail": "(接待不满意客户/接待总客户数)*100%",
           "id": 2,
           "fixed": false,
-          "type": 0
+          "type": 0,
+          "textAreaVal":"",
+          "iptVal":""
         }
       ],
       "list2": [
@@ -94,7 +109,9 @@
           "detail": "(接待不满意客户/接待总客户数)*100%",
           "id": 0,
           "fixed": false,
-          "type": 9
+          "type": 9,
+          "textAreaVal":"",
+          "iptVal":""
         }
       ]
     }

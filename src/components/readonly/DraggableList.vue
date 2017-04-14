@@ -57,8 +57,8 @@
                                 {{element.name}}
                             </h5>
                             <p class="drag-detail">{{element.detail}}</p>
-                            <textarea placeholder="请填写考核目标要求"></textarea>
-                            <div>设置权重：<input class="drag-ipt-s" type="text">%</div>
+                            <textarea placeholder="请填写考核目标要求" v-model="element.textAreaVal"></textarea>
+                            <div>设置权重：<input class="drag-ipt-s" type="text" v-model="element.iptVal">%</div>
                             <span class="close-btn" @click="removeItem(index,element)">
                                 <i class="fa fa-times" aria-hidden="true"></i>
                             </span>
@@ -67,24 +67,55 @@
                 </transition-group>
             </draggable>
         </div>
-        <div class="wrap-drag-btn"><input class="drag-btn" type="button" value="确定"></div>
+        <div class="wrap-drag-btn">
+            <v-button @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
+        </div>
+        <div style="height: 500px">
+            <div  class="list-group col-md-3">
+                <pre>{{listString}}</pre>
+            </div>
+            <div  class="list-group col-md-3">
+                <pre>{{list2String}}</pre>
+            </div>
+            <div  class="list-group col-md-3">
+                <pre>{{test}}</pre>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    import draggable from 'vuedraggable'
+    import draggable from 'vuedraggable';
+    import VButton from '../../components/form/Button';
     export default {
         name: 'DraggableList',
         components: {
             draggable,
+            VButton,
         },
         data () {
             return {
+                test:"",
                 active:0,
                 list:[],
                 list2:[],
+                url:"",
                 isDragging: false,
                 delayedDragging:false,
+                // 表单结果数据
+                formValues: {
+                    body: {}
+                },
+                // 构造表单
+                form: {
+                    status: -1,
+                    data: {}
+                },
+                btnSubmit: {
+                    disabled: false,
+                    loading: false,
+                    text: '确定'
+                }
             }
         },
         props:{
@@ -98,6 +129,7 @@
         mounted: function() {
             this.list = this.opts.list;
             this.list2 = this.opts.list2;
+            this.url=this.opts.url;
         },
         methods:{
             httpPostData(){
@@ -110,6 +142,54 @@
                     })
                     .catch(function (error) {
                         console.log(error);
+                    });
+            },
+            /**
+             * 提交
+             */
+            submit() {
+                this.btnSubmit.disabled = true;
+                this.btnSubmit.loading = true;
+                this.btnSubmit.text = '处理中...';
+
+                this.test = this.list2;
+
+                //这里面post的url是后端给我的
+                axios.post(this.url, qs.stringify({
+                    ...this.formValues.body,
+                    ...this.form.data.formHiddenValue
+                }))
+                    .then((response) => {
+                        this.btnSubmit.disabled = false;
+                        this.btnSubmit.loading = false;
+                        this.btnSubmit.text = '确定';
+
+                        this.$store.commit('alert', {
+                            width: '200px',
+                            show: true,
+                            text: response.data.message,
+                            holdTime: 2000,
+                            lock: true,
+                            afterClose: () => {
+                                try {
+                                    if (undefined != response.data.data) {
+                                        if (undefined != response.data.data.path) {
+                                            this.$router.push({
+                                                path: response.data.data.path,
+                                                query: response.data.data.query
+                                            });
+                                        } else if (undefined != response.data.data.link) {
+                                            window.location.href = response.data.data.link;
+                                        }
+                                    }
+                                } catch (e) {
+                                    syslog(e);
+                                }
+                            }
+                        });
+                    })
+                    .catch((error) => {
+                        syslog(error);
                     });
             },
             removeItem(idx,el){
@@ -363,6 +443,10 @@
         clear: both;
         text-align: center;
         margin-bottom: 40px;
+        a{
+            background: #14bb9d !important;
+            border: 1px solid #14bb9d !important;
+        }
     }
     .drag-btn{
         font-size: 14px;

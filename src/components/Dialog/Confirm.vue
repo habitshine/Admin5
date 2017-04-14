@@ -1,14 +1,39 @@
 <template>
-    <div class="com-alert">
-        <v-modal :width="width" :hasClose="hasClose" :holdTime="holdTime" :lock="lock" :title="title" v-model="isShow" @after-close="afterClose">
+    <div class="com-confirm">
+        <v-modal             
+            :width="width" 
+            :hasClose="hasClose" 
+            :holdTime="holdTime" 
+            :lock="lock" 
+            :title="title"
+            v-model="isShow" 
+            @after-close="afterClose">
             {{text}}
+            <div slot="footer">
+                <a class="btn btn-default" @click="close">返回</a>
+                <a class="btn btn-primary" @click="ok">确定</a>
+            </div>
         </v-modal>
     </div>
 </template>
 <script>
 import VModal from './Modal'
 export default {
-    name: 'Alert',
+
+    name: 'confirm',
+
+    computed: {
+
+        isShow: {
+            get() {
+                return this.value;
+            },
+
+            set(isShow) {
+                this.$emit('input', isShow);
+            }
+        }
+    },
 
     props: {
         value: {
@@ -39,9 +64,8 @@ export default {
             type: Boolean
         }
     },
-
     methods: {
-        ok() {
+        ok(){
             this.$emit('input', false);
             this.$emit('ok');
         },
@@ -55,17 +79,6 @@ export default {
         }
     },
 
-    computed: {
-        isShow: {
-            get() {
-                return this.value;
-            },
-
-            set(isShow) {
-                this.$emit('input', isShow);
-            }
-        }
-    },
     components: {
         VModal
     }

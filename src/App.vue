@@ -1,5 +1,7 @@
 <template>
     <div class="app">
+        <v-prompt :text="prompt.text"></v-prompt>
+
         <v-notify v-model="$store.state.dialogModule.notifyList"></v-notify>
         <v-confirm @ok="$store.state.dialogModule.confirm.ok" @after-close="$store.state.dialogModule.confirm.afterClose" v-model="isConfirmShow" :width="$store.state.dialogModule.confirm.width" :lock="$store.state.dialogModule.confirm.lock" :holdTime="$store.state.dialogModule.confirm.holdTime" :title="$store.state.dialogModule.confirm.title" :text="$store.state.dialogModule.confirm.text">
         </v-confirm>
@@ -16,11 +18,16 @@
 <script>
 import VAlert from './components/notice/Alert'
 import VConfirm from './components/notice/Confirm'
-import VPrompt from './components/notice/Prompt'
 import VNotify from './components/notice/Notify'
 
 export default {
     name: 'App',
+
+    data(){
+        return {
+            prompt: this.$promptOptions
+        }
+    },
 
     computed: {
         isAlertShow: {
@@ -51,7 +58,6 @@ export default {
     components: {
         VAlert,
         VConfirm,
-        VPrompt,
         VNotify
     }
 }

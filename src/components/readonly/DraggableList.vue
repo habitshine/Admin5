@@ -1,10 +1,10 @@
 <template>
     <div class="drap-wrap">
-        <div class="col-md-12 drag-h1">制定<span class="month">{{opts.month}}月份</span><span class="name">{{opts.name}}</span>的考核表</div>
-        <h4 class="col-md-12 drag-h4">业绩指标</h4>
+        <div class="col-md-12 drag-h1" v-html="opts.dragName"></div>
+        <h4 class="col-md-12 drag-h4">{{opts.dragTitle}}</h4>
         <div class="col-md-6">
             <div class="drag-head">
-                <div class="drag-title">业绩指标库</div>
+                <div class="drag-title">{{opts.titleList}}</div>
                 <div class="drag-tags">
                     <span
                             v-for="(tag,index) in opts.tags"
@@ -41,10 +41,10 @@
 
         <div class="col-md-6">
             <div class="drag-head-new">
-                <div class="drag-title">业绩指标库</div>
+                <div class="drag-title">{{opts.titleList2}}</div>
                 <div class="drag-tags">
                     <div class="line-left"></div><div class="line-right"></div>
-                    业绩
+                    {{opts.list2Name}}
                 </div>
             </div>
             <draggable class="over-flow-scroll" element="div" v-model="list2" :options="dragOptions" :move="onMove">
@@ -70,17 +70,6 @@
         <div class="wrap-drag-btn">
             <v-button @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
         </div>
-        <div style="height: 500px">
-            <div  class="list-group col-md-3">
-                <pre>{{listString}}</pre>
-            </div>
-            <div  class="list-group col-md-3">
-                <pre>{{list2String}}</pre>
-            </div>
-            <div  class="list-group col-md-3">
-                <pre>{{test}}</pre>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -95,22 +84,13 @@
         },
         data () {
             return {
-                test:"",
                 active:0,
                 list:[],
                 list2:[],
                 url:"",
+                userId:"",
                 isDragging: false,
                 delayedDragging:false,
-                // 表单结果数据
-                formValues: {
-                    body: {}
-                },
-                // 构造表单
-                form: {
-                    status: -1,
-                    data: {}
-                },
                 btnSubmit: {
                     disabled: false,
                     loading: false,
@@ -130,20 +110,9 @@
             this.list = this.opts.list;
             this.list2 = this.opts.list2;
             this.url=this.opts.url;
+            this.userId=this.opts.userId;
         },
         methods:{
-            httpPostData(){
-                axios.post('', {
-                    firstName: 'Fred',
-                    lastName: 'Flintstone'
-                })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            },
             /**
              * 提交
              */
@@ -151,14 +120,14 @@
                 this.btnSubmit.disabled = true;
                 this.btnSubmit.loading = true;
                 this.btnSubmit.text = '处理中...';
+                //post url后端提供
+                axios.post(this.url, qs.stringify(
+                    {
+                        "list":this.list2,
+                        "uId":this.userId
+                    }
 
-                this.test = this.list2;
-
-                //这里面post的url是后端给我的
-                axios.post(this.url, qs.stringify({
-                    ...this.formValues.body,
-                    ...this.form.data.formHiddenValue
-                }))
+                ))
                     .then((response) => {
                         this.btnSubmit.disabled = false;
                         this.btnSubmit.loading = false;
@@ -213,7 +182,6 @@
                     ghostClass: 'ghost',
                     scroll: true,
                     scrollSensitivity: 30,
-//                    filter: '.js-remove'
                 };
             },
             listString(){
@@ -238,10 +206,6 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-    .flip-list-move {
-        /*transition: transform 0.5s;*/
-    }
-
     .no-move {
         transition: transform 0.5s;
     }

@@ -22,7 +22,7 @@ export var routes = [
             });
         }
     }, {
-        path: 'draggable',
+        path: 'performances/draggable',
         component: resolve => {
             require.ensure(['../views/DraggableView'], () => {
                 resolve(require('../views/DraggableView'))

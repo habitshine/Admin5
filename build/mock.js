@@ -37,7 +37,7 @@ module.exports = function(express, app) {
     /*
      * 拖拽列表数据
      */
-    app.get('/mock/draggable', function(req, res) {
+    app.get('/mock/performances/draggable', function(req, res) {
         var data = fs.readFileSync('./src/mock/draggable.json', 'utf8');
         var json = JSON.parse(data);
         setTimeout(() => {

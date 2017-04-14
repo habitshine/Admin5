@@ -4,8 +4,12 @@
   "data":[
     {
       "url":"./mock/success",
-      "name": "日期选择器",
-      "month": "2017-04",
+      "userId":"someOne",
+      "dragName":"制定<span class='month'>2017-04月份</span><span class='name'>日期选择器</span>的考核表",
+      "dragTitle":"业绩指标库1111",
+      "titleList":"业绩指标库titleList",
+      "titleList2":"业绩指标库titleList2",
+      "list2Name":"业绩title",
       "tags": [
         "社会媒体类",
         "备选指标",
@@ -60,8 +64,8 @@
       ]
     },
     {
-      "name": "日期选择器",
-      "month": "2017-04",
+      "url":"./mock/success",
+      "title":"",
       "tags": [
         "社会媒体类",
         "备选指标",

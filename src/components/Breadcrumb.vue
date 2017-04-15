@@ -15,7 +15,9 @@ export default {
 
     methods: {
         changeRoute(route) {
-            this.$alert({text: '123xxx12312312312312'});
+            this.$confirm('你删除吗?').then(() => {
+                alert(1)
+            })
             // this.$router.push(route);
         }
     }

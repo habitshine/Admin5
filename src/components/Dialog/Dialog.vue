@@ -1,13 +1,19 @@
 <template>
     <div class="component-dialog">
-        <v-mask>
-            <v-alert v-model="alert.value" class="center"></v-alert>
+        <v-mask v-model="mask.show">
+            <v-alert v-model="alert.show" :text="alert.text" @ok="alert.ok" class="center">
+            </v-alert>
+
+            <v-confirm v-model="confirm.show" :text="confirm.text" @ok="confirm.ok" @cancel="confirm.cancel" class="center">
+            </v-confirm>
         </v-mask>
     </div>
 </template>
 <script>
 import VMask from './Mask'
 import VAlert from './Alert'
+import VConfirm from './Confirm'
+
 
 export default {
     name: 'Dialog',
@@ -18,25 +24,37 @@ export default {
 
     data() {
         return {
+            mask: {
+                show: false
+            },
             alert: {
-                value: false,
-                text: '初始值 !'
+                show: false,
+                text: '初始值 !',
+                ok: ()=>{}
             },
             confirm: {
-
+                show: false,
+                text: '初始值 !',
+                ok: ()=>{},
+                cancel: ()=>{}
             },
             prompt: {
-
+                show: false,
+                text: '初始值 !',
             }
         };
     },
 
-    computed: {
-
+    watch: {
+        ['mask.show'](value){
+            console.log(value)
+            this.confirm.show = value;
+        }
     },
 
     components: {
         VAlert,
+        VConfirm,
         VMask
     }
 }

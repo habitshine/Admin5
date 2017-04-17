@@ -17,7 +17,7 @@
         methods:{
             httpGetBaseView(cb) {
                 var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
-                axios.get(url)
+                axios.get(url,{parmas:{...this.$route.path.query}})
                     .then((response) => {
                     cb(response);
                     console.log(response)

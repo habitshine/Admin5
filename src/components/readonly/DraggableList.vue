@@ -120,11 +120,12 @@
                 this.btnSubmit.disabled = true;
                 this.btnSubmit.loading = true;
                 this.btnSubmit.text = '处理中...';
+
                 //post url后端提供
                 axios.post(this.url, qs.stringify(
                     {
                         "list":this.list2,
-                        "uId":this.userId
+                        "uId":this.userId,
                     }
 
                 ))

@@ -17,21 +17,21 @@ plugin.install = (Vue, options) => {
     Vue.prototype.$alert = (options = {}) => {
         return new Promise((resolve, reject) => {
             if ('string' == typeof(options)) {
-                vm.mask.show = true;
+                vm.modal.show = true;
                 vm.alert = {
                     show: true,
                     ok: () => {
-                        vm.mask.show = false;
+                        vm.modal.show = false;
                         resolve();
                     },
                     text: options
                 };
             } else {
-                vm.mask.show = true;
+                vm.modal.show = true;
                 vm.alert = {
                     ...options,
                     ok: () => {
-                        vm.mask.show = false;
+                        vm.modal.show = false;
                         resolve();
                     },
                     show: true
@@ -45,29 +45,32 @@ plugin.install = (Vue, options) => {
     Vue.prototype.$confirm = (options = {}) => {
         return new Promise((resolve, reject) => {
             if ('string' == typeof(options)) {
-                vm.mask.show = true;
+                vm.modal.show = true;
                 vm.confirm = {
                     show: true,
+
                     ok: () => {
-                        vm.mask.show = false;
+                        vm.modal.show = false;
                         resolve();
                     },
+
                     cancel: () => {
-                        vm.mask.show = false;
+                        vm.modal.show = false;
                         reject();
                     },
+
                     text: options
                 };
             } else {
-                vm.mask.show = true;
+                vm.modal.show = true;
                 vm.confirm = {
                     ...options,
                     ok: () => {
-                        vm.mask.show = false;
+                        vm.modal.show = false;
                         resolve();
                     },
                     cancel: () => {
-                        vm.mask.show = false;
+                        vm.modal.show = false;
                         reject();
                     },
                     show: true
@@ -75,7 +78,6 @@ plugin.install = (Vue, options) => {
             };
         });
     };
-
 }
 
 export default plugin;

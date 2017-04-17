@@ -1,13 +1,13 @@
 <template>
-    <transition name="mask" @after-leave="afterLeave">
-        <div v-show="value" @click.self="close" class="component-mask" :style="{position, backgroundColor, zIndex}">
+    <transition name="modal" @after-leave="afterLeave">
+        <div v-show="value" @click.self="close" class="component-modal" :style="{position, backgroundColor, zIndex}">
             <slot></slot>
         </div>
     </transition>
 </template>
 <script>
 export default {
-    name: 'mask',
+    name: 'Modal',
 
     props: {
         value: {
@@ -58,22 +58,22 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.component-mask {
+.component-modal {
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
 /*动画*/
-.mask-enter-active {
-    animation: mask-in .5s;
+.modal-enter-active {
+    animation: modal-in .5s;
 }
 
-.mask-leave-active {
-    animation: mask-out .5s;
+.modal-leave-active {
+    animation: modal-out .5s;
 }
 
-@keyframes mask-in {
+@keyframes modal-in {
     0% {
         opacity: 0;
     }
@@ -82,7 +82,7 @@ export default {
     }
 }
 
-@keyframes mask-out {
+@keyframes modal-out {
     0% {
         opacity: 1;
     }

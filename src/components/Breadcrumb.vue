@@ -15,10 +15,7 @@ export default {
 
     methods: {
         changeRoute(route) {
-            this.$confirm('你删除吗?').then(() => {
-                alert(1)
-            })
-            // this.$router.push(route);
+            this.$router.push(route);
         }
     }
 }

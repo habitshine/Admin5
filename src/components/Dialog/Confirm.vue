@@ -75,8 +75,7 @@ export default {
                 this.$emit('input', isShow);
             }
         }
-    },
-    components: {}
+    }
 }
 </script>
 <style scoped lang="scss">

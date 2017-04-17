@@ -13,7 +13,7 @@
                         <a @click="back" class="btn btn-default">
                             <i class="glyphicon glyphicon-return"></i> 返回
                         </a>
-                        <v-button @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
+                        <v-button v-if="undefined != form.data.url.submit" @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
                     </template>
                 </form-layout>
             </div>
@@ -178,12 +178,10 @@ export default {
         FormLayout,
         VForm,
         VButton
-    },
-
-    activated() {}
+    }
 }
 </script>
-<style>
+<style lang="scss" scoped>
 .v-enter {
     opacity: 0;
     transform: translateY(-.5rem);

@@ -12,7 +12,7 @@
                         <a @click="back" class="btn btn-default">
                             <i class="glyphicon glyphicon-return"></i> 返回
                         </a>
-                        <v-button @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
+                        <v-button v-if="undefined != form.data.url.submit" @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
                     </template>
                 </form-layout>
             </div>
@@ -117,45 +117,42 @@ export default {
                     ...this.form.data.formHiddenValue
                 }))
                 .then((response) => {
-                    this.btnSubmit.disabled = false;
-                    this.btnSubmit.loading = false;
-                    this.btnSubmit.text = '确定';
+                        this.btnSubmit.disabled = false;
+                        this.btnSubmit.loading = false;
+                        this.btnSubmit.text = '确定';
 
-                    this.$store.commit('alert', {
-                        width: '200px',
-                        show: true,
-                        text: response.data.message,
-                        holdTime: 2000,
-                        lock: true,
-                        afterClose: () => {
-                            try {
-                                if (undefined != response.data.data) {
-                                    if (undefined != response.data.data.path) {
-                                        this.$router.push({
-                                            path: response.data.data.path,
-                                            query: response.data.data.query
-                                        });
-                                    } else if (undefined != response.data.data.link) {
-                                        window.location.href = response.data.data.link;
+                        this.$alert({
+                            width: '200px',
+                            show: true,
+                            text: response.data.message,
+                            holdTime: 2000,
+                            lock: true,
+                            afterClose: () => {
+                                try {
+                                    if (undefined != response.data.data) {
+                                        if (undefined != response.data.data.path) {
+                                            this.$router.push({
+                                                path: response.data.data.path,
+                                                query: response.data.data.query
+                                            });
+                                        } else if (undefined != response.data.data.link) {
+                                            window.location.href = response.data.data.link;
+                                        }
                                     }
+                                } catch (e) {
+                                    syslog(e);
                                 }
-                            } catch (e) {
-                                syslog(e);
                             }
-                        }
-                    });
+                        })
                 })
-                .catch((error) => {
-                    syslog(error);
-                });
-        },
-
-        back() {
-            this.$router.back();
-        }
     },
 
-    components: {
+    back() {
+        this.$router.back();
+    }
+},
+
+components: {
         VSpinner,
         FormLayout,
         VForm,

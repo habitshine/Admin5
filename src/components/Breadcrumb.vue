@@ -15,7 +15,6 @@ export default {
 
     methods: {
         changeRoute(route) {
-            // this.$prompt({text: '123xxx12312312312312'});
             this.$router.push(route);
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="com-prompt">
-    	<h1>{{text}}</h1>
+        <h1>{{text}}</h1>
     </div>
 </template>
 <script>
@@ -13,11 +13,16 @@ export default {
         value: {}
     },
 
+    data() {
+        return {
+            show: true
+        }
+    },
+
     methods: {
 
     }
 }
 </script>
 <style scoped lang=scss>
-
 </style>

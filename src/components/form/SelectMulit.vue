@@ -225,7 +225,6 @@ $disable_color: #ccc;
         transition: all .5s;
     }
     .selected-list {
-        padding: 15px 0;
         .btn {
             margin-right: 15px;
             margin-bottom: 15px;

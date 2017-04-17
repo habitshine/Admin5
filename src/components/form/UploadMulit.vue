@@ -11,7 +11,8 @@
                 <div v-if="1 == preview.status || undefined == preview.status" class="preview-item preview-item-success">
                     <!-- 删除按钮 -->
                     <span v-if="-1 != [100, undefined].indexOf(preview.progress)" @click="remove(i, preview.id)" class="remove fa fa-remove"></span>
-                    <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}"></span>
+                    <span class="mask" :style="{background: 'rgba(0,0,0, ' + (100 - preview.progress) / 100 + ')'}">
+                    </span>
                     <p v-if="100 > preview.progress && '' != preview.progress" class="progress2">{{preview.progress}}%</p>
                     <a target="_new" :href="preview.url" class="title">{{preview.fileName}}</a>
                     <img v-if="'image' == preview.type" :src="preview.cover">
@@ -51,7 +52,7 @@ export default {
     mounted() {
         this.previews = null == this.opts.value ? [] : JSON.parse(JSON.stringify(this.opts.value));
 
-        if(null == this.value) {
+        if (null == this.value) {
             this.$emit('input', []);
         }
 
@@ -158,6 +159,8 @@ export default {
         upload(file, cover = '', progress = () => {}, done = () => {}) {
             FileAPI.upload({
                 url: this.opts.url.upload,
+                // 未来会解耦
+                headers: { 'Access-Token': this.$store.state.loginModule.accessToken },
 
                 data: {
                     cover,
@@ -197,7 +200,7 @@ export default {
     },
 
     watch: {
-        previews(value){
+        previews(value) {
             this.$emit('input', value);
         }
     }

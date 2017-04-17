@@ -1,0 +1,73 @@
+<template>
+    <transition name="dialog" @after-leave="afterLeave">
+        <div v-show="value" class="component-dialog">
+            <div class="scroll-view">
+                <slot></slot>
+            </div>
+        </div>
+    </transition>
+</template>
+<script>
+export default {
+    name: 'Dialog',
+
+    props: {
+        value: {
+            type: Boolean
+        }
+    },
+
+    methods: {
+        afterLeave() {
+            this.$emit('after-leave');
+        }
+    }
+}
+</script>
+<style scoped lang="scss">
+.component-dialog {
+    margin: 15% auto;
+    max-width: 640px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, .2);
+    .scroll-view{
+        padding:0 5px;
+        max-height: 480px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}
+
+/*动画*/
+
+.dialog-enter-active {
+    animation: dialog-in .5s;
+}
+
+.dialog-leave-active {
+    animation: dialog-out .5s;
+}
+
+@keyframes dialog-in {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dialog-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+}
+</style>

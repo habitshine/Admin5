@@ -1,7 +1,7 @@
 {
     "status": 1,
     "message": "恭喜你,成功了!",
-    "delay": 3000,
+    "delay": 300,
     "data": {
 
     }

@@ -45,8 +45,8 @@ router.beforeEach((to, from, next) => {
 });
 Vue.config.productionTip = false;
 
-// import Dialog from './dialog';
-// Vue.use(Dialog)
+import Dialog from './components/Dialog';
+Vue.use(Dialog)
 
 /* eslint-disable no-new */
 new Vue({

@@ -6,7 +6,7 @@ var getMenuList = ({ commit, state }) => {
         axios.get(MENU_URL).then(response => {
             resolve(response.data);
         }).catch((error) => {
-            reject();
+            reject(error);
         });
     });
 }

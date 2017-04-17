@@ -10,25 +10,28 @@
             </a>
         </div>
         <v-modal v-model="popup.show">
-            <v-tab v-model="activeIndex">
-                <!-- panel -->
-                <v-tab-panel v-for="(page, i) in opts.children" :key="i" :label="page.label" :disabled="!newValues[i] && 0 == group[i].children.length">
-                    <!-- spinner -->
-                    <v-spinner v-show="loading" class="spinner-gutter"></v-spinner>
-                    <!-- listGroup -->
-                    <!-- 无默认值 -->
-                    <v-list-group v-if="null == value" v-show="!loading" :isGroup="false" :list="group[i].children" @clickItem="select">
-                    </v-list-group>
-                    <!-- 有默认值 -->
-                    <v-list-group v-else v-model="value.values[i]" v-show="!loading" :isGroup="false" :list="group[i].children" @clickItem="select">
-                    </v-list-group>
-                </v-tab-panel>
-            </v-tab>
+            <v-dialog v-model="popup.show" style="padding:30px 15px;">
+                <v-tab v-model="activeIndex">
+                    <!-- panel -->
+                    <v-tab-panel v-for="(page, i) in opts.children" :key="i" :label="page.label" :disabled="!newValues[i] && 0 == group[i].children.length">
+                        <!-- spinner -->
+                        <v-spinner v-show="loading" class="spinner-gutter"></v-spinner>
+                        <!-- listGroup -->
+                        <!-- 无默认值 -->
+                        <v-list-group v-if="null == value" v-show="!loading" :isGroup="false" :list="group[i].children" @clickItem="select">
+                        </v-list-group>
+                        <!-- 有默认值 -->
+                        <v-list-group v-else v-model="value.values[i]" v-show="!loading" :isGroup="false" :list="group[i].children" @clickItem="select">
+                        </v-list-group>
+                    </v-tab-panel>
+                </v-tab>
+            </v-dialog>
         </v-modal>
     </div>
 </template>
 <script>
-import VModal from '../notice/Modal'
+import VModal from '../Dialog/Modal'
+import VDialog from '../Dialog/Dialog'
 import VTab from '../layout/Tab'
 import VTabPanel from '../layout/TabPanel'
 import VSpinner from '../Spinner'
@@ -107,12 +110,12 @@ export default {
                 // });
             }
 
-                this.$emit('input', {
-                    values: this.newValues,
-                    texts: this.newTexts
-                });
+            this.$emit('input', {
+                values: this.newValues,
+                texts: this.newTexts
+            });
 
-            
+
         },
 
         close() {
@@ -190,6 +193,7 @@ export default {
 
     components: {
         VModal,
+        VDialog,
         VTab,
         VTabPanel,
         VSpinner,

@@ -10,13 +10,16 @@
             </a>
         </div>
         <v-modal v-model="isShowModal">
-            <v-tree :value="activeNode" @input="changeTreeValue" :data="opts.data"></v-tree>
+            <v-dialog v-model="isShowModal" style="padding:30px 15px;">
+                <v-tree :value="activeNode" @input="changeTreeValue" :data="opts.data"></v-tree>
+            </v-dialog>
         </v-modal>
     </div>
 </template>
 <script>
 import VTree from './Tree'
-import VModal from '../notice/Modal'
+import VModal from '../Dialog/Modal'
+import VDialog from '../Dialog/Dialog'
 export default {
     name: 'treeView',
 
@@ -55,25 +58,26 @@ export default {
             var activeNode = {};
             var length = nodes.length;
             for (var i = 0; i < length; i++) {
-                if(value == nodes[i].value) {
+                if (value == nodes[i].value) {
                     activeNode = nodes[i];
                     return activeNode;
                 } else {
-                    if(undefined != nodes[i].children) {
+                    if (undefined != nodes[i].children) {
                         activeNode = this.findTreeNode(value, nodes[i].children);
-                        if(undefined != activeNode) {
+                        if (undefined != activeNode) {
                             return activeNode;
                         }
                     }
                 }
             }
-            
+
         }
     },
 
     components: {
         VTree,
-        VModal
+        VModal,
+        VDialog
     }
 }
 </script>

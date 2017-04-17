@@ -39,9 +39,8 @@
                         <!-- 数据列 -->
                         <td v-for="obj in viewData.data.table.header">
                             <template v-if="'link' == obj.type">
-                                <a :href="props.row[obj.key]" class="btn btn-xs btn-link"><i class="fa fa-download"></i> 下载</a>
+                                <a :href="props.row[obj.key] + props.primaryKey" class="btn btn-xs btn-link"><i class="fa fa-download"></i> 下载</a>
                             </template>
-                            
                             <template v-else>
                                 {{props.row[obj.key]}}
                             </template>
@@ -55,8 +54,6 @@
                                 <router-link v-else-if="'route' == btn.type" :to="{path: btn.path, query: {id: props.primaryKey}}" class="btn btn-xs btn-link">
                                     <i :class="['fa', 'fa-'+btn.icon]"></i> {{btn.text}}
                                 </router-link>
-
-
                             </template>
                         </td>
                     </template>
@@ -78,7 +75,7 @@ import VPage from '../../components/Page'
 import VForm from '../../components/Form'
 
 export default {
-    name: 'listView',
+    name: 'ListView',
 
     components: {
         VBreadcrumb,
@@ -276,22 +273,20 @@ export default {
          * 删除
          */
         remove(url, id) {
-            this.$store.commit('confirm', {
-                show: true,
-                text: '您确定要删除吗?',
-                ok: () => {
-                    axios.delete(url, {
-                        params: {
-                            id
-                        }
-                    }).then(response => {
-                        this.table.activePrimaryKey = id;
-                        this.table.action = 'remove';
-                    }).catch((error) => {
-                        reject();
-                    });
-                }
-            });
+            this.$confirm('您确定要删除吗?').then(() => {
+                this.table.status = -1;
+                axios.delete(url, {
+                    params: {
+                        id
+                    }
+                }).then(response => {
+                    this.table.status = 1;
+                    this.table.activePrimaryKey = id;
+                    this.table.action = 'remove';
+                }).catch((error) => {
+                    reject();
+                });
+            }).catch(() => {})
         },
         /**
          * 通用ajax请求
@@ -299,26 +294,21 @@ export default {
          */
         httpRequestForSelect(url) {
             if (0 < this.table.ids.length) {
-                this.$store.commit('confirm', {
-                    show: true,
-                    text: '您确定执行该操作吗?',
-                    ok: () => {
-                        axios.delete(url, {
-                            params: {
+                this.$confirm('您确定执行该操作吗?').then(() => {
+                    this.table.status = -1;
+                    axios.delete(url, {
+                        params: {
+                            [this.table.primaryKey]: this.table.ids
+                        }
+                    }).then(response => {
+                        this.table.status = 1;
+                        this.$alert(response.data.message);
+                        this.httpGetTable();
+                    }).catch((error) => {
+                        syslog(error);
+                    });
+                }).catch(() => {
 
-                                [this.table.primaryKey]: this.table.ids
-                            }
-                        }).then(response => {
-                            this.$store.commit('alert', {
-                                holdTime: 1000,
-                                show: true,
-                                text: response.data.message
-                            });
-                            this.httpGetTable();
-                        }).catch((error) => {
-                            syslog(error);
-                        });
-                    }
                 });
             }
         }

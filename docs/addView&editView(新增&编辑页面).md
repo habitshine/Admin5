@@ -11,6 +11,7 @@
 |data   | 渲染页面的数据  |
 |data.formHiddenValue   | 可以理解为隐藏域  |
 |data.form   | 表单数据, 内容为任何组件数据  |
+|data.form.url.submit   | 表单提交地址, 如果submit键不存在, 那么自动隐藏提交按钮 |
 
 
 ### 数据示例

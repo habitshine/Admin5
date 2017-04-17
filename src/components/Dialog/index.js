@@ -1,16 +1,16 @@
-import Dialog from './Dialog'
+import MessageBus from './MessageBus'
 
 var plugin = {};
 plugin.install = (Vue, options) => {
     // Vue.component('VPrompt', Prompt);
     // document.createDocumentFragment()
-    var DialogComponent = Vue.extend(Dialog);
+    var MessageBusComponent = Vue.extend(MessageBus);
     // 创建一个挂载点
     var node = document.createElement('div');
     node.id = '_v-dialog';
     document.body.appendChild(node);
     // 挂载
-    var vm = new DialogComponent().$mount('#_v-dialog');
+    var vm = new MessageBusComponent().$mount('#_v-dialog');
     // =================================================
     // ==============组件内调用: this.$alert==============
     // =================================================

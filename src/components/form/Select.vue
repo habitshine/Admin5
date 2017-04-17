@@ -12,15 +12,18 @@
         </div>
         <!-- popup -->
         <v-modal v-model="popup.show">
-            <input ref="search" v-model="keyword" type="text" class="search form-control" :placeholder="opts.placeholder">
-            <!-- 选项列表 -->
-            <v-list-group :isGroup="isGroup" :value="value" :list="list" @clickItem="selectOption">
-            </v-list-group>
+            <v-dialog v-model="popup.show" style="padding:30px 15px;">
+                <input ref="search" v-model="keyword" type="text" class="search form-control" :placeholder="opts.placeholder">
+                <!-- 选项列表 -->
+                <v-list-group :isGroup="isGroup" :value="value" :list="list" @clickItem="selectOption">
+                </v-list-group>
+            </v-dialog>
         </v-modal>
     </div>
 </template>
 <script>
-import VModal from '../notice/Modal'
+import VModal from '../Dialog/Modal'
+import VDialog from '../Dialog/Dialog'
 import VListGroup from '../layout/ListGroup'
 
 export default {
@@ -35,6 +38,7 @@ export default {
 
     components: {
         VModal,
+        VDialog,
         VListGroup
     },
 
@@ -142,7 +146,6 @@ export default {
 .com-select {
     position: relative;
     width: 100%;
-
     .rotate {
         -webkit-transform: rotate(180deg);
         transform: rotate(180deg);

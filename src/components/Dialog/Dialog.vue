@@ -1,73 +1,73 @@
 <template>
-    <div class="component-dialog">
-        <v-modal v-model="modal.show">
-            <v-alert v-model="alert.show" :text="alert.text" @ok="alert.ok" class="center">
-            </v-alert>
-            <v-confirm v-model="confirm.show" :text="confirm.text" @ok="confirm.ok" @cancel="confirm.cancel" class="center">
-            </v-confirm>
-        </v-modal>
-    </div>
+    <transition name="dialog" @after-leave="afterLeave">
+        <div v-show="value" class="component-dialog">
+            <div class="scroll-view">
+                <slot></slot>
+            </div>
+        </div>
+    </transition>
 </template>
 <script>
-import VModal from './Modal'
-import VAlert from './Alert'
-import VConfirm from './Confirm'
-
 export default {
     name: 'Dialog',
 
     props: {
-        value: {}
-    },
-
-    data() {
-        return {
-            modal: {
-                show: false
-            },
-            alert: {
-                show: false,
-                text: 'alert初始值 !',
-                ok: () => {}
-            },
-            confirm: {
-                show: false,
-                text: 'confirm初始值 !',
-                ok: () => {},
-                cancel: () => {}
-            },
-            prompt: {
-                show: false,
-                text: '初始值 !',
-            }
-        };
-    },
-
-    watch: {
-        ['modal.show'](value) {
-            if(!value) {
-                this.alert.show = false;
-                this.confirm.show = false;                
-            }
+        value: {
+            type: Boolean
         }
     },
 
-    components: {
-        VAlert,
-        VConfirm,
-        VModal
+    methods: {
+        afterLeave() {
+            this.$emit('after-leave');
+        }
     }
 }
 </script>
-<style scoped lang=scss>
-.center {
-    position: absolute;
-    z-index: 1986;
-    top: 15%;
-    left: 0;
-    right: 0;
-    margin: auto;
+<style scoped lang="scss">
+.component-dialog {
+    margin: 15% auto;
+    max-width: 640px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, .2);
+    .scroll-view{
+        padding:0 5px;
+        max-height: 480px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
 }
 
-.v-alert {}
+/*动画*/
+
+.dialog-enter-active {
+    animation: dialog-in .5s;
+}
+
+.dialog-leave-active {
+    animation: dialog-out .5s;
+}
+
+@keyframes dialog-in {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dialog-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+}
 </style>

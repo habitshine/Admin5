@@ -29,15 +29,15 @@ export default {
         },
 
         lock: {
-            type : Boolean,
-            default(){
+            type: Boolean,
+            default () {
                 return false
             }
         },
 
         zIndex: {
             type: Number,
-            default(){
+            default () {
                 return 1986;
             }
         }
@@ -59,12 +59,16 @@ export default {
 </script>
 <style scoped lang="scss">
 .component-modal {
+    z-index: 1986;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
+
+
 /*动画*/
+
 .modal-enter-active {
     animation: modal-in .5s;
 }

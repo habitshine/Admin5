@@ -8,7 +8,7 @@
                 {{text}}
             </div>
             <div class="footer">
-                <a @click="ok" class="btn-ok">确定</a>
+                <a @click="ok" class="btn-ok">{{btnOkText}}</a>
             </div>
         </div>
     </transition>
@@ -48,6 +48,10 @@ export default {
         }
     },
 
+    data(){
+        return {timer1: null, timer2: null, btnOkText: '确定', _holdTime: 0};
+    },
+
     methods: {
         ok() {
             this.$emit('ok');
@@ -70,7 +74,29 @@ export default {
             }
         }
     },
-    components: {}
+    
+    watch: {
+        value(value){
+            if(value) {
+                clearTimeout(this.timer1);
+                this.timer1 = setTimeout(()=> {
+                    this.$emit('input', false);
+                }, this.holdTime);
+
+                // 刷新时钟
+                clearTimeout(this.timer2);
+                this._holdTime = Math.floor(this.holdTime / 1000);
+                this.btnOkText = '确定 ' + this._holdTime + 's'
+                this.timer2 = setInterval(()=>{
+                    if(0 < this._holdTime) {
+                        this._holdTime--;
+                        this.btnOkText = '确定 ' + this._holdTime + 's'
+                    }
+                }, 1000);
+
+            }
+        }
+    }
 }
 </script>
 <style scoped lang="scss">
@@ -93,7 +119,7 @@ export default {
         overflow: hidden;
         @mixin btn() {
             float: right;
-            padding:5px 15px;
+            padding: 5px 15px;
             border-radius: 4px;
             cursor: pointer;
             letter-spacing: 1px;
@@ -103,7 +129,7 @@ export default {
             }
         }
         .btn-ok {
-            border:1px solid #69c;
+            border: 1px solid #69c;
             color: #69c;
             @include btn();
         }

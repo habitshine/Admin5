@@ -139,7 +139,8 @@ export default {
                     this.btnSubmit.disabled = false;
                     this.btnSubmit.loading = false;
                     this.btnSubmit.text = '确定';
-                    this.$store.commit('alert', {
+
+                    this.$alert({
                         width: '200px',
                         show: true,
                         text: response.data.message,

@@ -20,6 +20,7 @@
         </div>
         <!-- popup  -->
         <v-modal v-model="popup.show">
+            <v-dialog v-model="popup.show" style="padding:30px 15px;">
             <!-- 已选择 -->
             <div class="selected-list">
                 <button @click="selectReverse(option)" v-for="option in selectedOptions" class="btn btn-xs btn-primary">{{option.label}}
@@ -43,12 +44,14 @@
                     <i class="fa fa-remove"></i> 关闭
                 </a>
             </div>
+            </v-dialog>
         </v-modal>
     </div>
 </template>
 <script>
 import VInput from '../form/Input'
-import VModal from '../notice/Modal'
+import VModal from '../Dialog/Modal'
+import VDialog from '../Dialog/Dialog'
 import VListGroup from '../layout/ListGroup'
 
 export default {
@@ -89,6 +92,7 @@ export default {
     },
 
     components: {
+        VDialog,
         VModal,
         VListGroup,
         VInput

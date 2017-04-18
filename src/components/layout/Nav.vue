@@ -38,15 +38,15 @@ export default {
     },
 
     mounted() {
-        this.getCount();
-        setInterval(() => {
-            this.getCount();
-        }, 10000);
+        // this.getCount();
+        // setInterval(() => {
+        //     this.getCount();
+        // }, 10000);
 
-        this.getList();
-        setInterval(() => {
-            this.getList();
-        }, 10000);
+        // this.getList();
+        // setInterval(() => {
+        //     this.getList();
+        // }, 10000);
     },
 
     methods: {

@@ -4,10 +4,15 @@ if (process.env.NODE_ENV == 'production') {
     window.API_ROOT = 'http://113.6.252.23:6688';
     window.MENU_URL = [window.API_ROOT, '/personal/menu'].join('');
     window.LOGIN_URL = [window.API_ROOT, '/oauth'].join('');
+    window.MESSAGE_COUNT = [window.API_ROOT, '/oauth'].join('');
+    window.MESSAGE_LIST = [window.API_ROOT, '/oauth'].join('');
 } else {
     window.API_ROOT = './mock';
     window.MENU_URL = './mock/menu';
-    window.LOGIN_URL = './mock/login'
+    window.LOGIN_URL = './mock/login';
+    window.MESSAGE_COUNT = './mock/auto/count'
+    window.MESSAGE_LIST = './mock/auto/messageList'
+
 }
 
 import Vue from 'vue'
@@ -56,6 +61,20 @@ new Vue({
     router,
     components: { App },
 });
+
+
+
+// function a(){
+//     console.log(213)
+// }
+
+// function abc(){
+//     return Promise.resolve(a);
+// }
+// abc().then(c=>{
+// c();
+// })
+
 
 // Raven
 // import Raven from 'raven-js';

@@ -118,7 +118,7 @@ export default {
                         width: '200px',
                         show: true,
                         text: response.data.message,
-                        holdTime: 2000,
+                        holdTime: 3000,
                         lock: true,
                         afterLeave: () => {
                             try {

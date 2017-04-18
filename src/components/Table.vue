@@ -79,13 +79,13 @@ export default {
     },
 
     watch: {
+
         activePrimaryKey(value) {
             if ('remove' == this.action) {
                 this.removeList[value] = true;
             }
 
         },
-
 
         checkedList(value) {
             var array = [];
@@ -98,6 +98,7 @@ export default {
         },
 
         status(value) {
+            console.log('x3:'+value)
             if (1 == value) {
                 this.table.forEach(row => {
                     // 初始化checkbox状态映射
@@ -118,7 +119,11 @@ export default {
     methods: {
         selectAll() {
             var bool = !this.allSelect;
-
+            if(0 == this.checkedList.length) {
+                this.table.forEach(()=>{
+                    this.checkedList.push(false);
+                });
+            }
             this.checkedList = this.checkedList.map(() => {
                 return !bool;
             });
@@ -145,8 +150,10 @@ export default {
         height: 90px;
         margin: auto;
         position: absolute;
-        top: 0; bottom: 0; 
-        right: 0;left:0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
         z-index: 1986;
         padding: 15px 0;
         border-radius: 8px;

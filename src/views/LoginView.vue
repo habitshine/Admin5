@@ -1,8 +1,9 @@
 <template>
     <div class="view-login">
         <h2>登陆</h2>
-        <v-input class="v-input" v-model="userName" :opts="{placeholder: '请输入用户名'}" @keyup="login"></v-input>
-        <v-input class="v-input" v-model="password" :opts="{placeholder: '请输入密码', type: 'password'}" @keyup="login"></v-input>
+        <v-input class="v-input" v-model="userName" :opts="{placeholder: '请输入用户名', validate: {require: true}}" @keyup="login"></v-input>
+        <v-input class="v-input" v-model="password" :opts="{placeholder: '请输入密码', validate: {require: true}, type: 'password'}" @keyup="login">
+        </v-input>
         <a @click="login" class="btn-login btn btn-lg btn-primary btn-block">
             <i class="fa fa-arrow-circle-right"></i> 登陆
         </a>
@@ -41,19 +42,20 @@ export default {
          * 登陆, 获取accessToken
          */
         login(e) {
-            if(undefined == e.keyCode || 13 == e.keyCode) {
+            if (undefined == e.keyCode || 13 == e.keyCode) {
                 this.$store.dispatch('login', {
                     userName: this.userName,
                     password: this.password
                 }).then((res) => {
                     if (1 == res.status) {
                         this.$router.push({
-                            path: '/home'
+                            path: res.data.path,
+                            query: res.data.query
                         });
                     } else {
-                        alert(res.message);
+                        this.$alert(res.message);
                     }
-                });                
+                });
             }
         }
     },

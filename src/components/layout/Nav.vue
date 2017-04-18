@@ -1,23 +1,25 @@
 <template>
     <nav class="layout-nav">
         <span class="logo">
-            <p>Admin5</p>
+            <p>MY AUTO</p>
         </span>
         <span class="tools">
             <span class="envelope">
-                <span class="label label-default"><i class="fa fa-envelope" aria-hidden="true"></i> 0 </span>
+                <span class="label label-default"><i class="fa fa-envelope" aria-hidden="true"></i> {{count}} </span>
         </span>
-        <span class="avator">
-                <div class="dropdown">
-                    <img src="../../assets/avator.jpeg">
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
+        <span class="avator" @mouseenter="menuShow = true" @mouseleave="menuShow = false">
+            <div class="dropdown">
+                <router-link tag="img" :to="{path: '/home/personal/edit'}" :src="$store.state.loginModule.avator">
+                </router-link>
+                <ul v-show="menuShow" class="dropdown-list">
+                    <router-link tag="li" :to="{path: '/home/personal/edit'}">
+                        <i class="fa fa-user"></i> 个人中心
+                    </router-link>
+                    <router-link tag="li" :to="{path: '/login'}">
+                        <i class="fa fa-power-off"></i> 退出
+                    </router-link>
+                </ul>
+            </div>
             </span>
         </span>
     </nav>
@@ -27,22 +29,54 @@ import Push from 'push.js'
 export default {
     name: 'Nav',
 
+    data() {
+        return {
+            menuShow: false,
+            count: 0,
+            list: []
+        };
+    },
+
     mounted() {
-        // Push.create("Hello world!", {
-        //     body: "How's it hangin'?",
-        //     icon: 'icon.png',
-        //     timeout: 4000,
-        //     onClick: function() {
-        //         window.focus();
-        //         this.close();
-        //     }
-        // });
+        this.getCount();
+        setInterval(() => {
+            this.getCount();
+        }, 10000);
+
+        this.getList();
+        setInterval(() => {
+            this.getList();
+        }, 10000);
     },
 
     methods: {
+        getCount() {
+            axios.get(MESSAGE_COUNT).then(response => {
+                if (1 == response.data.status) {
+                    this.count = response.data.data.count;
+                }
+            });
+        },
 
+        getList() {
+            axios.get(MESSAGE_LIST).then(response => {
+                if (1 == response.data.status) {
+                    this.list = response.data.data.list;
+                    this.list.forEach(item => {
+                        Push.create(item.title, {
+                            body: `[${[item.create_time]}] ${item.desc}`,
+                            // icon: 'icon.png',
+                            timeout: 4000,
+                            onClick: function() {
+                                window.focus();
+                                this.close();
+                            }
+                        });
+                    });
+                }
+            });
+        }
     }
-
 }
 </script>
 <style scoped lang=scss>
@@ -68,7 +102,6 @@ $h: 50px;
     .tools {
         float: right;
         height: $h;
-        overflow: hidden;
         .envelope {
             float: left;
             margin: 15px;
@@ -77,15 +110,25 @@ $h: 50px;
             }
         }
         .avator {
+            $avatorWidth: 30px;
+            
             float: left;
             margin: 10px;
-            width: 30px;
-            height: 30px;
-            overflow: hidden;
+            width: $avatorWidth;
+            height: $avatorWidth;
             border-radius: 3px;
             &:hover {
                 cursor: pointer;
             }
+
+            .dropdown-list{background: rgba(#fff,1);border-radius: 2px 0 2px 2px;border:1px solid #eee;box-shadow: -1px 1px 3px rgba(#000,.2);display: block;position: fixed;top:40px;right:22px;
+
+                li{width: 100%;display: block;padding:5px 15px;text-align: left;
+                    &:hover{background:#eee;}
+                }
+            }
+
+
             img {
                 display: block;
                 width: 100%;

@@ -158,8 +158,8 @@ export default {
                 this.setDefaultValue();
                 // 之后根据默认值, 渲染表格数据
                 this.httpGetTable();
+                
             }
-
         }
     },
 
@@ -328,7 +328,7 @@ export default {
     }
 }
 </script>
-<style scope lang=scss>
+<style scope lang="scss">
 .list-view {
     padding-bottom: 45px;
     .btn-bar {

@@ -2,7 +2,8 @@ import { SAVE_ACCESS_TOKEN, SAVE_USER_NAME, EXIT } from '../mutation-types.js'
 
 const state = {
     accessToken: localStorage.getItem('accessToken'),
-    userName: localStorage.getItem('userName')
+    userName: localStorage.getItem('userName'),
+    avator: localStorage.getItem('avator')
 };
 
 // actions
@@ -13,7 +14,9 @@ const actions = {
                 .then((response) => {
                     // 登陆成功
                     if (1 == response.data.status) {
+                        commit(EXIT);
                         commit('saveUserName', userName);
+                        commit('saveAvator', response.data.data.avator);
                         commit('saveAccessToken', response.data.data.accessToken);
                         // 设置全局token
                         axios.defaults.headers.common['Access-Token'] = response.data.data.accessToken;
@@ -29,6 +32,14 @@ const actions = {
 
 // mutations
 const mutations = {
+    /**
+     * 存储头像到缓存
+     */
+    saveAvator(state, avator){
+        state.avator = avator;
+        localStorage.setItem('avator', avator);
+    },
+
     /**
      * 存储accessToken
      */

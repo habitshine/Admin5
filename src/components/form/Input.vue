@@ -6,9 +6,7 @@
             </div>
         </transition>
         <span v-if="undefined != opts.icon" class="input-group-addon"><i :class="['fa', 'fa-'+opts.icon]"></i></span>
-        
         <input v-if="opts.disabled" disabled @blur="blur" @keyup="keyup" @keydown="keydown" @focus="selectAll" :value="value" @input="input" class="form-control" :placeholder="opts.placeholder" :type="opts.type">
-
         <input v-else @blur="blur" @keyup="keyup" @keydown="keydown" @focus="selectAll" :value="value" @input="input" class="form-control" :placeholder="opts.placeholder" :type="opts.type">
     </div>
 </template>
@@ -35,12 +33,14 @@ export default {
 
     methods: {
         _validate() {
-            if (this.opts.validate.require) {
-                if ('' == this.value) {
-                    this.warning = true;
-                    this.warningText = '必填项';
-                } else {
-                    this.warning = false;
+            if (undefined != this.opts.validate) {
+                if (this.opts.validate.require) {
+                    if ('' == this.value) {
+                        this.warning = true;
+                        this.warningText = '必填项';
+                    } else {
+                        this.warning = false;
+                    }
                 }
             }
         },

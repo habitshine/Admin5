@@ -25,7 +25,7 @@
       "list": [
         {
           "name": "前台接待客户满意度type0",
-          "detail": "(接待不满意客户/接待总客户数)*100%",
+          "detail": "<span style='color:red'>(接待不满意客户/接待总客户数)*100%</span>",
           "id": 0,
           "fixed": false,
           "type": 0,
@@ -52,6 +52,15 @@
         }
       ],
       "list2": [
+        {
+          "name": "前台接待客户满意度type0",
+          "detail": "<span>(接待不满意客户/接待总客户数)*100%</span>",
+          "id": 0,
+          "fixed": false,
+          "type": 9,
+          "textAreaVal":"",
+          "iptVal":""
+        },
         {
           "name": "前台接待客户满意度type0",
           "detail": "(接待不满意客户/接待总客户数)*100%",

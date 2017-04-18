@@ -32,7 +32,7 @@
                                    @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
                             {{element.name}}
                             </h5>
-                            <p class="drag-detail">{{element.detail}}</p>
+                            <p class="drag-detail" v-html="element.detail"></p>
                         </div>
                     </li>
                 </transition-group>
@@ -56,7 +56,7 @@
                                    @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
                                 {{element.name}}
                             </h5>
-                            <p class="drag-detail">{{element.detail}}</p>
+                            <p class="drag-detail" v-html="element.detail"></p>
                             <textarea placeholder="请填写考核目标要求" v-model="element.textAreaVal"></textarea>
                             <div>设置权重：<input class="drag-ipt-s" type="text" v-model="element.iptVal">%</div>
                             <span class="close-btn" @click="removeItem(index,element)">

@@ -3,6 +3,6 @@
     "message": "恭喜你,成功了!",
     "delay": 300,
     "data": {
-
+    	"link": "http://baidu.com"
     }
 }

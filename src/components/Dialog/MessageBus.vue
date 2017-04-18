@@ -1,9 +1,9 @@
 <template>
     <div class="component-dialog">
         <v-modal v-model="modal.show">
-            <v-alert v-model="alert.show" :holdTime="alert.holdTime" :text="alert.text" @ok="alert.ok" class="center">
+            <v-alert v-model="alert.show" :holdTime="alert.holdTime" :text="alert.text" @ok="alert.ok" @after-leave="alert.afterLeave" class="center">
             </v-alert>
-            <v-confirm v-model="confirm.show" :holdTime="alert.holdTime" :text="confirm.text" @ok="confirm.ok" @cancel="confirm.cancel" class="center">
+            <v-confirm v-model="confirm.show" :holdTime="alert.holdTime" :text="confirm.text" @ok="confirm.ok" @cancel="confirm.cancel" @after-leave="confirm.afterLeave" class="center">
             </v-confirm>
         </v-modal>
     </div>
@@ -29,13 +29,17 @@ export default {
                 show: false,
                 text: 'alert初始值 !',
                 holdTime: 0,
-                ok: () => {}
+                lock: false,
+                ok: () => {},
+                afterLeave: ()=>{}
             },
             confirm: {
                 show: false,
                 text: 'confirm初始值 !',
+                lock: false,
                 ok: () => {},
-                cancel: () => {}
+                cancel: () => {},
+                afterLeave: ()=>{}
             },
             prompt: {
                 show: false,

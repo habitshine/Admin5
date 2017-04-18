@@ -1,7 +1,7 @@
 <template>
     <transition name="dialog" @after-leave="afterLeave">
         <div v-show="value" class="component-dialog">
-            <div class="scroll-view">
+            <div class="scroll-view" :style="{maxHeight: height * 0.8 + 'px'}">
                 <slot></slot>
             </div>
         </div>
@@ -10,6 +10,14 @@
 <script>
 export default {
     name: 'Dialog',
+
+    data(){
+        return {height: 0};
+    },
+
+    created(){
+        this.height = window.outerHeight;
+    },
 
     props: {
         value: {
@@ -33,7 +41,6 @@ export default {
     box-shadow: 1px 2px 5px rgba(0, 0, 0, .2);
     .scroll-view{
         padding:0 5px;
-        max-height: 480px;
         overflow-x: hidden;
         overflow-y: auto;
     }

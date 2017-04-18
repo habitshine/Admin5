@@ -3,7 +3,7 @@
         <!-- 分组 -->
         <ul v-if="isGroup" class="group">
             <li v-for="group in list">
-                <h6 class="title">{{group.title}}</h6>
+                <h5 class="title">{{group.title}}</h5>
                 <ul :class="{list: true, inline: inline}">
                     <li @click="clickItem(item)" v-for="item in group.children" :class="{active: value == item.value}">
                         {{item.label}}
@@ -61,7 +61,7 @@ $disableColor: #ccc;
     overflow-y: auto;
     .group {
         /*组标题*/
-        h6.title {
+        h5.title {
             margin: 15px;
         }
     }

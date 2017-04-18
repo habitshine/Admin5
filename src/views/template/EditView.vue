@@ -87,13 +87,6 @@ export default {
 
     methods: {
         /**
-         * 保存提示成功后执行, 回退
-         */
-        afterClose() {
-            this.$router.back();
-        },
-
-        /**
          * 提取默认值到formValue
          */
         setDefaultValue() {
@@ -146,7 +139,7 @@ export default {
                         text: response.data.message,
                         holdTime: 2000,
                         lock: true,
-                        afterClose: () => {
+                        afterLeave: () => {
                             try {
                                 if (undefined != response.data.data) {
                                     if (undefined != response.data.data.path) {

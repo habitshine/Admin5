@@ -1,12 +1,12 @@
 <template>
-
+    <v-notification>123</v-notification>
 </template>
 <script>
+import VNotification from '../components/Dialog/Notification'
 export default {
     name: 'testView',
 
     mounted(){
-        // this.$alert(32112312321);
     },
 
     data() {
@@ -18,8 +18,10 @@ export default {
     },
 
     components: {
+        VNotification
     }
 }
 </script>
-<style lang=scss scope>
+<style lang="scss" scope>
+
 </style>

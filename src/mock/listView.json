@@ -175,6 +175,51 @@
                     "label": "地中海",
                     "disable": false
                 }]
+            },{
+                "title": "A组",
+                "children": [{
+                    "value": 1,
+                    "label": "欧美",
+                    "disable": false
+                }, {
+                    "value": 2,
+                    "label": "日韩超级家具",
+                    "disable": true
+                }, {
+                    "value": 3,
+                    "label": "地中海",
+                    "disable": false
+                }]
+            },{
+                "title": "A组",
+                "children": [{
+                    "value": 1,
+                    "label": "欧美",
+                    "disable": false
+                }, {
+                    "value": 2,
+                    "label": "日韩超级家具",
+                    "disable": true
+                }, {
+                    "value": 3,
+                    "label": "地中海",
+                    "disable": false
+                }]
+            },{
+                "title": "A组",
+                "children": [{
+                    "value": 1,
+                    "label": "欧美",
+                    "disable": false
+                }, {
+                    "value": 2,
+                    "label": "日韩超级家具",
+                    "disable": true
+                }, {
+                    "value": 3,
+                    "label": "地中海",
+                    "disable": false
+                }]
             }, {
                 "title": "B组",
                 "children": [{

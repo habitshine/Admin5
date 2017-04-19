@@ -1,7 +1,6 @@
 <template>
     <div>
-        <v-table :dataSource="dataSource" :columns="columns" :actions="actions">
-            启用
+        <v-table :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove">
         </v-table>
     </div>
 </template>
@@ -16,24 +15,23 @@ export default {
 
     data() {
         return {
+            status:1,
             actions: {
                 text: '操作',
                 data: [{
                     event: 'remove',
-                    text: '删除',
-                    params: ['id', 'name']
+                    text: '删除'
                 }, {
                     event: 'toggle',
                     text: ['启用', '禁用'],
-                    textIndex: 'toggleIndex',
-                    params: ['id', 'name']
+                    textIndex: 'toggleIndex'
                 }, {
-                    event: 'toggle',
-                    text: ['启用', '禁用'],
-                    textIndex: 'toggleIndex',
-                    params: ['id', 'name']
+                    event: 'onduty',
+                    text: ['离职', '在职', '兼职'],
+                    textIndex: 'toggleIndex'
                 } ]
             },
+            primaryKey: 'id',
 
             dataSource: [{
                 id: 1,
@@ -42,6 +40,22 @@ export default {
             }, {
                 id: 2,
                 name: '于谦',
+                toggleIndex: 0
+            },{
+                id:31,
+                name: '岳云鹏',
+                toggleIndex: 1
+            }, {
+                id:42,
+                name: '抽烟的',
+                toggleIndex: 0
+            },{
+                id:51,
+                name: '三蹦子',
+                toggleIndex: 1
+            }, {
+                id:62,
+                name: '烫头的',
                 toggleIndex: 0
             }],
 
@@ -56,7 +70,10 @@ export default {
     },
 
     methods: {
-
+        remove(row){
+            this.dataSource.splice(row._index, 1);
+            console.log(row);
+        }
     },
 
     components: {

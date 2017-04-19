@@ -21,7 +21,6 @@ export default {
         margin:auto;
         width: 150px;
         text-align: center;
-        padding-top: 0.15rem;
         > div {
             width: 20px;
             height: 20px;

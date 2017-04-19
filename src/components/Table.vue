@@ -98,7 +98,6 @@ export default {
         },
 
         status(value) {
-            console.log('x3:'+value)
             if (1 == value) {
                 this.table.forEach(row => {
                     // 初始化checkbox状态映射

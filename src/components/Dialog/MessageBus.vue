@@ -28,13 +28,14 @@ export default {
             alert: {
                 show: false,
                 text: 'alert初始值 !',
-                holdTime: 0,
+                holdTime: 3000,
                 lock: false,
                 ok: () => {},
                 afterLeave: ()=>{}
             },
             confirm: {
                 show: false,
+                holdTime: 3000,
                 text: 'confirm初始值 !',
                 lock: false,
                 ok: () => {},

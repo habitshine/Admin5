@@ -24,9 +24,7 @@ export default {
         },
 
         width: {
-            default () {
-                return '400px';
-            }
+            default: '400px'
         },
 
         text: {
@@ -35,13 +33,12 @@ export default {
 
         title: {
             type: String,
-            default () {
-                return '提示';
-            }
+            default: '提示'
         },
 
         holdTime: {
-            type: Number
+            type: Number,
+            default: 3000
         },
 
         lock: {

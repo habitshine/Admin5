@@ -19,6 +19,7 @@ plugin.install = (Vue, options) => {
             if ('string' == typeof(options)) {
                 vm.modal.show = true;
                 vm.alert = {
+                    ...vm.alert,
                     show: true,
                     ok: () => {
                         vm.modal.show = false;
@@ -29,6 +30,7 @@ plugin.install = (Vue, options) => {
             } else {
                 vm.modal.show = true;
                 vm.alert = {
+                    ...vm.alert,
                     ...options,
                     ok: () => {
                         vm.modal.show = false;
@@ -47,6 +49,7 @@ plugin.install = (Vue, options) => {
             if ('string' == typeof(options)) {
                 vm.modal.show = true;
                 vm.confirm = {
+                    ...vm.confirm,
                     show: true,
 
                     ok: () => {
@@ -64,6 +67,7 @@ plugin.install = (Vue, options) => {
             } else {
                 vm.modal.show = true;
                 vm.confirm = {
+                    ...vm.confirm,
                     ...options,
                     ok: () => {
                         vm.modal.show = false;

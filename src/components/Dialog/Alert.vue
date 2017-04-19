@@ -40,7 +40,10 @@ export default {
         },
 
         holdTime: {
-            type: Number
+            type: Number,
+            default (){
+                return 3000
+            }
         },
 
         lock: {

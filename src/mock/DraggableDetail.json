@@ -1,0 +1,63 @@
+{
+  "message": "无数据",
+  "status": 1,
+  "data": {
+    "total":0,
+    "query":"",
+    "url":"./mock/success",
+    "mockData":[
+      {
+        "title":"业绩指标",
+        "listTotal":0,
+        "listData":[
+          {
+            "listName":"其他事务性及临时工作（2016）",
+            "listPercent":"5%",
+            "listDetail":"其他事务性及临时工作其及临临时工作其他事务性及临时工作",
+            "listMore":"其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时",
+            "listTag":"参考标准",
+            "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
+            "listSelf":"自评分",
+            "listSelfVal":""
+          },
+          {
+            "listName":"其他事务性及临时工作（2017）",
+            "listPercent":"50%",
+            "listDetail":"其他作其他事务性及临时工作",
+            "listMore":"其他事务性性及临时",
+            "listTag":"参考标准",
+            "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
+            "listSelf":"自评分",
+            "listSelfVal":""
+          }
+        ]
+      },
+      {
+        "title":"品行指标",
+        "listTotal":0,
+        "listData":[
+          {
+            "listName":"其他事务性及临时工作（2016）",
+            "listPercent":"5%",
+            "listDetail":"其他事务性及临时工作其及临临时工作其他事务性及临时工作",
+            "listMore":"其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时",
+            "listTag":"参考标准",
+            "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
+            "listSelf":"自评分",
+            "listSelfVal":""
+          },
+          {
+            "listName":"其他事务",
+            "listPercent":"75%",
+            "listDetail":"其他事务性及临时务性及临时工作",
+            "listMore":"其他事务性及临时工作其他事务性及临时工作其他事务性及临时工性及临时",
+            "listTag":"参考标准",
+            "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
+            "listSelf":"自评分",
+            "listSelfVal":""
+          }
+        ]
+      }
+    ]
+  }
+}

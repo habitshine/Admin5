@@ -134,29 +134,7 @@
                         this.btnSubmit.loading = false;
                         this.btnSubmit.text = '确定';
 
-                        this.$store.commit('alert', {
-                            width: '200px',
-                            show: true,
-                            text: response.data.message,
-                            holdTime: 2000,
-                            lock: true,
-                            afterClose: () => {
-                                try {
-                                    if (undefined != response.data.data) {
-                                        if (undefined != response.data.data.path) {
-                                            this.$router.push({
-                                                path: response.data.data.path,
-                                                query: response.data.data.query
-                                            });
-                                        } else if (undefined != response.data.data.link) {
-                                            window.location.href = response.data.data.link;
-                                        }
-                                    }
-                                } catch (e) {
-                                    syslog(e);
-                                }
-                            }
-                        });
+                        this.$alert(response.data.message)
                     })
                     .catch((error) => {
                         syslog(error);

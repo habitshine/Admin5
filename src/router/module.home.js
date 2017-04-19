@@ -29,6 +29,14 @@ export var routes = [
             });
         },
         name: 'DraggableView'
+    },{
+        path: 'performances/DraggableDetail',
+        component: resolve => {
+            require.ensure(['../views/DraggableDetail'], () => {
+                resolve(require('../views/DraggableDetail'))
+            });
+        },
+        name: 'DraggableDetail'
     }, {
         path: '*/(.)*(add|append|post|upload)+(.)*',
         component: resolve => {

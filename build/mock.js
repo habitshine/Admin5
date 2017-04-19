@@ -43,6 +43,17 @@ module.exports = function(express, app) {
     });
 
     /*
+     * 拖拽列表数据
+     */
+    app.get('/mock/performances/DraggableDetail', function(req, res) {
+        var data = fs.readFileSync('./src/mock/DraggableDetail.json', 'utf8');
+        var json = JSON.parse(data);
+        setTimeout(() => {
+            res.send(JSON.stringify(json, null, 4));
+        }, 300);
+    });
+
+    /*
      * 新增页模板数据
      */
     app.get('/mock/*/add', function(req, res) {

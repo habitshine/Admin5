@@ -41,34 +41,22 @@ export default {
     },
 
     mounted() {
-        // this.getCount();
-        // setInterval(() => {
-        //     this.getCount();
-        // }, 10000);
-
         // this.getList();
         // setInterval(() => {
         //     this.getList();
-        // }, 10000);
+        // }, 100000);
     },
 
     methods: {
-        getCount() {
-            axios.get(MESSAGE_COUNT).then(response => {
-                if (1 == response.data.status) {
-                    this.count = response.data.data.count;
-                    this.listUrl = {
-                        path: response.data.data.path,
-                        query: response.data.data.query
-                    }
-                }
-            });
-        },
-
         getList() {
             axios.get(MESSAGE_LIST).then(response => {
                 if (1 == response.data.status) {
-                    this.list = response.data.data.list;
+                    this.count = response.data.data.message.count;
+                    this.listUrl = {
+                        path: response.data.data.message.path,
+                        query: response.data.data.message.query
+                    }
+                    this.list = response.data.data.message.list;
                     this.list.forEach(item => {
                         Push.create(item.title, {
                             body: `[${[item.create_time]}] ${item.desc}`,

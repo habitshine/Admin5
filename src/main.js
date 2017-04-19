@@ -4,7 +4,7 @@ if (process.env.NODE_ENV == 'production') {
     window.API_ROOT = 'http://113.6.252.23:6688';
     window.MENU_URL = [window.API_ROOT, '/personal/menu'].join('');
     window.LOGIN_URL = [window.API_ROOT, '/oauth'].join('');
-    window.MESSAGE_COUNT = [window.API_ROOT, '/messages/total'].join('');
+    // window.MESSAGE_COUNT = [window.API_ROOT, '/messages/total'].join('');
     window.MESSAGE_LIST = [window.API_ROOT, '/messages/noticelist '].join('');
 } else {
     window.API_ROOT = './mock';

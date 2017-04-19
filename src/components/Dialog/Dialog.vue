@@ -11,11 +11,13 @@
 export default {
     name: 'Dialog',
 
-    data(){
-        return {height: 0};
+    data() {
+        return {
+            height: 0
+        };
     },
 
-    created(){
+    created() {
         this.height = window.outerHeight;
     },
 
@@ -39,12 +41,13 @@ export default {
     border-radius: 4px;
     background: #fff;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, .2);
-    .scroll-view{
-        padding:0 5px;
+    .scroll-view {
+        padding: 0 5px;
         overflow-x: hidden;
         overflow-y: auto;
     }
 }
+
 
 /*动画*/
 

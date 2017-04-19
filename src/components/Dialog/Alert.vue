@@ -40,7 +40,10 @@ export default {
         },
 
         holdTime: {
-            type: Number
+            type: Number,
+            default () {
+                return 3000
+            }
         },
 
         lock: {
@@ -48,8 +51,13 @@ export default {
         }
     },
 
-    data(){
-        return {timer1: null, timer2: null, btnOkText: '确定', _holdTime: 0};
+    data() {
+        return {
+            timeOutTimer: null,
+            intervalTimer: null,
+            btnOkText: '确定',
+            _holdTime: 0
+        };
     },
 
     methods: {
@@ -74,21 +82,21 @@ export default {
             }
         }
     },
-    
+
     watch: {
-        value(value){
-            if(value) {
-                clearTimeout(this.timer1);
-                this.timer1 = setTimeout(()=> {
+        value(value) {
+            if (value) {
+                clearTimeout(this.timeOutTimer);
+                this.timeOutTimer = setTimeout(() => {
                     this.$emit('input', false);
                 }, this.holdTime);
 
                 // 刷新时钟
-                clearTimeout(this.timer2);
+                clearTimeout(this.intervalTimer);
                 this._holdTime = Math.floor(this.holdTime / 1000);
                 this.btnOkText = '确定 ' + this._holdTime + 's'
-                this.timer2 = setInterval(()=>{
-                    if(0 < this._holdTime) {
+                this.intervalTimer = setInterval(() => {
+                    if (0 < this._holdTime) {
                         this._holdTime--;
                         this.btnOkText = '确定 ' + this._holdTime + 's'
                     }

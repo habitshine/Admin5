@@ -5,7 +5,9 @@
         </span>
         <span class="tools">
             <span class="envelope">
-                <span class="label label-default"><i class="fa fa-envelope" aria-hidden="true"></i> {{count}} </span>
+                <router-link class="label label-default" tag="span" :to="{path: listUrl.path, query: listUrl.query}">
+                    <i class="fa fa-envelope" aria-hidden="true"></i> {{count}}
+                </router-link>
         </span>
         <span class="avator" @mouseenter="menuShow = true" @mouseleave="menuShow = false">
             <div class="dropdown">
@@ -33,43 +35,39 @@ export default {
         return {
             menuShow: false,
             count: 0,
+            listUrl: '',
             list: []
         };
     },
 
     mounted() {
-        // this.getCount();
-        // setInterval(() => {
-        //     this.getCount();
-        // }, 10000);
-
         // this.getList();
         // setInterval(() => {
         //     this.getList();
-        // }, 10000);
+        // }, 100000);
     },
 
     methods: {
-        getCount() {
-            axios.get(MESSAGE_COUNT).then(response => {
-                if (1 == response.data.status) {
-                    this.count = response.data.data.count;
-                }
-            });
-        },
-
         getList() {
             axios.get(MESSAGE_LIST).then(response => {
                 if (1 == response.data.status) {
-                    this.list = response.data.data.list;
+                    this.count = response.data.data.message.count;
+                    this.listUrl = {
+                        path: response.data.data.message.path,
+                        query: response.data.data.message.query
+                    }
+                    this.list = response.data.data.message.list;
                     this.list.forEach(item => {
                         Push.create(item.title, {
                             body: `[${[item.create_time]}] ${item.desc}`,
-                            // icon: 'icon.png',
+                            icon: item.icon,
                             timeout: 4000,
-                            onClick: function() {
+                            onClick: () => {
+                                this.$router.push({
+                                    path: item.path,
+                                    query: item.query
+                                });
                                 window.focus();
-                                this.close();
                             }
                         });
                     });
@@ -111,7 +109,6 @@ $h: 50px;
         }
         .avator {
             $avatorWidth: 30px;
-            
             float: left;
             margin: 10px;
             width: $avatorWidth;
@@ -120,15 +117,25 @@ $h: 50px;
             &:hover {
                 cursor: pointer;
             }
-
-            .dropdown-list{background: rgba(#fff,1);border-radius: 2px 0 2px 2px;border:1px solid #eee;box-shadow: -1px 1px 3px rgba(#000,.2);display: block;position: fixed;top:40px;right:22px;
-
-                li{width: 100%;display: block;padding:5px 15px;text-align: left;
-                    &:hover{background:#eee;}
+            .dropdown-list {
+                background: rgba(#fff, 1);
+                border-radius: 2px 0 2px 2px;
+                border: 1px solid #eee;
+                box-shadow: -1px 1px 3px rgba(#000, .2);
+                display: block;
+                position: fixed;
+                top: 40px;
+                right: 22px;
+                li {
+                    width: 100%;
+                    display: block;
+                    padding: 5px 15px;
+                    text-align: left;
+                    &:hover {
+                        background: #eee;
+                    }
                 }
             }
-
-
             img {
                 display: block;
                 width: 100%;

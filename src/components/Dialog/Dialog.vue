@@ -1,7 +1,7 @@
 <template>
     <transition name="dialog" @after-leave="afterLeave">
         <div v-show="value" class="component-dialog">
-            <div class="scroll-view" :style="{maxHeight: height * 0.8 + 'px'}">
+            <div class="scroll-view" :style="{maxHeight: height * 0.5 + 'px'}">
                 <slot></slot>
             </div>
         </div>

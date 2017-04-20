@@ -1,6 +1,6 @@
 <template>
     <transition name="modal" @after-leave="afterLeave">
-        <div v-show="value" @click.self="close" class="component-modal" :style="{position, backgroundColor, zIndex}">
+        <div v-show="value" @click.self="close" class="component-modal">
             <slot></slot>
         </div>
     </transition>
@@ -14,31 +14,10 @@ export default {
             type: Boolean
         },
 
-        backgroundColor: {
-            type: String,
-            default () {
-                return 'rgba(0,0,0,.5)';
-            }
-        },
-
-        position: {
-            type: String,
-            default () {
-                return 'fixed';
-            }
-        },
-
         lock: {
             type: Boolean,
             default () {
                 return false
-            }
-        },
-
-        zIndex: {
-            type: Number,
-            default () {
-                return 1986;
             }
         }
     },
@@ -59,13 +38,14 @@ export default {
 </script>
 <style scoped lang="scss">
 .component-modal {
+    position:fixed;
+    background:rgba(#000, .5);
     z-index: 1986;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
-
 
 /*动画*/
 

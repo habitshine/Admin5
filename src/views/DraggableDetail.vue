@@ -1,6 +1,6 @@
 <template>
     <div class="d-detail">
-        <template v-for="(list,index) in dataVal.data.mockData">
+        <template v-for="(list,listindex) in dataVal">
             <h2 class="dd-title"><i class="fa fa-bar-chart fa-pos"></i>{{list.title}}</h2>
             <!--一个列表项-->
             <template v-for="(item,index) in list.listData">
@@ -8,8 +8,8 @@
                     <span class="dd-index">{{index+1}}</span>
                     <span class="dd-name" v-html="item.listName"></span>
                     <span class="dd-percent" v-html="item.listPercent"></span>
-                    <span class="dd-tag">{{item.listTag}}<i class="fa fa-sort-desc"></i></span>
-                    <div class="dd-tag-dec" v-html="item.listTagDetail">{{item.listSelfVal}}</div>
+                    <span class="dd-tag" @click="showDetail(listindex,index)">{{item.listTag}}<i class="fa fa-sort-desc"></i></span>
+                    <div class="dd-tag-dec" v-show="index==i&&listindex==j" v-html="item.listTagDetail">{{item.listSelfVal}}</div>
                 </div>
                 <div class="dd-detail" v-html="item.listDetail"></div>
                 <div class="dd-more" v-html="item.listMore"></div>
@@ -38,12 +38,23 @@
         },
         created(){
             this.httpGetBaseView(response => {
-                this.dataVal = response.data;
-                this.url=this.dataVal.data.url;
-                this.query=this.dataVal.data.query;
+                this.dataVal = response.data.data.mockData;
+                this.url=response.data.data.url;
+                this.query=response.data.data.query;
             });
         },
         methods:{
+
+            showDetail(_listindex,_index){
+
+                if(this.j==_listindex&&this.i==_index){
+                    this.i=-1;
+                    this.j=-1;
+                }else{
+                    this.j=_listindex;
+                    this.i=_index;
+                }
+            },
 
             httpGetBaseView(cb) {
                 var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
@@ -66,7 +77,7 @@
                 //post url后端提供
                 axios.post(this.url, qs.stringify(
                     {
-//                        "data":this.backData,
+                        "data":this.dataVal,
                         "query":this.query,
                     }
 
@@ -83,14 +94,10 @@
                     });
             },
         },
-        mounted: function() {
-//            this.url=this.dataVal.data.url;
-//            this.query=this.dataVal.data.query;
-//            console.log(url)
-//            this.backData=this.dataVal.data.mockData;
-        },
         data(){
             return {
+                i:-1,
+                j:-1,
                 url:"",
                 query:"",
                 backData:'',
@@ -152,13 +159,14 @@
                 .fa{
                     position: relative;
                     top:-3px;
-                    margin-left: 3px;
+                    margin-left: 5px;
                 }
             }
             .dd-tag-dec{
                 position: absolute;
                 right: 0;
-                top: 40px;
+                top: 28px;
+                /*display: none;*/
                 border-radius: 5px;
                 border:1px solid #ddd;
                 padding: 10px 10px 2px;

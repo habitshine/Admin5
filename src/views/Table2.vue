@@ -8,14 +8,18 @@
             <!-- 头 -->
             <thead>
                 <tr>
-                    <th><v-checkbox v-model="isCheckedAll"></v-checkbox></th>
+                    <th>
+                        <v-checkbox v-model="isCheckedAll"></v-checkbox>
+                    </th>
                     <th v-for="th in columns">{{th.text}}</th>
                     <th v-if="undefined != actions">{{actions.text}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(row, i) in dataSource" :key="row[primaryKey]">
-                    <td><v-checkbox v-model="isCheckedList[i]"></v-checkbox></td>
+                    <td>
+                        <v-checkbox v-model="isCheckedList[i]" @input="changeCheckbox(i)"></v-checkbox>
+                    </td>
                     <td v-for="th in columns">{{row[th.key]}}</td>
                     <td v-if="undefined != actions" class="actions">
                         <a v-for="btn in actions.btns" class="btn btn-xs btn-primary" @click="operateRow(btn.event, i)">
@@ -79,33 +83,26 @@ export default {
     },
 
     watch: {
-        isCheckedAll(value){
-            this.isCheckedList.map((item, i)=> {
-                return tu
-            });
-        },
 
-        dataSource(newValue, oldValue){
-            if(0 == oldValue.length) {
-                newValue.forEach(()=>{
-                    this.isCheckedList.push(false);
-                });
-            }
-        }
     },
 
     methods: {
         operateRow(eventName, index) {
             this.$emit(eventName, {
-                row: this.dataSource[index],
+                row: this.tableData[index].row,
                 index
             });
+        },
+
+        changeCheckbox(index) {
+            this.$emit('input', this.isCheckedList);
         }
     },
 
     components: {
         VSpinner,
-        VModal, VCheckbox
+        VModal,
+        VCheckbox
     }
 };
 </script>
@@ -122,7 +119,7 @@ export default {
         position: absolute;
         background: rgba(#fff, .8);
         .v-spinner {
-            background: rgba(0, 0, 0, .7);
+            background: rgba(#000, .7);
             display: table;
             width: 150px;
             margin: auto;

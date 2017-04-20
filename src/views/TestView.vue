@@ -67,7 +67,6 @@ export default {
     },
 
     watch: {
-
         page() {
             this.status = -1;
             this.getTableData().then(response=> {});

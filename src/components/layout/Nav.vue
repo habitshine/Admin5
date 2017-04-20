@@ -41,10 +41,10 @@ export default {
     },
 
     mounted() {
-        // this.getList();
-        // setInterval(() => {
-        //     this.getList();
-        // }, 100000);
+        this.getList();
+        setInterval(() => {
+            this.getList();
+        }, 100000);
     },
 
     methods: {

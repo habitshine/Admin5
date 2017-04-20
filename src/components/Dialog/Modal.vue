@@ -16,9 +16,7 @@ export default {
 
         lock: {
             type: Boolean,
-            default () {
-                return false
-            }
+            default: false
         }
     },
 

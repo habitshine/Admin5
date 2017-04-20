@@ -1,22 +1,24 @@
 <template>
     <div class="com-table">
-        <v-modal :value="1 != status" class="v-modal">
+        <v-modal :value="-1 == status" :lock="true" class="v-modal">
             <v-spinner class="v-spinner"></v-spinner>
         </v-modal>
-        <p v-if="0 >= dataSource.length || 0 == status" class="alert alert-warning">{{message}}</p>
-        <table v-else v-show="1 == status || -1 == status" class="table table-responsive table-hover table-bordered  table-striped">
+        <p v-if="0 >= dataSource.length && -1 != status" class="alert alert-warning">{{message}}</p>
+        <table v-show="1 == status || -1 == status && 0 < dataSource.length" class="table table-responsive table-hover table-bordered  table-striped">
             <!-- 头 -->
             <thead>
                 <tr>
+                    <th><v-checkbox v-model="isCheckedAll"></v-checkbox></th>
                     <th v-for="th in columns">{{th.text}}</th>
-                    <th>{{actions.text}}</th>
+                    <th v-if="undefined != actions">{{actions.text}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(row, i) in dataSource" :key="row[primaryKey]">
+                    <td><v-checkbox v-model="isCheckedList[i]"></v-checkbox></td>
                     <td v-for="th in columns">{{row[th.key]}}</td>
-                    <td class="actions">
-                        <a v-for="btn in actions.data" class="btn btn-xs btn-primary" @click="operateRow(btn.event, i)">
+                    <td v-if="undefined != actions" class="actions">
+                        <a v-for="btn in actions.btns" class="btn btn-xs btn-primary" @click="operateRow(btn.event, i)">
                             {{undefined != btn.textIndex && btn.text[row[btn.textIndex]] || btn.text}}
                         </a>
                     </td>
@@ -27,7 +29,9 @@
 </template>
 <script>
 import VModal from '../components/Dialog/Modal';
-import VSpinner from '../components/Spinner'
+import VSpinner from '../components/Spinner';
+import VCheckbox from '../components/form/Checkbox'
+
 export default {
     name: 'table',
 
@@ -69,23 +73,39 @@ export default {
 
     data() {
         return {
-          
+            isCheckedAll: false,
+            isCheckedList: []
         }
     },
 
     watch: {
+        isCheckedAll(value){
+            this.isCheckedList.map((item, i)=> {
+                return tu
+            });
+        },
 
+        dataSource(newValue, oldValue){
+            if(0 == oldValue.length) {
+                newValue.forEach(()=>{
+                    this.isCheckedList.push(false);
+                });
+            }
+        }
     },
 
     methods: {
-        operateRow(eventName, _index) {
-            this.$emit(eventName, {...this.dataSource[_index], _index});
-            // console.log(eventName, index);
+        operateRow(eventName, index) {
+            this.$emit(eventName, {
+                row: this.dataSource[index],
+                index
+            });
         }
     },
 
     components: {
-        VSpinner, VModal
+        VSpinner,
+        VModal, VCheckbox
     }
 };
 </script>
@@ -95,11 +115,13 @@ export default {
     min-height: 200px;
     overflow: hidden;
     position: relative;
-    table{margin:0;}
-    .v-modal{
+    table {
+        margin: 0;
+    }
+    .v-modal {
         position: absolute;
         background: rgba(#fff, .8);
-        .v-spinner{
+        .v-spinner {
             background: rgba(0, 0, 0, .7);
             display: table;
             width: 150px;
@@ -115,9 +137,10 @@ export default {
             box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
         }
     }
-
-    td.actions{
-        .btn{margin-left:2px;}
+    td.actions {
+        .btn {
+            margin-left: 2px;
+        }
     }
     .tr-enter {
         opacity: 0;

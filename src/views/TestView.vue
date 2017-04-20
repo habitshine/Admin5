@@ -1,12 +1,15 @@
 <template>
     <div>
-        <v-table :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove">
+        <input v-model="page" style="border:1px solid #ccc;padding:5px;">
+        <v-table :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove" @download="download" @toggle="toggle" @changeDuty="changeDuty">
         </v-table>
+        <v-page v-show="0 != status" v-model="page" :count="count"></v-page>
     </div>
 </template>
 <script>
 import VNotification from '../components/Dialog/Notification'
 import VTable from './Table2'
+import VPage from '../components/Page'
 
 export default {
     name: 'testView',
@@ -15,70 +18,129 @@ export default {
 
     data() {
         return {
-            status:1,
+            status: -1,
+            page: 0,
+            count: 10,
             actions: {
                 text: '操作',
-                data: [{
+                btns: [{
                     event: 'remove',
+                    class: 'warning',
                     text: '删除'
                 }, {
                     event: 'toggle',
                     text: ['启用', '禁用'],
+                    class: ['success', 'danger'],
                     textIndex: 'toggleIndex'
                 }, {
-                    event: 'onduty',
+                    event: 'changeDuty',
                     text: ['离职', '在职', '兼职'],
+                    class: ['default', 'warning', 'danger'],
                     textIndex: 'toggleIndex'
-                } ]
+                }, {
+                    event: 'download',
+                    text: '下载'
+                }]
             },
-            primaryKey: 'id',
+            primaryKey: 'uid',
 
-            dataSource: [{
-                id: 1,
-                name: '郭德纲',
-                toggleIndex: 1
-            }, {
-                id: 2,
-                name: '于谦',
-                toggleIndex: 0
-            },{
-                id:31,
-                name: '岳云鹏',
-                toggleIndex: 1
-            }, {
-                id:42,
-                name: '抽烟的',
-                toggleIndex: 0
-            },{
-                id:51,
-                name: '三蹦子',
-                toggleIndex: 1
-            }, {
-                id:62,
-                name: '烫头的',
-                toggleIndex: 0
-            }],
+            dataSource: [],
 
             columns: [{
                 text: '编号',
-                key: 'id'
+                key: 'uid'
             }, {
-                text: '姓名',
-                key: 'name'
+                text: '标题',
+                key: 'title'
+            }, {
+                text: '日期',
+                key: 'create_time'
+            }, {
+                text: '分类',
+                key: 'category'
             }]
         }
     },
 
+    mounted() {
+        this.page = 1;
+    },
+
+    watch: {
+
+        page() {
+            this.status = -1;
+            this.getTableData().then(response=> {});
+        }
+    },
+
     methods: {
-        remove(row){
-            this.dataSource.splice(row._index, 1);
-            console.log(row);
+        getTableData(){
+            return new Promise((resolve, reject)=>{
+                axios('./mock/table', {
+                    params: {
+                        page: this.page,
+                        limit: 15
+                    }
+                }).then(response => {
+                    this.status = response.data.status;
+                    if (1 == this.status) {
+                        this.dataSource = response.data.data.list;
+                    } else {
+                        this.dataSource = [];
+                    }
+                    resolve(response.data);
+                });   
+            });
+        },
+
+        changeDuty({row, index}){
+            this.$confirm('是否执行该操作?').then(() => {
+                this.status = -1;
+                axios.post('./mock/success').then(response=> {
+                    this.dataSource[index].toggleIndex = response.data.data.index;
+                    this.getTableData().then(response=> {
+                        this.status = 1;
+                    });
+                });
+            }).catch(() => {
+
+            }); 
+        },
+
+        toggle({row, index}){
+            this.$confirm('是否执行该操作?').then(() => {
+                this.status = -1;
+                axios.post('./mock/success').then(response=> {
+                    this.dataSource[index].toggleIndex = response.data.data.index;
+                    this.status = 1;
+                });
+            }).catch(() => {
+
+            });            
+        },
+
+        download({row, index}){
+            window.location.href = row.url;
+        },
+
+        remove({row, index}) {
+            this.$confirm('是否删除?').then(() => {
+                this.status = -1;
+                axios.post('./mock/success').then(()=> {
+                    this.status = 1;
+                    this.dataSource.splice(index, 1);
+                });
+            }).catch(() => {
+
+            });
         }
     },
 
     components: {
         VNotification,
-        VTable
+        VTable,
+        VPage
     }
 }
 </script>

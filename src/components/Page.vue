@@ -1,19 +1,19 @@
 <template>
     <nav>
         <ul class="pagination">
-            <li :class="{disabled: page <= 1}"><a @click="previous"><i class="glyphicon glyphicon-arrow-left"></i> 上一页</a></li>
-            <li :class="{active: i == page}" v-for="i in pageNumber">
+            <li :class="{disabled: value <= 1}"><a @click="previous"><i class="glyphicon glyphicon-arrow-left"></i> 上一页</a></li>
+            <li :class="{active: i == value}" v-for="i in pageNumber">
                 <a @click="pageTo(i)">{{i}}</a>
             </li>
-            <li :class="{disabled: page >= count}"><a @click="next">下一页<i class="glyphicon glyphicon-arrow-right"></i></a></li>
+            <li :class="{disabled: value >= count}"><a @click="next">下一页<i class="glyphicon glyphicon-arrow-right"></i></a></li>
         </ul>
     </nav>
 </template>
 <script>
 export default {
     props: {
-        page: {
-            type: Number
+        value: {
+            type: [Number, String]
         },
 
         count: {
@@ -30,16 +30,16 @@ export default {
             var array = [];
             // 总数是否超过max
             if(10 < this.count) {
-                if(4 >= this.page) {
+                if(4 >= this.value) {
                     for(var i = 1; i <= 10; i++) {
                         array.push(i);
                     }
-                } else if(this.count < this.page + 5){
+                } else if(this.count < this.value + 5){
                     for(var i = this.count - 10; i <= this.count; i++){
                         array.push(i);
                     }
                 } else {
-                     for(var i = this.page - 4; i <= this.page + 5; i++){
+                     for(var i = this.value - 4; i <= this.value + 5; i++){
                         array.push(i);
                     }
                 }
@@ -54,18 +54,18 @@ export default {
 
     methods: {
         pageTo: function(page) {
-            this.$emit('change', page);
+            this.$emit('input', page);
         },
 
         previous: function() {
-            if (1 < this.page) {
-                this.$emit('change', this.page - 1);
+            if (1 < this.value) {
+                this.$emit('input', this.value - 1);
             }
         },
 
         next: function() {
-            if (this.page < this.count) {
-                this.$emit('change', this.page + 1);
+            if (this.value < this.count) {
+                this.$emit('input', this.value + 1);
             }
         },
     }

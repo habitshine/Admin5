@@ -59,7 +59,7 @@
                     </template>
                 </v-table>
                 <!-- 分页 -->
-                <v-page @change="changePage" :count="table.data.count" :page="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
+                <v-page @input="changePage" :count="table.data.count" :value="parseInt($route.query.page)" :limit="parseInt($route.query.limit)">
                 </v-page>
             </div>
         </transition>

@@ -5,7 +5,7 @@
             <div class="bounce2"></div>
             <div class="bounce3"></div>
         </div>
-        <p align="center"><slot>努力加载...</slot></p>
+        <p align="center"><slot>处理中...</slot></p>
     </div>
 </template>
 <script>
@@ -69,7 +69,8 @@ export default {
 .com-spinner {
     @include loading;
     p {
-        font-size: 0.14rem;
+        margin-top: 5px;
+        font-size: 13px;
         color: #ccc;
     }
 }

@@ -22,6 +22,7 @@ export var routes = [
             });
         }
     }, {
+        // path: '*/(.)*(draggable)+(.)*',
         path: 'performances/draggable',
         component: resolve => {
             require.ensure(['../views/DraggableView'], () => {
@@ -30,6 +31,7 @@ export var routes = [
         },
         name: 'DraggableView'
     },{
+        // path: '*/(.)*(DraggableDetail)+(.)*',
         path: 'performances/DraggableDetail',
         component: resolve => {
             require.ensure(['../views/DraggableDetail'], () => {

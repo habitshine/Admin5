@@ -3,7 +3,7 @@
   "status": 1,
   "data": {
     "total":0,
-    "query":"",
+    "query":"querystring",
     "url":"./mock/success",
     "mockData":[
       {
@@ -18,7 +18,7 @@
             "listTag":"参考标准",
             "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "listSelf":"自评分",
-            "listSelfVal":""
+            "listSelfVal":0
           },
           {
             "listName":"其他事务性及临时工作（2017）",
@@ -28,7 +28,7 @@
             "listTag":"参考标准",
             "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "listSelf":"自评分",
-            "listSelfVal":""
+            "listSelfVal":0
           }
         ]
       },
@@ -44,7 +44,7 @@
             "listTag":"参考标准",
             "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "listSelf":"自评分",
-            "listSelfVal":""
+            "listSelfVal":0
           },
           {
             "listName":"其他事务",
@@ -54,7 +54,7 @@
             "listTag":"参考标准",
             "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "listSelf":"自评分",
-            "listSelfVal":""
+            "listSelfVal":0
           }
         ]
       }
